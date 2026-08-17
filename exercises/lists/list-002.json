@@ -1,0 +1,35 @@
+{
+  "id": "list-002",
+  "module": "lists",
+  "difficulty": 1,
+  "title": "Middle slice",
+  "description": "Write a function `middle(items)` that returns every element except the first and the last, as a list.",
+  "examples": "middle([1, 2, 3, 4, 5]) -> [2, 3, 4]",
+  "starter_code": "def middle(items):\n    # write your code here\n    pass\n",
+  "hints": [
+    "Slicing lets you take a range of a list using `items[start:end]`.",
+    "Start at index 1 (skip the first) and stop at index -1 (exclude the last).",
+    "return items[1:-1]"
+  ],
+  "expected_behavior": "Returns a new list without its first and last elements.",
+  "hidden_tests": [
+    {
+      "call": "middle([1, 2, 3, 4, 5])",
+      "expected": "[2, 3, 4]"
+    },
+    {
+      "call": "middle([1, 2])",
+      "expected": "[]"
+    },
+    {
+      "call": "middle([1, 2, 3])",
+      "expected": "[2]"
+    }
+  ],
+  "solution": "def middle(items):\n    return items[1:-1]\n",
+  "explanation": "Slicing `items[1:-1]` starts right after the first element and stops right before the last one, since slice ends are exclusive.",
+  "concepts": [
+    "list",
+    "slicing"
+  ]
+}

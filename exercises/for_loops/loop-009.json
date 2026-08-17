@@ -1,0 +1,37 @@
+{
+  "id": "loop-009",
+  "module": "for_loops",
+  "difficulty": 3,
+  "title": "Numbered list with enumerate",
+  "description": "Write a function `numbered_lines(items)` that returns a list of strings formatted as '<index> <item>', starting at index 0.",
+  "examples": "numbered_lines(['apple', 'banana', 'orange']) -> ['0 apple', '1 banana', '2 orange']",
+  "starter_code": "def numbered_lines(items):\n    # write your code here\n    pass\n",
+  "hints": [
+    "You need both the position and the value of each item while looping — a plain `for item in items` only gives you the value.",
+    "`enumerate(items)` gives you (index, item) pairs you can unpack directly in the for line.",
+    "result = []\nfor index, item in enumerate(items):\n    result.append(f\"{index} {item}\")\nreturn result"
+  ],
+  "expected_behavior": "Returns a list of formatted strings, one per item.",
+  "hidden_tests": [
+    {
+      "call": "numbered_lines(['apple', 'banana', 'orange'])",
+      "expected": "['0 apple', '1 banana', '2 orange']"
+    },
+    {
+      "call": "numbered_lines([])",
+      "expected": "[]"
+    },
+    {
+      "call": "numbered_lines(['x'])",
+      "expected": "['0 x']"
+    }
+  ],
+  "solution": "def numbered_lines(items):\n    result = []\n    for index, item in enumerate(items):\n        result.append(f\"{index} {item}\")\n    return result\n",
+  "explanation": "`enumerate()` wraps an iterable and yields (index, value) tuples, which we unpack directly into `index, item` in the for line — avoiding a manually managed counter variable.",
+  "concepts": [
+    "for",
+    "enumerate",
+    "f-strings",
+    "list"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "id": "loop-005",
+  "module": "for_loops",
+  "difficulty": 2,
+  "title": "Count even numbers",
+  "description": "Write a function `count_even(numbers)` that returns how many numbers in the list are even.",
+  "examples": "count_even([1, 2, 3, 4, 5, 6]) -> 3",
+  "starter_code": "def count_even(numbers):\n    # write your code here\n    pass\n",
+  "hints": [
+    "A counter is an accumulator that only increases when a condition is true.",
+    "Start a counter at 0, and inside the loop, check `number % 2 == 0` before incrementing it.",
+    "count = 0\nfor number in numbers:\n    if number % 2 == 0:\n        count = count + 1\nreturn count"
+  ],
+  "expected_behavior": "Returns an integer count.",
+  "hidden_tests": [
+    {
+      "call": "count_even([1, 2, 3, 4, 5, 6])",
+      "expected": "3"
+    },
+    {
+      "call": "count_even([1, 3, 5])",
+      "expected": "0"
+    },
+    {
+      "call": "count_even([])",
+      "expected": "0"
+    },
+    {
+      "call": "count_even([2, 4, 6])",
+      "expected": "3"
+    }
+  ],
+  "solution": "def count_even(numbers):\n    count = 0\n    for number in numbers:\n        if number % 2 == 0:\n            count = count + 1\n    return count\n",
+  "explanation": "A counter combines the accumulator pattern with a condition: the running total only changes when the `if` is true, so it ends up counting matching items instead of summing values.",
+  "concepts": [
+    "for",
+    "if",
+    "counter"
+  ]
+}

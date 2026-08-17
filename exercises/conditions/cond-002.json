@@ -1,0 +1,40 @@
+{
+  "id": "cond-002",
+  "module": "conditions",
+  "difficulty": 1,
+  "title": "Can this person vote?",
+  "description": "Write a function `can_vote(age)` that returns True if `age` is 18 or older, and False otherwise.",
+  "examples": "can_vote(20) -> True\ncan_vote(15) -> False\ncan_vote(18) -> True",
+  "starter_code": "def can_vote(age):\n    # write your code here\n    pass\n",
+  "hints": [
+    "This only needs a single comparison, no elif required.",
+    "Think about which comparison operator means 'greater than or equal to'.",
+    "if age >= 18:\n    return True\nelse:\n    return False\n\n(or simply: return age >= 18)"
+  ],
+  "expected_behavior": "Returns a boolean (True or False).",
+  "hidden_tests": [
+    {
+      "call": "can_vote(20)",
+      "expected": "True"
+    },
+    {
+      "call": "can_vote(17)",
+      "expected": "False"
+    },
+    {
+      "call": "can_vote(18)",
+      "expected": "True"
+    },
+    {
+      "call": "can_vote(0)",
+      "expected": "False"
+    }
+  ],
+  "solution": "def can_vote(age):\n    return age >= 18\n",
+  "explanation": "A comparison expression like `age >= 18` already evaluates to True or False, so it can be returned directly without an if/else block.",
+  "concepts": [
+    "if",
+    "comparisons",
+    "bool"
+  ]
+}

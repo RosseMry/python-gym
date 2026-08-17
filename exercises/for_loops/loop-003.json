@@ -1,0 +1,40 @@
+{
+  "id": "loop-003",
+  "module": "for_loops",
+  "difficulty": 2,
+  "title": "Sum the numbers (accumulator)",
+  "description": "Write a function `sum_numbers(numbers)` that returns the sum of all numbers in the list, using a loop (not the built-in `sum()`).",
+  "examples": "sum_numbers([4, 7, 2, 9]) -> 22",
+  "starter_code": "def sum_numbers(numbers):\n    # write your code here\n    pass\n",
+  "hints": [
+    "What information do you need to keep while iterating?",
+    "You probably need a variable that starts at 0 and stores the running total.",
+    "total = 0\nfor number in numbers:\n    total = total + number\nreturn total"
+  ],
+  "expected_behavior": "Returns the sum as an int or float.",
+  "hidden_tests": [
+    {
+      "call": "sum_numbers([4, 7, 2, 9])",
+      "expected": "22"
+    },
+    {
+      "call": "sum_numbers([])",
+      "expected": "0"
+    },
+    {
+      "call": "sum_numbers([-1, 1])",
+      "expected": "0"
+    },
+    {
+      "call": "sum_numbers([10])",
+      "expected": "10"
+    }
+  ],
+  "solution": "def sum_numbers(numbers):\n    total = 0\n    for number in numbers:\n        total = total + number\n    return total\n",
+  "explanation": "This is the accumulator pattern: start a variable at a neutral value (0 for a sum), then update it once per loop iteration. By the time the loop ends, it holds the combined result.",
+  "concepts": [
+    "for",
+    "list",
+    "accumulator"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "id": "loop-001",
+  "module": "for_loops",
+  "difficulty": 1,
+  "title": "Read a loop (trace the output)",
+  "description": "Look at this code:\n\nnumbers = [1, 2, 3]\nfor number in numbers:\n    print(number)\n\nWrite a function `trace_output()` that returns a LIST of the lines that would be printed, as strings, in order. (This exercise trains reading loops, not writing them.)",
+  "examples": "trace_output() -> ['1', '2', '3']",
+  "starter_code": "def trace_output():\n    # write your code here\n    pass\n",
+  "hints": [
+    "You don't need a loop to answer this — you need to mentally run the one shown above and write down what happens.",
+    "Each `print(number)` produces one line. What are the three values `number` takes?",
+    "return ['1', '2', '3']"
+  ],
+  "expected_behavior": "Returns a list of 3 strings: ['1', '2', '3'].",
+  "hidden_tests": [
+    {
+      "call": "trace_output()",
+      "expected": "['1', '2', '3']"
+    }
+  ],
+  "solution": "def trace_output():\n    return ['1', '2', '3']\n",
+  "explanation": "`for number in numbers` visits each element of the list in order, binding it to `number`, then runs the loop body once per element — so `print(number)` runs 3 times, once per item.",
+  "concepts": [
+    "for",
+    "list",
+    "reading code"
+  ]
+}

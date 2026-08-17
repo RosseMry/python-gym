@@ -1,0 +1,41 @@
+{
+  "id": "loop-006",
+  "module": "for_loops",
+  "difficulty": 2,
+  "title": "Count the vowels",
+  "description": "Write a function `count_vowels(text)` that returns how many characters in `text` are vowels (a, e, i, o, u — lowercase only, you can assume the input is already lowercase).",
+  "examples": "count_vowels('hello world') -> 3",
+  "starter_code": "def count_vowels(text):\n    # write your code here\n    pass\n",
+  "hints": [
+    "Strings can be looped over directly, character by character.",
+    "Keep a counter, and check membership: is the current character one of 'aeiou'?",
+    "count = 0\nfor char in text:\n    if char in 'aeiou':\n        count = count + 1\nreturn count"
+  ],
+  "expected_behavior": "Returns an integer count of vowels.",
+  "hidden_tests": [
+    {
+      "call": "count_vowels('hello world')",
+      "expected": "3"
+    },
+    {
+      "call": "count_vowels('xyz')",
+      "expected": "0"
+    },
+    {
+      "call": "count_vowels('aeiou')",
+      "expected": "5"
+    },
+    {
+      "call": "count_vowels('')",
+      "expected": "0"
+    }
+  ],
+  "solution": "def count_vowels(text):\n    count = 0\n    for char in text:\n        if char in 'aeiou':\n            count = count + 1\n    return count\n",
+  "explanation": "A `for` loop over a string yields one character at a time. The `in` operator checks membership in the vowel string, so the counter only increases for matching characters.",
+  "concepts": [
+    "for",
+    "if",
+    "string iteration",
+    "counter"
+  ]
+}

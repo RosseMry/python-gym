@@ -1,0 +1,40 @@
+{
+  "id": "cond-003",
+  "module": "conditions",
+  "difficulty": 2,
+  "title": "The largest of three numbers",
+  "description": "Write a function `largest(a, b, c)` that returns the largest of the three numbers.",
+  "examples": "largest(3, 7, 2) -> 7\nlargest(-1, -5, -2) -> -1",
+  "starter_code": "def largest(a, b, c):\n    # write your code here\n    pass\n",
+  "hints": [
+    "You could compare pairs step by step, or look for a Python built-in that already does this.",
+    "Python has a built-in function that returns the largest of several values.",
+    "return max(a, b, c)"
+  ],
+  "expected_behavior": "Returns the largest of the three arguments.",
+  "hidden_tests": [
+    {
+      "call": "largest(3, 7, 2)",
+      "expected": "7"
+    },
+    {
+      "call": "largest(-1, -5, -2)",
+      "expected": "-1"
+    },
+    {
+      "call": "largest(5, 5, 5)",
+      "expected": "5"
+    },
+    {
+      "call": "largest(10, 2, 8)",
+      "expected": "10"
+    }
+  ],
+  "solution": "def largest(a, b, c):\n    return max(a, b, c)\n",
+  "explanation": "Python's built-in max() already implements 'find the largest' for any number of arguments, so we don't need to write the comparisons by hand.",
+  "concepts": [
+    "if",
+    "comparisons",
+    "built-in functions"
+  ]
+}

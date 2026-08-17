@@ -1,0 +1,41 @@
+{
+  "id": "cond-001",
+  "module": "conditions",
+  "difficulty": 1,
+  "title": "Positive, negative or zero",
+  "description": "Write a function `classify_number(n)` that returns the string \"positive\", \"negative\" or \"zero\" depending on the value of `n`.",
+  "examples": "classify_number(5) -> \"positive\"\nclassify_number(-3) -> \"negative\"\nclassify_number(0) -> \"zero\"",
+  "starter_code": "def classify_number(n):\n    # write your code here\n    pass\n",
+  "hints": [
+    "You need to compare `n` against zero using comparison operators.",
+    "Use if / elif / else: first check n > 0, then n < 0, then the remaining case.",
+    "if n > 0:\n    return \"positive\"\nelif n < 0:\n    return \"negative\"\nelse:\n    return \"zero\""
+  ],
+  "expected_behavior": "Returns exactly one of \"positive\", \"negative\", \"zero\" as a string.",
+  "hidden_tests": [
+    {
+      "call": "classify_number(5)",
+      "expected": "'positive'"
+    },
+    {
+      "call": "classify_number(-1)",
+      "expected": "'negative'"
+    },
+    {
+      "call": "classify_number(0)",
+      "expected": "'zero'"
+    },
+    {
+      "call": "classify_number(100)",
+      "expected": "'positive'"
+    }
+  ],
+  "solution": "def classify_number(n):\n    if n > 0:\n        return \"positive\"\n    elif n < 0:\n        return \"negative\"\n    else:\n        return \"zero\"\n",
+  "explanation": "We compare n against 0 with if/elif/else. Only one branch runs, and else covers the remaining case (n == 0) without needing an explicit comparison.",
+  "concepts": [
+    "if",
+    "elif",
+    "else",
+    "comparisons"
+  ]
+}

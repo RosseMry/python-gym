@@ -1,0 +1,36 @@
+{
+  "id": "loop-004",
+  "module": "for_loops",
+  "difficulty": 2,
+  "title": "Multiply everything (accumulator)",
+  "description": "Write a function `product(numbers)` that returns the product of all numbers in the list using a loop.",
+  "examples": "product([1, 2, 3, 4]) -> 24",
+  "starter_code": "def product(numbers):\n    # write your code here\n    pass\n",
+  "hints": [
+    "This is the same accumulator pattern as summing, but with a different operation.",
+    "What starting value keeps a product unchanged when you multiply by it?",
+    "result = 1\nfor number in numbers:\n    result = result * number\nreturn result"
+  ],
+  "expected_behavior": "Returns the product as an int or float.",
+  "hidden_tests": [
+    {
+      "call": "product([1, 2, 3, 4])",
+      "expected": "24"
+    },
+    {
+      "call": "product([5])",
+      "expected": "5"
+    },
+    {
+      "call": "product([2, 0, 3])",
+      "expected": "0"
+    }
+  ],
+  "solution": "def product(numbers):\n    result = 1\n    for number in numbers:\n        result = result * number\n    return result\n",
+  "explanation": "The accumulator starts at 1 (the multiplicative identity) instead of 0, because multiplying by 0 would zero everything out immediately.",
+  "concepts": [
+    "for",
+    "list",
+    "accumulator"
+  ]
+}

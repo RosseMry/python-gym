@@ -1,0 +1,63 @@
+.training-bar {
+  width: 100%;
+}
+
+.training-bar__label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 13px;
+  color: var(--ink-muted);
+  margin-bottom: 6px;
+}
+
+.training-bar__count {
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.training-bar__rack {
+  display: flex;
+  align-items: center;
+  height: 22px;
+}
+
+.training-bar__sleeve {
+  height: 4px;
+  flex: 1 1 auto;
+  min-width: 8px;
+  background: var(--border);
+  border-radius: 2px;
+}
+
+.training-bar__plate {
+  flex: 0 0 auto;
+  width: 10px;
+  height: 22px;
+  border-radius: 2px;
+  margin: 0 1px;
+  border: 2px solid var(--border);
+  background: transparent;
+  transition: background-color 0.2s ease, border-color 0.2s ease, height 0.2s ease;
+}
+
+.training-bar__plate--attempted {
+  border-color: var(--ink-muted);
+}
+
+.training-bar__plate--solved_with_hint {
+  border-color: var(--hint);
+  background: var(--hint-dim);
+}
+
+.training-bar__plate--solved {
+  border-color: var(--success);
+  background: var(--success);
+  height: 26px;
+}
+
+.training-bar__plate--mastered {
+  border-color: var(--focus);
+  background: var(--focus);
+  height: 30px;
+}

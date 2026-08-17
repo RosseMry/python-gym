@@ -1,0 +1,45 @@
+{
+  "id": "cond-005",
+  "module": "conditions",
+  "difficulty": 3,
+  "title": "Simple grade classifier",
+  "description": "Write a function `letter_grade(score)` that converts a numeric score (0-100) into a letter grade:\n90+  -> 'A'\n80-89 -> 'B'\n70-79 -> 'C'\n60-69 -> 'D'\nbelow 60 -> 'F'",
+  "examples": "letter_grade(95) -> 'A'\nletter_grade(82) -> 'B'\nletter_grade(40) -> 'F'",
+  "starter_code": "def letter_grade(score):\n    # write your code here\n    pass\n",
+  "hints": [
+    "You'll need a chain of elif branches, checked from highest to lowest.",
+    "Order matters: check `score >= 90` first, so a 95 doesn't accidentally match a lower branch.",
+    "if score >= 90:\n    return 'A'\nelif score >= 80:\n    return 'B'\nelif score >= 70:\n    return 'C'\nelif score >= 60:\n    return 'D'\nelse:\n    return 'F'"
+  ],
+  "expected_behavior": "Returns one of 'A', 'B', 'C', 'D', 'F'.",
+  "hidden_tests": [
+    {
+      "call": "letter_grade(95)",
+      "expected": "'A'"
+    },
+    {
+      "call": "letter_grade(82)",
+      "expected": "'B'"
+    },
+    {
+      "call": "letter_grade(75)",
+      "expected": "'C'"
+    },
+    {
+      "call": "letter_grade(61)",
+      "expected": "'D'"
+    },
+    {
+      "call": "letter_grade(40)",
+      "expected": "'F'"
+    }
+  ],
+  "solution": "def letter_grade(score):\n    if score >= 90:\n        return 'A'\n    elif score >= 80:\n        return 'B'\n    elif score >= 70:\n        return 'C'\n    elif score >= 60:\n        return 'D'\n    else:\n        return 'F'\n",
+  "explanation": "elif chains are evaluated top to bottom, and the first true condition wins. Checking from highest to lowest means once we pass the 90 check, we know score < 90 for every branch below.",
+  "concepts": [
+    "if",
+    "elif",
+    "else",
+    "comparisons"
+  ]
+}

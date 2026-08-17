@@ -1,0 +1,81 @@
+:root {
+  /* Color tokens */
+  --bg: #f4f5f8;
+  --surface: #ffffff;
+  --surface-sunken: #eceef3;
+  --ink: #1b1f27;
+  --ink-muted: #6b7280;
+  --border: #dde1e8;
+
+  --focus: #3450d1; /* primary: "in the zone" blue */
+  --focus-dim: #eaeeff;
+  --success: #1c9d6c; /* solved / mastered */
+  --success-dim: #e4f7ee;
+  --hint: #c8790f; /* amber: hints used */
+  --hint-dim: #fdf1e0;
+  --danger: #cf3d4a;
+  --danger-dim: #fbe9ea;
+
+  /* Type */
+  --font-display: "Fraunces", "Iowan Old Style", serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+
+  --radius: 10px;
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+button:focus-visible,
+a:focus-visible,
+textarea:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+code,
+pre,
+textarea.code-editor {
+  font-family: var(--font-mono);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

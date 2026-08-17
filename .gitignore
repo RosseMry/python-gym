@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+*.egg-info/
+
+# SQLite
+*.db
+
+# Node / frontend
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Editors / OS
+.DS_Store
+.vscode/
+.idea/

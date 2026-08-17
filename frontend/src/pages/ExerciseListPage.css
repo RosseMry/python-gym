@@ -1,0 +1,117 @@
+.page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+.page-header {
+  margin-bottom: 40px;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--focus);
+  margin: 0 0 8px;
+}
+
+.page-header h1 {
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 600;
+  margin: 0 0 10px;
+  letter-spacing: -0.01em;
+}
+
+.subtitle {
+  color: var(--ink-muted);
+  max-width: 46ch;
+  margin: 0;
+}
+
+.error-banner {
+  background: var(--danger-dim);
+  color: var(--danger);
+  border-radius: var(--radius);
+  padding: 16px;
+  font-size: 14px;
+}
+
+.module-section {
+  margin-bottom: 36px;
+}
+
+.module-section__bar {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-bottom: 10px;
+}
+
+.exercise-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.exercise-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.exercise-card:hover {
+  border-color: var(--focus);
+  transform: translateX(2px);
+}
+
+.status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  flex-shrink: 0;
+}
+
+.status-dot--attempted {
+  border-color: var(--ink-muted);
+}
+
+.status-dot--solved_with_hint {
+  border-color: var(--hint);
+  background: var(--hint-dim);
+}
+
+.status-dot--solved {
+  border-color: var(--success);
+  background: var(--success);
+}
+
+.status-dot--mastered {
+  border-color: var(--focus);
+  background: var(--focus);
+}
+
+.exercise-card__title {
+  flex: 1;
+  font-weight: 500;
+}
+
+.exercise-card__meta {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-muted);
+}

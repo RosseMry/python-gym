@@ -1,0 +1,40 @@
+{
+  "id": "cond-004",
+  "module": "conditions",
+  "difficulty": 2,
+  "title": "Divisible by 3 and 5",
+  "description": "Write a function `divisible_by_3_and_5(n)` that returns True if `n` is divisible by both 3 and 5, and False otherwise.",
+  "examples": "divisible_by_3_and_5(15) -> True\ndivisible_by_3_and_5(9) -> False\ndivisible_by_3_and_5(10) -> False",
+  "starter_code": "def divisible_by_3_and_5(n):\n    # write your code here\n    pass\n",
+  "hints": [
+    "The modulo operator `%` gives you the remainder of a division.",
+    "A number is divisible by X when `n % X == 0`. You need both conditions to be true.",
+    "return n % 3 == 0 and n % 5 == 0"
+  ],
+  "expected_behavior": "Returns a boolean.",
+  "hidden_tests": [
+    {
+      "call": "divisible_by_3_and_5(15)",
+      "expected": "True"
+    },
+    {
+      "call": "divisible_by_3_and_5(9)",
+      "expected": "False"
+    },
+    {
+      "call": "divisible_by_3_and_5(10)",
+      "expected": "False"
+    },
+    {
+      "call": "divisible_by_3_and_5(0)",
+      "expected": "True"
+    }
+  ],
+  "solution": "def divisible_by_3_and_5(n):\n    return n % 3 == 0 and n % 5 == 0\n",
+  "explanation": "`%` returns the remainder of a division. A remainder of 0 means the number divides evenly. `and` combines both conditions so both must hold.",
+  "concepts": [
+    "if",
+    "and",
+    "modulo"
+  ]
+}

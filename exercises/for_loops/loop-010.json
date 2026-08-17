@@ -1,0 +1,38 @@
+{
+  "id": "loop-010",
+  "module": "for_loops",
+  "difficulty": 4,
+  "title": "Average of positive numbers",
+  "description": "Write a function `average_of_positives(numbers)` that returns the average of only the POSITIVE numbers in the list. If there are no positive numbers, return 0.",
+  "examples": "average_of_positives([1, -2, 3, -4, 5]) -> 3.0\naverage_of_positives([-1, -2]) -> 0",
+  "starter_code": "def average_of_positives(numbers):\n    # write your code here\n    pass\n",
+  "hints": [
+    "You need two things at once while looping: a running total, and a count of how many numbers were actually included.",
+    "Only update the total and the count when a number is > 0. Watch out for dividing by zero when there are no positives.",
+    "total = 0\ncount = 0\nfor number in numbers:\n    if number > 0:\n        total = total + number\n        count = count + 1\nif count == 0:\n    return 0\nreturn total / count"
+  ],
+  "expected_behavior": "Returns a number (int or float). Returns 0 when there are no positive numbers, to avoid dividing by zero.",
+  "hidden_tests": [
+    {
+      "call": "average_of_positives([1, -2, 3, -4, 5])",
+      "expected": "3.0"
+    },
+    {
+      "call": "average_of_positives([-1, -2])",
+      "expected": "0"
+    },
+    {
+      "call": "average_of_positives([2, 4, 6])",
+      "expected": "4.0"
+    }
+  ],
+  "solution": "def average_of_positives(numbers):\n    total = 0\n    count = 0\n    for number in numbers:\n        if number > 0:\n            total = total + number\n            count = count + 1\n    if count == 0:\n        return 0\n    return total / count\n",
+  "explanation": "This combines two accumulators (a sum and a counter) guarded by the same condition, then divides at the very end — after the loop, not inside it — and guards against dividing by zero.",
+  "concepts": [
+    "for",
+    "if",
+    "accumulator",
+    "counter",
+    "division"
+  ]
+}

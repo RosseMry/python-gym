@@ -1,0 +1,38 @@
+{
+  "id": "list-003",
+  "module": "lists",
+  "difficulty": 2,
+  "title": "Remove duplicates, keep order",
+  "description": "Write a function `remove_duplicates(items)` that returns a new list with duplicate values removed, keeping the first occurrence of each value and preserving order.",
+  "examples": "remove_duplicates([1, 2, 2, 3, 1, 4]) -> [1, 2, 3, 4]",
+  "starter_code": "def remove_duplicates(items):\n    # write your code here\n    pass\n",
+  "hints": [
+    "You'll need to remember which values you've already added, so you can decide whether to skip a repeat.",
+    "Keep a result list and a 'seen' list (or membership check against the result itself) — only append when the value hasn't been added yet.",
+    "result = []\nfor item in items:\n    if item not in result:\n        result.append(item)\nreturn result"
+  ],
+  "expected_behavior": "Returns a new list with only the first occurrence of each value.",
+  "hidden_tests": [
+    {
+      "call": "remove_duplicates([1, 2, 2, 3, 1, 4])",
+      "expected": "[1, 2, 3, 4]"
+    },
+    {
+      "call": "remove_duplicates([])",
+      "expected": "[]"
+    },
+    {
+      "call": "remove_duplicates([1, 1, 1])",
+      "expected": "[1]"
+    }
+  ],
+  "solution": "def remove_duplicates(items):\n    result = []\n    for item in items:\n        if item not in result:\n            result.append(item)\n    return result\n",
+  "explanation": "`item not in result` checks whether the value has already been added. Because we check before appending, only the first occurrence of each value ends up in the result.",
+  "concepts": [
+    "for",
+    "if",
+    "list",
+    "membership",
+    "append"
+  ]
+}

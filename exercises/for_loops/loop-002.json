@@ -1,0 +1,32 @@
+{
+  "id": "loop-002",
+  "module": "for_loops",
+  "difficulty": 1,
+  "title": "Print every number",
+  "description": "Write a function `print_all(numbers)` that prints every number in the list `numbers`, one per line, and also returns None (this exercise is about the loop, not the return value).",
+  "examples": "print_all([1, 2, 3, 4, 5]) prints:\n1\n2\n3\n4\n5",
+  "starter_code": "def print_all(numbers):\n    # write your code here\n    pass\n",
+  "hints": [
+    "You need a `for` loop that goes through every item in `numbers`.",
+    "Inside the loop body, call print() on the current item.",
+    "for number in numbers:\n    print(number)"
+  ],
+  "expected_behavior": "Prints each number on its own line, nothing else.",
+  "hidden_tests": [
+    {
+      "call": "print_all([1, 2, 3])",
+      "expected": "None"
+    },
+    {
+      "call": "print_all([])",
+      "expected": "None"
+    }
+  ],
+  "solution": "def print_all(numbers):\n    for number in numbers:\n        print(number)\n",
+  "explanation": "A `for` loop repeats its body once per item in the list, automatically stopping when it reaches the end — no manual counting required.",
+  "concepts": [
+    "for",
+    "list",
+    "print"
+  ]
+}

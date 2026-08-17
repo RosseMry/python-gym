@@ -1,0 +1,38 @@
+{
+  "id": "loop-007",
+  "module": "for_loops",
+  "difficulty": 3,
+  "title": "Filter numbers greater than 5",
+  "description": "Write a function `filter_greater_than_5(numbers)` that returns a NEW list containing only the numbers greater than 5.",
+  "examples": "filter_greater_than_5([1, 5, 8, 2, 10, 3]) -> [8, 10]",
+  "starter_code": "def filter_greater_than_5(numbers):\n    # write your code here\n    pass\n",
+  "hints": [
+    "This time the accumulator isn't a number, it's a list you build up.",
+    "Start with an empty list, and use `.append()` when a number passes the condition.",
+    "result = []\nfor number in numbers:\n    if number > 5:\n        result.append(number)\nreturn result"
+  ],
+  "expected_behavior": "Returns a new list, preserving the original order.",
+  "hidden_tests": [
+    {
+      "call": "filter_greater_than_5([1, 5, 8, 2, 10, 3])",
+      "expected": "[8, 10]"
+    },
+    {
+      "call": "filter_greater_than_5([1, 2, 3])",
+      "expected": "[]"
+    },
+    {
+      "call": "filter_greater_than_5([])",
+      "expected": "[]"
+    }
+  ],
+  "solution": "def filter_greater_than_5(numbers):\n    result = []\n    for number in numbers:\n        if number > 5:\n            result.append(number)\n    return result\n",
+  "explanation": "Filtering is the list version of the accumulator pattern: instead of updating a single number, we grow a list, adding only the elements that satisfy the condition.",
+  "concepts": [
+    "for",
+    "if",
+    "list",
+    "append",
+    "filtering"
+  ]
+}

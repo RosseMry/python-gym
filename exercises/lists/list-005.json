@@ -1,0 +1,37 @@
+{
+  "id": "list-005",
+  "module": "lists",
+  "difficulty": 3,
+  "title": "Merge two lists, alternating",
+  "description": "Write a function `interleave(a, b)` that returns a new list alternating elements from `a` and `b`, starting with `a`. Assume both lists have the same length.",
+  "examples": "interleave([1, 3, 5], [2, 4, 6]) -> [1, 2, 3, 4, 5, 6]",
+  "starter_code": "def interleave(a, b):\n    # write your code here\n    pass\n",
+  "hints": [
+    "You're walking through both lists at the same position at the same time, so you'll need the index, not just the values.",
+    "Loop using `enumerate(a)` (or `range(len(a))`), and for each index append both `a[index]` and `b[index]`.",
+    "result = []\nfor index, value in enumerate(a):\n    result.append(value)\n    result.append(b[index])\nreturn result"
+  ],
+  "expected_behavior": "Returns a list twice the length of the inputs, alternating a/b.",
+  "hidden_tests": [
+    {
+      "call": "interleave([1, 3, 5], [2, 4, 6])",
+      "expected": "[1, 2, 3, 4, 5, 6]"
+    },
+    {
+      "call": "interleave([], [])",
+      "expected": "[]"
+    },
+    {
+      "call": "interleave(['a'], ['b'])",
+      "expected": "['a', 'b']"
+    }
+  ],
+  "solution": "def interleave(a, b):\n    result = []\n    for index, value in enumerate(a):\n        result.append(value)\n        result.append(b[index])\n    return result\n",
+  "explanation": "`enumerate(a)` gives us the index we need to reach into `b` at the same position, so each loop iteration appends one element from each list, in a-then-b order.",
+  "concepts": [
+    "for",
+    "enumerate",
+    "list",
+    "indexing"
+  ]
+}

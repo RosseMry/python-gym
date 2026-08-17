@@ -1,0 +1,37 @@
+{
+  "id": "loop-008",
+  "module": "for_loops",
+  "difficulty": 3,
+  "title": "Double every number (transformation)",
+  "description": "Write a function `double_all(numbers)` that returns a NEW list where every number has been multiplied by 2.",
+  "examples": "double_all([1, 2, 3, 4]) -> [2, 4, 6, 8]",
+  "starter_code": "def double_all(numbers):\n    # write your code here\n    pass\n",
+  "hints": [
+    "Similar to filtering, but every element is transformed and kept, none are skipped.",
+    "Build a new list, and append `number * 2` for each item.",
+    "result = []\nfor number in numbers:\n    result.append(number * 2)\nreturn result"
+  ],
+  "expected_behavior": "Returns a new list, same length as the input.",
+  "hidden_tests": [
+    {
+      "call": "double_all([1, 2, 3, 4])",
+      "expected": "[2, 4, 6, 8]"
+    },
+    {
+      "call": "double_all([])",
+      "expected": "[]"
+    },
+    {
+      "call": "double_all([0, -1])",
+      "expected": "[0, -2]"
+    }
+  ],
+  "solution": "def double_all(numbers):\n    result = []\n    for number in numbers:\n        result.append(number * 2)\n    return result\n",
+  "explanation": "A transformation loop appends a modified version of every item, unlike filtering which appends only some items unchanged.",
+  "concepts": [
+    "for",
+    "list",
+    "append",
+    "transformation"
+  ]
+}

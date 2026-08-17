@@ -1,0 +1,37 @@
+{
+  "id": "list-004",
+  "module": "lists",
+  "difficulty": 2,
+  "title": "Find the index of the maximum",
+  "description": "Write a function `index_of_max(numbers)` that returns the index of the largest number in the list. Assume the list is not empty, and if there's a tie, return the first index.",
+  "examples": "index_of_max([3, 7, 2, 9, 4]) -> 3",
+  "starter_code": "def index_of_max(numbers):\n    # write your code here\n    pass\n",
+  "hints": [
+    "You need to track both the best value seen so far AND its position, so plain `for number in numbers` isn't quite enough.",
+    "Use `enumerate()` to get (index, number) pairs, and update your 'best so far' variables only when you find something larger.",
+    "best_index = 0\nbest_value = numbers[0]\nfor index, number in enumerate(numbers):\n    if number > best_value:\n        best_value = number\n        best_index = index\nreturn best_index"
+  ],
+  "expected_behavior": "Returns an integer index into the list.",
+  "hidden_tests": [
+    {
+      "call": "index_of_max([3, 7, 2, 9, 4])",
+      "expected": "3"
+    },
+    {
+      "call": "index_of_max([5])",
+      "expected": "0"
+    },
+    {
+      "call": "index_of_max([1, 5, 5, 2])",
+      "expected": "1"
+    }
+  ],
+  "solution": "def index_of_max(numbers):\n    best_index = 0\n    best_value = numbers[0]\n    for index, number in enumerate(numbers):\n        if number > best_value:\n            best_value = number\n            best_index = index\n    return best_index\n",
+  "explanation": "This is the 'running best' pattern: initialize with the first element, then only overwrite the tracked best when a strictly larger value appears — the strict `>` naturally keeps ties on the earliest index.",
+  "concepts": [
+    "for",
+    "enumerate",
+    "if",
+    "list"
+  ]
+}
