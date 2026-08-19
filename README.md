@@ -1,3 +1,5 @@
+# Comando para reload port 8000
+  uv run uvicorn app.main:app --reload --port 8000
 # Python Gym — Sprint 1 (MVP)
 
 A local practice platform to build Python fluency for Machine Learning,
