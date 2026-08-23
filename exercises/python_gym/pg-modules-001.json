@@ -1,0 +1,26 @@
+{
+  "id": "pg-modules-001",
+  "module": "modules",
+  "difficulty": 2,
+  "title": "Circle area with the math module",
+  "description": "Write a function `circle_area(radius)` that returns the area of a circle with the given `radius`, computed as `math.pi * radius ** 2` and rounded to 2 decimal places. Use Python's built-in `math` module for the value of pi.",
+  "examples": "circle_area(2) -> 12.57",
+  "starter_code": "def circle_area(radius):\n    # write your code here\n    pass\n",
+  "hints": [
+    "You need a precise value of pi rather than hardcoding an approximation yourself.",
+    "The standard library `math` module provides `math.pi`, and Python's `round(value, ndigits)` rounds to a given number of decimal places.",
+    "Import `math`, compute `math.pi * radius ** 2`, and return the result of `round(..., 2)`."
+  ],
+  "expected_behavior": "Returns the area of a circle of the given radius, using math.pi, rounded to exactly 2 decimal places.",
+  "hidden_tests": [
+    {"call": "circle_area(1)", "expected": "3.14", "label": "unit radius"},
+    {"call": "circle_area(2)", "expected": "12.57", "label": "radius 2"},
+    {"call": "circle_area(0)", "expected": "0.0", "label": "zero radius"}
+  ],
+  "solution": "import math\n\n\ndef circle_area(radius):\n    return round(math.pi * radius ** 2, 2)\n",
+  "explanation": "`math.pi` gives an accurate value of pi from the standard library. Multiplying it by `radius ** 2` computes the area of the circle, and `round(..., 2)` limits the result to 2 decimal places as required.",
+  "concepts": ["module", "math", "rounding"],
+  "source": "python_gym",
+  "skills": ["basic_data_manipulation"],
+  "prerequisites": []
+}

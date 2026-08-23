@@ -1,0 +1,26 @@
+{
+  "id": "pg-functions-002",
+  "module": "functions",
+  "difficulty": 1,
+  "title": "Greet with a default greeting",
+  "description": "Write a function `greet(name, greeting=\"Hello\")` that returns the string `\"{greeting}, {name}!\"`. If no `greeting` is provided by the caller, it should default to `\"Hello\"`.",
+  "examples": "greet('Ana') -> 'Hello, Ana!'",
+  "starter_code": "def greet(name, greeting=\"Hello\"):\n    # write your code here\n    pass\n",
+  "hints": [
+    "A function parameter can have a default value that is used automatically when the caller doesn't supply that argument.",
+    "You can build the result with an f-string, e.g. `f\"{greeting}, {name}!\"`.",
+    "Return an f-string of the form `f\"{greeting}, {name}!\"`; since `greeting` already defaults to `\"Hello\"` in the signature, you don't need any extra conditional logic in the body."
+  ],
+  "expected_behavior": "Returns \"{greeting}, {name}!\", using the default greeting \"Hello\" when the caller does not pass one.",
+  "hidden_tests": [
+    {"call": "greet('Ana')", "expected": "'Hello, Ana!'", "label": "default greeting"},
+    {"call": "greet('Ana', 'Hi')", "expected": "'Hi, Ana!'", "label": "positional greeting"},
+    {"call": "greet('Bo', greeting='Hey')", "expected": "'Hey, Bo!'", "label": "keyword greeting"}
+  ],
+  "solution": "def greet(name, greeting=\"Hello\"):\n    return f\"{greeting}, {name}!\"\n",
+  "explanation": "Giving `greeting` a default value of `\"Hello\"` in the function signature means callers can omit it entirely, and Python fills it in automatically. The f-string then formats whichever greeting was ultimately used together with `name`.",
+  "concepts": ["function", "default arguments", "f-string"],
+  "source": "python_gym",
+  "skills": ["functional_python"],
+  "prerequisites": []
+}

@@ -1,0 +1,27 @@
+{
+  "id": "fnd-types-001",
+  "module": "types",
+  "difficulty": 1,
+  "title": "Add numbers given as strings",
+  "description": "Write a function `add_as_numbers(a, b)` where `a` and `b` are strings representing whole numbers (e.g. `\"2\"`, `\"-3\"`). Convert both to integers and return their sum as an int.",
+  "examples": "add_as_numbers('2', '3') -> 5",
+  "starter_code": "def add_as_numbers(a, b):\n    # write your code here\n    pass\n",
+  "hints": [
+    "The `+` operator behaves differently on strings than on numbers, so adding a and b directly won't give you a numeric sum.",
+    "Python's built-in `int()` function converts a string of digits into an integer.",
+    "Convert each argument with `int(a)` and `int(b)` before adding them, and return the resulting sum."
+  ],
+  "expected_behavior": "Returns the integer sum of the two numeric strings.",
+  "hidden_tests": [
+    {"call": "add_as_numbers('2', '3')", "expected": "5", "label": "two positive strings"},
+    {"call": "add_as_numbers('10', '-3')", "expected": "7", "label": "positive and negative"},
+    {"call": "add_as_numbers('0', '0')", "expected": "0", "label": "zeros"}
+  ],
+  "solution": "def add_as_numbers(a, b):\n    return int(a) + int(b)\n",
+  "explanation": "Strings and integers are different types in Python, so `'2' + '3'` would concatenate to `'23'` instead of adding. `int()` parses a numeric string into an integer, letting `+` perform arithmetic addition.",
+  "concepts": ["type conversion", "int", "strings"],
+  "skills": ["type_introspection"],
+  "prerequisites": [],
+  "exercise_type": "function",
+  "source": "foundations"
+}

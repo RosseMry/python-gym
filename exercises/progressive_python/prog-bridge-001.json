@@ -1,0 +1,38 @@
+{
+  "id": "prog-bridge-001",
+  "module": "for_loops",
+  "difficulty": 3,
+  "title": "Classify numbers by parity",
+  "description": "Write a function `classify_numbers(numbers)` that splits a list of integers into even and odd numbers, returning a dict `{\"even\": [...], \"odd\": [...]}`. This combines looping over a list with a conditional check on each element, and building up two lists at once.",
+  "examples": "classify_numbers([1, 2, 3, 4]) -> {'even': [2, 4], 'odd': [1, 3]}",
+  "starter_code": "def classify_numbers(numbers):\n    # write your code here\n    pass\n",
+  "hints": [
+    "You'll need to look at every number in the list and decide, one at a time, which of two buckets it belongs to.",
+    "The modulo operator `%` tells you if a number is even or odd: `number % 2 == 0` means even.",
+    "Start with a dict containing two empty lists, one keyed 'even' and one keyed 'odd'. Loop over the input, and for each number use an if/else on `number % 2` to append it to the correct list inside that dict, then return the dict."
+  ],
+  "expected_behavior": "Returns a dict with keys 'even' and 'odd', each mapping to a list of the matching numbers in their original relative order.",
+  "hidden_tests": [
+    {
+      "call": "classify_numbers([1, 2, 3, 4])",
+      "expected": "{'even': [2, 4], 'odd': [1, 3]}",
+      "label": "mixed numbers"
+    },
+    {
+      "call": "classify_numbers([])",
+      "expected": "{'even': [], 'odd': []}",
+      "label": "empty list"
+    },
+    {
+      "call": "classify_numbers([1, 3, 5])",
+      "expected": "{'even': [], 'odd': [1, 3, 5]}",
+      "label": "all odd"
+    }
+  ],
+  "solution": "def classify_numbers(numbers):\n    result = {\"even\": [], \"odd\": []}\n    for number in numbers:\n        if number % 2 == 0:\n            result[\"even\"].append(number)\n        else:\n            result[\"odd\"].append(number)\n    return result\n",
+  "explanation": "A single loop visits each number once. The modulo check `number % 2 == 0` decides whether it goes into the 'even' or 'odd' list of the result dict, so both output lists are built in one pass while preserving the original order.",
+  "concepts": ["for loop", "conditional", "modulo", "dict", "list building"],
+  "skills": ["iteration", "basic_data_manipulation"],
+  "prerequisites": ["loop-005"],
+  "source": "progressive_python"
+}

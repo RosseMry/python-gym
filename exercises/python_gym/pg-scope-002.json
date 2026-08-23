@@ -1,0 +1,26 @@
+{
+  "id": "pg-scope-002",
+  "module": "scope",
+  "difficulty": 2,
+  "title": "Build a multiplier closure",
+  "description": "Write a function `make_multiplier(factor)` that returns a new function. That returned function should take one argument `x` and return `x * factor`, remembering the `factor` it was created with even after `make_multiplier` has finished running.",
+  "examples": "make_multiplier(3)(4) -> 12",
+  "starter_code": "def make_multiplier(factor):\n    # write your code here\n    pass\n",
+  "hints": [
+    "Instead of returning a number, this function needs to return another function, ready to be called later.",
+    "A function defined and returned from inside another function is called a closure — it keeps access to the variables of the scope it was created in, like `factor`.",
+    "Inside `make_multiplier`, define `def multiplier(x): return x * factor`, then `return multiplier` (without calling it) so the caller can invoke it later with their own `x`."
+  ],
+  "expected_behavior": "Returns a function that, when later called with a number x, returns x * factor, where factor is fixed at the time make_multiplier was called.",
+  "hidden_tests": [
+    {"call": "make_multiplier(3)(4)", "expected": "12", "label": "positive factor"},
+    {"call": "make_multiplier(0)(100)", "expected": "0", "label": "zero factor"},
+    {"call": "make_multiplier(-2)(5)", "expected": "-10", "label": "negative factor"}
+  ],
+  "solution": "def make_multiplier(factor):\n    def multiplier(x):\n        return x * factor\n\n    return multiplier\n",
+  "explanation": "`make_multiplier` defines a nested function `multiplier` that reads `factor` from the enclosing scope, and returns that function object itself (not its result). This is a closure: even after `make_multiplier` has returned, the function it produced still remembers the specific `factor` it was created with, which is why calling it later with `x` reproduces `x * factor`.",
+  "concepts": ["scope", "closure", "nested function", "higher-order function"],
+  "source": "python_gym",
+  "skills": ["functional_python"],
+  "prerequisites": ["pg-scope-001"]
+}

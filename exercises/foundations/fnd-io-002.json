@@ -1,0 +1,26 @@
+{
+  "id": "fnd-io-002",
+  "module": "input_output",
+  "difficulty": 2,
+  "title": "Sum two entered numbers",
+  "description": "Write a script that asks the user for two whole numbers, one at a time, with the exact prompts `\"Enter first number: \"` and `\"Enter second number: \"`, then prints their sum in the exact form `\"Sum: <total>\"`.",
+  "examples": "Enter first number: 3\nEnter second number: 4\nSum: 7",
+  "starter_code": "# your code here\n",
+  "hints": [
+    "You need two separate values from the user, so you'll call the input function twice.",
+    "input() always returns a string, so you need int() to convert each entry into a whole number before adding them.",
+    "Call `int(input('Enter first number: '))` and `int(input('Enter second number: '))`, add the results, and print `f'Sum: {total}'`."
+  ],
+  "expected_behavior": "Prompts for two numbers in order and prints their sum after the label 'Sum: '.",
+  "hidden_tests": [
+    {"args": [], "stdin": "3\n4\n", "expected_stdout": "Enter first number: Enter second number: Sum: 7", "label": "3 plus 4"},
+    {"args": [], "stdin": "10\n-2\n", "expected_stdout": "Enter first number: Enter second number: Sum: 8", "label": "10 plus -2"}
+  ],
+  "solution": "def main():\n    a = int(input('Enter first number: '))\n    b = int(input('Enter second number: '))\n    print(f'Sum: {a + b}')\n\n\nif __name__ == '__main__':\n    main()\n",
+  "explanation": "Two calls to input() each display their prompt and read one line. Wrapping each in int() converts the text into a whole number so `+` performs numeric addition instead of string concatenation, and the result is printed with the required label.",
+  "concepts": ["input", "int", "print", "f-strings"],
+  "skills": ["basic_data_manipulation"],
+  "prerequisites": ["fnd-io-001"],
+  "exercise_type": "script",
+  "source": "foundations"
+}

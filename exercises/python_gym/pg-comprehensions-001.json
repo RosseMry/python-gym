@@ -1,0 +1,26 @@
+{
+  "id": "pg-comprehensions-001",
+  "module": "comprehensions",
+  "difficulty": 2,
+  "title": "Squares of even numbers",
+  "description": "Write a function `even_squares(numbers)` that returns a list containing the square of each even number in `numbers`, using a single list comprehension. Odd numbers are skipped entirely.",
+  "examples": "even_squares([1, 2, 3, 4]) -> [4, 16]",
+  "starter_code": "def even_squares(numbers):\n    # write your code here\n    pass\n",
+  "hints": [
+    "You need to both filter out odd numbers and transform the ones that remain into their square.",
+    "A list comprehension can combine a transformation with an `if` condition in one expression: `[expr for x in iterable if condition]`.",
+    "Use `n % 2 == 0` as the filter condition and `n * n` as the transformation: `[n * n for n in numbers if n % 2 == 0]`."
+  ],
+  "expected_behavior": "Returns a list of the squares of every even element in `numbers`, preserving their original order and skipping odd elements.",
+  "hidden_tests": [
+    {"call": "even_squares([1, 2, 3, 4])", "expected": "[4, 16]", "label": "mixed even and odd"},
+    {"call": "even_squares([1, 3, 5])", "expected": "[]", "label": "no even numbers"},
+    {"call": "even_squares([2, 4, 6])", "expected": "[4, 16, 36]", "label": "all even numbers"}
+  ],
+  "solution": "def even_squares(numbers):\n    return [n * n for n in numbers if n % 2 == 0]\n",
+  "explanation": "The list comprehension iterates over `numbers`, keeps only the elements that satisfy `n % 2 == 0` (even numbers), and maps each surviving element to `n * n`, producing the list of squares in a single pass.",
+  "concepts": ["list comprehension", "filtering", "modulo"],
+  "source": "python_gym",
+  "skills": ["basic_data_manipulation"],
+  "prerequisites": []
+}

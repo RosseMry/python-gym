@@ -1,0 +1,27 @@
+{
+  "id": "fnd-variables-002",
+  "module": "variables",
+  "difficulty": 2,
+  "title": "Swap and sum",
+  "description": "Write a function `swap_and_sum(a, b)` that returns a 3-tuple `(b, a, a + b)`: the two arguments swapped, followed by their sum.",
+  "examples": "swap_and_sum(2, 3) -> (3, 2, 5)",
+  "starter_code": "def swap_and_sum(a, b):\n    # write your code here\n    pass\n",
+  "hints": [
+    "This builds on the swap idea: you need the two values in reversed order, plus one more computed value.",
+    "A tuple literal can hold as many comma-separated expressions as you want, not just two.",
+    "Return three items separated by commas: `b`, then `a`, then the expression `a + b`, in that exact order."
+  ],
+  "expected_behavior": "Returns a tuple (b, a, a + b): the arguments swapped, then their sum as the third element.",
+  "hidden_tests": [
+    {"call": "swap_and_sum(2, 3)", "expected": "(3, 2, 5)", "label": "positive integers"},
+    {"call": "swap_and_sum(0, 0)", "expected": "(0, 0, 0)", "label": "zeros"},
+    {"call": "swap_and_sum(-1, 5)", "expected": "(5, -1, 4)", "label": "negative and positive"}
+  ],
+  "solution": "def swap_and_sum(a, b):\n    return b, a, a + b\n",
+  "explanation": "A return statement with several comma-separated expressions packs them into a tuple in the order written, so `b, a, a + b` produces the swapped pair followed by the sum.",
+  "concepts": ["multiple assignment", "tuples", "arithmetic operators"],
+  "skills": ["basic_data_manipulation"],
+  "prerequisites": ["fnd-variables-001"],
+  "exercise_type": "function",
+  "source": "foundations"
+}

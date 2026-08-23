@@ -53,6 +53,18 @@ def _row_to_exercise(row: sqlite3.Row) -> Exercise:
         exercise_status=(
             row["exercise_status"] if "exercise_status" in columns else "active"
         ),
+        title_fr=row["title_fr"] if "title_fr" in columns else None,
+        description_fr=row["description_fr"] if "description_fr" in columns else None,
+        examples_fr=row["examples_fr"] if "examples_fr" in columns else None,
+        expected_behavior_fr=(
+            row["expected_behavior_fr"] if "expected_behavior_fr" in columns else None
+        ),
+        explanation_fr=row["explanation_fr"] if "explanation_fr" in columns else None,
+        hints_fr=(
+            json.loads(row["hints_fr"])
+            if "hints_fr" in columns and row["hints_fr"]
+            else None
+        ),
     )
 
 
@@ -71,8 +83,13 @@ class ExerciseRepository:
                 starter_code, hints, expected_behavior, hidden_tests,
                 solution, explanation, concepts, track, source, skills,
                 prerequisites, resources, validation_profile,
-                exercise_type, exercise_status
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                exercise_type, exercise_status, title_fr, description_fr,
+                examples_fr, expected_behavior_fr, explanation_fr,
+                hints_fr
+            ) VALUES (
+                ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
+                ?, ?, ?, ?, ?, ?, ?
+            )
             ON CONFLICT(id) DO UPDATE SET
                 module=excluded.module,
                 difficulty=excluded.difficulty,
@@ -93,7 +110,13 @@ class ExerciseRepository:
                 resources=excluded.resources,
                 validation_profile=excluded.validation_profile,
                 exercise_type=excluded.exercise_type,
-                exercise_status=excluded.exercise_status
+                exercise_status=excluded.exercise_status,
+                title_fr=excluded.title_fr,
+                description_fr=excluded.description_fr,
+                examples_fr=excluded.examples_fr,
+                expected_behavior_fr=excluded.expected_behavior_fr,
+                explanation_fr=excluded.explanation_fr,
+                hints_fr=excluded.hints_fr
             """,
             (
                 exercise.id,
@@ -117,6 +140,12 @@ class ExerciseRepository:
                 exercise.validation_profile,
                 exercise.exercise_type,
                 exercise.exercise_status,
+                exercise.title_fr,
+                exercise.description_fr,
+                exercise.examples_fr,
+                exercise.expected_behavior_fr,
+                exercise.explanation_fr,
+                json.dumps(exercise.hints_fr) if exercise.hints_fr else None,
             ),
         )
         self._conn.execute(
@@ -164,6 +193,85 @@ class ExerciseRepository:
         """Return a single exercise by id, or None if it does not exist."""
         row = self._conn.execute(
             "SELECT * FROM exercises WHERE id = ?", (exercise_id,)
+        ).fetchone()
+        return _row_to_exercise(row) if row else None
+
+    def resolve_prerequisites(self, exercise_ids: list[str]) -> list[dict]:
+        """Resolve prerequisite ids into ``{id, title, solved}`` for display.
+
+        Basic learning path (Sprint 3): prerequisites were already
+        stored as raw ids since Sprint 2 but never resolved into
+        anything a student could act on.
+        """
+        if not exercise_ids:
+            return []
+        placeholders = ",".join("?" for _ in exercise_ids)
+        titles = {
+            row["id"]: row["title"]
+            for row in self._conn.execute(
+                f"SELECT id, title FROM exercises WHERE id IN ({placeholders})",
+                exercise_ids,
+            ).fetchall()
+        }
+        solved_family = (
+            ExerciseStatus.SOLVED.value,
+            ExerciseStatus.SOLVED_WITH_HINT.value,
+            ExerciseStatus.SOLVED_TO_REPEAT.value,
+            ExerciseStatus.MASTERED.value,
+        )
+        solved_placeholders = ",".join("?" for _ in solved_family)
+        solved_ids = {
+            row["exercise_id"]
+            for row in self._conn.execute(
+                f"""
+                SELECT exercise_id FROM progress
+                WHERE exercise_id IN ({placeholders})
+                AND status IN ({solved_placeholders})
+                """,
+                [*exercise_ids, *solved_family],
+            ).fetchall()
+        }
+        return [
+            {
+                "id": prereq_id,
+                "title": titles.get(prereq_id, prereq_id),
+                "solved": prereq_id in solved_ids,
+            }
+            for prereq_id in exercise_ids
+        ]
+
+    def get_next_unsolved(self, source: str | None = None) -> Exercise | None:
+        """First not-yet-solved exercise, optionally within one source.
+
+        Deliberately simple catalog-order recommendation, not an
+        adaptive/scoring engine (Sprint 3 explicitly defers that).
+        """
+        solved_family = (
+            ExerciseStatus.SOLVED.value,
+            ExerciseStatus.SOLVED_WITH_HINT.value,
+            ExerciseStatus.SOLVED_TO_REPEAT.value,
+            ExerciseStatus.MASTERED.value,
+        )
+        solved_placeholders = ",".join("?" for _ in solved_family)
+        clauses = [
+            "exercises.exercise_status != 'excluded'",
+            f"(progress.status IS NULL OR progress.status NOT IN "
+            f"({solved_placeholders}))",
+        ]
+        params: list[str] = list(solved_family)
+        if source:
+            clauses.append("exercises.source = ?")
+            params.append(source)
+        where = " AND ".join(clauses)
+        row = self._conn.execute(
+            f"""
+            SELECT exercises.* FROM exercises
+            LEFT JOIN progress ON progress.exercise_id = exercises.id
+            WHERE {where}
+            ORDER BY exercises.module, exercises.difficulty, exercises.id
+            LIMIT 1
+            """,
+            params,
         ).fetchone()
         return _row_to_exercise(row) if row else None
 

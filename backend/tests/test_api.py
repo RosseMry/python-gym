@@ -89,10 +89,10 @@ def test_get_missing_exercise_returns_404(client: TestClient) -> None:
 def test_hint_endpoint_returns_hints_in_order(client: TestClient) -> None:
     first = client.post("/api/exercises/loop-003/hint")
     assert first.status_code == 200
-    assert first.json() == {"hint": "hint 1"}
+    assert first.json() == {"hint": "hint 1", "hint_fr": None}
 
     second = client.post("/api/exercises/loop-003/hint")
-    assert second.json() == {"hint": "hint 2"}
+    assert second.json() == {"hint": "hint 2", "hint_fr": None}
 
 
 def test_submit_endpoint_reports_pass_fail(client: TestClient) -> None:
@@ -143,3 +143,19 @@ def test_progress_endpoint_lists_records(client: TestClient) -> None:
     body = response.json()
     assert body[0]["exercise_id"] == "loop-003"
     assert body[0]["status"] == "NEW"
+
+
+def test_repeated_source_filtered_requests_do_not_leak_connections(
+    client: TestClient,
+) -> None:
+    """Regression test for Sprint 2's progressive_python reload 500s.
+
+    get_service() used to open a fresh sqlite3 connection per request
+    without ever closing it, so repeated requests (e.g. React
+    StrictMode double-firing effects on every reload) accumulated open
+    connections until one failed. 50 requests is comfortably past where
+    the old code would start erroring.
+    """
+    for _ in range(50):
+        response = client.get("/api/exercises?source=progressive_python")
+        assert response.status_code == 200

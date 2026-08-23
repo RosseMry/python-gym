@@ -1,0 +1,25 @@
+{
+  "id": "pg-sets-002",
+  "module": "sets",
+  "difficulty": 2,
+  "title": "Items common to both lists",
+  "description": "Write a function `common_items(a, b)` that returns a sorted list of the values present in both list `a` and list `b`.",
+  "examples": "common_items([1, 2, 3], [2, 3, 4]) -> [2, 3]",
+  "starter_code": "def common_items(a, b):\n    # write your code here\n    pass\n",
+  "hints": [
+    "Sets have an operation that directly gives you the elements shared between two collections.",
+    "Converting both lists to sets lets you use the `&` operator (set intersection) to find common values.",
+    "Build `set(a) & set(b)` to get the intersection of the two lists, then return `sorted(...)` of that result."
+  ],
+  "expected_behavior": "Returns a sorted list of the distinct values that appear in both `a` and `b`.",
+  "hidden_tests": [
+    {"call": "common_items([1, 2, 3], [2, 3, 4])", "expected": "[2, 3]", "label": "overlapping lists"},
+    {"call": "common_items([1], [2])", "expected": "[]", "label": "no overlap"}
+  ],
+  "solution": "def common_items(a, b):\n    return sorted(set(a) & set(b))\n",
+  "explanation": "Converting both lists to sets and combining them with the `&` operator computes their intersection, i.e. the values present in both. `sorted()` then turns that intersection into a deterministic, ascending list.",
+  "concepts": ["set", "intersection", "sorted"],
+  "source": "python_gym",
+  "skills": ["basic_data_manipulation"],
+  "prerequisites": ["pg-sets-001"]
+}

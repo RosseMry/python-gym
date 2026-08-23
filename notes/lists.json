@@ -1,0 +1,28 @@
+{
+  "id": "lists",
+  "module": "lists",
+  "title": "Lists",
+  "display_order": 1,
+  "explanation": "A list is an ordered, mutable collection of values, written between square brackets and separated by commas: `numbers = [1, 2, 3]`. \"Ordered\" means each item has a fixed position (an index); \"mutable\" means you can change a list in place after creating it, unlike a string or a tuple. Lists can hold any mix of types, including other lists.",
+  "syntax": "numbers = [1, 2, 3]\n\n# indexing (0-based) and negative indexing (from the end)\nnumbers[0]        # 1\nnumbers[-1]       # 3\n\n# slicing: list[start:stop] - stop is excluded\nnumbers[0:2]      # [1, 2]\nnumbers[1:]       # [2, 3]\n\n# growing a list\nnumbers.append(4)         # add one item at the end -> [1, 2, 3, 4]\nnumbers.extend([5, 6])    # add many items at the end -> [1, 2, 3, 4, 5, 6]\nnumbers.insert(0, 0)      # insert at a specific index -> [0, 1, 2, 3, 4, 5, 6]\n\n# shrinking a list\nnumbers.remove(0)   # removes the first 0 it finds (by value)\nnumbers.pop()        # removes and returns the last item\nnumbers.pop(0)        # removes and returns the item at index 0\nnumbers.clear()        # empties the list\n\n# ordering\nnumbers.sort()          # sorts in place\nnumbers.reverse()       # reverses in place\n\n# reading\nlen(numbers)             # number of items\n3 in numbers              # membership test -> True/False\nfor n in numbers:          # iteration\n    print(n)\n\n# nested lists\ngrid = [[1, 2], [3, 4]]\ngrid[0][1]   # 2\n\n# list comprehension: build a new list from an existing one\nsquares = [n * n for n in numbers]\nevens = [n for n in numbers if n % 2 == 0]",
+  "examples": "Track a shopping cart:\n\ncart = []\ncart.append(\"bread\")\ncart.append(\"milk\")\nprint(cart)          # ['bread', 'milk']\nprint(len(cart))     # 2\n\nDouble every price using a comprehension:\n\nprices = [2, 5, 8]\ndoubled = [p * 2 for p in prices]\nprint(doubled)       # [4, 10, 16]",
+  "common_mistakes": "1. Confusing `append` and `extend`: `numbers.append([4, 5])` adds ONE item that is itself a list (`[..., [4, 5]]`), while `numbers.extend([4, 5])` adds two separate items.\n\n2. Modifying a list while iterating over it (e.g. calling `.remove()` inside a `for` loop over the same list) silently skips items, because the indices shift as you remove. Iterate over a copy (`for x in list(numbers):`) or build a new list instead.\n\n3. `list[index]` on an index that doesn't exist raises `IndexError` - always check `len()` first, or use a negative index only when you're sure the list isn't empty.\n\n4. Two variables pointing at the same list are the same object: `a = [1, 2]; b = a; b.append(3)` also changes `a`. Use `b = a.copy()` (or `a[:]`) to get an independent list.",
+  "mini_exercise": "Without running Python, predict the output:\n\nnumbers = [10, 20, 30]\nnumbers.append(40)\nnumbers.insert(0, 5)\nnumbers.pop(1)\nprint(numbers)\n\n(Answer: [5, 20, 30, 40] - append adds 40 at the end, insert puts 5 at index 0 giving [5, 10, 20, 30, 40], then pop(1) removes the item at index 1, which is 10.)",
+  "related_exercise_ids": [
+    "list-001",
+    "list-002",
+    "list-003",
+    "list-004",
+    "list-005",
+    "prog-nested-loop-001",
+    "prog-nested-loop-002",
+    "prog-bridge-002",
+    "30days-list-methods"
+  ],
+  "title_fr": null,
+  "explanation_fr": null,
+  "syntax_fr": null,
+  "examples_fr": null,
+  "common_mistakes_fr": null,
+  "mini_exercise_fr": null
+}

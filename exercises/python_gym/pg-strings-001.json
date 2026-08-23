@@ -1,0 +1,26 @@
+{
+  "id": "pg-strings-001",
+  "module": "strings",
+  "difficulty": 1,
+  "title": "Reverse the word order",
+  "description": "Write a function `reverse_words(sentence)` that splits `sentence` on whitespace and returns the words joined back together with single spaces, but in reverse order. The order of the words is reversed, not the characters within each word.",
+  "examples": "reverse_words(\"hello world\") -> \"world hello\"",
+  "starter_code": "def reverse_words(sentence):\n    # write your code here\n    pass\n",
+  "hints": [
+    "Think about the sentence as a sequence of words rather than a single block of text. What operation turns a string into a list of its words?",
+    "`str.split()` breaks a sentence into a list of words, and `str.join()` glues a list of strings back together with a separator.",
+    "Split `sentence` with `.split()`, reverse the resulting list with `reversed()` (or slicing), then rejoin it with `' '.join(...)`."
+  ],
+  "expected_behavior": "Returns a new string with the words of `sentence` in reverse order, separated by single spaces.",
+  "hidden_tests": [
+    {"call": "reverse_words(\"hello world\")", "expected": "'world hello'", "label": "two words"},
+    {"call": "reverse_words(\"a b c\")", "expected": "'c b a'", "label": "three words"},
+    {"call": "reverse_words(\"single\")", "expected": "'single'", "label": "single word"}
+  ],
+  "solution": "def reverse_words(sentence):\n    return ' '.join(reversed(sentence.split()))\n",
+  "explanation": "`sentence.split()` splits on any whitespace and drops extra spaces, producing a list of words. `reversed()` gives an iterator over that list in reverse order, and `' '.join(...)` glues the words back into a single string separated by single spaces.",
+  "concepts": ["string", "split", "join", "reversed"],
+  "source": "python_gym",
+  "skills": ["text_processing", "basic_data_manipulation"],
+  "prerequisites": []
+}

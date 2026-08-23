@@ -1,0 +1,26 @@
+{
+  "id": "pg-exceptions-001",
+  "module": "exceptions",
+  "difficulty": 1,
+  "title": "Safely convert text to an integer",
+  "description": "Write a function `safe_int(text)` that returns `int(text)` if the conversion succeeds, or `None` if converting `text` raises a `ValueError`.",
+  "examples": "safe_int('42') -> 42",
+  "starter_code": "def safe_int(text):\n    # write your code here\n    pass\n",
+  "hints": [
+    "Rather than checking in advance whether `text` looks like a valid number, let Python attempt the conversion and react if it fails.",
+    "A `try`/`except` block lets you attempt code that might fail and handle the specific error it raises, here a `ValueError`.",
+    "Wrap `return int(text)` in a `try` block, add an `except ValueError:` clause below it, and `return None` from within that except clause."
+  ],
+  "expected_behavior": "Returns int(text) when the conversion succeeds, and None when converting text to an int raises a ValueError.",
+  "hidden_tests": [
+    {"call": "safe_int('42')", "expected": "42", "label": "valid positive integer string"},
+    {"call": "safe_int('abc')", "expected": "None", "label": "non-numeric string"},
+    {"call": "safe_int('-5')", "expected": "-5", "label": "valid negative integer string"}
+  ],
+  "solution": "def safe_int(text):\n    try:\n        return int(text)\n    except ValueError:\n        return None\n",
+  "explanation": "The `try` block attempts the conversion directly with `int(text)`. If `text` is not a valid integer literal, `int()` raises a `ValueError`, which is caught by the `except ValueError:` clause, returning `None` instead of letting the exception propagate. This correctly handles negative numbers like '-5', which a pre-check like `.isdigit()` would incorrectly reject.",
+  "concepts": ["exception", "try/except", "valueerror", "type conversion"],
+  "source": "python_gym",
+  "skills": ["error_handling"],
+  "prerequisites": []
+}

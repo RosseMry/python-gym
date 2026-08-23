@@ -1,0 +1,48 @@
+{
+  "id": "30days-string-methods",
+  "module": "strings",
+  "difficulty": 2,
+  "title": "Shout it back and count the words",
+  "description": "Write a script that asks the user for a sentence, prints it back entirely in uppercase, and then prints how many words it contains.",
+  "examples": "Enter a sentence: hello world foo\nHELLO WORLD FOO\nWord count: 3",
+  "starter_code": "def main():\n    # your code here\n    pass\n\n\nif __name__ == \"__main__\":\n    main()\n",
+  "hints": [
+    "Read the sentence with input(), then think about which string method changes every letter to uppercase.",
+    "str.upper() returns an uppercase copy of a string, and str.split() breaks a string into a list of words on whitespace by default.",
+    "Print sentence.upper() on its own line, then print an f-string that reads exactly 'Word count: ' followed by len(sentence.split())."
+  ],
+  "expected_behavior": "Reads a sentence, prints it fully uppercased, then prints the number of whitespace-separated words it contains.",
+  "hidden_tests": [
+    {
+      "args": [],
+      "stdin": "hello world foo\n",
+      "expected_stdout": "Enter a sentence: HELLO WORLD FOO\nWord count: 3",
+      "label": "three words"
+    },
+    {
+      "args": [],
+      "stdin": "python is fun\n",
+      "expected_stdout": "Enter a sentence: PYTHON IS FUN\nWord count: 3",
+      "label": "three words, different sentence"
+    },
+    {
+      "args": [],
+      "stdin": "hi\n",
+      "expected_stdout": "Enter a sentence: HI\nWord count: 1",
+      "label": "single word"
+    }
+  ],
+  "solution": "def main():\n    sentence = input(\"Enter a sentence: \")\n    print(sentence.upper())\n    print(f\"Word count: {len(sentence.split())}\")\n\n\nif __name__ == \"__main__\":\n    main()\n",
+  "explanation": "str.upper() returns a new string with every letter capitalized, and str.split() splits on any run of whitespace, producing a list whose length is the word count.",
+  "concepts": [
+    "strings",
+    "string methods",
+    "split",
+    "upper"
+  ],
+  "skills": [
+    "text_processing"
+  ],
+  "exercise_type": "script",
+  "source": "30_days_of_python"
+}

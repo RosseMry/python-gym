@@ -1,0 +1,26 @@
+{
+  "id": "pg-files-001",
+  "module": "files",
+  "difficulty": 2,
+  "title": "Write then read a file",
+  "description": "Write a function `write_then_read(text)` that writes `text` to a temporary file, reads the content back from that file, and returns what was read. The temporary file must be cleaned up (deleted) before the function returns, and the function must not depend on any file that already exists on disk.",
+  "examples": "write_then_read('hello') -> 'hello'",
+  "starter_code": "def write_then_read(text):\n    # write your code here\n    pass\n",
+  "hints": [
+    "You need a file that exists only for the duration of this function call, without colliding with any real file on disk.",
+    "The `tempfile` module (for example `tempfile.mkstemp()`) can create a file in a safe temporary location for you to write to and read from.",
+    "Use `tempfile.mkstemp()` to get a file descriptor and path, write `text` to it, close it, then `open(path)` and `.read()` the content back, and finally call `os.remove(path)` before returning the content."
+  ],
+  "expected_behavior": "Writes `text` to a temporary file, reads it back, deletes the temporary file, and returns the exact content that was read (equal to `text`).",
+  "hidden_tests": [
+    {"call": "write_then_read('hello')", "expected": "'hello'", "label": "simple word"},
+    {"call": "write_then_read('')", "expected": "''", "label": "empty string"},
+    {"call": "write_then_read('Python Gym')", "expected": "'Python Gym'", "label": "string with a space"}
+  ],
+  "solution": "import os\nimport tempfile\n\n\ndef write_then_read(text):\n    fd, path = tempfile.mkstemp()\n    try:\n        with os.fdopen(fd, \"w\") as f:\n            f.write(text)\n        with open(path, \"r\") as f:\n            content = f.read()\n    finally:\n        os.remove(path)\n    return content\n",
+  "explanation": "`tempfile.mkstemp()` creates a new, uniquely named temporary file and returns an open file descriptor plus its path. Writing `text` through that descriptor, then reopening the path to read it back, round-trips the content exactly. The `finally` block guarantees `os.remove(path)` runs even if something goes wrong, so no file is left behind.",
+  "concepts": ["file i/o", "tempfile", "context manager"],
+  "source": "python_gym",
+  "skills": ["file_handling"],
+  "prerequisites": []
+}

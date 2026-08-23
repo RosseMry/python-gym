@@ -7,6 +7,14 @@
   box-sizing: border-box;
 }
 
+.sidebar__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding: 0 8px;
+}
+
 .sidebar__brand {
   display: block;
   font-family: var(--font-display);
@@ -14,8 +22,30 @@
   font-size: 20px;
   color: var(--ink);
   text-decoration: none;
-  margin-bottom: 24px;
-  padding: 0 8px;
+}
+
+.sidebar__locale-toggle {
+  display: flex;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.sidebar__locale-btn,
+.sidebar__locale-btn--active {
+  border: none;
+  background: none;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 3px 8px;
+  cursor: pointer;
+  color: var(--ink-muted);
+}
+
+.sidebar__locale-btn--active {
+  background: var(--focus-dim);
+  color: var(--focus);
+  font-weight: 600;
 }
 
 .sidebar__repeat {

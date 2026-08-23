@@ -1,0 +1,26 @@
+{
+  "id": "pg-tuples-002",
+  "module": "tuples",
+  "difficulty": 2,
+  "title": "Unpack a point",
+  "description": "Write a function `unpack_point(point)` that takes a 2-tuple `(x, y)`, unpacks it into two variables using tuple assignment, and returns the formatted string `\"x={x}, y={y}\"`.",
+  "examples": "unpack_point((1, 2)) -> \"x=1, y=2\"",
+  "starter_code": "def unpack_point(point):\n    # write your code here\n    pass\n",
+  "hints": [
+    "A tuple with exactly two elements can be assigned to two variable names at once, rather than accessing each index separately.",
+    "Tuple unpacking looks like `x, y = point`, which binds `x` and `y` directly from the tuple's elements.",
+    "Unpack `point` with `x, y = point`, then build the result using an f-string like `f\"x={x}, y={y}\"` and return it."
+  ],
+  "expected_behavior": "Returns the string 'x=<x>, y=<y>' where x and y come from unpacking the input tuple.",
+  "hidden_tests": [
+    {"call": "unpack_point((1, 2))", "expected": "'x=1, y=2'", "label": "positive coordinates"},
+    {"call": "unpack_point((0, 0))", "expected": "'x=0, y=0'", "label": "origin"},
+    {"call": "unpack_point((-3, 7))", "expected": "'x=-3, y=7'", "label": "negative x"}
+  ],
+  "solution": "def unpack_point(point):\n    x, y = point\n    return f\"x={x}, y={y}\"\n",
+  "explanation": "Tuple assignment `x, y = point` unpacks the two-element tuple into separate variables in one step. An f-string then formats those variables directly into the required 'x=..., y=...' text.",
+  "concepts": ["tuple", "unpacking", "f-string"],
+  "source": "python_gym",
+  "skills": ["basic_data_manipulation"],
+  "prerequisites": ["pg-tuples-001"]
+}

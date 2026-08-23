@@ -92,6 +92,18 @@ class Exercise:
     validation_profile: str = "standard_python"
     exercise_type: str = "function"  # "function" or "script"
     exercise_status: str = "active"  # "active" or "excluded"
+    # Sprint 3 French translations, all optional. Only user-facing
+    # prose is translated - starter_code/solution stay code, and
+    # concepts/skills stay English taxonomy keys (the frontend maps
+    # those to display labels per locale instead). Empty/None means
+    # "not translated yet" - the frontend falls back to the English
+    # field rather than showing a blank.
+    title_fr: str | None = None
+    description_fr: str | None = None
+    examples_fr: str | None = None
+    expected_behavior_fr: str | None = None
+    explanation_fr: str | None = None
+    hints_fr: list[str] | None = None
 
 
 @dataclass(frozen=True)
@@ -132,6 +144,34 @@ class SubmissionResult:
     execution_time: float
     error: str | None = None
     style: StyleCheckResult | None = None
+
+
+@dataclass(frozen=True)
+class LearningNote:
+    """A theory page for one Python topic (spec: Learning Notes).
+
+    Deliberately structured (not one markdown blob) so the frontend can
+    render each section on its own: explanation, then syntax, then
+    examples, then common mistakes, then a mini exercise, then links to
+    real practice exercises for the topic.
+    """
+
+    id: str
+    module: str
+    title: str
+    display_order: int
+    explanation: str
+    syntax: str
+    examples: str
+    common_mistakes: str
+    mini_exercise: str
+    related_exercise_ids: list[str] = field(default_factory=list)
+    title_fr: str | None = None
+    explanation_fr: str | None = None
+    syntax_fr: str | None = None
+    examples_fr: str | None = None
+    common_mistakes_fr: str | None = None
+    mini_exercise_fr: str | None = None
 
 
 @dataclass

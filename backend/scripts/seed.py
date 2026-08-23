@@ -47,6 +47,14 @@ def load_exercise(path: Path) -> Exercise:
         validation_profile=data.get("validation_profile", "standard_python"),
         exercise_type=data.get("exercise_type", "function"),
         exercise_status=data.get("exercise_status", "active"),
+        # Sprint 3 French translations - all optional, absent means
+        # "not translated yet" (frontend falls back to English).
+        title_fr=data.get("title_fr"),
+        description_fr=data.get("description_fr"),
+        examples_fr=data.get("examples_fr"),
+        expected_behavior_fr=data.get("expected_behavior_fr"),
+        explanation_fr=data.get("explanation_fr"),
+        hints_fr=data.get("hints_fr"),
     )
 
 

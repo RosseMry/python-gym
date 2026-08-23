@@ -1,0 +1,26 @@
+{
+  "id": "fnd-io-001",
+  "module": "input_output",
+  "difficulty": 1,
+  "title": "Greet the user",
+  "description": "Write a script that asks the user for their name with the exact prompt `\"What is your name? \"`, then prints a greeting in the exact form `\"Hello, <name>!\"`.",
+  "examples": "What is your name? Ana\nHello, Ana!",
+  "starter_code": "# your code here\n",
+  "hints": [
+    "You'll need to read a line of text from the user before you can greet them.",
+    "The built-in `input()` function displays a prompt and returns whatever the user typed as a string.",
+    "Call `input('What is your name? ')` and store the result, then print it with an f-string like `f'Hello, {name}!'` matching the wording exactly."
+  ],
+  "expected_behavior": "Prompts for the user's name and prints a greeting containing it, followed by an exclamation mark.",
+  "hidden_tests": [
+    {"args": [], "stdin": "Ana\n", "expected_stdout": "What is your name? Hello, Ana!", "label": "name Ana"},
+    {"args": [], "stdin": "Bo\n", "expected_stdout": "What is your name? Hello, Bo!", "label": "name Bo"}
+  ],
+  "solution": "def main():\n    name = input('What is your name? ')\n    print(f'Hello, {name}!')\n\n\nif __name__ == '__main__':\n    main()\n",
+  "explanation": "`input()` prints its argument as a prompt without a newline, then blocks until the user types a line and presses enter, returning that line as a string. Embedding it in an f-string builds the greeting with the entered name.",
+  "concepts": ["input", "print", "f-strings"],
+  "skills": ["basic_data_manipulation"],
+  "prerequisites": [],
+  "exercise_type": "script",
+  "source": "foundations"
+}

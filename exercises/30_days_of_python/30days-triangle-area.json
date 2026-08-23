@@ -9,7 +9,7 @@
   "hints": [
     "input() always returns a string - you'll need to convert it to a number before doing arithmetic with it.",
     "Two separate input() calls, one for each prompt, in the order the example shows.",
-    "base = float(input('Enter base: '))\nheight = float(input('Enter height: '))\nprint(f'The area of the triangle is {0.5 * base * height}')"
+    "Wrap each input() in float(), multiply base * height * 0.5, and print the result inside an f-string matching the example's wording exactly."
   ],
   "expected_behavior": "Prints the triangle's area after reading base and height.",
   "hidden_tests": [

@@ -1,0 +1,26 @@
+{
+  "id": "pg-functions-001",
+  "module": "functions",
+  "difficulty": 2,
+  "title": "Apply a function twice",
+  "description": "Write a function `apply_twice(func, value)` that applies the function `func` to `value`, and then applies `func` again to that result, returning the final value. `func` will always be a one-argument function passed in by the caller.",
+  "examples": "apply_twice(lambda x: x + 1, 5) -> 7",
+  "starter_code": "def apply_twice(func, value):\n    # write your code here\n    pass\n",
+  "hints": [
+    "Functions can be passed around and called just like any other value in Python, including as arguments to another function.",
+    "You can call whatever function is stored in the `func` parameter by writing `func(...)`, the same way you'd call any other function.",
+    "Call `func(value)` first to get an intermediate result, then call `func` again on that intermediate result and return what that second call produces."
+  ],
+  "expected_behavior": "Returns func(func(value)), i.e. func applied to value, and then func applied again to that result.",
+  "hidden_tests": [
+    {"call": "apply_twice(lambda x: x + 1, 5)", "expected": "7", "label": "increment twice"},
+    {"call": "apply_twice(lambda x: x * 2, 3)", "expected": "12", "label": "double twice"},
+    {"call": "apply_twice(lambda x: x - 1, 0)", "expected": "-2", "label": "decrement twice"}
+  ],
+  "solution": "def apply_twice(func, value):\n    return func(func(value))\n",
+  "explanation": "In Python, functions are first-class values, so `func` can be called just like any named function using `func(...)`. The inner call `func(value)` produces an intermediate result, and wrapping that in another `func(...)` call applies the same transformation a second time.",
+  "concepts": ["function", "first-class functions", "higher-order function"],
+  "source": "python_gym",
+  "skills": ["functional_python"],
+  "prerequisites": []
+}

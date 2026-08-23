@@ -1,0 +1,25 @@
+{
+  "id": "dictionaries",
+  "module": "dictionaries",
+  "title": "Dictionaries",
+  "display_order": 2,
+  "explanation": "A dictionary stores key-value pairs, written between curly braces: `person = {\"name\": \"Rosse\", \"age\": 25}`. Instead of looking up a value by position (like a list), you look it up by its key. Keys must be unique and immutable (strings, numbers, tuples); values can be anything, including other dictionaries. Since Python 3.7, dictionaries preserve insertion order.",
+  "syntax": "person = {\"name\": \"Rosse\", \"age\": 25}\n\n# access\nperson[\"name\"]              # 'Rosse' - raises KeyError if missing\nperson.get(\"email\")          # None - safe lookup, no error\nperson.get(\"email\", \"n/a\")    # 'n/a' - with a default\n\n# add or modify (same syntax for both)\nperson[\"age\"] = 26\nperson[\"email\"] = \"rosse@example.com\"\n\n# delete\ndel person[\"email\"]\nperson.pop(\"age\")              # removes and returns the value\n\n# reading\nperson.keys()                  # dict_keys(['name'])\nperson.values()                 # dict_values(['Rosse'])\nperson.items()                   # dict_items([('name', 'Rosse')])\n\n# iteration\nfor key in person:                # iterates over keys by default\n    print(key, person[key])\nfor key, value in person.items():  # iterates over (key, value) pairs\n    print(key, value)\n\n# membership - checks KEYS, not values\n\"name\" in person     # True\n\"Rosse\" in person    # False\n\n# nested dictionaries\nstudent = {\"name\": \"Ada\", \"grades\": {\"math\": 90, \"art\": 85}}\nstudent[\"grades\"][\"math\"]   # 90\n\n# dict comprehension\nsquares = {n: n * n for n in range(5)}",
+  "examples": "Count word frequency:\n\nwords = [\"a\", \"b\", \"a\", \"c\", \"b\", \"a\"]\ncounts = {}\nfor word in words:\n    counts[word] = counts.get(word, 0) + 1\nprint(counts)   # {'a': 3, 'b': 2, 'c': 1}\n\nBuild a lookup table with a comprehension:\n\nnames = [\"Ana\", \"Bo\", \"Cid\"]\nname_lengths = {name: len(name) for name in names}\nprint(name_lengths)   # {'Ana': 3, 'Bo': 2, 'Cid': 3}",
+  "common_mistakes": "1. `dict[key]` on a missing key raises `KeyError` and crashes the program - use `.get(key, default)` when the key might not exist, or check `if key in dict:` first.\n\n2. `for key in person:` gives you keys, not values - a common bug is writing `for value in person:` and then treating `value` as if it were the value, when it's actually the key.\n\n3. `\"Rosse\" in person` checks the KEYS, not the values, even though `\"Rosse\"` is a value in the example above - use `\"Rosse\" in person.values()` to search values.\n\n4. Dictionary keys must be immutable - `{[\"a\"]: 1}` raises `TypeError` because a list can't be a key (use a tuple instead if you need a compound key).",
+  "mini_exercise": "Without running Python, predict the output:\n\nscores = {\"alice\": 10, \"bob\": 7}\nscores[\"carol\"] = 5\nscores[\"bob\"] = scores[\"bob\"] + 1\ndel scores[\"alice\"]\nprint(scores)\n\n(Answer: {'bob': 8, 'carol': 5} - carol is added, bob's value increases by 1, and alice's key is removed. Dict iteration/print order reflects insertion order, and re-assigning bob does not change its position.)",
+  "related_exercise_ids": [
+    "piscine-00-sos",
+    "pg-dicts-001",
+    "pg-dicts-002",
+    "pg-dicts-003",
+    "prog-bridge-003",
+    "30days-dict-practice"
+  ],
+  "title_fr": null,
+  "explanation_fr": null,
+  "syntax_fr": null,
+  "examples_fr": null,
+  "common_mistakes_fr": null,
+  "mini_exercise_fr": null
+}

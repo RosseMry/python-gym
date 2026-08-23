@@ -1,0 +1,26 @@
+{
+  "id": "pg-files-002",
+  "module": "files",
+  "difficulty": 3,
+  "title": "Count lines in a file",
+  "description": "Write a function `line_count(lines)` that takes a list of strings `lines`, writes `\"\\n\".join(lines)` to a temporary file, reads the file back using `.readlines()`, and returns how many lines were read as an int. The temporary file must be cleaned up before the function returns.",
+  "examples": "line_count(['a', 'b', 'c']) -> 3",
+  "starter_code": "def line_count(lines):\n    # write your code here\n    pass\n",
+  "hints": [
+    "You need to turn the list into file content, save it, then measure how many lines come back out when reading it.",
+    "`\"\\n\".join(lines)` builds the text to write, and a file object's `.readlines()` method returns a list with one entry per line.",
+    "Write `\"\\n\".join(lines)` to a temp file created with `tempfile.mkstemp()`, then reopen it, call `.readlines()`, and return `len(...)` of that list before removing the file with `os.remove`."
+  ],
+  "expected_behavior": "Returns the number of lines produced by writing `\"\\n\".join(lines)` to a file and reading it back with `.readlines()`.",
+  "hidden_tests": [
+    {"call": "line_count(['a', 'b', 'c'])", "expected": "3", "label": "three lines"},
+    {"call": "line_count([])", "expected": "0", "label": "empty list"},
+    {"call": "line_count(['only'])", "expected": "1", "label": "single line"}
+  ],
+  "solution": "import os\nimport tempfile\n\n\ndef line_count(lines):\n    fd, path = tempfile.mkstemp()\n    try:\n        with os.fdopen(fd, \"w\") as f:\n            f.write(\"\\n\".join(lines))\n        with open(path, \"r\") as f:\n            read_lines = f.readlines()\n    finally:\n        os.remove(path)\n    return len(read_lines)\n",
+  "explanation": "`\"\\n\".join(lines)` produces the file content with one entry per line separated by newlines. `.readlines()` splits that content back into a list of lines (keeping trailing newlines except on the last line), so its length equals the number of entries in the original `lines` list, including 0 for an empty list.",
+  "concepts": ["file i/o", "tempfile", "readlines"],
+  "source": "python_gym",
+  "skills": ["file_handling"],
+  "prerequisites": ["pg-files-001"]
+}

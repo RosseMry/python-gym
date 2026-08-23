@@ -1,0 +1,26 @@
+{
+  "id": "pg-iterators-001",
+  "module": "iterators_generators",
+  "difficulty": 2,
+  "title": "Generate the first n squares",
+  "description": "Write a generator function `first_n_squares(n)` that yields the squares `0, 1, 4, 9, ...` for each `i` in `range(n)`, i.e. it yields `i * i` for `i` from 0 up to (but not including) `n`.",
+  "examples": "list(first_n_squares(4)) -> [0, 1, 4, 9]",
+  "starter_code": "def first_n_squares(n):\n    # write your code here\n    pass\n",
+  "hints": [
+    "Instead of building and returning a whole list, this function should produce values one at a time as they are requested.",
+    "The `yield` keyword turns a function into a generator: each `yield expr` produces the next value of the sequence.",
+    "Loop with `for i in range(n):` and `yield i * i` inside the loop, rather than returning a list."
+  ],
+  "expected_behavior": "A generator that, when iterated, produces i * i for each i in range(n), in increasing order of i.",
+  "hidden_tests": [
+    {"call": "list(first_n_squares(4))", "expected": "[0, 1, 4, 9]", "label": "four squares"},
+    {"call": "list(first_n_squares(0))", "expected": "[]", "label": "zero squares"},
+    {"call": "list(first_n_squares(1))", "expected": "[0]", "label": "single square"}
+  ],
+  "solution": "def first_n_squares(n):\n    for i in range(n):\n        yield i * i\n",
+  "explanation": "Using `yield` inside the loop makes `first_n_squares` a generator function: calling it returns a generator object, and each iteration of the `for` loop over `range(n)` produces the next square `i * i` on demand, without ever materializing the full list in memory.",
+  "concepts": ["generator", "yield", "range"],
+  "source": "python_gym",
+  "skills": ["iterators_and_generators"],
+  "prerequisites": []
+}

@@ -1,0 +1,26 @@
+{
+  "id": "pg-scope-001",
+  "module": "scope",
+  "difficulty": 1,
+  "title": "Read an outer variable from a nested function",
+  "description": "Write a function `outer_and_inner(x)` that defines a nested function `inner()` (taking no parameters) which returns `x * 2`, by reading `x` directly from the enclosing scope. `outer_and_inner` should then call `inner()` and return its result.",
+  "examples": "outer_and_inner(5) -> 10",
+  "starter_code": "def outer_and_inner(x):\n    # write your code here\n    pass\n",
+  "hints": [
+    "A function defined inside another function can see the variables of the function it's defined in, without them being passed as arguments.",
+    "This is called a closure: `inner` doesn't need an `x` parameter of its own because it can read the `x` from `outer_and_inner`'s scope directly.",
+    "Define `def inner(): return x * 2` inside `outer_and_inner`, relying on `inner` reading `x` from the enclosing scope, then call `inner()` and return that value."
+  ],
+  "expected_behavior": "Returns x * 2, computed by a nested function that reads x from the enclosing function's scope rather than receiving it as a parameter.",
+  "hidden_tests": [
+    {"call": "outer_and_inner(5)", "expected": "10", "label": "positive value"},
+    {"call": "outer_and_inner(0)", "expected": "0", "label": "zero"},
+    {"call": "outer_and_inner(-3)", "expected": "-6", "label": "negative value"}
+  ],
+  "solution": "def outer_and_inner(x):\n    def inner():\n        return x * 2\n\n    return inner()\n",
+  "explanation": "Because `inner` is defined inside `outer_and_inner`, it has access to `outer_and_inner`'s local variables through Python's enclosing scope, so it can read `x` without needing it as a parameter. Since `inner` only reads `x` and never reassigns it, no `nonlocal` declaration is needed.",
+  "concepts": ["scope", "nested function", "enclosing scope", "closure"],
+  "source": "python_gym",
+  "skills": ["functional_python"],
+  "prerequisites": ["pg-functions-001"]
+}

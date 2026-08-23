@@ -1,0 +1,26 @@
+{
+  "id": "pg-iterators-002",
+  "module": "iterators_generators",
+  "difficulty": 3,
+  "title": "Take the first n items manually",
+  "description": "Write a function `take(iterable, n)` that returns a list of the first `n` items produced by `iterable`. Implement it using the manual iterator protocol: call `iter()` to get an iterator and `next()` in a loop to pull items one at a time, stopping early (without error) if `iterable` has fewer than `n` items. Do not use slicing to solve this.",
+  "examples": "take([10, 20, 30, 40], 2) -> [10, 20]",
+  "starter_code": "def take(iterable, n):\n    # write your code here\n    pass\n",
+  "hints": [
+    "Any iterable (a list, a string, a generator, ...) can be turned into an iterator that hands you one item at a time on demand.",
+    "`iter(iterable)` gives you an iterator, and calling `next(iterator)` repeatedly gives you successive items until it raises `StopIteration`.",
+    "Get `it = iter(iterable)`, then loop up to `n` times calling `next(it)` inside a `try` block, appending each result to a list, and use `except StopIteration: break` to stop early if the iterable runs out before you reach `n` items."
+  ],
+  "expected_behavior": "Returns a list containing up to the first n items yielded by the iterable, using iter()/next() rather than slicing; if the iterable has fewer than n items, returns all of them.",
+  "hidden_tests": [
+    {"call": "take([10, 20, 30, 40], 2)", "expected": "[10, 20]", "label": "take fewer than length"},
+    {"call": "take('abcdef', 3)", "expected": "['a', 'b', 'c']", "label": "take from a string"},
+    {"call": "take([1], 5)", "expected": "[1]", "label": "n exceeds length"}
+  ],
+  "solution": "def take(iterable, n):\n    it = iter(iterable)\n    result = []\n    for _ in range(n):\n        try:\n            result.append(next(it))\n        except StopIteration:\n            break\n    return result\n",
+  "explanation": "`iter(iterable)` produces an iterator object that tracks its own position. Calling `next(it)` up to `n` times pulls successive items one at a time; when the iterable is exhausted, `next` raises `StopIteration`, which is caught to stop the loop early instead of propagating an error, so `take` gracefully handles iterables shorter than `n`.",
+  "concepts": ["iterator", "iter", "next", "stopiteration"],
+  "source": "python_gym",
+  "skills": ["iterators_and_generators"],
+  "prerequisites": ["pg-iterators-001"]
+}

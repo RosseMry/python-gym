@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from collections.abc import Iterator
+
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 
@@ -17,10 +19,20 @@ from app.services.exercise_service import (
 router = APIRouter(prefix="/api/exercises", tags=["exercises"])
 
 
-def get_service() -> ExerciseService:
-    """Build a service instance with a fresh DB connection per request."""
+def get_service() -> Iterator[ExerciseService]:
+    """Build a service instance with a fresh DB connection per request.
+
+    A generator dependency so FastAPI closes the connection once the
+    request finishes, regardless of which threadpool worker ran it -
+    without this, connections opened here were never closed and
+    accumulated across repeated requests (e.g. React StrictMode's
+    double-fired dev effects), eventually causing 500s.
+    """
     conn = get_connection()
-    return ExerciseService(ExerciseRepository(conn))
+    try:
+        yield ExerciseService(ExerciseRepository(conn))
+    finally:
+        conn.close()
 
 
 class ExerciseSummary(BaseModel):
@@ -28,10 +40,17 @@ class ExerciseSummary(BaseModel):
     module: str
     difficulty: int
     title: str
+    title_fr: str | None
     concepts: list[str]
     track: str
     source: str
     exercise_type: str
+
+
+class PrerequisiteResponse(BaseModel):
+    id: str
+    title: str
+    solved: bool
 
 
 class ExerciseDetail(BaseModel):
@@ -39,15 +58,19 @@ class ExerciseDetail(BaseModel):
     module: str
     difficulty: int
     title: str
+    title_fr: str | None
     description: str
+    description_fr: str | None
     examples: str
+    examples_fr: str | None
     starter_code: str
     expected_behavior: str
+    expected_behavior_fr: str | None
     concepts: list[str]
     track: str
     source: str
     skills: list[str]
-    prerequisites: list[str]
+    prerequisites: list[PrerequisiteResponse]
     resources: list[str]
     validation_profile: str
     exercise_type: str
@@ -85,11 +108,13 @@ class SubmissionResponse(BaseModel):
 
 class HintResponse(BaseModel):
     hint: str
+    hint_fr: str | None
 
 
 class SolutionResponse(BaseModel):
     solution: str
     explanation: str
+    explanation_fr: str | None
 
 
 class ExplanationRequest(BaseModel):
@@ -102,6 +127,7 @@ def _to_summary(exercise: Exercise) -> ExerciseSummary:
         module=exercise.module,
         difficulty=exercise.difficulty,
         title=exercise.title,
+        title_fr=exercise.title_fr,
         concepts=exercise.concepts,
         track=exercise.track,
         source=exercise.source,
@@ -109,21 +135,29 @@ def _to_summary(exercise: Exercise) -> ExerciseSummary:
     )
 
 
-def _to_detail(exercise: Exercise) -> ExerciseDetail:
+def _to_detail(
+    exercise: Exercise, prerequisites: list[dict] | None = None
+) -> ExerciseDetail:
     return ExerciseDetail(
         id=exercise.id,
         module=exercise.module,
         difficulty=exercise.difficulty,
         title=exercise.title,
+        title_fr=exercise.title_fr,
         description=exercise.description,
+        description_fr=exercise.description_fr,
         examples=exercise.examples,
+        examples_fr=exercise.examples_fr,
         starter_code=exercise.starter_code,
         expected_behavior=exercise.expected_behavior,
+        expected_behavior_fr=exercise.expected_behavior_fr,
         concepts=exercise.concepts,
         track=exercise.track,
         source=exercise.source,
         skills=exercise.skills,
-        prerequisites=exercise.prerequisites,
+        prerequisites=[
+            PrerequisiteResponse(**p) for p in (prerequisites or [])
+        ],
         resources=exercise.resources,
         validation_profile=exercise.validation_profile,
         exercise_type=exercise.exercise_type,
@@ -179,6 +213,16 @@ def get_repeat_queue(
     return [_to_summary(e) for e in service.list_repeat_queue()]
 
 
+@router.get("/next", response_model=ExerciseSummary | None)
+def get_next_exercise(
+    source: str | None = None,
+    service: ExerciseService = Depends(get_service),
+) -> ExerciseSummary | None:
+    """Recommend the next not-yet-solved exercise (basic learning path)."""
+    exercise = service.get_next_unsolved(source)
+    return _to_summary(exercise) if exercise else None
+
+
 @router.get("/{exercise_id}", response_model=ExerciseDetail)
 def get_exercise(
     exercise_id: str, service: ExerciseService = Depends(get_service)
@@ -188,7 +232,8 @@ def get_exercise(
         exercise = service.get_exercise_for_student(exercise_id)
     except ExerciseNotFoundError as exc:
         raise HTTPException(status_code=404, detail="Exercise not found") from exc
-    return _to_detail(exercise)
+    prerequisites = service.resolve_prerequisites(exercise.prerequisites)
+    return _to_detail(exercise, prerequisites)
 
 
 @router.post("/{exercise_id}/hint", response_model=HintResponse)
@@ -197,10 +242,10 @@ def request_hint(
 ) -> HintResponse:
     """Reveal the next unseen hint for this exercise."""
     try:
-        hint = service.request_hint(exercise_id)
+        hint, hint_fr = service.request_hint(exercise_id)
     except ExerciseNotFoundError as exc:
         raise HTTPException(status_code=404, detail="Exercise not found") from exc
-    return HintResponse(hint=hint)
+    return HintResponse(hint=hint, hint_fr=hint_fr)
 
 
 @router.post("/{exercise_id}/solution", response_model=SolutionResponse)
@@ -209,10 +254,12 @@ def reveal_solution(
 ) -> SolutionResponse:
     """Reveal the solution and explanation for this exercise."""
     try:
-        solution, explanation = service.reveal_solution(exercise_id)
+        solution, explanation, explanation_fr = service.reveal_solution(exercise_id)
     except ExerciseNotFoundError as exc:
         raise HTTPException(status_code=404, detail="Exercise not found") from exc
-    return SolutionResponse(solution=solution, explanation=explanation)
+    return SolutionResponse(
+        solution=solution, explanation=explanation, explanation_fr=explanation_fr
+    )
 
 
 @router.post("/{exercise_id}/submit", response_model=SubmissionResponse)

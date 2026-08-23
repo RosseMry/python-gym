@@ -1,0 +1,38 @@
+{
+  "id": "prog-bridge-004",
+  "module": "strings",
+  "difficulty": 3,
+  "title": "Longest word in a sentence",
+  "description": "Write a function `longest_word(sentence)` that splits a sentence on whitespace and returns the longest word. If several words tie for longest, return the first one encountered. This combines string splitting with a loop that tracks the best value seen so far.",
+  "examples": "longest_word(\"I love python programming\") -> 'programming'",
+  "starter_code": "def longest_word(sentence):\n    # write your code here\n    pass\n",
+  "hints": [
+    "You'll first need to break the sentence up into individual words before comparing them.",
+    "`sentence.split()` splits on whitespace and gives you a list of words to loop over.",
+    "Split the sentence into a list of words. Keep a variable holding the longest word found so far, starting as the first word. Loop over the remaining words and, using `len`, replace it only when you find a STRICTLY longer word - this keeps the first longest one on ties."
+  ],
+  "expected_behavior": "Returns the longest word (as a string) from the sentence, using whitespace splitting. On ties, the earliest-occurring longest word wins.",
+  "hidden_tests": [
+    {
+      "call": "longest_word(\"I love python programming\")",
+      "expected": "'programming'",
+      "label": "basic sentence"
+    },
+    {
+      "call": "longest_word(\"a bb ccc\")",
+      "expected": "'ccc'",
+      "label": "increasing lengths"
+    },
+    {
+      "call": "longest_word(\"hi\")",
+      "expected": "'hi'",
+      "label": "single word"
+    }
+  ],
+  "solution": "def longest_word(sentence):\n    words = sentence.split()\n    longest = words[0]\n    for word in words[1:]:\n        if len(word) > len(longest):\n            longest = word\n    return longest\n",
+  "explanation": "`sentence.split()` turns the sentence into a list of words. Starting `longest` at the first word and only replacing it when a later word is strictly longer (`>`, not `>=`) guarantees that on a tie the earliest longest word is kept.",
+  "concepts": ["string", "split", "for loop", "comparison", "tracking best value"],
+  "skills": ["iteration", "string_manipulation"],
+  "prerequisites": [],
+  "source": "progressive_python"
+}

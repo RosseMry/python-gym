@@ -1,0 +1,42 @@
+{
+  "id": "30days-nested-lists",
+  "module": "nested_lists",
+  "difficulty": 3,
+  "title": "Sum each row of a grid",
+  "description": "Write a script that asks the user for four numbers to fill a 2x2 grid (a list of two rows, each a list of two values), then prints the sum of each row.",
+  "examples": "Row 1, value 1: 1\nRow 1, value 2: 2\nRow 2, value 1: 3\nRow 2, value 2: 4\nRow 0 sum: 3\nRow 1 sum: 7",
+  "starter_code": "def main():\n    # your code here\n    pass\n\n\nif __name__ == \"__main__\":\n    main()\n",
+  "hints": [
+    "Read the four values with four separate input() calls in the order the prompts are given, then think about grouping them into two small lists rather than four loose variables.",
+    "A list of lists (like [[a, b], [c, d]]) lets you loop over it with enumerate() to get both an index and each row while summing each row with sum().",
+    "Build row1 = [first, second] and row2 = [third, fourth] from four int()-converted input() calls, put them in grid = [row1, row2], then loop with for i, row in enumerate(grid): and print an f-string reading 'Row ' followed by i followed by ' sum: ' followed by sum(row) for each row."
+  ],
+  "expected_behavior": "Reads four integers via four separate prompts, arranges them into a 2x2 nested list, and prints the sum of each row with its index.",
+  "hidden_tests": [
+    {
+      "args": [],
+      "stdin": "1\n2\n3\n4\n",
+      "expected_stdout": "Row 1, value 1: Row 1, value 2: Row 2, value 1: Row 2, value 2: Row 0 sum: 3\nRow 1 sum: 7",
+      "label": "basic 2x2 grid"
+    },
+    {
+      "args": [],
+      "stdin": "0\n0\n5\n5\n",
+      "expected_stdout": "Row 1, value 1: Row 1, value 2: Row 2, value 1: Row 2, value 2: Row 0 sum: 0\nRow 1 sum: 10",
+      "label": "one row of zeros"
+    }
+  ],
+  "solution": "def main():\n    first = int(input(\"Row 1, value 1: \"))\n    second = int(input(\"Row 1, value 2: \"))\n    third = int(input(\"Row 2, value 1: \"))\n    fourth = int(input(\"Row 2, value 2: \"))\n    row1 = [first, second]\n    row2 = [third, fourth]\n    grid = [row1, row2]\n    for i, row in enumerate(grid):\n        print(f\"Row {i} sum: {sum(row)}\")\n\n\nif __name__ == \"__main__\":\n    main()\n",
+  "explanation": "A nested list groups each row's values together, and enumerate() yields both the row's index and the row itself while iterating, so sum(row) computes each row's total in turn.",
+  "concepts": [
+    "nested lists",
+    "enumerate",
+    "sum",
+    "loops"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "script",
+  "source": "30_days_of_python"
+}

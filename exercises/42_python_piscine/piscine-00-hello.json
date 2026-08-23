@@ -9,7 +9,7 @@
   "hints": [
     "You need to replace the second element of the list/tuple, the second element of the set, and the value of the dict - not create new objects.",
     "Lists support item assignment by index (ft_list[1] = ...). Tuples don't - you'll need to rebuild the tuple. Sets don't support indexing either - remove the old value and add the new one.",
-    "ft_list[1] = \"World!\"\nft_tuple = (\"Hello\", \"France!\")\nft_set.remove(\"tutu!\")\nft_set.add(\"Paris!\")\nft_dict[\"Hello\"] = \"42Paris!\""
+    "For the list use index assignment, for the tuple build a brand-new tuple literal, for the set call .remove() then .add(), and for the dict assign to the existing key - you still need to fill in the actual campus/country/city values yourself."
   ],
   "expected_behavior": "Prints the four objects, each showing 'Hello' paired with World/France/Paris/42Paris.",
   "hidden_tests": [],

@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { api } from "../services/api";
 import type { ExerciseDetail, SubmissionResult } from "../types/exercise";
 import { CodeEditor } from "../components/CodeEditor";
+import { useLocale, useLocalized } from "../i18n/LocaleContext";
 import "./ExercisePage.css";
 
 interface ExercisePageProps {
@@ -12,14 +13,20 @@ interface ExercisePageProps {
 export function ExercisePage({ onRepeatChanged }: ExercisePageProps) {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { t } = useLocale();
+  const localize = useLocalized();
 
   const [exercise, setExercise] = useState<ExerciseDetail | null>(null);
   const [code, setCode] = useState("");
-  const [hints, setHints] = useState<string[]>([]);
+  const [hints, setHints] = useState<{ text: string; textFr: string | null }[]>([]);
   const [hintsExhausted, setHintsExhausted] = useState(false);
   const [result, setResult] = useState<SubmissionResult | null>(null);
   const [submitting, setSubmitting] = useState(false);
-  const [solution, setSolution] = useState<{ solution: string; explanation: string } | null>(null);
+  const [solution, setSolution] = useState<{
+    solution: string;
+    explanation: string;
+    explanationFr: string | null;
+  } | null>(null);
   const [explanation, setExplanation] = useState("");
   const [explanationSaved, setExplanationSaved] = useState(false);
   const [repeatMarked, setRepeatMarked] = useState(false);
@@ -58,12 +65,12 @@ export function ExercisePage({ onRepeatChanged }: ExercisePageProps) {
   }
 
   async function handleRequestHint() {
-    const { hint } = await api.requestHint(id!);
+    const { hint, hint_fr } = await api.requestHint(id!);
     if (hint === "No more hints available for this exercise.") {
       setHintsExhausted(true);
       return;
     }
-    setHints((prev) => [...prev, hint]);
+    setHints((prev) => [...prev, { text: hint, textFr: hint_fr }]);
   }
 
   async function handleSubmit() {
@@ -79,7 +86,11 @@ export function ExercisePage({ onRepeatChanged }: ExercisePageProps) {
 
   async function handleRevealSolution() {
     const data = await api.revealSolution(id!);
-    setSolution(data);
+    setSolution({
+      solution: data.solution,
+      explanation: data.explanation,
+      explanationFr: data.explanation_fr,
+    });
   }
 
   async function handleSaveExplanation() {
@@ -102,18 +113,41 @@ export function ExercisePage({ onRepeatChanged }: ExercisePageProps) {
   return (
     <div className="page">
       <Link to="/" className="back-link">
-        ← Back to exercises
+        {t("exercise.backToExercises")}
       </Link>
 
       <header className="exercise-header">
         <p className="eyebrow">{exercise.module.replace(/_/g, " ")}</p>
-        <h1>{exercise.title}</h1>
+        <h1>{localize(exercise.title, exercise.title_fr)}</h1>
       </header>
 
+      {exercise.prerequisites.length > 0 && (
+        <section className="panel">
+          <h2>{t("exercise.prerequisites")}</h2>
+          <ul className="test-list">
+            {exercise.prerequisites.map((prereq) => (
+              <li key={prereq.id} className={prereq.solved ? "test-list__pass" : "test-list__fail"}>
+                {prereq.solved ? "✓" : "○"}{" "}
+                <Link to={`/exercises/${prereq.id}`}>{prereq.title}</Link>{" "}
+                (
+                {prereq.solved
+                  ? t("exercise.prerequisiteSolved")
+                  : t("exercise.prerequisiteNotSolved")}
+                )
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       <section className="panel">
-        <p className="exercise-description">{exercise.description}</p>
+        <p className="exercise-description">
+          {localize(exercise.description, exercise.description_fr)}
+        </p>
         {exercise.examples && (
-          <pre className="examples-block">{exercise.examples}</pre>
+          <pre className="examples-block">
+            {localize(exercise.examples, exercise.examples_fr)}
+          </pre>
         )}
       </section>
 
@@ -121,10 +155,10 @@ export function ExercisePage({ onRepeatChanged }: ExercisePageProps) {
         <CodeEditor value={code} onChange={setCode} disabled={submitting} />
         <div className="actions">
           <button className="btn btn--primary" onClick={handleSubmit} disabled={submitting}>
-            {submitting ? "Running…" : isScript ? "Run" : "Run tests"}
+            {submitting ? t("exercise.running") : isScript ? t("exercise.run") : t("exercise.runTests")}
           </button>
           <button className="btn" onClick={handleRequestHint} disabled={hintsExhausted}>
-            {hints.length === 0 ? "I'm stuck — give me a hint" : "Next hint"}
+            {hints.length === 0 ? t("exercise.giveHint") : t("exercise.nextHint")}
           </button>
         </div>
       </section>
@@ -133,10 +167,10 @@ export function ExercisePage({ onRepeatChanged }: ExercisePageProps) {
 
       {hints.length > 0 && (
         <section className="panel hints-panel">
-          <h2>Hints</h2>
+          <h2>{t("exercise.hints")}</h2>
           <ol>
             {hints.map((hint, i) => (
-              <li key={i}>{hint}</li>
+              <li key={i}>{localize(hint.text, hint.textFr)}</li>
             ))}
           </ol>
         </section>
@@ -144,16 +178,13 @@ export function ExercisePage({ onRepeatChanged }: ExercisePageProps) {
 
       {result?.passed && !repeatMarked && (
         <section className="panel continue-panel">
-          <p className="continue-panel__prompt">
-            All tests passed. Ready to move on, or want to see this one
-            again later?
-          </p>
+          <p className="continue-panel__prompt">{t("exercise.allTestsPassed")}</p>
           <div className="actions">
             <button className="btn btn--primary" onClick={handleContinue}>
-              Continue
+              {t("exercise.continue")}
             </button>
             <button className="btn" onClick={handleMarkRepeat}>
-              🔁 Repeat later
+              {t("exercise.repeatLater")}
             </button>
           </div>
         </section>
@@ -161,21 +192,17 @@ export function ExercisePage({ onRepeatChanged }: ExercisePageProps) {
 
       {repeatMarked && (
         <section className="panel continue-panel">
-          <p className="continue-panel__saved">
-            🔁 Queued for later. Find it any time in the Repeat queue.
-          </p>
+          <p className="continue-panel__saved">{t("exercise.repeatQueued")}</p>
           <button className="btn btn--primary" onClick={handleContinue}>
-            Continue
+            {t("exercise.continue")}
           </button>
         </section>
       )}
 
       {result?.passed && !solution && (
         <section className="panel explanation-panel">
-          <h2>Explain your code</h2>
-          <p className="explanation-panel__prompt">
-            In your own words, what does your code do and why does it work?
-          </p>
+          <h2>{t("exercise.explainTitle")}</h2>
+          <p className="explanation-panel__prompt">{t("exercise.explainPrompt")}</p>
           <textarea
             className="explanation-textarea"
             value={explanation}
@@ -189,10 +216,10 @@ export function ExercisePage({ onRepeatChanged }: ExercisePageProps) {
               onClick={handleSaveExplanation}
               disabled={explanation.trim().length === 0}
             >
-              Save explanation
+              {t("exercise.saveExplanation")}
             </button>
           ) : (
-            <p className="explanation-panel__saved">Saved. Nice work.</p>
+            <p className="explanation-panel__saved">{t("exercise.explanationSaved")}</p>
           )}
         </section>
       )}
@@ -200,20 +227,19 @@ export function ExercisePage({ onRepeatChanged }: ExercisePageProps) {
       <section className="panel solution-panel">
         {!solution ? (
           <details>
-            <summary>Reveal the solution</summary>
-            <p className="solution-panel__warning">
-              Only do this after real attempts and both hints — solving with
-              the answer visible won't count toward mastery.
-            </p>
+            <summary>{t("exercise.revealSolution")}</summary>
+            <p className="solution-panel__warning">{t("exercise.revealWarning")}</p>
             <button className="btn btn--muted" onClick={handleRevealSolution}>
-              Show solution and explanation
+              {t("exercise.showSolution")}
             </button>
           </details>
         ) : (
           <>
-            <h2>Solution</h2>
+            <h2>{t("exercise.solution")}</h2>
             <pre className="solution-block">{solution.solution}</pre>
-            <p className="solution-explanation">{solution.explanation}</p>
+            <p className="solution-explanation">
+              {localize(solution.explanation, solution.explanationFr)}
+            </p>
           </>
         )}
       </section>

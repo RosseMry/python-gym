@@ -1,0 +1,26 @@
+{
+  "id": "pg-exceptions-002",
+  "module": "exceptions",
+  "difficulty": 2,
+  "title": "Divide or return a message",
+  "description": "Write a function `divide_or_message(a, b)` that returns `a / b`, or the string `'undefined'` if that division raises a `ZeroDivisionError`.",
+  "examples": "divide_or_message(10, 2) -> 5.0",
+  "starter_code": "def divide_or_message(a, b):\n    # write your code here\n    pass\n",
+  "hints": [
+    "Rather than checking `b` beforehand, let the division itself run and respond to what happens if it fails.",
+    "A `try`/`except` block lets you attempt an operation and catch the specific exception it raises, here `ZeroDivisionError`.",
+    "Put `return a / b` inside a `try` block, add an `except ZeroDivisionError:` clause, and `return 'undefined'` from within that except clause."
+  ],
+  "expected_behavior": "Returns a / b when b is not zero, and the string 'undefined' when dividing by b raises a ZeroDivisionError.",
+  "hidden_tests": [
+    {"call": "divide_or_message(10, 2)", "expected": "5.0", "label": "clean division"},
+    {"call": "divide_or_message(5, 0)", "expected": "'undefined'", "label": "division by zero"},
+    {"call": "divide_or_message(-9, 3)", "expected": "-3.0", "label": "negative dividend"}
+  ],
+  "solution": "def divide_or_message(a, b):\n    try:\n        return a / b\n    except ZeroDivisionError:\n        return 'undefined'\n",
+  "explanation": "Attempting `a / b` directly inside a `try` block lets Python's division raise a `ZeroDivisionError` naturally when `b` is 0, which the `except ZeroDivisionError:` clause catches and turns into the string `'undefined'`. This is preferred over a manual `if b == 0` pre-check because it directly demonstrates handling the exception the operation itself raises.",
+  "concepts": ["exception", "try/except", "zerodivisionerror", "division"],
+  "source": "python_gym",
+  "skills": ["error_handling"],
+  "prerequisites": ["pg-exceptions-001"]
+}

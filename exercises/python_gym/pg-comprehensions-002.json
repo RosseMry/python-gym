@@ -1,0 +1,26 @@
+{
+  "id": "pg-comprehensions-002",
+  "module": "comprehensions",
+  "difficulty": 3,
+  "title": "Word length lookup",
+  "description": "Write a function `length_lookup(words)` that returns a dictionary mapping each string in `words` to its length, built using a single dictionary comprehension.",
+  "examples": "length_lookup(['a', 'bb']) -> {'a': 1, 'bb': 2}",
+  "starter_code": "def length_lookup(words):\n    # write your code here\n    pass\n",
+  "hints": [
+    "You need to build a mapping where each word from the input becomes a key and its length becomes the value.",
+    "A dictionary comprehension has the form `{key_expr: value_expr for item in iterable}`, similar to a list comprehension but producing key-value pairs.",
+    "Use the word itself as the key and `len(w)` as the value: `{w: len(w) for w in words}`."
+  ],
+  "expected_behavior": "Returns a dict where each key is a string from `words` and its value is the length of that string.",
+  "hidden_tests": [
+    {"call": "length_lookup(['a', 'bb'])", "expected": "{'a': 1, 'bb': 2}", "label": "two short words"},
+    {"call": "length_lookup([])", "expected": "{}", "label": "empty list"},
+    {"call": "length_lookup(['abc'])", "expected": "{'abc': 3}", "label": "single word"}
+  ],
+  "solution": "def length_lookup(words):\n    return {w: len(w) for w in words}\n",
+  "explanation": "The dictionary comprehension iterates over `words`, using each word `w` as a key and `len(w)` as its associated value, building the full lookup dictionary in one expression without needing to pre-declare an empty dict.",
+  "concepts": ["dictionary comprehension", "len", "mapping"],
+  "source": "python_gym",
+  "skills": ["basic_data_manipulation", "lookup_tables"],
+  "prerequisites": ["pg-comprehensions-001"]
+}

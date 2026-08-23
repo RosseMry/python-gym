@@ -20,7 +20,13 @@ from app.models.database import SCHEMA  # noqa: E402
 from app.repositories.exercise_repository import ExerciseRepository  # noqa: E402
 from scripts.seed import EXERCISES_DIR, load_exercise  # noqa: E402
 
-EXPECTED_SOURCES = {"progressive_python", "42_python_piscine", "30_days_of_python"}
+EXPECTED_SOURCES = {
+    "progressive_python",
+    "42_python_piscine",
+    "30_days_of_python",
+    "foundations",
+    "python_gym",
+}
 
 
 @pytest.fixture()
@@ -75,3 +81,23 @@ def test_ids_are_unique_across_all_sources() -> None:
     json_files = sorted(EXERCISES_DIR.glob("**/*.json"))
     ids = [load_exercise(path).id for path in json_files]
     assert len(ids) == len(set(ids))
+
+
+def test_catalog_was_substantially_expanded_in_sprint_3(
+    seeded_repo: ExerciseRepository,
+) -> None:
+    """Sprint 3 added 46 exercises (43 -> 89) - guard against silently
+    losing content in a future refactor of the exercises/ layout.
+    """
+    all_exercises = seeded_repo.list_all(include_excluded=True)
+    assert len(all_exercises) >= 89
+
+    by_source: dict[str, int] = {}
+    for exercise in all_exercises:
+        by_source[exercise.source] = by_source.get(exercise.source, 0) + 1
+    assert by_source.get("foundations", 0) >= 8
+    assert by_source.get("python_gym", 0) >= 26
+    assert by_source.get("progressive_python", 0) >= 28
+    assert by_source.get("30_days_of_python", 0) >= 8
+    # Capped this sprint - no new 42 Piscine PDFs were provided.
+    assert by_source.get("42_python_piscine", 0) == 19

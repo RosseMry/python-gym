@@ -34,7 +34,15 @@ CREATE TABLE IF NOT EXISTS exercises (
     resources TEXT NOT NULL DEFAULT '[]',     -- JSON list[str]
     validation_profile TEXT NOT NULL DEFAULT 'standard_python',
     exercise_type TEXT NOT NULL DEFAULT 'function',
-    exercise_status TEXT NOT NULL DEFAULT 'active'
+    exercise_status TEXT NOT NULL DEFAULT 'active',
+    -- Sprint 3 French translations, all optional (NULL = not
+    -- translated yet, frontend falls back to the English field):
+    title_fr TEXT,
+    description_fr TEXT,
+    examples_fr TEXT,
+    expected_behavior_fr TEXT,
+    explanation_fr TEXT,
+    hints_fr TEXT
 );
 
 CREATE TABLE IF NOT EXISTS progress (
@@ -68,6 +76,25 @@ CREATE TABLE IF NOT EXISTS explanations (
     created_at TEXT NOT NULL DEFAULT (datetime('now')),
     FOREIGN KEY (exercise_id) REFERENCES exercises (id)
 );
+
+CREATE TABLE IF NOT EXISTS learning_notes (
+    id TEXT PRIMARY KEY,
+    module TEXT NOT NULL,
+    title TEXT NOT NULL,
+    display_order INTEGER NOT NULL DEFAULT 0,
+    explanation TEXT NOT NULL,
+    syntax TEXT NOT NULL,
+    examples TEXT NOT NULL,
+    common_mistakes TEXT NOT NULL,
+    mini_exercise TEXT NOT NULL,
+    related_exercise_ids TEXT NOT NULL DEFAULT '[]', -- JSON list[str]
+    title_fr TEXT,
+    explanation_fr TEXT,
+    syntax_fr TEXT,
+    examples_fr TEXT,
+    common_mistakes_fr TEXT,
+    mini_exercise_fr TEXT
+);
 """
 
 
@@ -83,6 +110,13 @@ _EXERCISE_MIGRATION_COLUMNS = {
     "validation_profile": "TEXT NOT NULL DEFAULT 'standard_python'",
     "exercise_type": "TEXT NOT NULL DEFAULT 'function'",
     "exercise_status": "TEXT NOT NULL DEFAULT 'active'",
+    # Sprint 3 French translations - see app.domain.models.Exercise.
+    "title_fr": "TEXT",
+    "description_fr": "TEXT",
+    "examples_fr": "TEXT",
+    "expected_behavior_fr": "TEXT",
+    "explanation_fr": "TEXT",
+    "hints_fr": "TEXT",
 }
 
 _SUBMISSION_MIGRATION_COLUMNS = {
@@ -93,8 +127,15 @@ _SUBMISSION_MIGRATION_COLUMNS = {
 
 
 def get_connection() -> sqlite3.Connection:
-    """Open a SQLite connection with sensible defaults."""
-    conn = sqlite3.connect(DB_PATH)
+    """Open a SQLite connection with sensible defaults.
+
+    check_same_thread=False: FastAPI resolves a sync Depends() and the
+    sync endpoint it feeds via separate run_in_threadpool calls, which
+    can land on different worker threads for the same request. The
+    connection here is still request-scoped (never shared across
+    concurrent requests), so relaxing this check is safe.
+    """
+    conn = sqlite3.connect(DB_PATH, check_same_thread=False)
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA foreign_keys = ON")
     return conn

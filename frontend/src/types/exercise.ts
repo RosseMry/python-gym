@@ -3,10 +3,17 @@ export interface ExerciseSummary {
   module: string;
   difficulty: number;
   title: string;
+  title_fr: string | null;
   concepts: string[];
   track: string;
   source: string;
   exercise_type: string;
+}
+
+export interface Prerequisite {
+  id: string;
+  title: string;
+  solved: boolean;
 }
 
 export interface ExerciseDetail {
@@ -14,15 +21,19 @@ export interface ExerciseDetail {
   module: string;
   difficulty: number;
   title: string;
+  title_fr: string | null;
   description: string;
+  description_fr: string | null;
   examples: string;
+  examples_fr: string | null;
   starter_code: string;
   expected_behavior: string;
+  expected_behavior_fr: string | null;
   concepts: string[];
   track: string;
   source: string;
   skills: string[];
-  prerequisites: string[];
+  prerequisites: Prerequisite[];
   resources: string[];
   validation_profile: string;
   exercise_type: string;
@@ -56,11 +67,38 @@ export interface SubmissionResult {
 
 export interface HintResponse {
   hint: string;
+  hint_fr: string | null;
 }
 
 export interface SolutionResponse {
   solution: string;
   explanation: string;
+  explanation_fr: string | null;
+}
+
+export interface LearningNoteSummary {
+  id: string;
+  module: string;
+  title: string;
+  title_fr: string | null;
+}
+
+export interface LearningNoteDetail {
+  id: string;
+  module: string;
+  title: string;
+  title_fr: string | null;
+  explanation: string;
+  explanation_fr: string | null;
+  syntax: string;
+  syntax_fr: string | null;
+  examples: string;
+  examples_fr: string | null;
+  common_mistakes: string;
+  common_mistakes_fr: string | null;
+  mini_exercise: string;
+  mini_exercise_fr: string | null;
+  related_exercise_ids: string[];
 }
 
 export type ProgressStatus =
@@ -83,7 +121,9 @@ export interface ProgressItem {
 // Content sources, matching the backend's `source` field (Sprint 2 spec
 // section 18). Used to group the sidebar and filter exercise lists.
 export const CONTENT_SOURCES = {
+  foundations: "Foundations",
   progressive_python: "Progressive Python",
+  python_gym: "Python-Gym Exercises",
   "30_days_of_python": "30 Days of Python",
   "42_python_piscine": "42 Python Piscine",
 } as const;

@@ -1,0 +1,42 @@
+{
+  "id": "30days-dict-practice",
+  "module": "dictionaries",
+  "difficulty": 3,
+  "title": "Build a person dictionary",
+  "description": "Write a script that asks the user for their name and age, stores both answers in a dictionary, and prints a sentence built from the dictionary's values.",
+  "examples": "What is your name? Ana\nWhat is your age? 25\nAna is 25 years old.",
+  "starter_code": "def main():\n    # your code here\n    pass\n\n\nif __name__ == \"__main__\":\n    main()\n",
+  "hints": [
+    "Ask the two questions with input(), then think about how you'd group two related pieces of information under named keys instead of using two separate variables.",
+    "A dictionary literal like {\"key\": value} lets you store both answers under the keys 'name' and 'age'.",
+    "Build person = {\"name\": name, \"age\": age} from the two input() results (keep age as the plain string input() gives you, no int() conversion), then print an f-string that reads person['name'] followed by ' is ' followed by person['age'] followed by ' years old.'"
+  ],
+  "expected_behavior": "Reads a name and an age as plain strings, stores them in a dictionary, and prints a sentence combining both values read back out of that dictionary.",
+  "hidden_tests": [
+    {
+      "args": [],
+      "stdin": "Ana\n25\n",
+      "expected_stdout": "What is your name? What is your age? Ana is 25 years old.",
+      "label": "basic case"
+    },
+    {
+      "args": [],
+      "stdin": "Bo\n30\n",
+      "expected_stdout": "What is your name? What is your age? Bo is 30 years old.",
+      "label": "different name and age"
+    }
+  ],
+  "solution": "def main():\n    name = input(\"What is your name? \")\n    age = input(\"What is your age? \")\n    person = {\"name\": name, \"age\": age}\n    print(f\"{person['name']} is {person['age']} years old.\")\n\n\nif __name__ == \"__main__\":\n    main()\n",
+  "explanation": "A dictionary groups related values under descriptive keys; indexing it with person['name'] and person['age'] retrieves those values back out for the final sentence.",
+  "concepts": [
+    "dictionaries",
+    "dictionary keys",
+    "f-strings",
+    "input"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "script",
+  "source": "30_days_of_python"
+}

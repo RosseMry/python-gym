@@ -1,0 +1,27 @@
+{
+  "id": "fnd-types-002",
+  "module": "types",
+  "difficulty": 2,
+  "title": "Safe division",
+  "description": "Write a function `safe_divide(a, b)` that returns `a / b` as a float when `b` is not zero, and returns `None` when `b` is zero, without raising an error.",
+  "examples": "safe_divide(10, 2) -> 5.0\nsafe_divide(7, 0) -> None",
+  "starter_code": "def safe_divide(a, b):\n    # write your code here\n    pass\n",
+  "hints": [
+    "Dividing by zero would normally cause a problem, so you need to check for that case before dividing.",
+    "Use an `if` statement to test whether `b` equals 0 before performing the division.",
+    "If `b == 0`, return `None`; otherwise return `a / b` using the `/` operator, which always produces a float."
+  ],
+  "expected_behavior": "Returns a / b as a float, or None if b is zero.",
+  "hidden_tests": [
+    {"call": "safe_divide(10, 2)", "expected": "5.0", "label": "clean division"},
+    {"call": "safe_divide(7, 0)", "expected": "None", "label": "division by zero"},
+    {"call": "safe_divide(-9, 3)", "expected": "-3.0", "label": "negative numerator"}
+  ],
+  "solution": "def safe_divide(a, b):\n    if b == 0:\n        return None\n    return a / b\n",
+  "explanation": "Checking `b == 0` before dividing avoids ever executing the division with a zero denominator. The `/` operator always returns a float in Python 3, and `None` is Python's value for representing the absence of a valid result.",
+  "concepts": ["conditionals", "division", "none"],
+  "skills": ["type_introspection"],
+  "prerequisites": ["fnd-types-001"],
+  "exercise_type": "function",
+  "source": "foundations"
+}

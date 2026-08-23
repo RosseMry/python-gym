@@ -2,6 +2,8 @@ import type {
   ExerciseDetail,
   ExerciseSummary,
   HintResponse,
+  LearningNoteDetail,
+  LearningNoteSummary,
   ProgressItem,
   SolutionResponse,
   SubmissionResult,
@@ -35,6 +37,11 @@ export const api = {
 
   getRepeatQueue: () => request<ExerciseSummary[]>("/exercises/repeat-queue"),
 
+  getNextExercise: (source?: string) =>
+    request<ExerciseSummary | null>(
+      `/exercises/next${source ? `?source=${source}` : ""}`,
+    ),
+
   getExercise: (id: string) => request<ExerciseDetail>(`/exercises/${id}`),
 
   requestHint: (id: string) =>
@@ -59,4 +66,8 @@ export const api = {
     }),
 
   listProgress: () => request<ProgressItem[]>("/progress"),
+
+  listNotes: () => request<LearningNoteSummary[]>("/notes"),
+
+  getNote: (id: string) => request<LearningNoteDetail>(`/notes/${id}`),
 };

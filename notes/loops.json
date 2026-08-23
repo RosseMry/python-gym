@@ -1,0 +1,28 @@
+{
+  "id": "loops",
+  "module": "for_loops",
+  "title": "Loops",
+  "display_order": 4,
+  "explanation": "A loop repeats a block of code. Python has two: `for`, which iterates over a known sequence (a list, a string, a range, ...) one item at a time, and `while`, which repeats as long as a condition stays true. Most \"repeat N times\" or \"do something to every item\" problems use `for`; problems where you don't know the number of repetitions ahead of time use `while`.",
+  "syntax": "numbers = [1, 2, 3, 4, 5]\n\n# for: iterate over a sequence\nfor n in numbers:\n    print(n)\n\n# range(): generate a sequence of numbers without building a list\nfor i in range(5):        # 0, 1, 2, 3, 4\n    print(i)\nfor i in range(2, 5):      # 2, 3, 4 - start, stop (exclusive)\n    print(i)\n\n# enumerate(): get both the index and the value while iterating\nfor index, value in enumerate(numbers):\n    print(index, value)\n\n# accumulator pattern: build up a result across iterations\ntotal = 0\nfor n in numbers:\n    total += n\n\n# while: repeat while a condition holds\ncount = 0\nwhile count < 3:\n    print(count)\n    count += 1\n\n# loop control\nfor n in numbers:\n    if n == 3:\n        continue    # skip the rest of this iteration, go to the next\n    if n == 5:\n        break         # stop the loop entirely\n    print(n)\n\n# nested loops: a loop inside another loop, e.g. for a grid\nfor row in range(3):\n    for col in range(3):\n        print(row, col)",
+  "examples": "Sum only the even numbers:\n\nnumbers = [1, 2, 3, 4, 5, 6]\ntotal = 0\nfor n in numbers:\n    if n % 2 == 0:\n        total += n\nprint(total)   # 12\n\nPrint a numbered list:\n\nfruits = [\"apple\", \"banana\", \"cherry\"]\nfor index, fruit in enumerate(fruits, start=1):\n    print(f\"{index}. {fruit}\")\n# 1. apple\n# 2. banana\n# 3. cherry",
+  "common_mistakes": "1. Forgetting to initialize the accumulator before the loop (e.g. writing `total += n` without `total = 0` first) - raises `NameError` because `total` doesn't exist yet on the first iteration.\n\n2. `for i in range(len(numbers)): print(numbers[i])` works but is usually unnecessary - `for n in numbers:` is simpler when you don't need the index, and `enumerate(numbers)` is cleaner when you do.\n\n3. Confusing `break` and `continue`: `break` exits the loop immediately, `continue` only skips to the next iteration. Using the wrong one silently changes how much of the loop runs.\n\n4. An off-by-one error with `range()`: `range(5)` produces `0, 1, 2, 3, 4` (5 numbers, stopping BEFORE 5) - forgetting this leads to loops that run one time too few or too many.\n\n5. A `while` loop whose condition never becomes false (e.g. forgetting to update the counter) runs forever - always double-check that something inside the loop moves it toward the stopping condition.",
+  "mini_exercise": "Without running Python, predict the output:\n\ntotal = 0\nfor n in range(1, 6):\n    if n % 2 == 0:\n        continue\n    total += n\nprint(total)\n\n(Answer: 9 - range(1, 6) gives 1,2,3,4,5; continue skips the even ones (2 and 4), so only 1 + 3 + 5 = 9 gets added.)",
+  "related_exercise_ids": [
+    "loop-001",
+    "loop-002",
+    "loop-003",
+    "loop-005",
+    "loop-007",
+    "loop-009",
+    "prog-nested-loop-001",
+    "prog-nested-loop-002",
+    "prog-bridge-001"
+  ],
+  "title_fr": null,
+  "explanation_fr": null,
+  "syntax_fr": null,
+  "examples_fr": null,
+  "common_mistakes_fr": null,
+  "mini_exercise_fr": null
+}

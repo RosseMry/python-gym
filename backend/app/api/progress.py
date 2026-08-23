@@ -6,6 +6,8 @@ streaks and weakest concepts (spec section 24).
 
 from __future__ import annotations
 
+from collections.abc import Iterator
+
 from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 
@@ -16,9 +18,18 @@ from app.services.exercise_service import ExerciseService
 router = APIRouter(prefix="/api/progress", tags=["progress"])
 
 
-def get_service() -> ExerciseService:
+def get_service() -> Iterator[ExerciseService]:
+    """Build a service instance with a fresh DB connection per request.
+
+    See app.api.exercises.get_service for why this closes the
+    connection via a generator dependency rather than returning it
+    directly.
+    """
     conn = get_connection()
-    return ExerciseService(ExerciseRepository(conn))
+    try:
+        yield ExerciseService(ExerciseRepository(conn))
+    finally:
+        conn.close()
 
 
 class ProgressItem(BaseModel):

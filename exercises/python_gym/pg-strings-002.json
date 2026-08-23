@@ -1,0 +1,27 @@
+{
+  "id": "pg-strings-002",
+  "module": "strings",
+  "difficulty": 2,
+  "title": "Check for a palindrome",
+  "description": "Write a function `is_palindrome(text)` that returns True if `text`, compared case-insensitively, reads the same forwards and backwards. Spaces are not stripped or ignored, only the letter case is normalized.",
+  "examples": "is_palindrome(\"Racecar\") -> True",
+  "starter_code": "def is_palindrome(text):\n    # write your code here\n    pass\n",
+  "hints": [
+    "You need to compare the text to its own reverse, but case should not matter.",
+    "`str.lower()` normalizes case, and slicing with a step of -1 reverses a string.",
+    "Lower-case `text` first with `.lower()`, then compare that result to itself reversed using `[::-1]`, and return whether they are equal."
+  ],
+  "expected_behavior": "Returns True if the lower-cased text equals its own reverse, and False otherwise.",
+  "hidden_tests": [
+    {"call": "is_palindrome(\"Racecar\")", "expected": "True", "label": "mixed case palindrome"},
+    {"call": "is_palindrome(\"hello\")", "expected": "False", "label": "non-palindrome"},
+    {"call": "is_palindrome(\"a\")", "expected": "True", "label": "single character"},
+    {"call": "is_palindrome(\"Ab\")", "expected": "False", "label": "two different letters"}
+  ],
+  "solution": "def is_palindrome(text):\n    lowered = text.lower()\n    return lowered == lowered[::-1]\n",
+  "explanation": "`text.lower()` normalizes the case so that 'Racecar' and 'racecar' are treated the same. Slicing with `[::-1]` produces the reversed string without a loop, and comparing the lowered text to its reverse tells us whether it reads the same both ways.",
+  "concepts": ["string", "slicing", "lower", "palindrome"],
+  "source": "python_gym",
+  "skills": ["text_processing", "basic_data_manipulation"],
+  "prerequisites": ["pg-strings-001"]
+}

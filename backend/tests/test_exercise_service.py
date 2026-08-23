@@ -35,12 +35,14 @@ def test_get_missing_exercise_raises(service: ExerciseService) -> None:
 
 
 def test_hints_are_revealed_one_at_a_time(service: ExerciseService) -> None:
-    assert service.request_hint("loop-003") == "hint 1"
-    assert service.request_hint("loop-003") == "hint 2"
-    assert "total = 0" in service.request_hint("loop-003")
-    assert (
-        service.request_hint("loop-003")
-        == "No more hints available for this exercise."
+    assert service.request_hint("loop-003") == ("hint 1", None)
+    assert service.request_hint("loop-003") == ("hint 2", None)
+    hint, hint_fr = service.request_hint("loop-003")
+    assert "total = 0" in hint
+    assert hint_fr is None
+    assert service.request_hint("loop-003") == (
+        "No more hints available for this exercise.",
+        None,
     )
 
 
@@ -102,9 +104,10 @@ def test_two_clean_solves_lead_to_mastery(service: ExerciseService) -> None:
 def test_revealing_solution_prevents_full_mastery_on_next_pass(
     service: ExerciseService,
 ) -> None:
-    solution, explanation = service.reveal_solution("loop-003")
+    solution, explanation, explanation_fr = service.reveal_solution("loop-003")
     assert "total" in solution
     assert explanation == "Accumulator pattern."
+    assert explanation_fr is None
 
     result = service.submit("loop-003", CORRECT)
     assert result.passed is True

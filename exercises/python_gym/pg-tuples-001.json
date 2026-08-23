@@ -1,0 +1,26 @@
+{
+  "id": "pg-tuples-001",
+  "module": "tuples",
+  "difficulty": 1,
+  "title": "Minimum and maximum",
+  "description": "Write a function `min_max(numbers)` that returns a tuple containing the smallest and largest values found in the list `numbers`, in that order.",
+  "examples": "min_max([3, 1, 2]) -> (1, 3)",
+  "starter_code": "def min_max(numbers):\n    # write your code here\n    pass\n",
+  "hints": [
+    "Python has built-in functions that find the smallest and largest value in a collection for you.",
+    "`min()` and `max()` each take an iterable and return the smallest or largest element.",
+    "Call `min(numbers)` and `max(numbers)` and pack the two results together into a tuple with parentheses."
+  ],
+  "expected_behavior": "Returns a 2-tuple (smallest, largest) computed from the list `numbers`.",
+  "hidden_tests": [
+    {"call": "min_max([3, 1, 2])", "expected": "(1, 3)", "label": "unsorted list"},
+    {"call": "min_max([5])", "expected": "(5, 5)", "label": "single element"},
+    {"call": "min_max([-1, -5, 2])", "expected": "(-5, 2)", "label": "negative numbers"}
+  ],
+  "solution": "def min_max(numbers):\n    return (min(numbers), max(numbers))\n",
+  "explanation": "The built-in `min()` and `max()` functions each scan `numbers` once to find the smallest and largest element. Wrapping both calls in parentheses with a comma packs them into a single tuple, which is returned as (smallest, largest).",
+  "concepts": ["tuple", "min", "max"],
+  "source": "python_gym",
+  "skills": ["basic_data_manipulation"],
+  "prerequisites": []
+}

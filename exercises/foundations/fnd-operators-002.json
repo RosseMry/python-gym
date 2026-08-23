@@ -1,0 +1,27 @@
+{
+  "id": "fnd-operators-002",
+  "module": "operators",
+  "difficulty": 2,
+  "title": "Check if a value is in range",
+  "description": "Write a function `is_in_range(n, low, high)` that returns `True` if `n` is between `low` and `high`, inclusive on both ends, and `False` otherwise.",
+  "examples": "is_in_range(5, 1, 10) -> True\nis_in_range(0, 1, 10) -> False",
+  "starter_code": "def is_in_range(n, low, high):\n    # write your code here\n    pass\n",
+  "hints": [
+    "You need to check two conditions at once: that n is not too small, and not too large.",
+    "Python lets you combine two comparisons into a single chained expression instead of using `and` explicitly.",
+    "Write the condition as `low <= n <= high` and return it directly - comparison expressions already evaluate to True or False."
+  ],
+  "expected_behavior": "Returns True when low <= n <= high, False otherwise.",
+  "hidden_tests": [
+    {"call": "is_in_range(5, 1, 10)", "expected": "True", "label": "inside range"},
+    {"call": "is_in_range(0, 1, 10)", "expected": "False", "label": "below range"},
+    {"call": "is_in_range(10, 1, 10)", "expected": "True", "label": "on upper bound"}
+  ],
+  "solution": "def is_in_range(n, low, high):\n    return low <= n <= high\n",
+  "explanation": "Python supports chained comparisons: `low <= n <= high` is equivalent to `low <= n and n <= high`, but reads more naturally and evaluates `n` only once. The result of a comparison is already a bool, so it can be returned directly.",
+  "concepts": ["chained comparison", "boolean logic", "operators"],
+  "skills": ["basic_data_manipulation"],
+  "prerequisites": ["fnd-operators-001"],
+  "exercise_type": "function",
+  "source": "foundations"
+}

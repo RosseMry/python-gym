@@ -1,0 +1,26 @@
+{
+  "id": "pg-dicts-003",
+  "module": "dictionaries",
+  "difficulty": 3,
+  "title": "Merge two score dictionaries",
+  "description": "Write a function `merge_scores(a, b)` that merges two dictionaries of numbers. If a key appears in both `a` and `b`, its value in the result is the sum of both values. If a key appears in only one of the dicts, its value is kept as-is.",
+  "examples": "merge_scores({'x': 1, 'y': 2}, {'y': 3, 'z': 4}) -> {'x': 1, 'y': 5, 'z': 4}",
+  "starter_code": "def merge_scores(a, b):\n    # write your code here\n    pass\n",
+  "hints": [
+    "Think about starting from a copy of one dictionary and then folding the second one into it, key by key.",
+    "`dict.get(key, default)` lets you look up a possibly-missing key without a KeyError, which is handy for the sum case.",
+    "Start with `result = dict(a)` to copy `a`, then loop over `b.items()` and set `result[key] = result.get(key, 0) + value` for each pair."
+  ],
+  "expected_behavior": "Returns a new dict containing every key from `a` and `b`; keys in both are summed, keys in only one dict keep their original value.",
+  "hidden_tests": [
+    {"call": "merge_scores({'x': 1, 'y': 2}, {'y': 3, 'z': 4})", "expected": "{'x': 1, 'y': 5, 'z': 4}", "label": "overlapping keys"},
+    {"call": "merge_scores({}, {'a': 1})", "expected": "{'a': 1}", "label": "first dict empty"},
+    {"call": "merge_scores({'a': 1}, {})", "expected": "{'a': 1}", "label": "second dict empty"}
+  ],
+  "solution": "def merge_scores(a, b):\n    result = dict(a)\n    for key, value in b.items():\n        result[key] = result.get(key, 0) + value\n    return result\n",
+  "explanation": "`dict(a)` creates a shallow copy of `a` so the original is not mutated. Then, for every key-value pair in `b`, `result.get(key, 0)` returns the existing value if the key was already present (from `a`) or 0 otherwise, and adding `value` gives the correct merged total either way.",
+  "concepts": ["dictionary", "merging", "get", "accumulator"],
+  "source": "python_gym",
+  "skills": ["lookup_tables", "basic_data_manipulation"],
+  "prerequisites": ["pg-dicts-002"]
+}

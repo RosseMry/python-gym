@@ -1,0 +1,27 @@
+{
+  "id": "pg-oop-002",
+  "module": "oop",
+  "difficulty": 3,
+  "title": "Bank account class",
+  "description": "Write a class `BankAccount` whose `__init__(self, balance=0)` stores the starting balance. Its `deposit(self, amount)` method adds `amount` to the balance and returns the new balance. Its `withdraw(self, amount)` method subtracts `amount` from the balance and returns the new balance, unless `amount` is greater than the current balance, in which case it returns the string `'insufficient funds'` and leaves the balance unchanged.",
+  "examples": "BankAccount(100).deposit(50) -> 150",
+  "starter_code": "class BankAccount:\n    def __init__(self, balance=0):\n        # write your code here\n        pass\n\n    def deposit(self, amount):\n        # write your code here\n        pass\n\n    def withdraw(self, amount):\n        # write your code here\n        pass\n",
+  "hints": [
+    "The account needs to remember its balance between method calls, and withdraw must check something before it changes anything.",
+    "Store the balance as `self.balance` in `__init__`, and in `withdraw` compare `amount` against `self.balance` before deciding what to do.",
+    "In `deposit`, do `self.balance += amount` and return `self.balance`. In `withdraw`, if `amount > self.balance` return `'insufficient funds'` without touching `self.balance`; otherwise do `self.balance -= amount` and return `self.balance`."
+  ],
+  "expected_behavior": "deposit(amount) increases the balance by amount and returns the new balance. withdraw(amount) decreases the balance by amount and returns the new balance, unless amount exceeds the balance, in which case it returns 'insufficient funds' and the balance stays the same.",
+  "hidden_tests": [
+    {"call": "BankAccount(100).deposit(50)", "expected": "150", "label": "deposit increases balance"},
+    {"call": "BankAccount(100).withdraw(30)", "expected": "70", "label": "withdraw within balance"},
+    {"call": "BankAccount(100).withdraw(200)", "expected": "'insufficient funds'", "label": "withdraw exceeds balance"},
+    {"call": "BankAccount().deposit(20)", "expected": "20", "label": "default balance of 0"}
+  ],
+  "solution": "class BankAccount:\n    def __init__(self, balance=0):\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        if amount > self.balance:\n            return \"insufficient funds\"\n        self.balance -= amount\n        return self.balance\n",
+  "explanation": "`__init__` stores the starting balance in `self.balance`, defaulting to 0. `deposit` increases that attribute and returns the updated value. `withdraw` first checks whether `amount` exceeds the current balance; if so it returns the error string without mutating state, otherwise it decreases `self.balance` and returns the new value.",
+  "concepts": ["class", "instance attribute", "conditional", "state mutation"],
+  "source": "python_gym",
+  "skills": ["object_oriented_design", "data_modeling"],
+  "prerequisites": ["pg-oop-001"]
+}

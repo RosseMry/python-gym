@@ -1,0 +1,26 @@
+{
+  "id": "pg-strings-003",
+  "module": "strings",
+  "difficulty": 3,
+  "title": "Count each letter",
+  "description": "Write a function `count_each_letter(text)` that returns a dictionary counting how many times each character appears in `text`, treated case-insensitively (lower-cased) and completely ignoring spaces (they are not counted at all). Process the text left to right so the keys appear in the dictionary in the order each character first showed up.",
+  "examples": "count_each_letter(\"aab\") -> {\"a\": 2, \"b\": 1}",
+  "starter_code": "def count_each_letter(text):\n    # write your code here\n    pass\n",
+  "hints": [
+    "You'll need to go through the text one character at a time and keep a running tally somewhere.",
+    "A dictionary is a natural place to store each character's count. `dict.get(key, default)` lets you look up a count that might not exist yet.",
+    "Lower-case `text`, then loop over its characters, skipping any character that is a space; for each remaining character do `counts[char] = counts.get(char, 0) + 1`."
+  ],
+  "expected_behavior": "Returns a dict mapping each non-space, lower-cased character in `text` to the number of times it appears, with keys in first-appearance order.",
+  "hidden_tests": [
+    {"call": "count_each_letter(\"aab\")", "expected": "{'a': 2, 'b': 1}", "label": "basic count"},
+    {"call": "count_each_letter(\"A a\")", "expected": "{'a': 2}", "label": "case-insensitive, ignores spaces"},
+    {"call": "count_each_letter(\"\")", "expected": "{}", "label": "empty string"}
+  ],
+  "solution": "def count_each_letter(text):\n    counts = {}\n    for char in text.lower():\n        if char == ' ':\n            continue\n        counts[char] = counts.get(char, 0) + 1\n    return counts\n",
+  "explanation": "Lower-casing `text` up front makes the counting case-insensitive. Looping character by character lets us skip spaces with `continue`, and `counts.get(char, 0) + 1` increments a character's tally whether or not it has been seen before, building the dictionary in first-appearance order.",
+  "concepts": ["string", "dictionary", "loop", "counting"],
+  "source": "python_gym",
+  "skills": ["text_processing", "basic_data_manipulation"],
+  "prerequisites": ["pg-strings-002"]
+}

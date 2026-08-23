@@ -60,6 +60,14 @@ class ExerciseService:
         """List exercises the student marked to repeat later (section 5)."""
         return self._repo.list_repeat_queue()
 
+    def resolve_prerequisites(self, exercise_ids: list[str]) -> list[dict]:
+        """Resolve prerequisite ids into displayable, solved-aware links."""
+        return self._repo.resolve_prerequisites(exercise_ids)
+
+    def get_next_unsolved(self, source: str | None = None) -> Exercise | None:
+        """Recommend the next not-yet-solved exercise (basic learning path)."""
+        return self._repo.get_next_unsolved(source)
+
     def get_exercise_for_student(self, exercise_id: str) -> Exercise:
         """Return an exercise with the answer stripped out.
 
@@ -95,26 +103,44 @@ class ExerciseService:
             validation_profile=exercise.validation_profile,
             exercise_type=exercise.exercise_type,
             exercise_status=exercise.exercise_status,
+            title_fr=exercise.title_fr,
+            description_fr=exercise.description_fr,
+            examples_fr=exercise.examples_fr,
+            expected_behavior_fr=exercise.expected_behavior_fr,
+            # explanation_fr/hints_fr stay off the student-facing copy,
+            # same as explanation/hints - they're only revealed via
+            # request_hint()/reveal_solution().
         )
 
-    def request_hint(self, exercise_id: str) -> str:
-        """Reveal the next hint the student hasn't seen yet."""
+    def request_hint(self, exercise_id: str) -> tuple[str, str | None]:
+        """Reveal the next hint the student hasn't seen yet.
+
+        Returns ``(hint, hint_fr)`` - ``hint_fr`` is ``None`` when that
+        hint hasn't been translated yet, so the frontend falls back to
+        the English text.
+        """
         exercise = self._repo.get(exercise_id)
         if exercise is None:
             raise ExerciseNotFoundError(exercise_id)
         progress = self._get_or_create_progress(exercise_id)
 
         if progress.hints_used >= len(exercise.hints):
-            return "No more hints available for this exercise."
+            return "No more hints available for this exercise.", None
 
-        hint_text = exercise.hints[progress.hints_used]
+        index = progress.hints_used
+        hint_text = exercise.hints[index]
+        hint_text_fr = (
+            exercise.hints_fr[index]
+            if exercise.hints_fr and index < len(exercise.hints_fr)
+            else None
+        )
         progress.hints_used += 1
         if progress.status == ExerciseStatus.NEW:
             progress.status = ExerciseStatus.ATTEMPTED
         self._repo.save_progress(progress)
-        return hint_text
+        return hint_text, hint_text_fr
 
-    def reveal_solution(self, exercise_id: str) -> tuple[str, str]:
+    def reveal_solution(self, exercise_id: str) -> tuple[str, str, str | None]:
         """Explicitly reveal the solution and explanation.
 
         This should only be called by the frontend after the student
@@ -128,7 +154,7 @@ class ExerciseService:
         progress = self._get_or_create_progress(exercise_id)
         progress.solution_revealed = True
         self._repo.save_progress(progress)
-        return exercise.solution, exercise.explanation
+        return exercise.solution, exercise.explanation, exercise.explanation_fr
 
     def submit(self, exercise_id: str, code: str) -> SubmissionResult:
         """Run the student's code and update progress/mastery status.

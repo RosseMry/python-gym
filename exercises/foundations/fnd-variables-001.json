@@ -1,0 +1,27 @@
+{
+  "id": "fnd-variables-001",
+  "module": "variables",
+  "difficulty": 1,
+  "title": "Swap two values",
+  "description": "Write a function `swap(a, b)` that returns a tuple containing `a` and `b` in swapped order, i.e. `(b, a)`.",
+  "examples": "swap(1, 2) -> (2, 1)",
+  "starter_code": "def swap(a, b):\n    # write your code here\n    pass\n",
+  "hints": [
+    "You don't need a temporary variable to swap two values in Python, unlike in many other languages.",
+    "Python lets you assign to multiple names at once from a comma-separated sequence of values on the right.",
+    "You can write `return b, a` directly, or do the swap first with `a, b = b, a` and then return the pair."
+  ],
+  "expected_behavior": "Returns a tuple (b, a), i.e. the two arguments in reversed order.",
+  "hidden_tests": [
+    {"call": "swap(1, 2)", "expected": "(2, 1)", "label": "integers"},
+    {"call": "swap(\"x\", \"y\")", "expected": "('y', 'x')", "label": "strings"},
+    {"call": "swap(0, 0)", "expected": "(0, 0)", "label": "equal values"}
+  ],
+  "solution": "def swap(a, b):\n    return b, a\n",
+  "explanation": "Returning `b, a` builds a tuple with the values in reversed order. Python's multiple assignment (`a, b = b, a`) works the same way: the right-hand side is fully evaluated into a tuple before any names are rebound, so no temporary variable is needed to swap values.",
+  "concepts": ["multiple assignment", "tuples", "variables"],
+  "skills": ["basic_data_manipulation"],
+  "prerequisites": [],
+  "exercise_type": "function",
+  "source": "foundations"
+}

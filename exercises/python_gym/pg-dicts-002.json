@@ -1,0 +1,26 @@
+{
+  "id": "pg-dicts-002",
+  "module": "dictionaries",
+  "difficulty": 2,
+  "title": "Count frequencies",
+  "description": "Write a function `count_frequencies(items)` that returns a dictionary mapping each distinct element of the list `items` to the number of times it appears in that list.",
+  "examples": "count_frequencies(['a', 'b', 'a']) -> {'a': 2, 'b': 1}",
+  "starter_code": "def count_frequencies(items):\n    # write your code here\n    pass\n",
+  "hints": [
+    "You need to accumulate a running count for each distinct item as you go through the list.",
+    "A dictionary can act as a counter: `dict.get(key, default)` returns a fallback value when the key is not yet present.",
+    "Start with an empty dict and loop over `items`, updating it with `counts[item] = counts.get(item, 0) + 1` for each item, then return `counts`."
+  ],
+  "expected_behavior": "Returns a dict where each key is a distinct element from `items` and each value is how many times that element occurs in `items`.",
+  "hidden_tests": [
+    {"call": "count_frequencies(['a', 'b', 'a'])", "expected": "{'a': 2, 'b': 1}", "label": "repeated strings"},
+    {"call": "count_frequencies([])", "expected": "{}", "label": "empty list"},
+    {"call": "count_frequencies([1, 1, 1])", "expected": "{1: 3}", "label": "all same element"}
+  ],
+  "solution": "def count_frequencies(items):\n    counts = {}\n    for item in items:\n        counts[item] = counts.get(item, 0) + 1\n    return counts\n",
+  "explanation": "`counts.get(item, 0)` reads the current count for `item`, defaulting to 0 the first time it is seen, so each iteration safely increments the running total without a KeyError, building up a full frequency table by the time the loop ends.",
+  "concepts": ["dictionary", "accumulator", "get"],
+  "source": "python_gym",
+  "skills": ["lookup_tables", "basic_data_manipulation"],
+  "prerequisites": ["pg-dicts-001"]
+}

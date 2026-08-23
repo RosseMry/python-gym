@@ -4,6 +4,7 @@ import { api } from "../services/api";
 import type { ExerciseSummary, ProgressItem } from "../types/exercise";
 import { CONTENT_SOURCES } from "../types/exercise";
 import { TrainingBar } from "../components/TrainingBar";
+import { useLocale, useLocalized } from "../i18n/LocaleContext";
 import "./ExerciseListPage.css";
 
 const MODULE_LABELS: Record<string, string> = {
@@ -14,6 +15,25 @@ const MODULE_LABELS: Record<string, string> = {
   piscine_00_starting: "Starting",
   piscine_03_oop: "Object-Oriented Programming",
   piscine_04_data_oriented_design: "Data Oriented Design",
+  // Sprint 3 foundations/python_gym/progressive-bridge modules
+  variables: "Variables",
+  types: "Types",
+  input_output: "Input & output",
+  operators: "Operators",
+  strings: "Strings",
+  tuples: "Tuples",
+  sets: "Sets",
+  dictionaries: "Dictionaries",
+  functions: "Functions",
+  scope: "Scope & closures",
+  exceptions: "Exceptions",
+  comprehensions: "Comprehensions",
+  files: "Files",
+  modules: "Modules",
+  oop: "Object-Oriented Programming",
+  iterators_generators: "Iterators & generators",
+  nested_structures: "Nested structures",
+  nested_lists: "Nested lists",
 };
 
 const DIFFICULTY_LABELS = ["", "Recognition", "Reproduction", "Applied", "Combined", "Problem solving"];
@@ -25,22 +45,27 @@ export function ExerciseListPage() {
   const [exercises, setExercises] = useState<ExerciseSummary[] | null>(null);
   const [progress, setProgress] = useState<Record<string, ProgressItem>>({});
   const [error, setError] = useState<string | null>(null);
+  const [nextId, setNextId] = useState<string | null>(null);
+  const { t } = useLocale();
+  const localize = useLocalized();
 
   useEffect(() => {
     setExercises(null);
+    setNextId(null);
     Promise.all([api.listExercises({ source }), api.listProgress()])
       .then(([exerciseList, progressList]) => {
         setExercises(exerciseList);
         setProgress(Object.fromEntries(progressList.map((p) => [p.exercise_id, p])));
       })
       .catch((e) => setError(String(e)));
+    api.getNextExercise(source).then((next) => setNextId(next?.id ?? null));
   }, [source]);
 
   if (error) {
     return (
       <div className="page">
         <p className="error-banner">
-          Couldn't reach the backend. Is it running on port 8000?
+          {t("list.backendError")}
           <br />
           <code>{error}</code>
         </p>
@@ -49,23 +74,25 @@ export function ExerciseListPage() {
   }
 
   if (!exercises) {
-    return <div className="page">Loading exercises…</div>;
+    return <div className="page">{t("list.loading")}</div>;
   }
 
   const byModule = groupByModule(exercises);
   const heading = source
     ? CONTENT_SOURCES[source as keyof typeof CONTENT_SOURCES] ?? source
-    : "Today's session";
+    : t("list.todaysSession");
 
   return (
     <div className="page">
       <header className="page-header">
-        <p className="eyebrow">Python Gym</p>
+        <p className="eyebrow">{t("brand")}</p>
         <h1>{heading}</h1>
-        <p className="subtitle">
-          Read the problem, think before you type, and only ask for a hint
-          once you're actually stuck.
-        </p>
+        <p className="subtitle">{t("list.subtitle")}</p>
+        {nextId && (
+          <Link to={`/exercises/${nextId}`} className="page-header__cta">
+            {t("list.continueWhereYouLeftOff")}
+          </Link>
+        )}
       </header>
 
       {Object.entries(byModule).map(([module, items]) => (
@@ -86,7 +113,9 @@ export function ExerciseListPage() {
                 <li key={exercise.id}>
                   <Link to={`/exercises/${exercise.id}`} className="exercise-card">
                     <span className={`status-dot status-dot--${status.toLowerCase()}`} />
-                    <span className="exercise-card__title">{exercise.title}</span>
+                    <span className="exercise-card__title">
+                      {localize(exercise.title, exercise.title_fr)}
+                    </span>
                     <span className="exercise-card__meta">
                       {DIFFICULTY_LABELS[exercise.difficulty] ?? `Level ${exercise.difficulty}`}
                     </span>

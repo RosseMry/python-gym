@@ -1,0 +1,38 @@
+{
+  "id": "prog-bridge-006",
+  "module": "functions",
+  "difficulty": 4,
+  "title": "Apply a function to every matrix element",
+  "description": "Write a function `apply_to_matrix(matrix, func)` that takes a list of lists `matrix` and a one-argument function `func`, and returns a new matrix of the same shape where `func` has been applied to every individual element. This combines nested loops over a matrix with treating a function as a value passed into another function.",
+  "examples": "apply_to_matrix([[1, 2], [3, 4]], lambda x: x * 2) -> [[2, 4], [6, 8]]",
+  "starter_code": "def apply_to_matrix(matrix, func):\n    # write your code here\n    pass\n",
+  "hints": [
+    "`func` is just a regular value here - a function you were given - and you can call it like any function, e.g. `func(some_value)`.",
+    "You'll need a nested loop to reach every element, and a new matrix (list of lists) to hold the transformed values without mutating the original.",
+    "For each row in `matrix`, build a new empty list; loop over the values in that row, call `func(value)` on each one and append the result to the new row list; once the row is done, append the new row to the new matrix. Return the new matrix."
+  ],
+  "expected_behavior": "Returns a new list of lists with the same shape as matrix, where each element is the result of calling func on the corresponding element of matrix. The original matrix is not modified. Returns an empty list when matrix is empty.",
+  "hidden_tests": [
+    {
+      "call": "apply_to_matrix([[1, 2], [3, 4]], lambda x: x * 2)",
+      "expected": "[[2, 4], [6, 8]]",
+      "label": "doubling"
+    },
+    {
+      "call": "apply_to_matrix([[0]], lambda x: x + 1)",
+      "expected": "[[1]]",
+      "label": "single cell"
+    },
+    {
+      "call": "apply_to_matrix([], lambda x: x)",
+      "expected": "[]",
+      "label": "empty matrix"
+    }
+  ],
+  "solution": "def apply_to_matrix(matrix, func):\n    new_matrix = []\n    for row in matrix:\n        new_row = []\n        for value in row:\n            new_row.append(func(value))\n        new_matrix.append(new_row)\n    return new_matrix\n",
+  "explanation": "Since functions are first-class values in Python, `func` can be called directly inside the loop just like any other function. The nested loop rebuilds the matrix row by row, calling `func(value)` on each element and collecting the results into a brand new list of lists, leaving the original matrix untouched.",
+  "concepts": ["nested loops", "functions as values", "lambda", "list building"],
+  "skills": ["iteration", "functional_programming"],
+  "prerequisites": ["prog-bridge-005"],
+  "source": "progressive_python"
+}

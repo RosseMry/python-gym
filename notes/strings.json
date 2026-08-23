@@ -1,0 +1,24 @@
+{
+  "id": "strings",
+  "module": "strings",
+  "title": "Strings",
+  "display_order": 3,
+  "explanation": "A string is an ordered, immutable sequence of characters: `name = \"Rosse\"`. \"Immutable\" means once created, a string can never be changed in place - every string method that looks like it modifies a string actually returns a brand-new string. Strings support indexing and slicing just like lists, since they're both sequences.",
+  "syntax": "name = \"Rosse\"\n\n# indexing and slicing (same rules as lists)\nname[0]        # 'R'\nname[-1]       # 'e'\nname[1:3]      # 'os'\n\n# common methods (all return a NEW string, the original is unchanged)\nname.upper()             # 'ROSSE'\nname.lower()              # 'rosse'\nname.strip()               # removes leading/trailing whitespace\nname.replace(\"o\", \"0\")      # 'R0sse'\nname.split(\"s\")              # ['Ro', '', 'e'] - splits on the separator\n\", \".join([\"a\", \"b\", \"c\"])     # 'a, b, c' - joins a list into one string\n\n# searching\n\"os\" in name                # True - substring membership\nname.startswith(\"Ro\")        # True\nname.find(\"s\")                 # 2 - index of first match, -1 if not found\n\n# formatting\nage = 25\nf\"{name} is {age} years old\"    # f-string: embed expressions directly\n\"{} is {}\".format(name, age)     # .format() - older style, same result\n\n# length and iteration\nlen(name)          # 5\nfor ch in name:      # iterates character by character\n    print(ch)",
+  "examples": "Clean up user input:\n\nraw = \"  Hello World  \"\nclean = raw.strip().lower()\nprint(clean)   # 'hello world'\n\nBuild a greeting with an f-string:\n\nuser = \"Ada\"\nprint(f\"Welcome, {user}! You have {3 + 2} new messages.\")\n# Welcome, Ada! You have 5 new messages.",
+  "common_mistakes": "1. Trying to change a string in place, e.g. `name[0] = \"J\"`, raises `TypeError: 'str' object does not support item assignment` - strings are immutable, so you must build a new string (e.g. `\"J\" + name[1:]`) instead.\n\n2. Forgetting that `.replace()`, `.strip()`, `.upper()`, etc. do NOT modify the original string - `name.upper()` on its own has no effect; you need `name = name.upper()` to keep the result.\n\n3. `.split()` with no argument splits on any whitespace and collapses repeats, while `.split(\" \")` splits on every single space and can produce empty strings between consecutive spaces - these give different results on messy input.\n\n4. Mixing types in concatenation: `\"Age: \" + 25` raises `TypeError` because you can't add a string and an int - convert first (`str(25)`) or use an f-string instead.",
+  "mini_exercise": "Without running Python, predict the output:\n\ntext = \"  Python Gym  \"\nresult = text.strip().replace(\"Gym\", \"Rocks\").lower()\nprint(result)\n\n(Answer: 'python rocks' - strip() removes the outer spaces first, then replace() swaps 'Gym' for 'Rocks', then lower() lowercases everything. Each method call chains onto the string returned by the previous one.)",
+  "related_exercise_ids": [
+    "pg-strings-001",
+    "pg-strings-002",
+    "pg-strings-003",
+    "prog-bridge-004",
+    "30days-string-methods"
+  ],
+  "title_fr": null,
+  "explanation_fr": null,
+  "syntax_fr": null,
+  "examples_fr": null,
+  "common_mistakes_fr": null,
+  "mini_exercise_fr": null
+}

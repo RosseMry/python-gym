@@ -1,0 +1,25 @@
+{
+  "id": "pg-sets-001",
+  "module": "sets",
+  "difficulty": 1,
+  "title": "Unique items, sorted",
+  "description": "Write a function `unique_items(items)` that returns a sorted list of the unique values found in the list `items`, with duplicates removed.",
+  "examples": "unique_items([1, 2, 2, 3, 1]) -> [1, 2, 3]",
+  "starter_code": "def unique_items(items):\n    # write your code here\n    pass\n",
+  "hints": [
+    "There is a built-in collection type designed specifically to hold only unique values.",
+    "Passing `items` to `set()` removes duplicates, and `sorted()` turns any iterable into an ordered list.",
+    "Convert `items` to a set with `set(items)` to drop duplicates, then wrap that in `sorted(...)` to get a deterministic list."
+  ],
+  "expected_behavior": "Returns a list containing each distinct value from `items`, sorted in ascending order.",
+  "hidden_tests": [
+    {"call": "unique_items([1, 2, 2, 3, 1])", "expected": "[1, 2, 3]", "label": "numeric duplicates"},
+    {"call": "unique_items(['b', 'a', 'a'])", "expected": "['a', 'b']", "label": "string duplicates"}
+  ],
+  "solution": "def unique_items(items):\n    return sorted(set(items))\n",
+  "explanation": "`set(items)` builds a set from the list, which automatically discards duplicate values since sets only store unique elements. `sorted()` then converts that set into a list in ascending order, giving a deterministic, duplicate-free result.",
+  "concepts": ["set", "sorted", "deduplication"],
+  "source": "python_gym",
+  "skills": ["basic_data_manipulation"],
+  "prerequisites": []
+}

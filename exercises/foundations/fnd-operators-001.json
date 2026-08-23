@@ -1,0 +1,27 @@
+{
+  "id": "fnd-operators-001",
+  "module": "operators",
+  "difficulty": 1,
+  "title": "Quotient and remainder",
+  "description": "Write a function `remainder_and_quotient(a, b)` that returns a tuple `(quotient, remainder)` of dividing `a` by `b` using integer division.",
+  "examples": "remainder_and_quotient(17, 5) -> (3, 2)",
+  "starter_code": "def remainder_and_quotient(a, b):\n    # write your code here\n    pass\n",
+  "hints": [
+    "Regular division with `/` gives a float, but you need the whole-number quotient and what's left over.",
+    "Python has a floor division operator and a modulo operator for exactly this purpose.",
+    "Use `a // b` for the integer quotient and `a % b` for the remainder, and return them as a tuple in that order."
+  ],
+  "expected_behavior": "Returns a tuple (a // b, a % b): the integer quotient followed by the remainder.",
+  "hidden_tests": [
+    {"call": "remainder_and_quotient(17, 5)", "expected": "(3, 2)", "label": "17 divided by 5"},
+    {"call": "remainder_and_quotient(10, 2)", "expected": "(5, 0)", "label": "exact division"},
+    {"call": "remainder_and_quotient(20, 6)", "expected": "(3, 2)", "label": "20 divided by 6"}
+  ],
+  "solution": "def remainder_and_quotient(a, b):\n    return a // b, a % b\n",
+  "explanation": "`//` performs floor (integer) division, discarding any fractional part, while `%` computes the remainder left over from that division. Together they satisfy a == (a // b) * b + (a % b).",
+  "concepts": ["operators", "floor division", "modulo"],
+  "skills": ["basic_data_manipulation"],
+  "prerequisites": [],
+  "exercise_type": "function",
+  "source": "foundations"
+}

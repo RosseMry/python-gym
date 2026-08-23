@@ -1,0 +1,38 @@
+{
+  "id": "prog-bridge-003",
+  "module": "dictionaries",
+  "difficulty": 3,
+  "title": "Group words by length",
+  "description": "Write a function `group_by_length(words)` that returns a dict mapping each word length to the list of words of that length, in their original order. This combines looping over a list, computing a key with `len`, and building up a dict of lists.",
+  "examples": "group_by_length(['a', 'bb', 'cc', 'ddd']) -> {1: ['a'], 2: ['bb', 'cc'], 3: ['ddd']}",
+  "starter_code": "def group_by_length(words):\n    # write your code here\n    pass\n",
+  "hints": [
+    "For each word you need to figure out which 'group' (by length) it belongs to, and add it there.",
+    "`len(word)` gives you the key to use in a dict. Each key should map to a list of matching words.",
+    "Loop over the words. For each one compute `length = len(word)`; if `length` is not yet a key in your result dict, create it with an empty list, then append the word to `result[length]`. Return the dict at the end."
+  ],
+  "expected_behavior": "Returns a dict whose keys are integer word lengths and whose values are lists of the words with that length, in the order they appeared in the input. Returns an empty dict for an empty input.",
+  "hidden_tests": [
+    {
+      "call": "group_by_length(['a', 'bb', 'cc', 'ddd'])",
+      "expected": "{1: ['a'], 2: ['bb', 'cc'], 3: ['ddd']}",
+      "label": "mixed lengths"
+    },
+    {
+      "call": "group_by_length([])",
+      "expected": "{}",
+      "label": "empty list"
+    },
+    {
+      "call": "group_by_length(['x', 'y'])",
+      "expected": "{1: ['x', 'y']}",
+      "label": "same length"
+    }
+  ],
+  "solution": "def group_by_length(words):\n    groups = {}\n    for word in words:\n        length = len(word)\n        if length not in groups:\n            groups[length] = []\n        groups[length].append(word)\n    return groups\n",
+  "explanation": "For every word, `len(word)` gives the grouping key. The `if length not in groups` check lazily creates a new empty list the first time a given length is seen, and every subsequent word of that length is appended to the same list.",
+  "concepts": ["for loop", "dict", "len", "list building", "grouping"],
+  "skills": ["iteration", "basic_data_manipulation"],
+  "prerequisites": ["prog-bridge-001"],
+  "source": "progressive_python"
+}

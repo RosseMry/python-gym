@@ -1,0 +1,26 @@
+{
+  "id": "pg-functions-003",
+  "module": "functions",
+  "difficulty": 2,
+  "title": "Sum a variable number of arguments",
+  "description": "Write a function `sum_all(*args)` that accepts any number of positional numeric arguments and returns their sum. Calling it with no arguments should return 0.",
+  "examples": "sum_all(1, 2, 3) -> 6",
+  "starter_code": "def sum_all(*args):\n    # write your code here\n    pass\n",
+  "hints": [
+    "The function needs to accept any number of arguments, not just a fixed count.",
+    "Prefixing a parameter with `*`, like `*args`, collects all positional arguments into a tuple inside the function.",
+    "Since `args` is just a tuple of numbers, you can pass it directly to the built-in `sum()` function and return the result."
+  ],
+  "expected_behavior": "Returns the sum of all positional arguments passed in; returns 0 if no arguments are passed.",
+  "hidden_tests": [
+    {"call": "sum_all(1, 2, 3)", "expected": "6", "label": "three arguments"},
+    {"call": "sum_all()", "expected": "0", "label": "no arguments"},
+    {"call": "sum_all(5)", "expected": "5", "label": "single argument"}
+  ],
+  "solution": "def sum_all(*args):\n    return sum(args)\n",
+  "explanation": "The `*args` syntax gathers every positional argument the function is called with into a single tuple named `args`. `sum()` then adds up all the numbers in that tuple, naturally returning 0 when the tuple is empty.",
+  "concepts": ["function", "args", "variadic arguments", "sum"],
+  "source": "python_gym",
+  "skills": ["functional_python"],
+  "prerequisites": ["pg-functions-002"]
+}

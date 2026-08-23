@@ -1,0 +1,26 @@
+{
+  "id": "pg-dicts-001",
+  "module": "dictionaries",
+  "difficulty": 1,
+  "title": "Invert a dictionary",
+  "description": "Write a function `invert_dict(data)` that returns a new dictionary where the keys and values of `data` are swapped. You can assume all values in `data` are unique and hashable.",
+  "examples": "invert_dict({'a': 1, 'b': 2}) -> {1: 'a', 2: 'b'}",
+  "starter_code": "def invert_dict(data):\n    # write your code here\n    pass\n",
+  "hints": [
+    "You need to build a brand new dictionary rather than modify `data` in place.",
+    "You can iterate over a dict's key-value pairs with `.items()`.",
+    "Loop over `data.items()` and build a new dict where each value from `data` becomes a key, and each key from `data` becomes its value, e.g. `new_dict[value] = key`."
+  ],
+  "expected_behavior": "Returns a new dict whose keys are the values of `data` and whose values are the corresponding keys of `data`.",
+  "hidden_tests": [
+    {"call": "invert_dict({'a': 1, 'b': 2})", "expected": "{1: 'a', 2: 'b'}", "label": "two entries"},
+    {"call": "invert_dict({})", "expected": "{}", "label": "empty dict"},
+    {"call": "invert_dict({'x': 10})", "expected": "{10: 'x'}", "label": "single entry"}
+  ],
+  "solution": "def invert_dict(data):\n    return {value: key for key, value in data.items()}\n",
+  "explanation": "`data.items()` yields (key, value) pairs. A dict comprehension builds a new dictionary where each pair is flipped: the original value becomes the new key, and the original key becomes the new value.",
+  "concepts": ["dictionary", "dict comprehension", "items"],
+  "source": "python_gym",
+  "skills": ["lookup_tables", "basic_data_manipulation"],
+  "prerequisites": []
+}

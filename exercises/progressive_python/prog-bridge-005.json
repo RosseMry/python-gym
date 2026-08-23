@@ -1,0 +1,38 @@
+{
+  "id": "prog-bridge-005",
+  "module": "nested_structures",
+  "difficulty": 4,
+  "title": "Flatten and filter a matrix",
+  "description": "Write a function `flatten_and_filter(matrix, threshold)` that takes a list of lists of numbers and a number `threshold`, and returns a sorted (ascending) list of every value in the nested structure that is strictly greater than `threshold`. This combines nested loops with filtering and sorting.",
+  "examples": "flatten_and_filter([[1, 5], [3, 8]], 3) -> [5, 8]",
+  "starter_code": "def flatten_and_filter(matrix, threshold):\n    # write your code here\n    pass\n",
+  "hints": [
+    "You need to visit every single number inside every row of the matrix, not just each row as a whole.",
+    "A loop over the rows, with another loop inside it over each row's values, lets you reach every individual number - then compare each one against `threshold`.",
+    "Build up an empty result list. Use a nested for loop (outer over rows, inner over each value in a row); whenever a value is strictly greater than `threshold`, append it to the result list. Once every value has been checked, call `.sort()` on the result list before returning it."
+  ],
+  "expected_behavior": "Returns a flat, ascending-sorted list containing every value from the nested matrix that is strictly greater than threshold. Returns an empty list if no value qualifies.",
+  "hidden_tests": [
+    {
+      "call": "flatten_and_filter([[1, 5], [3, 8]], 3)",
+      "expected": "[5, 8]",
+      "label": "basic filter"
+    },
+    {
+      "call": "flatten_and_filter([[1, 2], [3, 4]], 10)",
+      "expected": "[]",
+      "label": "nothing above threshold"
+    },
+    {
+      "call": "flatten_and_filter([[10, 1], [2, 20]], 5)",
+      "expected": "[10, 20]",
+      "label": "requires sorting"
+    }
+  ],
+  "solution": "def flatten_and_filter(matrix, threshold):\n    result = []\n    for row in matrix:\n        for value in row:\n            if value > threshold:\n                result.append(value)\n    result.sort()\n    return result\n",
+  "explanation": "The outer loop walks through each row and the inner loop walks through each value within that row, so every element of the nested matrix is examined exactly once. Values greater than `threshold` are collected into a flat list, which is sorted ascending before being returned.",
+  "concepts": ["nested loops", "list", "filtering", "sorting"],
+  "skills": ["iteration", "basic_data_manipulation"],
+  "prerequisites": ["prog-nested-loop-002"],
+  "source": "progressive_python"
+}
