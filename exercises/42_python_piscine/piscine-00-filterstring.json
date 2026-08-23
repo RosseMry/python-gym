@@ -1,0 +1,48 @@
+{
+  "id": "piscine-00-filterstring",
+  "module": "piscine_00_starting",
+  "difficulty": 2,
+  "title": "Dictionaries SoS prep - filter my words",
+  "description": "Part 2 of the ft_filter exercise: write a program that accepts two arguments, a string S and an integer N, and prints the list of words from S that are longer than N characters. Words are separated by spaces, and the string has no punctuation.\n\nThe program must contain at least one list comprehension and one lambda. If the argument count or types are wrong, print an AssertionError.",
+  "examples": "$> python filterstring.py 'Hello the World' 4\n['Hello', 'World']\n\n$> python filterstring.py 'Hello the World' 99\n[]\n\n$> python filterstring.py 3 'Hello the World'\nAssertionError: the arguments are bad",
+  "starter_code": "import sys\n\n\ndef main():\n    pass\n\n\nif __name__ == \"__main__\":\n    main()\n",
+  "hints": [
+    "Validate argument count first, then try converting the second argument to int - both failures should raise the same AssertionError message.",
+    "A lambda works well as the filter predicate: is_long = lambda word: len(word) > n.",
+    "words = text.split(' ')\nis_long = lambda w: len(w) > n\nresult = [w for w in words if is_long(w)]\nprint(result)"
+  ],
+  "expected_behavior": "Prints a Python list of the matching words.",
+  "hidden_tests": [
+    {
+      "args": [
+        "Hello the World",
+        "4"
+      ],
+      "expected_stdout": "['Hello', 'World']",
+      "label": "Test 1"
+    },
+    {
+      "args": [
+        "Hello the World",
+        "99"
+      ],
+      "expected_stdout": "[]",
+      "label": "Test 2"
+    }
+  ],
+  "solution": "import sys\n\n\ndef main():\n    try:\n        assert len(sys.argv) == 3\n        text = sys.argv[1]\n        n = int(sys.argv[2])\n    except (AssertionError, ValueError):\n        print(\"AssertionError: the arguments are bad\")\n        return\n    is_long = lambda word: len(word) > n\n    words = text.split(' ')\n    print([word for word in words if is_long(word)])\n\n\nif __name__ == \"__main__\":\n    main()\n",
+  "explanation": "The lambda expresses the 'longer than N' predicate; the list comprehension applies it to every word in one line, which is the ft_filter pattern the subject is building toward.",
+  "concepts": [
+    "list comprehension",
+    "lambda",
+    "sys.argv"
+  ],
+  "skills": [
+    "functional_python",
+    "cli_argument_handling"
+  ],
+  "exercise_type": "script",
+  "source": "42_python_piscine",
+  "track": "python",
+  "validation_profile": "42_piscine"
+}

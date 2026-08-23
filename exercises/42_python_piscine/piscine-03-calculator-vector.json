@@ -1,0 +1,29 @@
+{
+  "id": "piscine-03-calculator-vector",
+  "module": "piscine_03_oop",
+  "difficulty": 3,
+  "title": "Calculate my vector",
+  "description": "Write a `calculator` class whose `__add__`, `__mul__`, `__sub__` and `__truediv__` methods each take a vector (a list of floats) and a scalar, print the elementwise result, and return None. Division by zero should be handled explicitly (this is the one error case the subject asks you to handle).",
+  "examples": "v1 = calculator([0.0, 1.0, 2.0, 3.0, 4.0, 5.0])\nv1 + 5\n# prints [5.0, 6.0, 7.0, 8.0, 9.0, 10.0]",
+  "starter_code": "class calculator:\n    # your code here\n\n    def __add__(self, other):\n        pass\n\n    def __mul__(self, other):\n        pass\n\n    def __sub__(self, other):\n        pass\n\n    def __truediv__(self, other):\n        pass\n",
+  "hints": [
+    "__add__(self, other) is called automatically for `instance + other` - `other` here is the scalar on the right-hand side.",
+    "Each dunder method should build a new list applying the operation to every element of self's stored vector, then print it (the prototype return type is None, not the new vector).",
+    "def __add__(self, other):\n    print([x + other for x in self.values])"
+  ],
+  "expected_behavior": "Each operator prints the elementwise result list; dividing by 0 is handled without crashing.",
+  "hidden_tests": [],
+  "solution": "class calculator:\n    \"\"\"Elementwise vector/scalar arithmetic, printed in place.\"\"\"\n\n    def __init__(self, values):\n        \"\"\"Store the vector this calculator wraps.\"\"\"\n        self.values = values\n\n    def __add__(self, other):\n        \"\"\"Print self + other, elementwise.\"\"\"\n        print([x + other for x in self.values])\n\n    def __mul__(self, other):\n        \"\"\"Print self * other, elementwise.\"\"\"\n        print([x * other for x in self.values])\n\n    def __sub__(self, other):\n        \"\"\"Print self - other, elementwise.\"\"\"\n        print([x - other for x in self.values])\n\n    def __truediv__(self, other):\n        \"\"\"Print self / other, elementwise (guards against 0).\"\"\"\n        if other == 0:\n            print(\"Error: division by zero\")\n            return\n        print([x / other for x in self.values])\n",
+  "explanation": "Operator overloading via dunder methods lets `v1 + 5` call v1.__add__(5) automatically; the subject asks for the side effect (printing) rather than a returned value, which is why every method ends in print(...) instead of return.",
+  "concepts": [
+    "dunder methods",
+    "operator overloading"
+  ],
+  "skills": [
+    "object_oriented_design"
+  ],
+  "exercise_type": "function",
+  "source": "42_python_piscine",
+  "track": "python",
+  "validation_profile": "42_piscine"
+}

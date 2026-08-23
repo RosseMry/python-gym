@@ -1,0 +1,30 @@
+{
+  "id": "piscine-00-package",
+  "module": "piscine_00_starting",
+  "difficulty": 3,
+  "title": "My first package creation",
+  "description": "Package your own code as an installable Python package (any way you like) so that:\n- it appears in `pip list`;\n- `pip show -v ft_package` prints its metadata;\n- it installs via either the built sdist (.tar.gz) or wheel (.whl);\n- `from ft_package import count_in_list` works, where `count_in_list(a_list, value)` returns how many times `value` appears in `a_list`.\n\nThis is a packaging/tooling exercise (pyproject.toml, build backend, etc.) rather than a single function to grade automatically - it's included here for completeness of the learning path, verified manually.",
+  "examples": "from ft_package import count_in_list\nprint(count_in_list([\"toto\", \"tata\", \"toto\"], \"toto\"))  # 2\nprint(count_in_list([\"toto\", \"tata\", \"toto\"], \"tutu\"))  # 0",
+  "starter_code": "# pyproject.toml / package layout - see description\n",
+  "hints": [
+    "A minimal package needs a pyproject.toml with [project] metadata and a src/ft_package/__init__.py.",
+    "`count_in_list` is just list.count(value) under the hood.",
+    "def count_in_list(items, value):\n    return items.count(value)"
+  ],
+  "expected_behavior": "pip show -v ft_package succeeds and count_in_list works as shown.",
+  "hidden_tests": [],
+  "solution": "# ft_package/__init__.py\ndef count_in_list(items, value):\n    \"\"\"Return how many times value appears in items.\"\"\"\n    return items.count(value)\n",
+  "explanation": "The function itself is one line; the exercise is really about producing a valid, installable package around it.",
+  "concepts": [
+    "packaging",
+    "pyproject.toml",
+    "pip"
+  ],
+  "skills": [
+    "packaging"
+  ],
+  "exercise_type": "function",
+  "source": "42_python_piscine",
+  "track": "python",
+  "validation_profile": "42_piscine"
+}

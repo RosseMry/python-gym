@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { api } from "../services/api";
 import type { ExerciseSummary, ProgressItem } from "../types/exercise";
+import { CONTENT_SOURCES } from "../types/exercise";
 import { TrainingBar } from "../components/TrainingBar";
 import "./ExerciseListPage.css";
 
@@ -9,23 +10,31 @@ const MODULE_LABELS: Record<string, string> = {
   conditions: "Conditions",
   for_loops: "For loops",
   lists: "Lists",
+  input_and_formulas: "Input & formulas",
+  piscine_00_starting: "Starting",
+  piscine_03_oop: "Object-Oriented Programming",
+  piscine_04_data_oriented_design: "Data Oriented Design",
 };
 
 const DIFFICULTY_LABELS = ["", "Recognition", "Reproduction", "Applied", "Combined", "Problem solving"];
 
 export function ExerciseListPage() {
+  const [searchParams] = useSearchParams();
+  const source = searchParams.get("source") ?? undefined;
+
   const [exercises, setExercises] = useState<ExerciseSummary[] | null>(null);
   const [progress, setProgress] = useState<Record<string, ProgressItem>>({});
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    Promise.all([api.listExercises(), api.listProgress()])
+    setExercises(null);
+    Promise.all([api.listExercises({ source }), api.listProgress()])
       .then(([exerciseList, progressList]) => {
         setExercises(exerciseList);
         setProgress(Object.fromEntries(progressList.map((p) => [p.exercise_id, p])));
       })
       .catch((e) => setError(String(e)));
-  }, []);
+  }, [source]);
 
   if (error) {
     return (
@@ -40,16 +49,19 @@ export function ExerciseListPage() {
   }
 
   if (!exercises) {
-    return <div className="page">Loading today's exercises…</div>;
+    return <div className="page">Loading exercises…</div>;
   }
 
   const byModule = groupByModule(exercises);
+  const heading = source
+    ? CONTENT_SOURCES[source as keyof typeof CONTENT_SOURCES] ?? source
+    : "Today's session";
 
   return (
     <div className="page">
       <header className="page-header">
         <p className="eyebrow">Python Gym</p>
-        <h1>Today's session</h1>
+        <h1>{heading}</h1>
         <p className="subtitle">
           Read the problem, think before you type, and only ask for a hint
           once you're actually stuck.

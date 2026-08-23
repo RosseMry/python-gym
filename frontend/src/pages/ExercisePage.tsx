@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { api } from "../services/api";
 import type { ExerciseDetail, SubmissionResult } from "../types/exercise";
 import { CodeEditor } from "../components/CodeEditor";
 import "./ExercisePage.css";
 
-export function ExercisePage() {
+interface ExercisePageProps {
+  onRepeatChanged: () => void;
+}
+
+export function ExercisePage({ onRepeatChanged }: ExercisePageProps) {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+
   const [exercise, setExercise] = useState<ExerciseDetail | null>(null);
   const [code, setCode] = useState("");
   const [hints, setHints] = useState<string[]>([]);
@@ -16,6 +22,7 @@ export function ExercisePage() {
   const [solution, setSolution] = useState<{ solution: string; explanation: string } | null>(null);
   const [explanation, setExplanation] = useState("");
   const [explanationSaved, setExplanationSaved] = useState(false);
+  const [repeatMarked, setRepeatMarked] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -28,6 +35,7 @@ export function ExercisePage() {
     setSolution(null);
     setExplanation("");
     setExplanationSaved(false);
+    setRepeatMarked(false);
     api
       .getExercise(id)
       .then((data) => {
@@ -79,14 +87,26 @@ export function ExercisePage() {
     setExplanationSaved(true);
   }
 
+  async function handleMarkRepeat() {
+    await api.markRepeat(id!);
+    setRepeatMarked(true);
+    onRepeatChanged();
+  }
+
+  function handleContinue() {
+    navigate("/");
+  }
+
+  const isScript = exercise.exercise_type === "script";
+
   return (
     <div className="page">
       <Link to="/" className="back-link">
-        ← Back to today's session
+        ← Back to exercises
       </Link>
 
       <header className="exercise-header">
-        <p className="eyebrow">{exercise.module.replace("_", " ")}</p>
+        <p className="eyebrow">{exercise.module.replace(/_/g, " ")}</p>
         <h1>{exercise.title}</h1>
       </header>
 
@@ -101,7 +121,7 @@ export function ExercisePage() {
         <CodeEditor value={code} onChange={setCode} disabled={submitting} />
         <div className="actions">
           <button className="btn btn--primary" onClick={handleSubmit} disabled={submitting}>
-            {submitting ? "Running…" : "Run tests"}
+            {submitting ? "Running…" : isScript ? "Run" : "Run tests"}
           </button>
           <button className="btn" onClick={handleRequestHint} disabled={hintsExhausted}>
             {hints.length === 0 ? "I'm stuck — give me a hint" : "Next hint"}
@@ -109,17 +129,7 @@ export function ExercisePage() {
         </div>
       </section>
 
-      {result && (
-        <section className={`panel result-panel ${result.passed ? "result-panel--pass" : "result-panel--fail"}`}>
-          <p className="result-panel__headline">
-            {result.passed
-              ? `All tests passed (${result.tests_passed}/${result.tests_total})`
-              : `${result.tests_passed}/${result.tests_total} tests passed`}
-          </p>
-          {result.error && <p className="result-panel__error">{result.error}</p>}
-          {result.stderr && <pre className="result-panel__stderr">{result.stderr}</pre>}
-        </section>
-      )}
+      {result && <ExecutionPanel result={result} />}
 
       {hints.length > 0 && (
         <section className="panel hints-panel">
@@ -129,6 +139,34 @@ export function ExercisePage() {
               <li key={i}>{hint}</li>
             ))}
           </ol>
+        </section>
+      )}
+
+      {result?.passed && !repeatMarked && (
+        <section className="panel continue-panel">
+          <p className="continue-panel__prompt">
+            All tests passed. Ready to move on, or want to see this one
+            again later?
+          </p>
+          <div className="actions">
+            <button className="btn btn--primary" onClick={handleContinue}>
+              Continue
+            </button>
+            <button className="btn" onClick={handleMarkRepeat}>
+              🔁 Repeat later
+            </button>
+          </div>
+        </section>
+      )}
+
+      {repeatMarked && (
+        <section className="panel continue-panel">
+          <p className="continue-panel__saved">
+            🔁 Queued for later. Find it any time in the Repeat queue.
+          </p>
+          <button className="btn btn--primary" onClick={handleContinue}>
+            Continue
+          </button>
         </section>
       )}
 
@@ -180,5 +218,78 @@ export function ExercisePage() {
         )}
       </section>
     </div>
+  );
+}
+
+/**
+ * The Sprint 2 execution feedback panel: the student's own output,
+ * individual test results, errors, and (for 42-piscine exercises) a
+ * separate style check - never mixed with hidden-test internals.
+ */
+function ExecutionPanel({ result }: { result: SubmissionResult }) {
+  return (
+    <section
+      className={`panel result-panel result-panel--${result.status === "passed" ? "pass" : result.status === "error" ? "error" : "fail"}`}
+    >
+      <p className="result-panel__headline">
+        {result.status === "passed" && result.tests_total > 0
+          ? `All tests passed (${result.tests_passed}/${result.tests_total})`
+          : result.status === "passed"
+            ? "Ran successfully"
+            : result.status === "error"
+              ? "Execution error"
+              : `${result.tests_passed}/${result.tests_total} tests passed`}
+        <span className="result-panel__time">{result.execution_time.toFixed(2)}s</span>
+      </p>
+
+      {result.stdout.trim() && (
+        <div className="result-block">
+          <p className="result-block__label">Output</p>
+          <pre className="result-block__content">{result.stdout}</pre>
+        </div>
+      )}
+
+      {result.tests.length > 0 && (
+        <div className="result-block">
+          <p className="result-block__label">Tests</p>
+          <ul className="test-list">
+            {result.tests.map((t, i) => (
+              <li key={i} className={t.passed ? "test-list__pass" : "test-list__fail"}>
+                {t.passed ? "✓" : "✗"} {t.label}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {result.error && (
+        <div className="result-block">
+          <p className="result-block__label">Error</p>
+          <pre className="result-block__content result-block__content--error">
+            {result.error}
+          </pre>
+        </div>
+      )}
+
+      {result.stderr.trim() && (
+        <div className="result-block">
+          <p className="result-block__label">stderr</p>
+          <pre className="result-block__content result-block__content--error">
+            {result.stderr}
+          </pre>
+        </div>
+      )}
+
+      {result.style && (
+        <div className="result-block">
+          <p className="result-block__label">
+            Style {result.style.ran ? (result.style.passed ? "✓" : "✗") : "(unavailable)"}
+          </p>
+          {result.style.output && (
+            <pre className="result-block__content">{result.style.output}</pre>
+          )}
+        </div>
+      )}
+    </section>
   );
 }

@@ -37,6 +37,41 @@ SUM_EXERCISE = Exercise(
 )
 
 
+SCRIPT_EXERCISE = Exercise(
+    id="script-001",
+    module="scripts",
+    difficulty=1,
+    title="Print the argument",
+    description="Print whatever argument is passed on the command line.",
+    examples="python solution.py hello -> hello",
+    starter_code="import sys\n",
+    hints=["Use sys.argv."],
+    expected_behavior="Prints sys.argv[1].",
+    hidden_tests=[
+        HiddenTest(args=["hello"], expected_stdout="hello", label="Test 1"),
+        HiddenTest(args=["world"], expected_stdout="world", label="Test 2"),
+    ],
+    solution="import sys\n\nprint(sys.argv[1])\n",
+    explanation="sys.argv[1] holds the first command-line argument.",
+    concepts=["sys.argv"],
+    exercise_type="script",
+    source="42_python_piscine",
+    validation_profile="42_piscine",
+)
+
+
+@pytest.fixture()
+def script_repo(conn: sqlite3.Connection) -> ExerciseRepository:
+    repository = ExerciseRepository(conn)
+    repository.upsert(SCRIPT_EXERCISE)
+    return repository
+
+
+@pytest.fixture()
+def script_service(script_repo: ExerciseRepository) -> ExerciseService:
+    return ExerciseService(script_repo)
+
+
 @pytest.fixture()
 def conn() -> sqlite3.Connection:
     """An isolated in-memory SQLite connection with the schema applied."""

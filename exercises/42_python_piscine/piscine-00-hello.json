@@ -1,0 +1,32 @@
+{
+  "id": "piscine-00-hello",
+  "module": "piscine_00_starting",
+  "difficulty": 1,
+  "title": "First python script (Hello)",
+  "description": "You need to modify the string of each data object to display the following greetings: \"Hello World\", \"Hello «country of your campus»\", \"Hello «city of your campus»\", \"Hello «name of your campus»\".\n\nStarter data:\nft_list = [\"Hello\", \"tata!\"]\nft_tuple = (\"Hello\", \"toto!\")\nft_set = {\"Hello\", \"tutu!\"}\nft_dict = {\"Hello\" : \"titi!\"}\n\nThen print each of the four objects, one per line.\n\nFor this exercise, use the 42 Paris campus as your reference campus (France / Paris / 42Paris).",
+  "examples": "$> python Hello.py | cat -e\n['Hello', 'World!']$\n('Hello', 'France!')$\n{'Hello', 'Paris!'}$\n{'Hello': '42Paris!'}$\n$>",
+  "starter_code": "ft_list = [\"Hello\", \"tata!\"]\nft_tuple = (\"Hello\", \"toto!\")\nft_set = {\"Hello\", \"tutu!\"}\nft_dict = {\"Hello\" : \"titi!\"}\n\n# your code here\n\nprint(ft_list)\nprint(ft_tuple)\nprint(ft_set)\nprint(ft_dict)\n",
+  "hints": [
+    "You need to replace the second element of the list/tuple, the second element of the set, and the value of the dict - not create new objects.",
+    "Lists support item assignment by index (ft_list[1] = ...). Tuples don't - you'll need to rebuild the tuple. Sets don't support indexing either - remove the old value and add the new one.",
+    "ft_list[1] = \"World!\"\nft_tuple = (\"Hello\", \"France!\")\nft_set.remove(\"tutu!\")\nft_set.add(\"Paris!\")\nft_dict[\"Hello\"] = \"42Paris!\""
+  ],
+  "expected_behavior": "Prints the four objects, each showing 'Hello' paired with World/France/Paris/42Paris.",
+  "hidden_tests": [],
+  "solution": "ft_list = [\"Hello\", \"tata!\"]\nft_tuple = (\"Hello\", \"toto!\")\nft_set = {\"Hello\", \"tutu!\"}\nft_dict = {\"Hello\" : \"titi!\"}\n\nft_list[1] = \"World!\"\nft_tuple = (\"Hello\", \"France!\")\nft_set.remove(\"tutu!\")\nft_set.add(\"Paris!\")\nft_dict[\"Hello\"] = \"42Paris!\"\n\nprint(ft_list)\nprint(ft_tuple)\nprint(ft_set)\nprint(ft_dict)\n",
+  "explanation": "Lists are mutable and support index assignment. Tuples are immutable, so a new tuple has to be built. Sets have no index, so the old value is removed and the new one added. Dicts are updated by assigning to the existing key. (Not auto-graded: the set line has no guaranteed print order in Python, so an exact-stdout hidden test would be flaky by design - verify the list/tuple/dict lines and the set contents by eye.)",
+  "concepts": [
+    "list",
+    "tuple",
+    "set",
+    "dict",
+    "mutability"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "script",
+  "source": "42_python_piscine",
+  "track": "python",
+  "validation_profile": "42_piscine"
+}

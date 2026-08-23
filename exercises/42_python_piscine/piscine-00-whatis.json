@@ -1,0 +1,54 @@
+{
+  "id": "piscine-00-whatis",
+  "module": "piscine_00_starting",
+  "difficulty": 2,
+  "title": "The Even and the Odd",
+  "description": "Write a script that takes one integer argument on the command line, and prints \"I'm Even.\" or \"I'm Odd.\" accordingly.\n\nIf more than one argument is given, or the argument isn't an integer, print an AssertionError with a clear message instead of crashing with a raw traceback.\n\nAllowed: sys, or any other library that gives you the command-line arguments.",
+  "examples": "$> python whatis.py 14\nI'm Even.\n$> python whatis.py -5\nI'm Odd.\n$> python whatis.py Hi!\nAssertionError: argument is not an integer\n$> python whatis.py 13 5\nAssertionError: more than one argument is provided",
+  "starter_code": "import sys\n\n\ndef main():\n    pass\n\n\nif __name__ == \"__main__\":\n    main()\n",
+  "hints": [
+    "sys.argv[0] is the script name - the actual arguments start at sys.argv[1].",
+    "Wrap the argument-count and int-parsing checks in try/assert, and catch AssertionError around your own asserts so you can print a clean message instead of a traceback.",
+    "assert len(sys.argv) == 2, 'more than one argument is provided'\ntry:\n    n = int(sys.argv[1])\nexcept ValueError:\n    raise AssertionError('argument is not an integer')"
+  ],
+  "expected_behavior": "Prints \"I'm Even.\" or \"I'm Odd.\" for a valid single integer argument.",
+  "hidden_tests": [
+    {
+      "args": [
+        "14"
+      ],
+      "expected_stdout": "I'm Even.",
+      "label": "14 is even"
+    },
+    {
+      "args": [
+        "-5"
+      ],
+      "expected_stdout": "I'm Odd.",
+      "label": "-5 is odd"
+    },
+    {
+      "args": [
+        "0"
+      ],
+      "expected_stdout": "I'm Even.",
+      "label": "0 is even"
+    }
+  ],
+  "solution": "import sys\n\n\ndef main():\n    try:\n        assert len(sys.argv) == 2, (\n            \"AssertionError: more than one argument is provided\"\n        )\n        try:\n            number = int(sys.argv[1])\n        except ValueError as exc:\n            raise AssertionError(\n                \"AssertionError: argument is not an integer\"\n            ) from exc\n    except AssertionError as exc:\n        print(exc)\n        return\n    print(\"I'm Even.\" if number % 2 == 0 else \"I'm Odd.\")\n\n\nif __name__ == \"__main__\":\n    main()\n",
+  "explanation": "The argument count is validated before trying to parse it as an int, and both failure paths are funnelled through a single assert/except so the script never crashes with a raw traceback.",
+  "concepts": [
+    "sys.argv",
+    "assert",
+    "exceptions",
+    "modulo"
+  ],
+  "skills": [
+    "cli_argument_handling",
+    "error_handling"
+  ],
+  "exercise_type": "script",
+  "source": "42_python_piscine",
+  "track": "python",
+  "validation_profile": "42_piscine"
+}

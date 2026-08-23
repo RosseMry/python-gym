@@ -1,0 +1,30 @@
+{
+  "id": "piscine-04-dataclass-student",
+  "module": "piscine_04_data_oriented_design",
+  "difficulty": 2,
+  "title": "Data class (Student)",
+  "description": "Write a `@dataclass` `Student` with `name` and `surname` as required fields, `active` defaulting to True, a `login` computed from name/surname (first letter of the name + full surname, capitalised), and a random 15-character `id` from `generate_id()`. Neither `login` nor `id` should be settable via the constructor - passing `id=...` should raise a TypeError. Do not define `__str__`/`__repr__` yourself - use the dataclass-generated one.",
+  "examples": "student = Student(name='Edward', surname='agle')\nprint(student)\n# Student(name='Edward', surname='agle', active=True, login='Eagle', id='trannxhndgtolvh')",
+  "starter_code": "import random\nimport string\nfrom dataclasses import dataclass, field\n\n\ndef generate_id():\n    \"\"\"Return a random 15-character lowercase id.\"\"\"\n    return \"\".join(random.choices(string.ascii_lowercase, k=15))\n\n\n@dataclass\nclass Student:\n    # your code here\n    pass\n",
+  "hints": [
+    "`login` and `id` both depend on other fields (or on randomness), so they can't be plain constructor parameters - they need `field(init=False, ...)`.",
+    "`field(default_factory=generate_id)` computes `id` once per instance, at construction time, without it being a settable argument.",
+    "A field with no default set directly in __post_init__ (or computed via default_factory referencing other fields indirectly) is one way to derive login from name/surname after the other fields are set."
+  ],
+  "expected_behavior": "Student(name=..., surname=...) works; Student(..., id=...) raises TypeError; the printed repr shows all five fields.",
+  "hidden_tests": [],
+  "solution": "import random\nimport string\nfrom dataclasses import dataclass, field\n\n\ndef generate_id():\n    \"\"\"Return a random 15-character lowercase id.\"\"\"\n    return \"\".join(random.choices(string.ascii_lowercase, k=15))\n\n\n@dataclass\nclass Student:\n    \"\"\"A student with an auto-generated login and id.\"\"\"\n\n    name: str\n    surname: str\n    active: bool = True\n    login: str = field(init=False)\n    id: str = field(init=False, default_factory=generate_id)\n\n    def __post_init__(self):\n        \"\"\"Derive login from name and surname.\"\"\"\n        self.login = self.name[0].upper() + self.surname.lower()\n",
+  "explanation": "`field(init=False)` removes a field from the generated __init__ signature entirely, so passing it as a keyword argument raises TypeError. `__post_init__` runs right after the generated __init__, which is where `login` can be derived from the already-set `name`/`surname`.",
+  "concepts": [
+    "dataclasses",
+    "field",
+    "__post_init__"
+  ],
+  "skills": [
+    "data_modeling"
+  ],
+  "exercise_type": "function",
+  "source": "42_python_piscine",
+  "track": "python",
+  "validation_profile": "42_piscine"
+}

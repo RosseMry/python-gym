@@ -1,0 +1,32 @@
+{
+  "id": "piscine-04-statistics",
+  "module": "piscine_04_data_oriented_design",
+  "difficulty": 3,
+  "title": "Calculate my statistics",
+  "description": "Write `ft_statistics(*args, **kwargs)`: `args` are the numbers to analyse, and `kwargs` picks which statistics to print - the *value* of each kwarg names the statistic (mean, median, quartile, std, var), regardless of what the keyword's own name is. Handle bad input (e.g. no numbers, or an unrecognised statistic name) by printing 'ERROR' instead of crashing.",
+  "examples": "ft_statistics(1, 42, 360, 11, 64, toto='mean', tutu='median', tata='quartile')\n# mean : 95.6\n# median : 42\n# quartile : [11.0, 64.0]",
+  "starter_code": "def ft_statistics(*args, **kwargs):\n    # your code here\n    pass\n",
+  "hints": [
+    "It's the *values* of kwargs that matter ('mean', 'median', ...), not their key names - loop over kwargs.values(), not kwargs.keys().",
+    "Guard the whole per-statistic computation in a try/except so an unknown statistic name, or an empty args, prints 'ERROR' for that entry instead of stopping the whole function.",
+    "for stat in kwargs.values():\n    try:\n        if stat == 'mean':\n            print('mean :', sum(args) / len(args))\n        ...\n    except (ZeroDivisionError, ValueError):\n        print('ERROR')"
+  ],
+  "expected_behavior": "Prints one line per requested statistic, in the order given, or 'ERROR' for anything it can't compute.",
+  "hidden_tests": [],
+  "solution": "def ft_statistics(*args, **kwargs):\n    \"\"\"Print the requested statistics for the given numbers.\"\"\"\n    for stat in kwargs.values():\n        try:\n            if not args:\n                raise ValueError('no data')\n            ordered = sorted(args)\n            n = len(ordered)\n            if stat == 'mean':\n                print('mean :', sum(args) / n)\n            elif stat == 'median':\n                mid = n // 2\n                if n % 2 == 0:\n                    print('median :', (ordered[mid - 1] + ordered[mid]) / 2)\n                else:\n                    print('median :', ordered[mid])\n            elif stat == 'quartile':\n                q1 = ordered[n // 4]\n                q3 = ordered[(3 * n) // 4]\n                print('quartile :', [float(q1), float(q3)])\n            elif stat == 'std':\n                mean = sum(args) / n\n                variance = sum((x - mean) ** 2 for x in args) / n\n                print('std :', variance ** 0.5)\n            elif stat == 'var':\n                mean = sum(args) / n\n                variance = sum((x - mean) ** 2 for x in args) / n\n                print('var :', variance)\n            else:\n                raise ValueError('unknown statistic')\n        except (ValueError, ZeroDivisionError):\n            print('ERROR')\n",
+  "explanation": "**kwargs is a plain dict, so its .values() give the statistic names the caller asked for regardless of what they named the keyword itself - that indirection is the whole point of the exercise.",
+  "concepts": [
+    "*args",
+    "**kwargs",
+    "statistics",
+    "error handling"
+  ],
+  "skills": [
+    "functional_python",
+    "numerical_computation"
+  ],
+  "exercise_type": "function",
+  "source": "42_python_piscine",
+  "track": "python",
+  "validation_profile": "42_piscine"
+}

@@ -45,6 +45,11 @@
   border-color: var(--ink-muted);
 }
 
+.training-bar__plate--failed {
+  border-color: var(--danger);
+  background: var(--danger-dim);
+}
+
 .training-bar__plate--solved_with_hint {
   border-color: var(--hint);
   background: var(--hint-dim);

@@ -22,10 +22,19 @@ CREATE TABLE IF NOT EXISTS exercises (
     starter_code TEXT NOT NULL,
     hints TEXT NOT NULL,           -- JSON list[str]
     expected_behavior TEXT NOT NULL,
-    hidden_tests TEXT NOT NULL,    -- JSON list[{call, expected}]
+    hidden_tests TEXT NOT NULL,    -- JSON list[{call, expected, args, ...}]
     solution TEXT NOT NULL,
     explanation TEXT NOT NULL,
-    concepts TEXT NOT NULL         -- JSON list[str]
+    concepts TEXT NOT NULL,        -- JSON list[str]
+    -- Sprint 2 metadata (spec section 17):
+    track TEXT NOT NULL DEFAULT 'python',
+    source TEXT NOT NULL DEFAULT 'progressive_python',
+    skills TEXT NOT NULL DEFAULT '[]',        -- JSON list[str]
+    prerequisites TEXT NOT NULL DEFAULT '[]', -- JSON list[str]
+    resources TEXT NOT NULL DEFAULT '[]',     -- JSON list[str]
+    validation_profile TEXT NOT NULL DEFAULT 'standard_python',
+    exercise_type TEXT NOT NULL DEFAULT 'function',
+    exercise_status TEXT NOT NULL DEFAULT 'active'
 );
 
 CREATE TABLE IF NOT EXISTS progress (
@@ -45,6 +54,9 @@ CREATE TABLE IF NOT EXISTS submissions (
     passed INTEGER NOT NULL,
     tests_total INTEGER NOT NULL,
     tests_passed INTEGER NOT NULL,
+    status TEXT NOT NULL DEFAULT 'failed',
+    hints_used_snapshot INTEGER NOT NULL DEFAULT 0,
+    solution_revealed_snapshot INTEGER NOT NULL DEFAULT 0,
     submitted_at TEXT NOT NULL DEFAULT (datetime('now')),
     FOREIGN KEY (exercise_id) REFERENCES exercises (id)
 );
@@ -59,6 +71,27 @@ CREATE TABLE IF NOT EXISTS explanations (
 """
 
 
+# Columns added after the initial Sprint 1 release. CREATE TABLE IF NOT
+# EXISTS does not retrofit columns onto an already-existing table, so an
+# existing Sprint 1 database needs these added explicitly (Sprint 2).
+_EXERCISE_MIGRATION_COLUMNS = {
+    "track": "TEXT NOT NULL DEFAULT 'python'",
+    "source": "TEXT NOT NULL DEFAULT 'progressive_python'",
+    "skills": "TEXT NOT NULL DEFAULT '[]'",
+    "prerequisites": "TEXT NOT NULL DEFAULT '[]'",
+    "resources": "TEXT NOT NULL DEFAULT '[]'",
+    "validation_profile": "TEXT NOT NULL DEFAULT 'standard_python'",
+    "exercise_type": "TEXT NOT NULL DEFAULT 'function'",
+    "exercise_status": "TEXT NOT NULL DEFAULT 'active'",
+}
+
+_SUBMISSION_MIGRATION_COLUMNS = {
+    "status": "TEXT NOT NULL DEFAULT 'failed'",
+    "hints_used_snapshot": "INTEGER NOT NULL DEFAULT 0",
+    "solution_revealed_snapshot": "INTEGER NOT NULL DEFAULT 0",
+}
+
+
 def get_connection() -> sqlite3.Connection:
     """Open a SQLite connection with sensible defaults."""
     conn = sqlite3.connect(DB_PATH)
@@ -67,11 +100,24 @@ def get_connection() -> sqlite3.Connection:
     return conn
 
 
+def _migrate_columns(
+    conn: sqlite3.Connection, table: str, columns: dict[str, str]
+) -> None:
+    """Add any missing columns from ``columns`` to an existing table."""
+    existing = {row["name"] for row in conn.execute(f"PRAGMA table_info({table})")}
+    for column, ddl in columns.items():
+        if column not in existing:
+            conn.execute(f"ALTER TABLE {table} ADD COLUMN {column} {ddl}")
+    conn.commit()
+
+
 def init_db() -> None:
-    """Create tables if they do not already exist."""
+    """Create tables if they do not already exist, and migrate old ones."""
     conn = get_connection()
     try:
         conn.executescript(SCHEMA)
         conn.commit()
+        _migrate_columns(conn, "exercises", _EXERCISE_MIGRATION_COLUMNS)
+        _migrate_columns(conn, "submissions", _SUBMISSION_MIGRATION_COLUMNS)
     finally:
         conn.close()

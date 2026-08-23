@@ -1,0 +1,34 @@
+{
+  "id": "piscine-03-calculator-dotproduct",
+  "module": "piscine_03_oop",
+  "difficulty": 3,
+  "title": "Calculate my dot product",
+  "description": "Extend the calculator with `dotproduct`, `add_vec` and `sous_vec` methods that work on two same-length vectors (dot product, elementwise addition, elementwise subtraction). These should be usable without instantiating the class at all - `calculator.dotproduct(a, b)` should work directly, which calls for a decorator.",
+  "examples": "a = [5, 10, 2]\nb = [2, 4, 3]\ncalculator.dotproduct(a, b)  # Dot product is: 56\ncalculator.add_vec(a, b)     # Add Vector is : [7.0, 14.0, 5.0]\ncalculator.sous_vec(a, b)    # Sous Vector is: [3.0, 6.0, -1.0]",
+  "starter_code": "class calculator:\n    # your code here\n\n    # decorator\n    def dotproduct(V1, V2):\n        pass\n\n    # decorator\n    def add_vec(V1, V2):\n        pass\n\n    # decorator\n    def sous_vec(V1, V2):\n        pass\n",
+  "hints": [
+    "Calling a method on the class itself, not an instance (calculator.dotproduct(...) rather than calculator().dotproduct(...)), is exactly what @staticmethod is for.",
+    "No error handling is required here - vectors are guaranteed to be the same length.",
+    "@staticmethod\ndef dotproduct(V1, V2):\n    print('Dot product is:', sum(x * y for x, y in zip(V1, V2)))"
+  ],
+  "expected_behavior": "Each method can be called directly on the class, and prints its result.",
+  "hidden_tests": [],
+  "solution": "class calculator:\n    \"\"\"Vector-to-vector operations usable without an instance.\"\"\"\n\n    @staticmethod\n    def dotproduct(V1, V2):\n        \"\"\"Print the dot product of V1 and V2.\"\"\"\n        result = sum(x * y for x, y in zip(V1, V2))\n        print(f'Dot product is: {result}')\n\n    @staticmethod\n    def add_vec(V1, V2):\n        \"\"\"Print the elementwise sum of V1 and V2.\"\"\"\n        result = [float(x + y) for x, y in zip(V1, V2)]\n        print(f'Add Vector is : {result}')\n\n    @staticmethod\n    def sous_vec(V1, V2):\n        \"\"\"Print the elementwise difference of V1 and V2.\"\"\"\n        result = [float(x - y) for x, y in zip(V1, V2)]\n        print(f'Sous Vector is: {result}')\n",
+  "explanation": "@staticmethod removes the implicit `self`/`cls` first argument, so the method behaves like a plain function namespaced under the class - exactly what's needed to call it as `calculator.dotproduct(a, b)` with no instance.",
+  "concepts": [
+    "staticmethod",
+    "decorators",
+    "zip",
+    "dot product"
+  ],
+  "skills": [
+    "object_oriented_design"
+  ],
+  "exercise_type": "function",
+  "prerequisites": [
+    "piscine-03-calculator-vector"
+  ],
+  "source": "42_python_piscine",
+  "track": "python",
+  "validation_profile": "42_piscine"
+}

@@ -1,12 +1,35 @@
+import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
+import { Sidebar } from "./components/Sidebar";
 import { ExerciseListPage } from "./pages/ExerciseListPage";
 import { ExercisePage } from "./pages/ExercisePage";
+import { RepeatQueuePage } from "./pages/RepeatQueuePage";
+import { api } from "./services/api";
 
 export default function App() {
+  const [repeatCount, setRepeatCount] = useState(0);
+
+  useEffect(() => {
+    refreshRepeatCount();
+  }, []);
+
+  function refreshRepeatCount() {
+    api.getRepeatQueue().then((items) => setRepeatCount(items.length));
+  }
+
   return (
-    <Routes>
-      <Route path="/" element={<ExerciseListPage />} />
-      <Route path="/exercises/:id" element={<ExercisePage />} />
-    </Routes>
+    <div style={{ display: "flex" }}>
+      <Sidebar repeatCount={repeatCount} />
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <Routes>
+          <Route path="/" element={<ExerciseListPage />} />
+          <Route
+            path="/exercises/:id"
+            element={<ExercisePage onRepeatChanged={refreshRepeatCount} />}
+          />
+          <Route path="/repeat" element={<RepeatQueuePage />} />
+        </Routes>
+      </div>
+    </div>
   );
 }

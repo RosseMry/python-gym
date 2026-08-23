@@ -1,0 +1,40 @@
+{
+  "id": "piscine-00-building",
+  "module": "piscine_00_starting",
+  "difficulty": 2,
+  "title": "First standalone program (character counts)",
+  "description": "Write an autonomous program (with a main) that takes a single string argument and prints how many characters it contains in total, then how many are upper-case letters, lower-case letters, punctuation marks, spaces, and digits.\n\nIf no argument is given, prompt the user for a string instead. If more than one argument is given, print an AssertionError.",
+  "examples": "$> python building.py \"Ab3! z\"\nThe text contains 6 characters:\n1 upper letters\n2 lower letters\n1 punctuation marks\n1 spaces\n1 digits",
+  "starter_code": "import sys\nimport string\n\n\ndef main():\n    pass\n\n\nif __name__ == \"__main__\":\n    main()\n",
+  "hints": [
+    "The `string` module has ready-made character sets: string.ascii_uppercase, string.ascii_lowercase, string.punctuation, string.digits.",
+    "Count with a loop and five counters, or with sum(1 for c in text if c in string.ascii_uppercase) for each category.",
+    "upper = sum(1 for c in text if c.isupper())\nlower = sum(1 for c in text if c.islower())\npunctuation = sum(1 for c in text if c in string.punctuation)\nspaces = sum(1 for c in text if c == ' ')\ndigits = sum(1 for c in text if c.isdigit())"
+  ],
+  "expected_behavior": "Prints the total character count, then one line per category, in the order: upper, lower, punctuation, spaces, digits.",
+  "hidden_tests": [
+    {
+      "args": [
+        "Ab3! z"
+      ],
+      "expected_stdout": "The text contains 6 characters:\n1 upper letters\n2 lower letters\n1 punctuation marks\n1 spaces\n1 digits",
+      "label": "Test 1"
+    }
+  ],
+  "solution": "import sys\nimport string\n\n\ndef main():\n    assert len(sys.argv) <= 2, \"AssertionError: too many arguments\"\n    text = sys.argv[1] if len(sys.argv) == 2 else input(\n        \"What is the text to count?\\n\"\n    )\n    upper = sum(1 for c in text if c.isupper())\n    lower = sum(1 for c in text if c.islower())\n    punctuation = sum(1 for c in text if c in string.punctuation)\n    spaces = sum(1 for c in text if c == ' ')\n    digits = sum(1 for c in text if c.isdigit())\n    print(f\"The text contains {len(text)} characters:\")\n    print(f\"{upper} upper letters\")\n    print(f\"{lower} lower letters\")\n    print(f\"{punctuation} punctuation marks\")\n    print(f\"{spaces} spaces\")\n    print(f\"{digits} digits\")\n\n\nif __name__ == \"__main__\":\n    main()\n",
+  "explanation": "str.isupper()/islower()/isdigit() and membership in string.punctuation classify each character; summing a generator expression counts matches without a manual loop and counter variable.",
+  "concepts": [
+    "string module",
+    "sys.argv",
+    "input",
+    "generator expressions"
+  ],
+  "skills": [
+    "text_processing",
+    "cli_argument_handling"
+  ],
+  "exercise_type": "script",
+  "source": "42_python_piscine",
+  "track": "python",
+  "validation_profile": "42_piscine"
+}

@@ -25,10 +25,15 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 }
 
 export const api = {
-  listExercises: (module?: string) =>
-    request<ExerciseSummary[]>(
-      module ? `/exercises?module=${encodeURIComponent(module)}` : "/exercises",
-    ),
+  listExercises: (params?: { module?: string; source?: string }) => {
+    const query = new URLSearchParams();
+    if (params?.module) query.set("module", params.module);
+    if (params?.source) query.set("source", params.source);
+    const qs = query.toString();
+    return request<ExerciseSummary[]>(`/exercises${qs ? `?${qs}` : ""}`);
+  },
+
+  getRepeatQueue: () => request<ExerciseSummary[]>("/exercises/repeat-queue"),
 
   getExercise: (id: string) => request<ExerciseDetail>(`/exercises/${id}`),
 
@@ -43,6 +48,9 @@ export const api = {
       method: "POST",
       body: JSON.stringify({ code }),
     }),
+
+  markRepeat: (id: string) =>
+    request<void>(`/exercises/${id}/repeat`, { method: "POST" }),
 
   saveExplanation: (id: string, text: string) =>
     request<void>(`/exercises/${id}/explanation`, {

@@ -1,0 +1,55 @@
+{
+  "id": "piscine-00-find-type",
+  "module": "piscine_00_starting",
+  "difficulty": 1,
+  "title": "First function python (find the type)",
+  "description": "Write a function `all_thing_is_obj(object)` that prints the type of the object it receives, then returns 42.\n\nFor a list, print 'List : <class ...>'. For a tuple, print 'Tuple : <class ...>'. For a set, print 'Set : <class ...>'. For a dict, print 'Dict : <class ...>'. For any other string, print '<the string> is in the kitchen : <class ...>'. For any other type, print 'Type not found'.\n\nCalling the function directly (without going through a tester) does nothing by itself - there is no code at the top level of this file.",
+  "examples": "all_thing_is_obj(['Hello', 'tata!'])\n-> prints \"List : <class 'list'>\"\n\nall_thing_is_obj('Brian')\n-> prints \"Brian is in the kitchen : <class 'str'>\"\n\nprint(all_thing_is_obj(10))\n-> prints \"Type not found\", then 42",
+  "starter_code": "def all_thing_is_obj(object):\n    # your code here\n    pass\n",
+  "hints": [
+    "Check the object's exact type with type(object) is list, type(object) is tuple, etc. - order matters since bool is a subclass of int and str needs its own case.",
+    "For the string case, the printed message includes the string's own value, not a fixed word.",
+    "if type(object) is list:\n    print(f\"List : {type(object)}\")\nelif type(object) is str:\n    print(f\"{object} is in the kitchen : {type(object)}\")\n...\nelse:\n    print(\"Type not found\")\nreturn 42"
+  ],
+  "expected_behavior": "Always returns 42, and prints one line describing the type.",
+  "hidden_tests": [
+    {
+      "call": "all_thing_is_obj([1, 2])",
+      "expected": "42"
+    },
+    {
+      "call": "all_thing_is_obj((1, 2))",
+      "expected": "42"
+    },
+    {
+      "call": "all_thing_is_obj({1, 2})",
+      "expected": "42"
+    },
+    {
+      "call": "all_thing_is_obj({'a': 1})",
+      "expected": "42"
+    },
+    {
+      "call": "all_thing_is_obj('Brian')",
+      "expected": "42"
+    },
+    {
+      "call": "all_thing_is_obj(10)",
+      "expected": "42"
+    }
+  ],
+  "solution": "def all_thing_is_obj(object):\n    if type(object) is list:\n        print(f\"List : {type(object)}\")\n    elif type(object) is tuple:\n        print(f\"Tuple : {type(object)}\")\n    elif type(object) is set:\n        print(f\"Set : {type(object)}\")\n    elif type(object) is dict:\n        print(f\"Dict : {type(object)}\")\n    elif type(object) is str:\n        print(f\"{object} is in the kitchen : {type(object)}\")\n    else:\n        print(\"Type not found\")\n    return 42\n",
+  "explanation": "type(x) is list (rather than isinstance) matches the exact type only, which matters here since the subject wants a specific branch per container type.",
+  "concepts": [
+    "type",
+    "if/elif",
+    "functions"
+  ],
+  "skills": [
+    "type_introspection"
+  ],
+  "exercise_type": "function",
+  "source": "42_python_piscine",
+  "track": "python",
+  "validation_profile": "42_piscine"
+}

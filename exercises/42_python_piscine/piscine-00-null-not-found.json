@@ -1,0 +1,58 @@
+{
+  "id": "piscine-00-null-not-found",
+  "module": "piscine_00_starting",
+  "difficulty": 1,
+  "title": "NULL not found",
+  "description": "Write a function `NULL_not_found(object)` that prints the object's type for every flavour of 'nothing' in Python (None, NaN, 0, empty string, False), and prints 'Type not Found' for anything else. Return 0 on success, 1 on error.\n\nExpected print format: 'Nothing: None <class \\'NoneType\\'>' style - the value, then its type.",
+  "examples": "NULL_not_found(None) -> prints \"None <class 'NoneType'>\"\nNULL_not_found(float('nan')) -> prints \"nan <class 'float'>\"\nprint(NULL_not_found('Brian')) -> prints \"Type not Found\", then 1",
+  "starter_code": "def NULL_not_found(object):\n    # your code here\n    pass\n",
+  "hints": [
+    "None, NaN, 0, '' and False are five distinct 'falsy' values with five different types - you can't just check `if not object`, because that would also match values you should report as 'Type not Found' (like an empty list).",
+    "NaN is tricky: `float('nan') == float('nan')` is False. Checking the exact type (`type(object) is float` combined with `object != object`) is one reliable way to detect it.",
+    "if object is None:\n    ...\nelif type(object) is float and object != object:\n    ...  # NaN\nelif object is False:\n    ...\nelif type(object) is int and object == 0:\n    ...\nelif type(object) is str and object == '':\n    ...\nelse:\n    print(\"Type not Found\")\n    return 1\nreturn 0"
+  ],
+  "expected_behavior": "Returns 0 for a recognised 'null' value, 1 otherwise.",
+  "hidden_tests": [
+    {
+      "call": "NULL_not_found(None)",
+      "expected": "0"
+    },
+    {
+      "call": "NULL_not_found(float('nan'))",
+      "expected": "0"
+    },
+    {
+      "call": "NULL_not_found(0)",
+      "expected": "0"
+    },
+    {
+      "call": "NULL_not_found('')",
+      "expected": "0"
+    },
+    {
+      "call": "NULL_not_found(False)",
+      "expected": "0"
+    },
+    {
+      "call": "NULL_not_found('Brian')",
+      "expected": "1"
+    }
+  ],
+  "solution": "def NULL_not_found(object):\n    if object is None:\n        print(f\"Nothing: {object} {type(object)}\")\n    elif type(object) is float and object != object:\n        print(f\"Cheese: {object} {type(object)}\")\n    elif object is False:\n        print(f\"Fake: {object} {type(object)}\")\n    elif type(object) is int and object == 0:\n        print(f\"Zero: {object} {type(object)}\")\n    elif type(object) is str and object == '':\n        print(f\"Empty: {type(object)}\")\n    else:\n        print(\"Type not Found\")\n        return 1\n    return 0\n",
+  "explanation": "Each 'null-like' value needs its own check because they're different types with different equality quirks - especially NaN, whose defining property is that it never equals itself.",
+  "concepts": [
+    "None",
+    "NaN",
+    "type",
+    "if/elif",
+    "functions"
+  ],
+  "skills": [
+    "type_introspection",
+    "edge_case_handling"
+  ],
+  "exercise_type": "function",
+  "source": "42_python_piscine",
+  "track": "python",
+  "validation_profile": "42_piscine"
+}

@@ -37,6 +37,16 @@ def load_exercise(path: Path) -> Exercise:
         solution=data["solution"],
         explanation=data["explanation"],
         concepts=data["concepts"],
+        # Sprint 2 metadata - default to Sprint 1's implicit values when
+        # a JSON file predates these fields.
+        track=data.get("track", "python"),
+        source=data.get("source", "progressive_python"),
+        skills=data.get("skills", []),
+        prerequisites=data.get("prerequisites", []),
+        resources=data.get("resources", []),
+        validation_profile=data.get("validation_profile", "standard_python"),
+        exercise_type=data.get("exercise_type", "function"),
+        exercise_status=data.get("exercise_status", "active"),
     )
 
 
@@ -53,9 +63,15 @@ def main() -> None:
     for path in json_files:
         exercise = load_exercise(path)
         repo.upsert(exercise)
-        print(f"seeded {exercise.id} ({exercise.module})")
+        print(f"seeded {exercise.id} ({exercise.source}/{exercise.module})")
 
     print(f"\nSeeded {len(json_files)} exercises.")
+    by_source: dict[str, int] = {}
+    for path in json_files:
+        source = load_exercise(path).source
+        by_source[source] = by_source.get(source, 0) + 1
+    for source, count in sorted(by_source.items()):
+        print(f"  {source}: {count}")
 
 
 if __name__ == "__main__":

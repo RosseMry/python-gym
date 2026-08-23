@@ -1,0 +1,33 @@
+{
+  "id": "piscine-03-diamond-trap",
+  "module": "piscine_03_oop",
+  "difficulty": 4,
+  "title": "Now it's weird! (diamond inheritance + properties)",
+  "description": "Create a `King` class that inherits from both `Baratheon` and `Lannister` (multiple inheritance - a 'diamond' since both ultimately inherit from `Character`). Use properties so that `eyes`/`hairs` are read through `get_eyes()`/`get_hairs()` and written through `set_eyes()`/`set_hairs()`.\n\nPython resolves the diamond via C3 linearization (MRO) since Python 2.3, so King(Baratheon, Lannister) is well defined - worth reading up on `ClassName.__mro__`.",
+  "examples": "Joffrey = King('Joffrey')\nJoffrey.set_eyes('blue')\nprint(Joffrey.get_eyes())  # blue",
+  "starter_code": "from S1E7 import Baratheon, Lannister\n\n\nclass King(Baratheon, Lannister):\n    # your code here\n    pass\n",
+  "hints": [
+    "King doesn't need its own __init__ if Baratheon's is suitable - multiple inheritance still follows the MRO for attribute/method lookup.",
+    "A property pair looks like: a plain attribute (e.g. self._eyes) plus get_eyes()/set_eyes() methods that read and write it.",
+    "def get_eyes(self):\n    return self.eyes\n\ndef set_eyes(self, value):\n    self.eyes = value"
+  ],
+  "expected_behavior": "King inherits Baratheon's attributes by default (via MRO), and get/set methods let you change eyes/hairs afterward.",
+  "hidden_tests": [],
+  "solution": "from S1E7 import Baratheon, Lannister\n\n\nclass King(Baratheon, Lannister):\n    \"\"\"The one true king - or so he thinks.\"\"\"\n\n    def get_eyes(self):\n        \"\"\"Return the current eye colour.\"\"\"\n        return self.eyes\n\n    def set_eyes(self, value):\n        \"\"\"Update the eye colour.\"\"\"\n        self.eyes = value\n\n    def get_hairs(self):\n        \"\"\"Return the current hair colour.\"\"\"\n        return self.hairs\n\n    def set_hairs(self, value):\n        \"\"\"Update the hair colour.\"\"\"\n        self.hairs = value\n",
+  "explanation": "Python's C3 linearization gives King a single, consistent MRO even though Baratheon and Lannister both descend from Character, so `King(Baratheon, Lannister)` is unambiguous about which __init__ runs first (Baratheon's).",
+  "concepts": [
+    "multiple inheritance",
+    "MRO",
+    "properties"
+  ],
+  "skills": [
+    "object_oriented_design"
+  ],
+  "exercise_type": "function",
+  "prerequisites": [
+    "piscine-03-got-s1e7"
+  ],
+  "source": "42_python_piscine",
+  "track": "python",
+  "validation_profile": "42_piscine"
+}

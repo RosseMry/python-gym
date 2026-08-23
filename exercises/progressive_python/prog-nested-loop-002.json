@@ -1,0 +1,46 @@
+{
+  "id": "prog-nested-loop-002",
+  "module": "for_loops",
+  "difficulty": 4,
+  "title": "Flatten a grid (nested loops + accumulator)",
+  "description": "Write a function `flatten(grid)` that takes a list of lists (a grid) and returns a single flat list containing every element, in row-major order (row by row, left to right).",
+  "examples": "flatten([[1, 2], [3, 4], [5]]) -> [1, 2, 3, 4, 5]",
+  "starter_code": "def flatten(grid):\n    # write your code here\n    pass\n",
+  "hints": [
+    "This combines two patterns you already know: the accumulator (building a result list) and nested loops (visiting a grid row by row).",
+    "For each row in the grid, loop over that row's elements and append each one to the result.",
+    "result = []\nfor row in grid:\n    for item in row:\n        result.append(item)\nreturn result"
+  ],
+  "expected_behavior": "Returns a single flat list with every grid element in order.",
+  "hidden_tests": [
+    {
+      "call": "flatten([[1, 2], [3, 4], [5]])",
+      "expected": "[1, 2, 3, 4, 5]"
+    },
+    {
+      "call": "flatten([[]])",
+      "expected": "[]"
+    },
+    {
+      "call": "flatten([])",
+      "expected": "[]"
+    }
+  ],
+  "solution": "def flatten(grid):\n    result = []\n    for row in grid:\n        for item in row:\n            result.append(item)\n    return result\n",
+  "explanation": "The outer loop visits each row; the inner loop visits each item within that row, appending straight into the shared result list rather than building a separate list per row.",
+  "concepts": [
+    "nested loops",
+    "for",
+    "accumulator",
+    "list"
+  ],
+  "skills": [
+    "iteration",
+    "basic_data_manipulation"
+  ],
+  "prerequisites": [
+    "prog-nested-loop-001"
+  ],
+  "track": "python",
+  "source": "progressive_python"
+}

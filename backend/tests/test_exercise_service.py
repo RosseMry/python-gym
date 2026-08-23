@@ -38,7 +38,10 @@ def test_hints_are_revealed_one_at_a_time(service: ExerciseService) -> None:
     assert service.request_hint("loop-003") == "hint 1"
     assert service.request_hint("loop-003") == "hint 2"
     assert "total = 0" in service.request_hint("loop-003")
-    assert service.request_hint("loop-003") == "No more hints available for this exercise."
+    assert (
+        service.request_hint("loop-003")
+        == "No more hints available for this exercise."
+    )
 
 
 def test_correct_submission_passes_and_marks_solved(
@@ -53,7 +56,7 @@ def test_correct_submission_passes_and_marks_solved(
     assert progress.attempts == 1
 
 
-def test_wrong_submission_fails_and_marks_attempted(
+def test_wrong_submission_fails_and_marks_failed(
     service: ExerciseService,
 ) -> None:
     result = service.submit("loop-003", WRONG)
@@ -64,7 +67,9 @@ def test_wrong_submission_fails_and_marks_attempted(
     assert result.tests_total == 2
 
     progress = service._repo.get_progress("loop-003")
-    assert progress.status == ExerciseStatus.ATTEMPTED
+    # Sprint 2: a failed submission is its own state, distinct from the
+    # "requested a hint but hasn't submitted" ATTEMPTED state.
+    assert progress.status == ExerciseStatus.FAILED
     assert progress.attempts == 1
 
 

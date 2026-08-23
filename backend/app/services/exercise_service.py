@@ -11,18 +11,35 @@ from app.domain.models import (
     Exercise,
     ExerciseStatus,
     ProgressEntry,
+    StyleCheckResult,
     SubmissionResult,
 )
 from app.repositories.exercise_repository import ExerciseRepository
 from app.services.execution_service import run_submission
+from app.services.style_service import check_style
 
 # Solved-with-hint exercises need this many additional clean solves
 # before they count as MASTERED (kept simple for the MVP).
 _MASTERY_STREAK_REQUIRED = 2
 
+# Progress states that mean "this was solved at some point" - used to
+# decide whether marking an exercise for repeat makes sense (spec
+# section 5) and whether a fresh clean solve should count toward
+# mastery (spec section 21).
+_SOLVED_FAMILY = (
+    ExerciseStatus.SOLVED,
+    ExerciseStatus.SOLVED_WITH_HINT,
+    ExerciseStatus.SOLVED_TO_REPEAT,
+    ExerciseStatus.MASTERED,
+)
+
 
 class ExerciseNotFoundError(Exception):
     """Raised when an exercise id does not exist."""
+
+
+class InvalidRepeatRequestError(Exception):
+    """Raised when repeat is requested for an exercise that isn't solved."""
 
 
 class ExerciseService:
@@ -35,12 +52,23 @@ class ExerciseService:
         """List exercises, optionally filtered by module."""
         return self._repo.list_all(module)
 
+    def list_by_source(self, source: str) -> list[Exercise]:
+        """List exercises for a single content source (spec section 18)."""
+        return self._repo.list_by_source(source)
+
+    def list_repeat_queue(self) -> list[Exercise]:
+        """List exercises the student marked to repeat later (section 5)."""
+        return self._repo.list_repeat_queue()
+
     def get_exercise_for_student(self, exercise_id: str) -> Exercise:
         """Return an exercise with the answer stripped out.
 
         Solution and hidden tests are never sent to the frontend
         directly - they are only used server-side for grading, or
-        exposed explicitly via ``reveal_solution``.
+        exposed explicitly via ``reveal_solution``. Sprint 2 metadata
+        (track, source, skills, prerequisites, validation profile) is
+        not sensitive and is passed through for the sidebar/learning
+        path to use.
         """
         exercise = self._repo.get(exercise_id)
         if exercise is None:
@@ -59,6 +87,14 @@ class ExerciseService:
             solution="",
             explanation="",
             concepts=exercise.concepts,
+            track=exercise.track,
+            source=exercise.source,
+            skills=exercise.skills,
+            prerequisites=exercise.prerequisites,
+            resources=exercise.resources,
+            validation_profile=exercise.validation_profile,
+            exercise_type=exercise.exercise_type,
+            exercise_status=exercise.exercise_status,
         )
 
     def request_hint(self, exercise_id: str) -> str:
@@ -95,30 +131,60 @@ class ExerciseService:
         return exercise.solution, exercise.explanation
 
     def submit(self, exercise_id: str, code: str) -> SubmissionResult:
-        """Run the student's code and update progress/mastery status."""
+        """Run the student's code and update progress/mastery status.
+
+        Sprint 2 (spec section 32) runs a style check alongside the
+        hidden tests, but only for exercises whose validation profile
+        asks for it - style is never a hidden-test failure, it's
+        surfaced as a separate ``style`` field on the result.
+        """
         exercise = self._repo.get(exercise_id)
         if exercise is None:
             raise ExerciseNotFoundError(exercise_id)
 
         result = run_submission(exercise, code)
+        if exercise.validation_profile == "42_piscine":
+            result = _with_style_check(result, code)
 
         progress = self._get_or_create_progress(exercise_id)
         progress.attempts += 1
+
+        submission_status = "passed" if result.passed else result.status
         self._repo.record_submission(
             exercise_id=exercise_id,
             code=code,
             passed=result.passed,
             tests_total=result.tests_total,
             tests_passed=result.tests_passed,
+            status=submission_status,
+            hints_used_snapshot=progress.hints_used,
+            solution_revealed_snapshot=progress.solution_revealed,
         )
 
         if result.passed:
             progress.status = self._next_status_on_success(progress)
-        elif progress.status == ExerciseStatus.NEW:
-            progress.status = ExerciseStatus.ATTEMPTED
+        else:
+            progress.status = ExerciseStatus.FAILED
 
         self._repo.save_progress(progress)
         return result
+
+    def mark_repeat(self, exercise_id: str) -> None:
+        """Mark a solved exercise as needing to be repeated later.
+
+        Sprint 2 spec sections 3-5: this is only meaningful for an
+        exercise the student has actually solved. It does not count as
+        mastery, and is distinct from FAILED.
+        """
+        if self._repo.get(exercise_id) is None:
+            raise ExerciseNotFoundError(exercise_id)
+        progress = self._get_or_create_progress(exercise_id)
+        if progress.status not in _SOLVED_FAMILY:
+            raise InvalidRepeatRequestError(
+                "Only a solved exercise can be marked to repeat later."
+            )
+        progress.status = ExerciseStatus.SOLVED_TO_REPEAT
+        self._repo.save_progress(progress)
 
     def save_explanation(self, exercise_id: str, text: str) -> None:
         """Store the student's free-text explanation of their solution."""
@@ -155,3 +221,25 @@ class ExerciseService:
                 solution_revealed=False,
             )
         return progress
+
+
+def _with_style_check(result: SubmissionResult, code: str) -> SubmissionResult:
+    """Attach a style-check result without touching test pass/fail.
+
+    Spec section 32 - style is reported separately and never silently
+    folded into the hidden-test result.
+    """
+    ran, passed, output = check_style(code)
+    return SubmissionResult(
+        status=result.status,
+        passed=result.passed,
+        tests_total=result.tests_total,
+        tests_passed=result.tests_passed,
+        tests=result.tests,
+        stdout=result.stdout,
+        stderr=result.stderr,
+        result=result.result,
+        execution_time=result.execution_time,
+        error=result.error,
+        style=StyleCheckResult(ran=ran, passed=passed, output=output),
+    )

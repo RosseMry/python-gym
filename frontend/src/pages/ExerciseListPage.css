@@ -90,6 +90,11 @@
   border-color: var(--ink-muted);
 }
 
+.status-dot--failed {
+  border-color: var(--danger);
+  background: var(--danger-dim);
+}
+
 .status-dot--solved_with_hint {
   border-color: var(--hint);
   background: var(--hint-dim);
@@ -98,6 +103,11 @@
 .status-dot--solved {
   border-color: var(--success);
   background: var(--success);
+}
+
+.status-dot--solved_to_repeat {
+  border-color: var(--hint);
+  background: var(--hint);
 }
 
 .status-dot--mastered {

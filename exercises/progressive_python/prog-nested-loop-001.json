@@ -1,0 +1,48 @@
+{
+  "id": "prog-nested-loop-001",
+  "module": "for_loops",
+  "difficulty": 4,
+  "title": "Multiplication table (nested loops)",
+  "description": "Write a function `multiplication_table(n)` that returns a list of lists: row `i` (for i from 1 to n) contains `[i*1, i*2, ..., i*n]`.\n\nThis is the bridge exercise from Sprint 1's for-loop levels (which stopped before nested loops) toward the 42 Piscine's own multi-column table exercise.",
+  "examples": "multiplication_table(3) -> [[1, 2, 3], [2, 4, 6], [3, 6, 9]]",
+  "starter_code": "def multiplication_table(n):\n    # write your code here\n    pass\n",
+  "hints": [
+    "You need one loop to build each row, and another loop inside it to fill in that row's columns - a loop inside a loop.",
+    "The outer loop picks the row number (1..n); the inner loop, using that same row number, computes each column value (row * column).",
+    "rows = []\nfor row in range(1, n + 1):\n    this_row = []\n    for col in range(1, n + 1):\n        this_row.append(row * col)\n    rows.append(this_row)\nreturn rows"
+  ],
+  "expected_behavior": "Returns an n-by-n list of lists of the multiplication table.",
+  "hidden_tests": [
+    {
+      "call": "multiplication_table(3)",
+      "expected": "[[1, 2, 3], [2, 4, 6], [3, 6, 9]]"
+    },
+    {
+      "call": "multiplication_table(1)",
+      "expected": "[[1]]"
+    },
+    {
+      "call": "multiplication_table(2)",
+      "expected": "[[1, 2], [2, 4]]"
+    }
+  ],
+  "solution": "def multiplication_table(n):\n    rows = []\n    for row in range(1, n + 1):\n        this_row = []\n        for col in range(1, n + 1):\n            this_row.append(row * col)\n        rows.append(this_row)\n    return rows\n",
+  "explanation": "The outer loop runs once per row; for each row, the inner loop runs all the way through the columns before the outer loop moves on - so the inner loop's full range repeats once per outer iteration.",
+  "concepts": [
+    "nested loops",
+    "for",
+    "list",
+    "append"
+  ],
+  "skills": [
+    "iteration",
+    "basic_data_manipulation"
+  ],
+  "prerequisites": [
+    "loop-007",
+    "loop-008",
+    "loop-009"
+  ],
+  "track": "python",
+  "source": "progressive_python"
+}

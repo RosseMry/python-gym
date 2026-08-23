@@ -17,6 +17,7 @@ from app.domain.models import (
 
 
 def _row_to_exercise(row: sqlite3.Row) -> Exercise:
+    columns = row.keys()
     return Exercise(
         id=row["id"],
         module=row["module"],
@@ -31,6 +32,27 @@ def _row_to_exercise(row: sqlite3.Row) -> Exercise:
         solution=row["solution"],
         explanation=row["explanation"],
         concepts=json.loads(row["concepts"]),
+        # Sprint 2 metadata columns. Guarded with .get()-style checks so
+        # this keeps working against a connection whose schema migration
+        # hasn't run yet (defensive, not expected in normal operation).
+        track=row["track"] if "track" in columns else "python",
+        source=row["source"] if "source" in columns else "progressive_python",
+        skills=json.loads(row["skills"]) if "skills" in columns else [],
+        prerequisites=(
+            json.loads(row["prerequisites"]) if "prerequisites" in columns else []
+        ),
+        resources=json.loads(row["resources"]) if "resources" in columns else [],
+        validation_profile=(
+            row["validation_profile"]
+            if "validation_profile" in columns
+            else "standard_python"
+        ),
+        exercise_type=(
+            row["exercise_type"] if "exercise_type" in columns else "function"
+        ),
+        exercise_status=(
+            row["exercise_status"] if "exercise_status" in columns else "active"
+        ),
     )
 
 
@@ -47,8 +69,10 @@ class ExerciseRepository:
             INSERT INTO exercises (
                 id, module, difficulty, title, description, examples,
                 starter_code, hints, expected_behavior, hidden_tests,
-                solution, explanation, concepts
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                solution, explanation, concepts, track, source, skills,
+                prerequisites, resources, validation_profile,
+                exercise_type, exercise_status
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ON CONFLICT(id) DO UPDATE SET
                 module=excluded.module,
                 difficulty=excluded.difficulty,
@@ -61,7 +85,15 @@ class ExerciseRepository:
                 hidden_tests=excluded.hidden_tests,
                 solution=excluded.solution,
                 explanation=excluded.explanation,
-                concepts=excluded.concepts
+                concepts=excluded.concepts,
+                track=excluded.track,
+                source=excluded.source,
+                skills=excluded.skills,
+                prerequisites=excluded.prerequisites,
+                resources=excluded.resources,
+                validation_profile=excluded.validation_profile,
+                exercise_type=excluded.exercise_type,
+                exercise_status=excluded.exercise_status
             """,
             (
                 exercise.id,
@@ -77,6 +109,14 @@ class ExerciseRepository:
                 exercise.solution,
                 exercise.explanation,
                 json.dumps(exercise.concepts),
+                exercise.track,
+                exercise.source,
+                json.dumps(exercise.skills),
+                json.dumps(exercise.prerequisites),
+                json.dumps(exercise.resources),
+                exercise.validation_profile,
+                exercise.exercise_type,
+                exercise.exercise_status,
             ),
         )
         self._conn.execute(
@@ -85,17 +125,39 @@ class ExerciseRepository:
         )
         self._conn.commit()
 
-    def list_all(self, module: str | None = None) -> list[Exercise]:
-        """Return exercises, optionally filtered by module."""
+    def list_all(
+        self, module: str | None = None, include_excluded: bool = False
+    ) -> list[Exercise]:
+        """Return exercises, optionally filtered by module.
+
+        Excluded exercises (spec section 33, e.g. the 42 compression
+        exercise) are hidden from normal listings by default so they
+        never appear in the learning path or count as pending.
+        """
+        clauses = []
+        params: list[str] = []
         if module:
-            rows = self._conn.execute(
-                "SELECT * FROM exercises WHERE module = ? ORDER BY difficulty, id",
-                (module,),
-            ).fetchall()
-        else:
-            rows = self._conn.execute(
-                "SELECT * FROM exercises ORDER BY module, difficulty, id"
-            ).fetchall()
+            clauses.append("module = ?")
+            params.append(module)
+        if not include_excluded:
+            clauses.append("exercise_status != 'excluded'")
+        where = f"WHERE {' AND '.join(clauses)}" if clauses else ""
+        rows = self._conn.execute(
+            f"SELECT * FROM exercises {where} ORDER BY module, difficulty, id",
+            params,
+        ).fetchall()
+        return [_row_to_exercise(r) for r in rows]
+
+    def list_by_source(self, source: str) -> list[Exercise]:
+        """Return active exercises for a single content source."""
+        rows = self._conn.execute(
+            """
+            SELECT * FROM exercises
+            WHERE source = ? AND exercise_status != 'excluded'
+            ORDER BY difficulty, id
+            """,
+            (source,),
+        ).fetchall()
         return [_row_to_exercise(r) for r in rows]
 
     def get(self, exercise_id: str) -> Exercise | None:
@@ -136,6 +198,23 @@ class ExerciseRepository:
             for r in rows
         ]
 
+    def list_repeat_queue(self) -> list[Exercise]:
+        """Return exercises the student explicitly marked to repeat later.
+
+        Sprint 2 spec section 5 - these are surfaced separately from the
+        main exercise list so the student can find and re-practice them.
+        """
+        rows = self._conn.execute(
+            """
+            SELECT exercises.* FROM exercises
+            JOIN progress ON progress.exercise_id = exercises.id
+            WHERE progress.status = ?
+            ORDER BY progress.last_submitted_at DESC
+            """,
+            (ExerciseStatus.SOLVED_TO_REPEAT.value,),
+        ).fetchall()
+        return [_row_to_exercise(r) for r in rows]
+
     def save_progress(self, progress: ProgressEntry) -> None:
         """Persist an updated progress record."""
         self._conn.execute(
@@ -162,15 +241,33 @@ class ExerciseRepository:
         passed: bool,
         tests_total: int,
         tests_passed: int,
+        status: str = "failed",
+        hints_used_snapshot: int = 0,
+        solution_revealed_snapshot: bool = False,
     ) -> None:
-        """Log a single submission attempt for later analytics."""
+        """Log a single submission attempt for later analytics.
+
+        Sprint 2 spec section 7 - attempts should retain enough context
+        (hints used, solution-revealed state) to be interpreted later,
+        not just a pass/fail flag.
+        """
         self._conn.execute(
             """
             INSERT INTO submissions
-                (exercise_id, code, passed, tests_total, tests_passed)
-            VALUES (?, ?, ?, ?, ?)
+                (exercise_id, code, passed, tests_total, tests_passed,
+                 status, hints_used_snapshot, solution_revealed_snapshot)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
             """,
-            (exercise_id, code, int(passed), tests_total, tests_passed),
+            (
+                exercise_id,
+                code,
+                int(passed),
+                tests_total,
+                tests_passed,
+                status,
+                hints_used_snapshot,
+                int(solution_revealed_snapshot),
+            ),
         )
         self._conn.commit()
 

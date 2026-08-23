@@ -30,7 +30,9 @@ class ProgressItem(BaseModel):
 
 
 @router.get("", response_model=list[ProgressItem])
-def list_progress(service: ExerciseService = Depends(get_service)) -> list[ProgressItem]:
+def list_progress(
+    service: ExerciseService = Depends(get_service),
+) -> list[ProgressItem]:
     """Return the raw progress record for every exercise seen so far."""
     repo = service._repo  # simple MVP: read-only pass-through
     return [

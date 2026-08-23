@@ -1,0 +1,30 @@
+{
+  "id": "piscine-00-loading",
+  "module": "piscine_00_starting",
+  "difficulty": 3,
+  "title": "Loading ... (ft_tqdm)",
+  "description": "Write a generator function `ft_tqdm(lst)` that copies the behaviour of the `tqdm` progress bar package using `yield`, printing a live percentage/progress bar as the caller iterates.\n\nThis one is best checked by eye against the real `tqdm` package side by side (see the subject's tester.py), since its output updates in place over time rather than producing a single fixed string - it isn't auto-graded here yet.",
+  "examples": "for elem in ft_tqdm(range(333)):\n    sleep(0.005)\n-> shows a live progress bar similar to:\n100%|[===================================>]| 333/333",
+  "starter_code": "def ft_tqdm(lst):\n    # your code here\n    pass\n",
+  "hints": [
+    "You need to know the total length up front (len(lst)) to compute a percentage as you go.",
+    "os.get_terminal_size() tells you how wide to draw the bar so it fits the terminal.",
+    "for i, item in enumerate(lst):\n    yield item\n    percent = (i + 1) / len(lst)\n    print(f'\\r{percent:.0%}|...', end='')"
+  ],
+  "expected_behavior": "Behaves like a generator wrapping the given iterable, printing progress as it's consumed.",
+  "hidden_tests": [],
+  "solution": "import os\n\n\ndef ft_tqdm(lst):\n    \"\"\"Yield from lst while printing a tqdm-style progress bar.\"\"\"\n    total = len(lst)\n    width = max(os.get_terminal_size().columns - 20, 10)\n    for i, item in enumerate(lst):\n        yield item\n        done = (i + 1) / total\n        filled = int(width * done)\n        bar = ('=' * filled + '>')[:width].ljust(width)\n        percent = int(done * 100)\n        print(\n            f'\\r{percent}%|[{bar}]| {i + 1}/{total}',\n            end='',\n        )\n    print()\n",
+  "explanation": "A generator can run code both before and after each `yield` - the loop body around the yield is exactly where the progress percentage gets recomputed and reprinted.",
+  "concepts": [
+    "generators",
+    "yield",
+    "os.get_terminal_size"
+  ],
+  "skills": [
+    "iterators_and_generators"
+  ],
+  "exercise_type": "function",
+  "source": "42_python_piscine",
+  "track": "python",
+  "validation_profile": "42_piscine"
+}
