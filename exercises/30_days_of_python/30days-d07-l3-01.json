@@ -1,0 +1,40 @@
+{
+  "id": "30days-d07-l3-01",
+  "module": "sets",
+  "day": 7,
+  "level": 3,
+  "difficulty": 3,
+  "title": "Ages as a set vs. a list",
+  "description": "Given `age = [22, 19, 24, 25, 26, 24, 25, 24]`: Convert the ages to a set and compare the length of the list and the set, which one is bigger?\n\nPython-Gym adaptation: implement as `compare_lengths(ages)`, returning a tuple `(len(list), len(set), which_is_bigger)` where `which_is_bigger` is the string `'list'`, `'set'`, or `'equal'`.",
+  "examples": "compare_lengths([22, 19, 24, 25, 26, 24, 25, 24]) -> (8, 5, 'list')",
+  "starter_code": "def compare_lengths(ages):\n    # write your code here\n    pass\n",
+  "hints": [
+    "A list can hold repeated values, but converting it to a set collapses any duplicates into a single copy.",
+    "Compute both lengths - the length of the original list, and the length of set(ages) - then compare them.",
+    "Return (len(ages), len(set(ages)), 'list' if len(ages) > len(set(ages)) else ('set' if len(set(ages)) > len(ages) else 'equal'))."
+  ],
+  "expected_behavior": "Returns a tuple of (length of the original list, length of the set built from it, and which one is bigger as a string).",
+  "hidden_tests": [
+    {
+      "call": "compare_lengths([22, 19, 24, 25, 26, 24, 25, 24])",
+      "expected": "(8, 5, 'list')",
+      "label": "original ages list, has duplicates"
+    },
+    {
+      "call": "compare_lengths([1, 1, 1, 2])",
+      "expected": "(4, 2, 'list')",
+      "label": "list with many duplicates"
+    },
+    {
+      "call": "compare_lengths([1, 2, 3])",
+      "expected": "(3, 3, 'equal')",
+      "label": "list with no duplicates"
+    }
+  ],
+  "solution": "def compare_lengths(ages):\n    list_len = len(ages)\n    set_len = len(set(ages))\n    if list_len > set_len:\n        bigger = 'list'\n    elif set_len > list_len:\n        bigger = 'set'\n    else:\n        bigger = 'equal'\n    return (list_len, set_len, bigger)\n",
+  "explanation": "Converting a list to a set with set(ages) removes duplicate values, since a set can only hold each distinct value once. Whenever the original list has repeats, the set built from it will always be shorter (or equal, never longer, since it can only lose elements, never gain them).",
+  "concepts": ["set", "list", "len", "duplicates"],
+  "skills": ["basic_data_manipulation"],
+  "source": "30_days_of_python",
+  "exercise_type": "function"
+}

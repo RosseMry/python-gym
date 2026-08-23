@@ -1,0 +1,41 @@
+{
+  "id": "30days-d06-l1-01",
+  "module": "tuples",
+  "day": 6,
+  "level": 1,
+  "difficulty": 1,
+  "title": "Create an empty tuple",
+  "description": "Create an empty tuple.\n\nPython-Gym adaptation: implement as create_empty_tuple(), returning an empty tuple.",
+  "examples": ">>> create_empty_tuple()\n()",
+  "starter_code": "def create_empty_tuple():\n    # your code here\n    pass\n",
+  "hints": [
+    "A tuple is written with parentheses containing comma-separated values, but an empty one needs no commas at all.",
+    "This is different from an empty function call or an empty list - the empty tuple has its own literal form.",
+    "Return () - two parentheses with nothing between them - to produce the empty tuple."
+  ],
+  "expected_behavior": "Returns an empty tuple, ().",
+  "hidden_tests": [
+    {
+      "call": "create_empty_tuple()",
+      "expected": "()",
+      "label": "returns the empty tuple"
+    },
+    {
+      "call": "len(create_empty_tuple())",
+      "expected": "0",
+      "label": "empty tuple has length 0"
+    }
+  ],
+  "solution": "def create_empty_tuple():\n    return ()\n",
+  "explanation": "() is the literal for an empty tuple, just as [] is the literal for an empty list - no elements means no commas are needed inside the parentheses.",
+  "concepts": [
+    "tuples",
+    "empty tuple",
+    "tuple literal"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

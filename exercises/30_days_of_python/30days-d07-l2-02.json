@@ -1,0 +1,40 @@
+{
+  "id": "30days-d07-l2-02",
+  "module": "sets",
+  "day": 7,
+  "level": 2,
+  "difficulty": 2,
+  "title": "A intersection B",
+  "description": "Given the sets `A = {19, 22, 24, 20, 25, 26}` and `B = {19, 22, 20, 25, 26, 24, 28, 27}`: Find A intersection B.\n\nPython-Gym adaptation: implement as `intersection(a, b)`, returning a SORTED list of the elements common to both sets.",
+  "examples": "intersection({19, 22, 24, 20, 25, 26}, {19, 22, 20, 25, 26, 24, 28, 27}) -> [19, 20, 22, 24, 25, 26]",
+  "starter_code": "def intersection(a, b):\n    # write your code here\n    pass\n",
+  "hints": [
+    "The intersection of two sets keeps only the elements that appear in both - everything unique to one side is dropped.",
+    "Python has both an operator and a method name for this operation.",
+    "Use the & operator (or a.intersection(b)) to get the common elements, then return sorted(result)."
+  ],
+  "expected_behavior": "Returns a sorted list of the elements that appear in both a and b.",
+  "hidden_tests": [
+    {
+      "call": "intersection({19, 22, 24, 20, 25, 26}, {19, 22, 20, 25, 26, 24, 28, 27})",
+      "expected": "[19, 20, 22, 24, 25, 26]",
+      "label": "original A and B sets"
+    },
+    {
+      "call": "intersection({1, 2, 3}, {2, 3, 4})",
+      "expected": "[2, 3]",
+      "label": "small overlapping sets"
+    },
+    {
+      "call": "intersection({1, 2}, {3, 4})",
+      "expected": "[]",
+      "label": "no elements in common"
+    }
+  ],
+  "solution": "def intersection(a, b):\n    return sorted(a & b)\n",
+  "explanation": "The & operator (equivalently, .intersection()) returns a new set with only the elements shared by both operands. Sorting the result gives a predictable order for checking.",
+  "concepts": ["set", "intersection", "sorted"],
+  "skills": ["basic_data_manipulation"],
+  "source": "30_days_of_python",
+  "exercise_type": "function"
+}

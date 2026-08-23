@@ -1,0 +1,41 @@
+{
+  "id": "30days-d05-l1-17",
+  "module": "lists",
+  "day": 5,
+  "level": 1,
+  "difficulty": 2,
+  "title": "Reverse the list into descending order",
+  "description": "Reverse the list in descending order using reverse() method.\n\nPython-Gym adaptation: implement as sort_companies_descending(companies), returning a new list with the companies sorted in descending (reverse alphabetical) order.",
+  "examples": ">>> sort_companies_descending(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'])\n['Oracle', 'Microsoft', 'IBM', 'Google', 'Facebook', 'Apple', 'Amazon']",
+  "starter_code": "def sort_companies_descending(companies):\n    # your code here\n    pass\n",
+  "hints": [
+    "First get the list into ascending order, the same way as the sort exercise.",
+    "Lists have a reverse() method that flips the current order of the list in place.",
+    "updated.sort() then updated.reverse(), and return updated."
+  ],
+  "expected_behavior": "Returns a new list containing the companies sorted alphabetically descending.",
+  "solution": "def sort_companies_descending(companies):\n    updated = companies.copy()\n    updated.sort()\n    updated.reverse()\n    return updated\n",
+  "hidden_tests": [
+    {
+      "call": "sort_companies_descending(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'])",
+      "expected": "['Oracle', 'Microsoft', 'IBM', 'Google', 'Facebook', 'Apple', 'Amazon']",
+      "label": "seven companies descending"
+    },
+    {
+      "call": "sort_companies_descending(['B', 'A', 'C'])",
+      "expected": "['C', 'B', 'A']",
+      "label": "three letters descending"
+    }
+  ],
+  "explanation": "Sorting ascending and then reversing produces descending order; list.reverse() flips the current element order in place.",
+  "concepts": [
+    "lists",
+    "sort",
+    "reverse"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

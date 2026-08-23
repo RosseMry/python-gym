@@ -16,6 +16,7 @@ const STATUS_ORDER: Record<ProgressStatus, number> = {
   ATTEMPTED: 1,
   FAILED: 1,
   SOLVED_WITH_HINT: 2,
+  SOLVED_AFTER_SOLUTION: 2,
   SOLVED: 3,
   SOLVED_TO_REPEAT: 3,
   MASTERED: 4,

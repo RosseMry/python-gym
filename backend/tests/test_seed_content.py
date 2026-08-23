@@ -90,14 +90,54 @@ def test_catalog_was_substantially_expanded_in_sprint_3(
     losing content in a future refactor of the exercises/ layout.
     """
     all_exercises = seeded_repo.list_all(include_excluded=True)
-    assert len(all_exercises) >= 89
+    assert len(all_exercises) >= 168
 
     by_source: dict[str, int] = {}
     for exercise in all_exercises:
         by_source[exercise.source] = by_source.get(exercise.source, 0) + 1
     assert by_source.get("foundations", 0) >= 8
-    assert by_source.get("python_gym", 0) >= 26
+    # The Sprint 3 correction recategorized 6 invented "30-days-inspired"
+    # exercises to python_gym, so the floor here rises accordingly.
+    assert by_source.get("python_gym", 0) >= 32
     assert by_source.get("progressive_python", 0) >= 28
-    assert by_source.get("30_days_of_python", 0) >= 8
-    # Capped this sprint - no new 42 Piscine PDFs were provided.
-    assert by_source.get("42_python_piscine", 0) == 19
+    # 2 pre-existing (Day 3) + 69 real imports from Days 5-8 (Lists 31
+    # incl. the real 4-item Level 2, Tuples 12, Sets 15, Dicts 11).
+    assert by_source.get("30_days_of_python", 0) >= 71
+    # 19 active + 10 locked (Module 1: Array, Module 2: DataTable) =
+    # the full real 29-exercise Piscine catalog (Sprint 3 correction -
+    # reconciled against github.com/zstenger93/python_piscine).
+    assert by_source.get("42_python_piscine", 0) == 29
+
+
+def test_days_5_to_8_are_completely_imported(seeded_repo: ExerciseRepository) -> None:
+    """Regression guard for the real per-day exercise counts fetched
+    from the source repo (not estimated) - Day 5 Lists 31 (27 Level 1
+    + 4 Level 2, the source has 4 not 3), Day 6 Tuples 12 (5+7), Day 7
+    Sets 15 (5+7+3), Day 8 Dictionaries 11 (flat, no levels).
+    """
+    thirty_days = seeded_repo.list_by_source("30_days_of_python")
+    by_day: dict[int, int] = {}
+    for exercise in thirty_days:
+        if exercise.day is not None:
+            by_day[exercise.day] = by_day.get(exercise.day, 0) + 1
+    assert by_day.get(5) == 31
+    assert by_day.get(6) == 12
+    assert by_day.get(7) == 15
+    assert by_day.get(8) == 11
+
+
+def test_piscine_catalog_has_ten_locked_exercises(
+    seeded_repo: ExerciseRepository,
+) -> None:
+    """Module 1 (Array) + Module 2 (DataTable) are real but not gradable
+    yet (no NumPy/Pandas) - represented as locked, not fabricated or
+    silently dropped.
+    """
+    piscine = seeded_repo.list_all(module=None, include_excluded=True)
+    locked = [
+        e
+        for e in piscine
+        if e.source == "42_python_piscine" and e.exercise_status == "locked"
+    ]
+    assert len(locked) == 10
+    assert {e.module for e in locked} == {"piscine_01_array", "piscine_02_datatable"}

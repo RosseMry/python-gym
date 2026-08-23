@@ -1,0 +1,40 @@
+{
+  "id": "30days-d05-l1-18",
+  "module": "lists",
+  "day": 5,
+  "level": 1,
+  "difficulty": 1,
+  "title": "Slice out the first 3 companies",
+  "description": "Slice out the first 3 companies from the list.\n\nPython-Gym adaptation: implement as first_three_companies(companies), returning a new list with the first 3 items of companies.",
+  "examples": ">>> first_three_companies(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'])\n['Facebook', 'Google', 'Microsoft']",
+  "starter_code": "def first_three_companies(companies):\n    # your code here\n    pass\n",
+  "hints": [
+    "Slicing a list with [:n] takes the first n items.",
+    "You don't need a starting index when slicing from the beginning.",
+    "Return companies[:3]."
+  ],
+  "expected_behavior": "Returns the first 3 items of companies as a new list.",
+  "solution": "def first_three_companies(companies):\n    return companies[:3]\n",
+  "hidden_tests": [
+    {
+      "call": "first_three_companies(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'])",
+      "expected": "['Facebook', 'Google', 'Microsoft']",
+      "label": "first three of seven"
+    },
+    {
+      "call": "first_three_companies(['A', 'B', 'C', 'D'])",
+      "expected": "['A', 'B', 'C']",
+      "label": "first three of four"
+    }
+  ],
+  "explanation": "companies[:3] slices from the start of the list up to (but not including) index 3.",
+  "concepts": [
+    "lists",
+    "slicing"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

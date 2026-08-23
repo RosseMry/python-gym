@@ -1,0 +1,27 @@
+{
+  "id": "30days-d08-01",
+  "module": "dictionaries",
+  "day": 8,
+  "difficulty": 1,
+  "title": "Create an empty dog dictionary",
+  "description": "Create an empty dictionary called dog.\n\nPython-Gym adaptation: implement as `create_empty_dog()`, returning a brand new empty dictionary.",
+  "examples": "create_empty_dog() -> {}",
+  "starter_code": "def create_empty_dog():\n    # write your code here\n    pass\n",
+  "hints": [
+    "A dictionary with nothing inside it is written the same way an empty list is written with square brackets, but using the dictionary bracket character instead.",
+    "This function doesn't need any parameters or logic - it just needs to hand back one value: a dictionary that has zero keys in it.",
+    "A pair of curly braces with nothing between them, `{}`, is itself a valid empty dictionary literal you can return directly."
+  ],
+  "expected_behavior": "Returns a new, empty dictionary (a dict with zero keys).",
+  "hidden_tests": [
+    {"call": "create_empty_dog()", "expected": "{}", "label": "returns empty dict"},
+    {"call": "isinstance(create_empty_dog(), dict)", "expected": "True", "label": "return type is dict"},
+    {"call": "len(create_empty_dog())", "expected": "0", "label": "length is zero"}
+  ],
+  "solution": "def create_empty_dog():\n    return {}\n",
+  "explanation": "A pair of curly braces with nothing inside, `{}`, is Python's literal for an empty dictionary, exactly like `[]` is for an empty list.",
+  "concepts": ["dictionaries", "dict literal", "empty dictionary"],
+  "skills": ["basic_data_manipulation"],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

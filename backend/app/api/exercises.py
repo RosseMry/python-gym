@@ -45,6 +45,9 @@ class ExerciseSummary(BaseModel):
     track: str
     source: str
     exercise_type: str
+    exercise_status: str
+    day: int | None
+    level: int | None
 
 
 class PrerequisiteResponse(BaseModel):
@@ -74,6 +77,9 @@ class ExerciseDetail(BaseModel):
     resources: list[str]
     validation_profile: str
     exercise_type: str
+    exercise_status: str
+    day: int | None
+    level: int | None
 
 
 class SubmissionRequest(BaseModel):
@@ -132,6 +138,9 @@ def _to_summary(exercise: Exercise) -> ExerciseSummary:
         track=exercise.track,
         source=exercise.source,
         exercise_type=exercise.exercise_type,
+        exercise_status=exercise.exercise_status,
+        day=exercise.day,
+        level=exercise.level,
     )
 
 
@@ -161,6 +170,9 @@ def _to_detail(
         resources=exercise.resources,
         validation_profile=exercise.validation_profile,
         exercise_type=exercise.exercise_type,
+        exercise_status=exercise.exercise_status,
+        day=exercise.day,
+        level=exercise.level,
     )
 
 

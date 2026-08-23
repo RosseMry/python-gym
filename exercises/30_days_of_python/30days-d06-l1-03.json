@@ -1,0 +1,41 @@
+{
+  "id": "30days-d06-l1-03",
+  "module": "tuples",
+  "day": 6,
+  "level": 1,
+  "difficulty": 1,
+  "title": "Join brothers and sisters tuples into siblings",
+  "description": "Join brothers and sisters tuples and assign it to siblings.\n\nPython-Gym adaptation: implement as join_siblings(sisters, brothers), where sisters and brothers are tuples, returning their concatenation as a single siblings tuple (sisters first, then brothers).",
+  "examples": ">>> join_siblings(('Martha', 'Jennifer'), ('John', 'Michael'))\n('Martha', 'Jennifer', 'John', 'Michael')",
+  "starter_code": "def join_siblings(sisters, brothers):\n    # your code here\n    pass\n",
+  "hints": [
+    "Joining two tuples together is called concatenation, and it produces one new, longer tuple.",
+    "Python lets you combine two tuples the same way you combine two strings or lists - with an operator, not a method.",
+    "Use the + operator: sisters + brothers puts every item of sisters first, followed by every item of brothers."
+  ],
+  "expected_behavior": "Returns the concatenation of sisters and brothers as one tuple, sisters' items first.",
+  "hidden_tests": [
+    {
+      "call": "join_siblings(('Martha', 'Jennifer'), ('John', 'Michael'))",
+      "expected": "('Martha', 'Jennifer', 'John', 'Michael')",
+      "label": "two sisters, two brothers"
+    },
+    {
+      "call": "join_siblings((), ('Sam',))",
+      "expected": "('Sam',)",
+      "label": "no sisters, one brother"
+    }
+  ],
+  "solution": "def join_siblings(sisters, brothers):\n    return sisters + brothers\n",
+  "explanation": "The + operator on two tuples concatenates them into a new tuple, preserving the order: everything in the left operand comes before everything in the right operand.",
+  "concepts": [
+    "tuples",
+    "tuple concatenation",
+    "operators"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

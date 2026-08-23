@@ -1,0 +1,41 @@
+{
+  "id": "30days-d05-l1-25",
+  "module": "lists",
+  "day": 5,
+  "level": 1,
+  "difficulty": 2,
+  "title": "Destroy the IT companies list",
+  "description": "Destroy the IT companies list.\n\nPython-Gym adaptation: implement as destroy_companies(companies), which deletes the companies name with del and returns True once it can confirm the name no longer exists (referencing it raises NameError).",
+  "examples": ">>> destroy_companies(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'])\nTrue",
+  "starter_code": "def destroy_companies(companies):\n    # your code here\n    pass\n",
+  "hints": [
+    "The del statement removes a variable name so it can no longer be used.",
+    "After deleting a name, referencing it again raises a NameError.",
+    "Use del companies, then try to reference companies inside a try/except NameError and return True in the except block."
+  ],
+  "expected_behavior": "Returns True after confirming the companies name has been deleted.",
+  "solution": "def destroy_companies(companies):\n    del companies\n    try:\n        companies\n        return False\n    except NameError:\n        return True\n",
+  "hidden_tests": [
+    {
+      "call": "destroy_companies(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'])",
+      "expected": "True",
+      "label": "destroys a seven-item list"
+    },
+    {
+      "call": "destroy_companies([])",
+      "expected": "True",
+      "label": "destroys an empty list"
+    }
+  ],
+  "explanation": "del companies removes the local binding entirely; trying to read companies afterward raises NameError, which the except block catches to confirm the list was destroyed.",
+  "concepts": [
+    "lists",
+    "del",
+    "namererror"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

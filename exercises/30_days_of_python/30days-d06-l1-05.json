@@ -1,0 +1,41 @@
+{
+  "id": "30days-d06-l1-05",
+  "module": "tuples",
+  "day": 6,
+  "level": 1,
+  "difficulty": 2,
+  "title": "Add parents to the siblings tuple",
+  "description": "Modify the siblings tuple and add the name of your father and mother and assign it to family_members.\n\nPython-Gym adaptation: implement as add_parents(siblings, father, mother), where siblings is a tuple of names and father/mother are strings, returning a new family_members tuple with the father and mother appended after the siblings (tuples are immutable, so 'modifying' means building a new tuple).",
+  "examples": ">>> add_parents(('Martha', 'Jennifer', 'John', 'Michael'), 'Daniel', 'Alice')\n('Martha', 'Jennifer', 'John', 'Michael', 'Daniel', 'Alice')",
+  "starter_code": "def add_parents(siblings, father, mother):\n    # your code here\n    pass\n",
+  "hints": [
+    "Tuples can't be changed in place - there is no append or add method - so 'adding' to one really means creating a brand new tuple.",
+    "You already know how to join two tuples together; father and mother just need to become a small tuple first.",
+    "Return siblings + (father, mother) - concatenating siblings with a two-item tuple of the parents' names."
+  ],
+  "expected_behavior": "Returns a new tuple with father and mother appended after the siblings' names.",
+  "hidden_tests": [
+    {
+      "call": "add_parents(('Martha', 'Jennifer', 'John', 'Michael'), 'Daniel', 'Alice')",
+      "expected": "('Martha', 'Jennifer', 'John', 'Michael', 'Daniel', 'Alice')",
+      "label": "four siblings plus two parents"
+    },
+    {
+      "call": "add_parents((), 'Dad', 'Mom')",
+      "expected": "('Dad', 'Mom')",
+      "label": "no siblings, just parents"
+    }
+  ],
+  "solution": "def add_parents(siblings, father, mother):\n    return siblings + (father, mother)\n",
+  "explanation": "Since tuples are immutable, there is no in-place way to add items; concatenating siblings with a new (father, mother) tuple produces the desired family_members tuple without mutating the original.",
+  "concepts": [
+    "tuples",
+    "immutability",
+    "tuple concatenation"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

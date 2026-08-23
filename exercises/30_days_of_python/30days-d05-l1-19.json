@@ -1,0 +1,41 @@
+{
+  "id": "30days-d05-l1-19",
+  "module": "lists",
+  "day": 5,
+  "level": 1,
+  "difficulty": 1,
+  "title": "Slice out the last 3 companies",
+  "description": "Slice out the last 3 companies from the list.\n\nPython-Gym adaptation: implement as last_three_companies(companies), returning a new list with the last 3 items of companies.",
+  "examples": ">>> last_three_companies(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'])\n['IBM', 'Oracle', 'Amazon']",
+  "starter_code": "def last_three_companies(companies):\n    # your code here\n    pass\n",
+  "hints": [
+    "Slicing supports negative indices to count from the end of the list.",
+    "A negative start index with no stop index slices to the end of the list.",
+    "Return companies[-3:]."
+  ],
+  "expected_behavior": "Returns the last 3 items of companies as a new list.",
+  "solution": "def last_three_companies(companies):\n    return companies[-3:]\n",
+  "hidden_tests": [
+    {
+      "call": "last_three_companies(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'])",
+      "expected": "['IBM', 'Oracle', 'Amazon']",
+      "label": "last three of seven"
+    },
+    {
+      "call": "last_three_companies(['A', 'B', 'C', 'D'])",
+      "expected": "['B', 'C', 'D']",
+      "label": "last three of four"
+    }
+  ],
+  "explanation": "companies[-3:] starts 3 items from the end and slices to the end of the list.",
+  "concepts": [
+    "lists",
+    "slicing",
+    "negative indexing"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

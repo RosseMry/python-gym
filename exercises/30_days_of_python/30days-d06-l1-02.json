@@ -1,0 +1,46 @@
+{
+  "id": "30days-d06-l1-02",
+  "module": "tuples",
+  "day": 6,
+  "level": 1,
+  "difficulty": 1,
+  "title": "Create sisters and brothers tuples",
+  "description": "Create a tuple containing names of your sisters and your brothers (imaginary siblings are fine).\n\nPython-Gym adaptation: implement as create_siblings_tuples(sisters, brothers), where sisters and brothers are lists of names, returning a tuple (sisters_tuple, brothers_tuple) with each list converted to a tuple.",
+  "examples": ">>> create_siblings_tuples(['Martha', 'Jennifer'], ['John', 'Michael'])\n(('Martha', 'Jennifer'), ('John', 'Michael'))",
+  "starter_code": "def create_siblings_tuples(sisters, brothers):\n    # your code here\n    pass\n",
+  "hints": [
+    "You need to build two separate tuples here, one for sisters and one for brothers, then hand both back together.",
+    "The built-in tuple() function converts any list into a tuple with the same items in the same order.",
+    "Return (tuple(sisters), tuple(brothers)) - a tuple pairing the converted sisters tuple with the converted brothers tuple."
+  ],
+  "expected_behavior": "Returns a 2-tuple of (sisters as a tuple, brothers as a tuple).",
+  "hidden_tests": [
+    {
+      "call": "create_siblings_tuples(['Martha', 'Jennifer'], ['John', 'Michael'])",
+      "expected": "(('Martha', 'Jennifer'), ('John', 'Michael'))",
+      "label": "two sisters, two brothers"
+    },
+    {
+      "call": "create_siblings_tuples([], ['Sam'])",
+      "expected": "((), ('Sam',))",
+      "label": "no sisters, one brother"
+    },
+    {
+      "call": "create_siblings_tuples(['Amaka'], [])",
+      "expected": "(('Amaka',), ())",
+      "label": "one sister, no brothers"
+    }
+  ],
+  "solution": "def create_siblings_tuples(sisters, brothers):\n    return (tuple(sisters), tuple(brothers))\n",
+  "explanation": "tuple() takes any iterable, such as a list, and produces a tuple with the same elements - applying it to both the sisters and brothers lists converts each into its own tuple.",
+  "concepts": [
+    "tuples",
+    "tuple conversion",
+    "list to tuple"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

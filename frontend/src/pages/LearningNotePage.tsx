@@ -4,11 +4,13 @@ import { api } from "../services/api";
 import type { LearningNoteDetail } from "../types/exercise";
 import { useLocale, useLocalized } from "../i18n/LocaleContext";
 import "./ExercisePage.css";
+import "./LearningNote.css";
 
 /**
- * One Learning Notes theory page (Sprint 3): explanation, syntax,
- * examples, common mistakes, a mini exercise, then links to real
- * practice exercises for the topic.
+ * One Learning Notes theory page (Sprint 3, redesigned as cards in the
+ * Sprint 3 correction): key idea, syntax, examples, a common-mistake
+ * warning card, a mini exercise card, then links to real practice
+ * exercises for the topic.
  */
 export function LearningNotePage() {
   const { id } = useParams<{ id: string }>();
@@ -36,7 +38,7 @@ export function LearningNotePage() {
   }
 
   return (
-    <div className="page">
+    <div className="page learning-note">
       <Link to="/notes" className="back-link">
         {t("exercise.backToExercises")}
       </Link>
@@ -46,8 +48,9 @@ export function LearningNotePage() {
         <h1>{localize(note.title, note.title_fr)}</h1>
       </header>
 
-      <section className="panel">
-        <p className="exercise-description">
+      <section className="learning-note__card learning-note__card--key-idea">
+        <p className="learning-note__card-label">{t("notes.keyIdea")}</p>
+        <p className="learning-note__key-idea-text">
           {localize(note.explanation, note.explanation_fr)}
         </p>
       </section>
@@ -62,16 +65,16 @@ export function LearningNotePage() {
         <pre className="examples-block">{localize(note.examples, note.examples_fr)}</pre>
       </section>
 
-      <section className="panel">
-        <h2>{t("notes.commonMistakes")}</h2>
-        <p className="exercise-description">
+      <section className="learning-note__card learning-note__card--warning">
+        <p className="learning-note__card-label">⚠️ {t("notes.commonMistakes")}</p>
+        <p className="learning-note__card-text">
           {localize(note.common_mistakes, note.common_mistakes_fr)}
         </p>
       </section>
 
-      <section className="panel">
-        <h2>{t("notes.miniExercise")}</h2>
-        <p className="exercise-description">
+      <section className="learning-note__card learning-note__card--try">
+        <p className="learning-note__card-label">✏️ {t("notes.miniExercise")}</p>
+        <p className="learning-note__card-text">
           {localize(note.mini_exercise, note.mini_exercise_fr)}
         </p>
       </section>

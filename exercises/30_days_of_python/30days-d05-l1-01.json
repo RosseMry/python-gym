@@ -1,0 +1,41 @@
+{
+  "id": "30days-d05-l1-01",
+  "module": "lists",
+  "day": 5,
+  "level": 1,
+  "difficulty": 1,
+  "title": "Declare an empty list",
+  "description": "Declare an empty list.\n\nPython-Gym adaptation: implement as empty_list(), returning an empty list.",
+  "examples": ">>> empty_list()\n[]",
+  "starter_code": "def empty_list():\n    # your code here\n    pass\n",
+  "hints": [
+    "A list literal is written with square brackets containing comma-separated values.",
+    "An empty list needs no values between the brackets at all.",
+    "Return [] - two square brackets with nothing between them."
+  ],
+  "expected_behavior": "Returns an empty list, [].",
+  "solution": "def empty_list():\n    return []\n",
+  "hidden_tests": [
+    {
+      "call": "empty_list()",
+      "expected": "[]",
+      "label": "returns the empty list"
+    },
+    {
+      "call": "len(empty_list())",
+      "expected": "0",
+      "label": "empty list has length 0"
+    }
+  ],
+  "explanation": "[] is the literal for an empty list - no elements means nothing needs to go between the brackets.",
+  "concepts": [
+    "lists",
+    "empty list",
+    "list literal"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

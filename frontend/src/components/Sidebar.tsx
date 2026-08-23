@@ -1,5 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
-import { CONTENT_SOURCES } from "../types/exercise";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { useLocale } from "../i18n/LocaleContext";
 import "./Sidebar.css";
 
@@ -7,18 +6,14 @@ interface SidebarProps {
   repeatCount: number;
 }
 
-// Display order for the Python sub-sections - derived from
-// CONTENT_SOURCES (the single source of truth for source -> label) so
-// the two never drift apart, with a translation-key per source for the
-// nav (CONTENT_SOURCES itself stays English-only, used as an API
-// fallback label).
-const PYTHON_SOURCES: { source: keyof typeof CONTENT_SOURCES; labelKey: string }[] = [
-  { source: "foundations", labelKey: "nav.foundations" },
-  { source: "progressive_python", labelKey: "nav.progressivePython" },
-  { source: "python_gym", labelKey: "nav.pythonGym" },
-  { source: "30_days_of_python", labelKey: "nav.thirtyDays" },
-  { source: "42_python_piscine", labelKey: "nav.piscine" },
-];
+// Sprint 3 correction: Foundations/Progressive Python/Python-Gym are
+// not separate tracks - they're one merged "Progressive -> Foundations"
+// content stream (spec: "Python-Gym exercises are not a separate
+// sidebar track. They are integrated into the Progressive learning
+// system."), fetched as one multi-source request. 30 Days of Python
+// gets its own dedicated page (day/level structure), not a source
+// filter. 42 Piscine stays separate, one level down: its own section.
+const FOUNDATIONS_SOURCES = "foundations,progressive_python,python_gym";
 
 const COMING_SOON = ["SQL", "Data Science", "Mathematics", "Machine Learning", "ML Piscine"];
 
@@ -31,6 +26,7 @@ const COMING_SOON = ["SQL", "Data Science", "Mathematics", "Machine Learning", "
  */
 export function Sidebar({ repeatCount }: SidebarProps) {
   const location = useLocation();
+  const [searchParams] = useSearchParams();
   const { locale, setLocale, t } = useLocale();
 
   return (
@@ -66,22 +62,28 @@ export function Sidebar({ repeatCount }: SidebarProps) {
       )}
 
       <div className="sidebar__section">
-        <p className="sidebar__section-title">{t("nav.python")}</p>
+        <p className="sidebar__section-title">{t("nav.progressive")}</p>
         <ul className="sidebar__list">
-          {PYTHON_SOURCES.map(({ source, labelKey }) => {
-            const to = `/?source=${source}`;
-            const active = location.search === `?source=${source}`;
-            return (
-              <li key={source}>
-                <Link
-                  to={to}
-                  className={`sidebar__link ${active ? "sidebar__link--active" : ""}`}
-                >
-                  {t(labelKey)}
-                </Link>
-              </li>
-            );
-          })}
+          <li>
+            <Link
+              to={`/?source=${FOUNDATIONS_SOURCES}`}
+              className={`sidebar__link ${
+                (searchParams.get("source") ?? "") === FOUNDATIONS_SOURCES
+                  ? "sidebar__link--active"
+                  : ""
+              }`}
+            >
+              {t("nav.foundations")}
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/thirty-days"
+              className={`sidebar__link ${location.pathname === "/thirty-days" ? "sidebar__link--active" : ""}`}
+            >
+              {t("nav.thirtyDays")}
+            </Link>
+          </li>
           <li>
             <Link
               to="/notes"
@@ -89,6 +91,36 @@ export function Sidebar({ repeatCount }: SidebarProps) {
             >
               📖 {t("nav.learningNotes")}
             </Link>
+          </li>
+        </ul>
+      </div>
+
+      <div className="sidebar__section">
+        <p className="sidebar__section-title">{t("nav.piscine")}</p>
+        <ul className="sidebar__list">
+          <li>
+            <Link
+              to="/?source=42_python_piscine"
+              className={`sidebar__link ${
+                (searchParams.get("source") ?? "") === "42_python_piscine"
+                  ? "sidebar__link--active"
+                  : ""
+              }`}
+            >
+              {t("nav.piscine")}
+            </Link>
+          </li>
+        </ul>
+      </div>
+
+      <div className="sidebar__section">
+        <p className="sidebar__section-title">{t("nav.exam")}</p>
+        <ul className="sidebar__list">
+          <li>
+            <span className="sidebar__link sidebar__link--disabled">
+              {t("nav.pythonExam")}
+              <span className="sidebar__tag">{t("nav.comingSoon")}</span>
+            </span>
           </li>
         </ul>
       </div>

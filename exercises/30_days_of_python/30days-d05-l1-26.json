@@ -1,0 +1,40 @@
+{
+  "id": "30days-d05-l1-26",
+  "module": "lists",
+  "day": 5,
+  "level": 1,
+  "difficulty": 1,
+  "title": "Join the front_end and back_end lists",
+  "description": "Join the following lists:\n\nfront_end = ['HTML', 'CSS', 'JS', 'React', 'Redux']\nback_end = ['Node','Express', 'MongoDB']\n\nPython-Gym adaptation: implement as join_tech_lists(front_end, back_end), returning a new list with all items of front_end followed by all items of back_end.",
+  "examples": ">>> join_tech_lists(['HTML', 'CSS', 'JS', 'React', 'Redux'], ['Node', 'Express', 'MongoDB'])\n['HTML', 'CSS', 'JS', 'React', 'Redux', 'Node', 'Express', 'MongoDB']",
+  "starter_code": "def join_tech_lists(front_end, back_end):\n    # your code here\n    pass\n",
+  "hints": [
+    "Two lists can be combined into one with an arithmetic-looking operator.",
+    "The order of the result follows the order the lists are combined in.",
+    "Return front_end + back_end."
+  ],
+  "expected_behavior": "Returns a new list with front_end's items followed by back_end's items.",
+  "solution": "def join_tech_lists(front_end, back_end):\n    return front_end + back_end\n",
+  "hidden_tests": [
+    {
+      "call": "join_tech_lists(['HTML', 'CSS', 'JS', 'React', 'Redux'], ['Node', 'Express', 'MongoDB'])",
+      "expected": "['HTML', 'CSS', 'JS', 'React', 'Redux', 'Node', 'Express', 'MongoDB']",
+      "label": "front-end plus back-end"
+    },
+    {
+      "call": "join_tech_lists([], ['Node'])",
+      "expected": "['Node']",
+      "label": "empty front-end"
+    }
+  ],
+  "explanation": "The + operator on two lists concatenates them, producing a single list with the first list's items followed by the second's.",
+  "concepts": [
+    "lists",
+    "concatenation"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

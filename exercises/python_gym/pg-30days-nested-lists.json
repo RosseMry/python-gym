@@ -1,5 +1,5 @@
 {
-  "id": "30days-nested-lists",
+  "id": "pg-30days-nested-lists",
   "module": "nested_lists",
   "difficulty": 3,
   "title": "Sum each row of a grid",
@@ -38,5 +38,5 @@
     "basic_data_manipulation"
   ],
   "exercise_type": "script",
-  "source": "30_days_of_python"
+  "source": "python_gym"
 }

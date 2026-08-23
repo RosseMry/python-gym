@@ -1,0 +1,40 @@
+{
+  "id": "30days-d07-l3-03",
+  "module": "sets",
+  "day": 7,
+  "level": 3,
+  "difficulty": 3,
+  "title": "Unique words in a sentence",
+  "description": "_I am a teacher and I love to inspire and teach people._ How many unique words have been used in the sentence? Use the split methods and set to get the unique words.\n\nPython-Gym adaptation: implement as `count_unique_words(sentence)`, returning the number of unique whitespace-separated words in the given sentence.",
+  "examples": "count_unique_words('I am a teacher and I love to inspire and teach people.') -> 10",
+  "starter_code": "def count_unique_words(sentence):\n    # write your code here\n    pass\n",
+  "hints": [
+    "First break the sentence into individual words, the same way you'd tokenize any string on whitespace.",
+    "Once you have a list of words, feed it into a set to collapse any words that appear more than once.",
+    "Use sentence.split() to get the words, wrap the result in set(...), and return its len()."
+  ],
+  "expected_behavior": "Splits the sentence on whitespace into words, then returns the count of distinct words (case-sensitive, punctuation attached to a word counts as part of that word).",
+  "hidden_tests": [
+    {
+      "call": "count_unique_words('I am a teacher and I love to inspire and teach people.')",
+      "expected": "10",
+      "label": "original sentence, 'I' and 'and' each repeat once"
+    },
+    {
+      "call": "count_unique_words('the quick brown fox the lazy dog')",
+      "expected": "6",
+      "label": "sentence with one repeated word"
+    },
+    {
+      "call": "count_unique_words('hello hello hello')",
+      "expected": "1",
+      "label": "every word is the same"
+    }
+  ],
+  "solution": "def count_unique_words(sentence):\n    return len(set(sentence.split()))\n",
+  "explanation": "str.split() with no arguments breaks the string on whitespace into a list of words. Wrapping that list in set(...) collapses any repeated words into one, so len() of the resulting set gives the count of distinct words.",
+  "concepts": ["string", "split", "set", "len"],
+  "skills": ["basic_data_manipulation"],
+  "source": "30_days_of_python",
+  "exercise_type": "function"
+}

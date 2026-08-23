@@ -1,0 +1,26 @@
+{
+  "id": "30days-d08-07",
+  "module": "dictionaries",
+  "day": 8,
+  "difficulty": 1,
+  "title": "Get dictionary keys as a list",
+  "description": "Get the dictionary keys as a list.\n\nPython-Gym adaptation: implement as `dict_keys_list(student)`, returning the student dictionary's keys as a list.",
+  "examples": "dict_keys_list({'a': 1, 'b': 2, 'c': 3}) -> ['a', 'b', 'c']",
+  "starter_code": "def dict_keys_list(student):\n    # write your code here\n    pass\n",
+  "hints": [
+    "Dictionaries have a built-in method that hands back a view of just their keys, without the values attached.",
+    "That method's result behaves like a list but isn't quite one yet - you'll need to convert it to an actual list.",
+    "Call `student.keys()` and wrap the result in `list(...)` before returning it."
+  ],
+  "expected_behavior": "Returns a list containing the dictionary's keys, in insertion order.",
+  "hidden_tests": [
+    {"call": "dict_keys_list({'first_name': 'Asabeneh', 'last_name': 'Yetayeh', 'gender': 'male', 'age': 250, 'marital_status': 'married', 'skills': ['JavaScript', 'React'], 'country': 'Finland', 'city': 'Helsinki', 'address': 'Space street'})", "expected": "['first_name', 'last_name', 'gender', 'age', 'marital_status', 'skills', 'country', 'city', 'address']", "label": "full student dict keys"},
+    {"call": "dict_keys_list({'a': 1, 'b': 2, 'c': 3})", "expected": "['a', 'b', 'c']", "label": "small dict keys"}
+  ],
+  "solution": "def dict_keys_list(student):\n    return list(student.keys())\n",
+  "explanation": "student.keys() returns a dict_keys view of the dictionary's keys, and wrapping it in list() converts that view into a plain, ordinary list.",
+  "concepts": ["dictionaries", "keys", "type conversion"],
+  "skills": ["basic_data_manipulation"],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

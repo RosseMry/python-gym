@@ -1,0 +1,26 @@
+{
+  "id": "30days-d08-06",
+  "module": "dictionaries",
+  "day": 8,
+  "difficulty": 2,
+  "title": "Add more skills",
+  "description": "Modify the skills values by adding one or two more skills.\n\nPython-Gym adaptation: implement as `add_skills(student, new_skills)`, appending each skill in the `new_skills` list to the student dictionary's existing 'skills' list, and returning the updated skills list.",
+  "examples": "add_skills({'skills': ['Python']}, ['Django', 'Flask']) -> ['Python', 'Django', 'Flask']",
+  "starter_code": "def add_skills(student, new_skills):\n    # write your code here\n    pass\n",
+  "hints": [
+    "The skills value is a list stored inside the dictionary, so modifying it means using a list method on `student['skills']`, not reassigning the whole dictionary.",
+    "You need to add every skill in `new_skills` (which could be one, two, or more items) to the existing list, one at a time.",
+    "Loop over `new_skills` and call the list's `.append()` method on `student['skills']` for each one, then return `student['skills']`."
+  ],
+  "expected_behavior": "Adds every skill from new_skills onto the end of the student dictionary's existing skills list, and returns that updated list.",
+  "hidden_tests": [
+    {"call": "add_skills({'first_name': 'Asabeneh', 'skills': ['Python']}, ['Django', 'Flask'])", "expected": "['Python', 'Django', 'Flask']", "label": "adding two skills"},
+    {"call": "add_skills({'skills': ['JavaScript', 'React']}, ['Node'])", "expected": "['JavaScript', 'React', 'Node']", "label": "adding one skill"}
+  ],
+  "solution": "def add_skills(student, new_skills):\n    for skill in new_skills:\n        student['skills'].append(skill)\n    return student['skills']\n",
+  "explanation": "Since student['skills'] is itself a list, appending to it with .append() inside a loop over new_skills extends that list in place, one or two skills at a time.",
+  "concepts": ["dictionaries", "lists", "append", "nested data", "loops"],
+  "skills": ["basic_data_manipulation"],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

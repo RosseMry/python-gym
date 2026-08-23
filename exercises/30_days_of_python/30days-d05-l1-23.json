@@ -1,0 +1,41 @@
+{
+  "id": "30days-d05-l1-23",
+  "module": "lists",
+  "day": 5,
+  "level": 1,
+  "difficulty": 1,
+  "title": "Remove the last IT company",
+  "description": "Remove the last IT company from the list.\n\nPython-Gym adaptation: implement as remove_last_company(companies), returning a new list without the last item.",
+  "examples": ">>> remove_last_company(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'])\n['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle']",
+  "starter_code": "def remove_last_company(companies):\n    # your code here\n    pass\n",
+  "hints": [
+    "Slicing can stop just before the last item of a list.",
+    "A slice ending at -1 leaves out the final item.",
+    "Return companies[:-1]."
+  ],
+  "expected_behavior": "Returns a new list with the last item removed.",
+  "solution": "def remove_last_company(companies):\n    return companies[:-1]\n",
+  "hidden_tests": [
+    {
+      "call": "remove_last_company(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'])",
+      "expected": "['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle']",
+      "label": "remove last of seven"
+    },
+    {
+      "call": "remove_last_company(['A', 'B'])",
+      "expected": "['A']",
+      "label": "remove last of two"
+    }
+  ],
+  "explanation": "companies[:-1] slices from the start up to (but not including) the last item.",
+  "concepts": [
+    "lists",
+    "slicing",
+    "negative indexing"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

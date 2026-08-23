@@ -13,6 +13,8 @@ const MODULE_LABELS: Record<string, string> = {
   lists: "Lists",
   input_and_formulas: "Input & formulas",
   piscine_00_starting: "Starting",
+  piscine_01_array: "Array",
+  piscine_02_datatable: "DataTable",
   piscine_03_oop: "Object-Oriented Programming",
   piscine_04_data_oriented_design: "Data Oriented Design",
   // Sprint 3 foundations/python_gym/progressive-bridge modules
@@ -78,9 +80,13 @@ export function ExerciseListPage() {
   }
 
   const byModule = groupByModule(exercises);
-  const heading = source
-    ? CONTENT_SOURCES[source as keyof typeof CONTENT_SOURCES] ?? source
-    : t("list.todaysSession");
+  const sourceParts = source?.split(",") ?? [];
+  const heading =
+    sourceParts.length > 1
+      ? t("nav.foundations")
+      : source
+        ? CONTENT_SOURCES[source as keyof typeof CONTENT_SOURCES] ?? source
+        : t("list.todaysSession");
 
   return (
     <div className="page">
@@ -100,14 +106,29 @@ export function ExerciseListPage() {
           <div className="module-section__bar">
             <TrainingBar
               label={MODULE_LABELS[module] ?? module}
-              reps={items.map((e) => ({
-                id: e.id,
-                status: progress[e.id]?.status ?? "NEW",
-              }))}
+              reps={items
+                .filter((e) => e.exercise_status !== "locked")
+                .map((e) => ({
+                  id: e.id,
+                  status: progress[e.id]?.status ?? "NEW",
+                }))}
             />
           </div>
           <ul className="exercise-list">
             {items.map((exercise) => {
+              if (exercise.exercise_status === "locked") {
+                return (
+                  <li key={exercise.id}>
+                    <span className="exercise-card exercise-card--locked">
+                      <span className="status-dot status-dot--locked" />
+                      <span className="exercise-card__title">
+                        🔒 {localize(exercise.title, exercise.title_fr)}
+                      </span>
+                      <span className="exercise-card__meta">{t("list.locked")}</span>
+                    </span>
+                  </li>
+                );
+              }
               const status = progress[exercise.id]?.status ?? "NEW";
               return (
                 <li key={exercise.id}>

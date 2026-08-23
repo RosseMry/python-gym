@@ -1,0 +1,40 @@
+{
+  "id": "30days-d07-l2-01",
+  "module": "sets",
+  "day": 7,
+  "level": 2,
+  "difficulty": 2,
+  "title": "Join A and B",
+  "description": "Given the sets `A = {19, 22, 24, 20, 25, 26}` and `B = {19, 22, 20, 25, 26, 24, 28, 27}`: Join A and B.\n\nPython-Gym adaptation: implement as `join_sets(a, b)`, returning a SORTED list of the union of the two sets.",
+  "examples": "join_sets({19, 22, 24, 20, 25, 26}, {19, 22, 20, 25, 26, 24, 28, 27}) -> [19, 20, 22, 24, 25, 26, 27, 28]",
+  "starter_code": "def join_sets(a, b):\n    # write your code here\n    pass\n",
+  "hints": [
+    "\"Joining\" two sets means combining every element from both into one set, with duplicates collapsed automatically.",
+    "Python has both an operator and a method name for this operation - either one produces the combined set.",
+    "Use the | operator (or a.union(b)) to combine the sets, then return sorted(result)."
+  ],
+  "expected_behavior": "Returns a sorted list containing every element that appears in either set (the union), with no duplicates.",
+  "hidden_tests": [
+    {
+      "call": "join_sets({19, 22, 24, 20, 25, 26}, {19, 22, 20, 25, 26, 24, 28, 27})",
+      "expected": "[19, 20, 22, 24, 25, 26, 27, 28]",
+      "label": "original A and B sets"
+    },
+    {
+      "call": "join_sets({1, 2}, {2, 3})",
+      "expected": "[1, 2, 3]",
+      "label": "small overlapping sets"
+    },
+    {
+      "call": "join_sets(set(), {5})",
+      "expected": "[5]",
+      "label": "one set empty"
+    }
+  ],
+  "solution": "def join_sets(a, b):\n    return sorted(a | b)\n",
+  "explanation": "The | operator (equivalently, .union()) returns a new set containing every element from both operands, automatically collapsing any duplicates. Sorting the result gives a predictable order for checking.",
+  "concepts": ["set", "union", "sorted"],
+  "skills": ["basic_data_manipulation"],
+  "source": "30_days_of_python",
+  "exercise_type": "function"
+}

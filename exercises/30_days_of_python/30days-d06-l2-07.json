@@ -1,0 +1,46 @@
+{
+  "id": "30days-d06-l2-07",
+  "module": "tuples",
+  "day": 6,
+  "level": 2,
+  "difficulty": 1,
+  "title": "Check if a country is a Nordic country",
+  "description": "Check if an item exists in tuple:\n\n- Check if 'Estonia' is a nordic country\n- Check if 'Iceland' is a nordic country\n\n```py\nnordic_countries = ('Denmark', 'Finland','Iceland', 'Norway', 'Sweden')\n```\n\nPython-Gym adaptation: implement as is_nordic_country(country), using the nordic_countries tuple exactly as given above, returning True if country is a member of that tuple and False otherwise.",
+  "examples": ">>> is_nordic_country('Estonia')\nFalse\n>>> is_nordic_country('Iceland')\nTrue",
+  "starter_code": "def is_nordic_country(country):\n    # your code here\n    pass\n",
+  "hints": [
+    "Checking whether a value is present in a tuple doesn't require a loop - Python has a keyword built for exactly this membership test.",
+    "The nordic_countries tuple is fixed: ('Denmark', 'Finland', 'Iceland', 'Norway', 'Sweden').",
+    "Return country in nordic_countries - the in operator checks membership and evaluates directly to True or False."
+  ],
+  "expected_behavior": "Returns True when country is one of Denmark, Finland, Iceland, Norway or Sweden, and False otherwise.",
+  "hidden_tests": [
+    {
+      "call": "is_nordic_country('Estonia')",
+      "expected": "False",
+      "label": "Estonia is not a Nordic country"
+    },
+    {
+      "call": "is_nordic_country('Iceland')",
+      "expected": "True",
+      "label": "Iceland is a Nordic country"
+    },
+    {
+      "call": "is_nordic_country('Germany')",
+      "expected": "False",
+      "label": "Germany is not a Nordic country"
+    }
+  ],
+  "solution": "def is_nordic_country(country):\n    nordic_countries = ('Denmark', 'Finland', 'Iceland', 'Norway', 'Sweden')\n    return country in nordic_countries\n",
+  "explanation": "The in operator performs a membership test on any sequence, including a tuple, returning True if a matching element is found and False if the tuple is scanned without a match.",
+  "concepts": [
+    "tuples",
+    "membership operator",
+    "in"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

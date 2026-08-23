@@ -1,0 +1,41 @@
+{
+  "id": "30days-d06-l2-02",
+  "module": "tuples",
+  "day": 6,
+  "level": 2,
+  "difficulty": 2,
+  "title": "Join fruits, vegetables and animal products into food_stuff_tp",
+  "description": "Create fruits, vegetables and animal products tuples. Join the three tuples and assign it to a variable called food_stuff_tp.\n\nPython-Gym adaptation: implement as create_food_stuff_tp(fruits, vegetables, animal_products), where each argument is a tuple, returning food_stuff_tp as the concatenation of fruits, then vegetables, then animal_products.",
+  "examples": ">>> create_food_stuff_tp(('banana', 'orange', 'mango', 'lemon'), ('tomato', 'potato', 'cabbage', 'onion', 'carrot'), ('milk', 'meat', 'fish', 'yoghurt'))\n('banana', 'orange', 'mango', 'lemon', 'tomato', 'potato', 'cabbage', 'onion', 'carrot', 'milk', 'meat', 'fish', 'yoghurt')",
+  "starter_code": "def create_food_stuff_tp(fruits, vegetables, animal_products):\n    # your code here\n    pass\n",
+  "hints": [
+    "You already joined two tuples with siblings earlier - joining three tuples works the same way, just with one more +.",
+    "Order matters: the result should list all of fruits, then all of vegetables, then all of animal_products.",
+    "Return fruits + vegetables + animal_products - chaining the + operator concatenates all three in order."
+  ],
+  "expected_behavior": "Returns the concatenation of fruits, vegetables and animal_products, in that order, as one tuple.",
+  "hidden_tests": [
+    {
+      "call": "create_food_stuff_tp(('banana', 'orange', 'mango', 'lemon'), ('tomato', 'potato', 'cabbage', 'onion', 'carrot'), ('milk', 'meat', 'fish', 'yoghurt'))",
+      "expected": "('banana', 'orange', 'mango', 'lemon', 'tomato', 'potato', 'cabbage', 'onion', 'carrot', 'milk', 'meat', 'fish', 'yoghurt')",
+      "label": "full example food lists"
+    },
+    {
+      "call": "create_food_stuff_tp(('apple',), ('carrot',), ('egg',))",
+      "expected": "('apple', 'carrot', 'egg')",
+      "label": "one item per category"
+    }
+  ],
+  "solution": "def create_food_stuff_tp(fruits, vegetables, animal_products):\n    return fruits + vegetables + animal_products\n",
+  "explanation": "The + operator concatenates tuples pairwise and can be chained, so fruits + vegetables + animal_products produces one tuple containing every item from all three, in order.",
+  "concepts": [
+    "tuples",
+    "tuple concatenation",
+    "operators"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

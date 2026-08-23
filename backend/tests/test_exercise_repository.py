@@ -41,3 +41,12 @@ def test_save_progress_persists_changes(repo: ExerciseRepository) -> None:
     assert reloaded.attempts == 3
     assert reloaded.hints_used == 1
     assert reloaded.status == ExerciseStatus.SOLVED_WITH_HINT
+
+
+def test_solved_after_solution_status_round_trips(repo: ExerciseRepository) -> None:
+    progress = repo.get_progress("loop-003")
+    progress.status = ExerciseStatus.SOLVED_AFTER_SOLUTION
+    repo.save_progress(progress)
+
+    reloaded = repo.get_progress("loop-003")
+    assert reloaded.status == ExerciseStatus.SOLVED_AFTER_SOLUTION

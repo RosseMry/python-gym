@@ -1,0 +1,36 @@
+{
+  "id": "30days-d05-l1-27",
+  "module": "lists",
+  "day": 5,
+  "level": 1,
+  "difficulty": 3,
+  "title": "Build full_stack and insert Python and SQL after Redux",
+  "description": "After joining the lists in question 26, copy the joined list and assign it to a variable full_stack, then insert Python and SQL after Redux.\n\nPython-Gym adaptation: implement as build_full_stack(front_end, back_end), which joins the two lists and returns the resulting full_stack list with 'Python' and 'SQL' inserted immediately after 'Redux'.",
+  "examples": ">>> build_full_stack(['HTML', 'CSS', 'JS', 'React', 'Redux'], ['Node', 'Express', 'MongoDB'])\n['HTML', 'CSS', 'JS', 'React', 'Redux', 'Python', 'SQL', 'Node', 'Express', 'MongoDB']",
+  "starter_code": "def build_full_stack(front_end, back_end):\n    # your code here\n    pass\n",
+  "hints": [
+    "Start the same way as joining the two lists together.",
+    "Find the position of 'Redux' in the joined list so you know exactly where to insert.",
+    "Use full_stack.index('Redux') to get the position, then splice in ['Python', 'SQL'] right after it with slice assignment or two inserts."
+  ],
+  "expected_behavior": "Returns front_end + back_end with 'Python' and 'SQL' inserted right after 'Redux'.",
+  "solution": "def build_full_stack(front_end, back_end):\n    full_stack = front_end + back_end\n    redux_index = full_stack.index('Redux')\n    full_stack[redux_index + 1:redux_index + 1] = ['Python', 'SQL']\n    return full_stack\n",
+  "hidden_tests": [
+    {
+      "call": "build_full_stack(['HTML', 'CSS', 'JS', 'React', 'Redux'], ['Node', 'Express', 'MongoDB'])",
+      "expected": "['HTML', 'CSS', 'JS', 'React', 'Redux', 'Python', 'SQL', 'Node', 'Express', 'MongoDB']",
+      "label": "insert after Redux"
+    }
+  ],
+  "explanation": "list.index('Redux') locates the insertion point, and slice assignment at that point splices in both new items without disturbing the rest of the list.",
+  "concepts": [
+    "lists",
+    "insert",
+    "index"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

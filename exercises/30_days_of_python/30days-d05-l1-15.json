@@ -1,0 +1,40 @@
+{
+  "id": "30days-d05-l1-15",
+  "module": "lists",
+  "day": 5,
+  "level": 1,
+  "difficulty": 1,
+  "title": "Check if a company exists in the list",
+  "description": "Check if a certain company exists in the it_companies list.\n\nPython-Gym adaptation: implement as company_exists(companies, company), returning True if company is present in companies, False otherwise.",
+  "examples": ">>> company_exists(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'], 'Google')\nTrue",
+  "starter_code": "def company_exists(companies, company):\n    # your code here\n    pass\n",
+  "hints": [
+    "Python has a membership operator for checking if a value is inside a list.",
+    "The result of that check is a boolean.",
+    "Return company in companies."
+  ],
+  "expected_behavior": "Returns True if company is in companies, False otherwise.",
+  "solution": "def company_exists(companies, company):\n    return company in companies\n",
+  "hidden_tests": [
+    {
+      "call": "company_exists(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'], 'Google')",
+      "expected": "True",
+      "label": "Google is present"
+    },
+    {
+      "call": "company_exists(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'], 'Netflix')",
+      "expected": "False",
+      "label": "Netflix is absent"
+    }
+  ],
+  "explanation": "The `in` operator checks membership in a list directly and returns a boolean.",
+  "concepts": [
+    "lists",
+    "membership operator"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

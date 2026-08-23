@@ -1,0 +1,26 @@
+{
+  "id": "30days-d08-09",
+  "module": "dictionaries",
+  "day": 8,
+  "difficulty": 2,
+  "title": "Change the dictionary to a list of tuples",
+  "description": "Change the dictionary to a list of tuples using the items() method.\n\nPython-Gym adaptation: implement as `dict_to_tuples(student)`, returning the student dictionary's key-value pairs as a list of (key, value) tuples.",
+  "examples": "dict_to_tuples({'a': 1, 'b': 2}) -> [('a', 1), ('b', 2)]",
+  "starter_code": "def dict_to_tuples(student):\n    # write your code here\n    pass\n",
+  "hints": [
+    "You need each key paired together with its value, as one combined item per pair, rather than two separate lists.",
+    "Dictionaries have a method whose name literally describes what you want: the individual key-value pairs, or 'items', of the dictionary.",
+    "Call `student.items()` and wrap the result in `list(...)` before returning it."
+  ],
+  "expected_behavior": "Returns a list of 2-tuples, each holding one (key, value) pair from the dictionary, in insertion order.",
+  "hidden_tests": [
+    {"call": "dict_to_tuples({'first_name': 'Asabeneh', 'last_name': 'Yetayeh', 'gender': 'male'})", "expected": "[('first_name', 'Asabeneh'), ('last_name', 'Yetayeh'), ('gender', 'male')]", "label": "student subset as tuples"},
+    {"call": "dict_to_tuples({'a': 1, 'b': 2})", "expected": "[('a', 1), ('b', 2)]", "label": "small dict as tuples"}
+  ],
+  "solution": "def dict_to_tuples(student):\n    return list(student.items())\n",
+  "explanation": "student.items() returns a dict_items view of (key, value) tuples, and list() converts that view into a plain list of tuples.",
+  "concepts": ["dictionaries", "items", "tuples", "type conversion"],
+  "skills": ["basic_data_manipulation"],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

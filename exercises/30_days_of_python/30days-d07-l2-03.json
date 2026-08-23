@@ -1,0 +1,40 @@
+{
+  "id": "30days-d07-l2-03",
+  "module": "sets",
+  "day": 7,
+  "level": 2,
+  "difficulty": 2,
+  "title": "Is A subset of B",
+  "description": "Given the sets `A = {19, 22, 24, 20, 25, 26}` and `B = {19, 22, 20, 25, 26, 24, 28, 27}`: Is A subset of B?\n\nPython-Gym adaptation: implement as `is_subset(a, b)`, returning True if every element of `a` is also in `b`, False otherwise.",
+  "examples": "is_subset({19, 22, 24, 20, 25, 26}, {19, 22, 20, 25, 26, 24, 28, 27}) -> True",
+  "starter_code": "def is_subset(a, b):\n    # write your code here\n    pass\n",
+  "hints": [
+    "A set is a subset of another when every one of its elements also belongs to the other set.",
+    "Sets have a dedicated method that answers exactly this question with True or False.",
+    "Call a.issubset(b) and return its result directly."
+  ],
+  "expected_behavior": "Returns True if every element of a is contained in b, False otherwise.",
+  "hidden_tests": [
+    {
+      "call": "is_subset({19, 22, 24, 20, 25, 26}, {19, 22, 20, 25, 26, 24, 28, 27})",
+      "expected": "True",
+      "label": "A is a subset of B"
+    },
+    {
+      "call": "is_subset({19, 22, 20, 25, 26, 24, 28, 27}, {19, 22, 24, 20, 25, 26})",
+      "expected": "False",
+      "label": "B is not a subset of A"
+    },
+    {
+      "call": "is_subset({1, 2}, {1, 2})",
+      "expected": "True",
+      "label": "a set is a subset of itself"
+    }
+  ],
+  "solution": "def is_subset(a, b):\n    return a.issubset(b)\n",
+  "explanation": "set.issubset() returns True exactly when every element of the calling set is also present in the other set, which is the definition of a subset relationship.",
+  "concepts": ["set", "issubset", "subset"],
+  "skills": ["basic_data_manipulation"],
+  "source": "30_days_of_python",
+  "exercise_type": "function"
+}

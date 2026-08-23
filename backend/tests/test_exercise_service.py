@@ -112,7 +112,33 @@ def test_revealing_solution_prevents_full_mastery_on_next_pass(
     result = service.submit("loop-003", CORRECT)
     assert result.passed is True
     progress = service._repo.get_progress("loop-003")
-    assert progress.status == ExerciseStatus.SOLVED_WITH_HINT
+    assert progress.status == ExerciseStatus.SOLVED_AFTER_SOLUTION
+
+
+def test_hint_and_solution_reveal_produce_distinct_statuses(
+    service: ExerciseService,
+) -> None:
+    """Sprint 3 correction: these used to collapse into one status."""
+    service.request_hint("loop-003")
+    service.submit("loop-003", CORRECT)
+    hint_progress = service._repo.get_progress("loop-003")
+    assert hint_progress.status == ExerciseStatus.SOLVED_WITH_HINT
+
+    service.reveal_solution("loop-003")
+    service.submit("loop-003", CORRECT)
+    reveal_progress = service._repo.get_progress("loop-003")
+    assert reveal_progress.status == ExerciseStatus.SOLVED_AFTER_SOLUTION
+    assert reveal_progress.status != hint_progress.status
+
+
+def test_solved_after_solution_is_still_eligible_for_repeat(
+    service: ExerciseService,
+) -> None:
+    service.reveal_solution("loop-003")
+    service.submit("loop-003", CORRECT)
+    service.mark_repeat("loop-003")
+    progress = service._repo.get_progress("loop-003")
+    assert progress.status == ExerciseStatus.SOLVED_TO_REPEAT
 
 
 def test_explanation_is_stored(service: ExerciseService) -> None:

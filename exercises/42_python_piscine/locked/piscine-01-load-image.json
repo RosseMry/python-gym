@@ -1,0 +1,21 @@
+{
+  "id": "piscine-01-load-image",
+  "module": "piscine_01_array",
+  "difficulty": 2,
+  "title": "Load Image (locked)",
+  "description": "Real Piscine subject: load a JPG/PNG image as a NumPy array (via PIL/Pillow) and display its individual RGB channels, practicing image-as-array manipulation.\n\nLocked: requires NumPy and PIL, plus real sample image files (landscape.jpg/png), none of which are part of Python-Gym's execution environment yet. Stays represented in the catalog rather than removed, per the Sprint 3 correction spec.",
+  "examples": "",
+  "starter_code": "",
+  "hints": [],
+  "expected_behavior": "Not gradable yet - requires NumPy, PIL, and sample images.",
+  "hidden_tests": [],
+  "solution": "",
+  "explanation": "Locked pending a NumPy/PIL-capable execution environment and image resources.",
+  "concepts": ["numpy", "PIL", "image processing", "RGB channels"],
+  "skills": ["numerical_computation", "image_processing"],
+  "source": "42_python_piscine",
+  "track": "python",
+  "validation_profile": "42_piscine",
+  "exercise_status": "locked",
+  "resources": ["python/42-piscine/landscape.jpg", "python/42-piscine/landscape.png"]
+}

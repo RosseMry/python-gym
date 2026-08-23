@@ -1,0 +1,27 @@
+{
+  "id": "30days-d08-02",
+  "module": "dictionaries",
+  "day": 8,
+  "difficulty": 1,
+  "title": "Add keys to the dog dictionary",
+  "description": "Add name, color, breed, legs, age to the dog dictionary.\n\nPython-Gym adaptation: implement as `build_dog(name, color, breed, legs, age)`, returning a dictionary built from an empty dict by adding the keys 'name', 'color', 'breed', 'legs' and 'age' (in that order) with the given argument values.",
+  "examples": "build_dog('Fido', 'brown', 'Labrador', 4, 3) -> {'name': 'Fido', 'color': 'brown', 'breed': 'Labrador', 'legs': 4, 'age': 3}",
+  "starter_code": "def build_dog(name, color, breed, legs, age):\n    # write your code here\n    pass\n",
+  "hints": [
+    "Start from an empty dictionary, then think of each argument as one more piece of information you need to attach to it under a descriptive key.",
+    "Assigning to a new key inside square brackets, like dct['key'] = value, adds that key-value pair to a dictionary that doesn't have it yet.",
+    "Start from an empty dictionary literal and then perform five separate square-bracket assignments, one per key, in the order name, color, breed, legs, age, before returning it."
+  ],
+  "expected_behavior": "Returns a dictionary with exactly the keys name, color, breed, legs and age, set from the corresponding arguments.",
+  "hidden_tests": [
+    {"call": "build_dog('Fido', 'brown', 'Labrador', 4, 3)", "expected": "{'name': 'Fido', 'color': 'brown', 'breed': 'Labrador', 'legs': 4, 'age': 3}", "label": "typical dog"},
+    {"call": "build_dog('Rex', 'black', 'Poodle', 4, 5)", "expected": "{'name': 'Rex', 'color': 'black', 'breed': 'Poodle', 'legs': 4, 'age': 5}", "label": "different values"},
+    {"call": "list(build_dog('Fido', 'brown', 'Labrador', 4, 3).keys())", "expected": "['name', 'color', 'breed', 'legs', 'age']", "label": "keys are in insertion order"}
+  ],
+  "solution": "def build_dog(name, color, breed, legs, age):\n    dog = {}\n    dog['name'] = name\n    dog['color'] = color\n    dog['breed'] = breed\n    dog['legs'] = legs\n    dog['age'] = age\n    return dog\n",
+  "explanation": "Assigning to a dictionary with a key that doesn't exist yet, like dog['name'] = name, creates that key-value pair; repeating this for each field builds up the full dictionary.",
+  "concepts": ["dictionaries", "adding keys", "dictionary assignment"],
+  "skills": ["basic_data_manipulation"],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

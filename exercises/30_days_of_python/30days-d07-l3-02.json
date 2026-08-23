@@ -1,0 +1,45 @@
+{
+  "id": "30days-d07-l3-02",
+  "module": "sets",
+  "day": 7,
+  "level": 3,
+  "difficulty": 3,
+  "title": "String, list, tuple, and set differences",
+  "description": "Explain the difference between the following data types: string, list, tuple and set.\n\nPython-Gym adaptation: implement as `data_type_properties(type_name)`, where `type_name` is one of the strings `'string'`, `'list'`, `'tuple'`, or `'set'`. Return a tuple `(is_mutable, is_ordered, allows_duplicates)` of booleans describing that data type's key properties, capturing the actual differences between the four types.",
+  "examples": "data_type_properties('set') -> (True, False, False)\ndata_type_properties('tuple') -> (False, True, True)",
+  "starter_code": "def data_type_properties(type_name):\n    # write your code here\n    pass\n",
+  "hints": [
+    "The four types differ along three axes: can you change them after creation, do they keep track of item order, and can the same value appear more than once.",
+    "Strings and tuples are both immutable and ordered; lists are mutable and ordered; sets are mutable but unordered and drop duplicates.",
+    "Build a dict mapping each type_name to its (is_mutable, is_ordered, allows_duplicates) tuple, then return props[type_name]."
+  ],
+  "expected_behavior": "Returns a 3-tuple of booleans (is_mutable, is_ordered, allows_duplicates) describing the given data type's key properties.",
+  "hidden_tests": [
+    {
+      "call": "data_type_properties('string')",
+      "expected": "(False, True, True)",
+      "label": "strings are immutable, ordered, allow duplicate characters"
+    },
+    {
+      "call": "data_type_properties('list')",
+      "expected": "(True, True, True)",
+      "label": "lists are mutable, ordered, allow duplicates"
+    },
+    {
+      "call": "data_type_properties('tuple')",
+      "expected": "(False, True, True)",
+      "label": "tuples are immutable, ordered, allow duplicates"
+    },
+    {
+      "call": "data_type_properties('set')",
+      "expected": "(True, False, False)",
+      "label": "sets are mutable, unordered, disallow duplicates"
+    }
+  ],
+  "solution": "def data_type_properties(type_name):\n    props = {\n        'string': (False, True, True),\n        'list': (True, True, True),\n        'tuple': (False, True, True),\n        'set': (True, False, False),\n    }\n    return props[type_name]\n",
+  "explanation": "Strings and tuples are immutable and preserve insertion order, and both can contain repeated values. Lists are mutable and ordered, and also allow duplicates. Sets are mutable but do not preserve any guaranteed order, and by definition cannot contain duplicate values - adding an existing value is simply a no-op.",
+  "concepts": ["string", "list", "tuple", "set", "mutability", "ordering"],
+  "skills": ["basic_data_manipulation"],
+  "source": "30_days_of_python",
+  "exercise_type": "function"
+}

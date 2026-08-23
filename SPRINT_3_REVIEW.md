@@ -307,3 +307,194 @@ adding more untranslated content, (2) the remaining 8 learning notes,
 (3) SQL Foundations track using the same content-JSON + seed-script
 pattern, (4) Interview Foundations. Sprint 4 should not start until you
 confirm this scope.
+
+---
+
+## Addendum — Sprint 3 Architecture Correction
+
+You corrected the information architecture and completeness of the
+above pass with a follow-up spec. This addendum documents that
+correction; the sections above are left as originally written (history,
+not retroactively edited).
+
+### What changed and why
+
+- **Piscine reconciled against the real repo, not PDFs I no longer had.**
+  You pointed me at `github.com/zstenger93/python_piscine` as a
+  substitute source. File-by-file reconciliation found the real catalog
+  is **29 exercises** (Module 0: 10, Module 1: 6, Module 2: 4, Module 3:
+  5, Module 4: 4) — and that the 19 already seeded (Modules 0/3/4) were
+  **already fully correct**, matching the real repo exactly. The actual
+  gap was Modules 1 (Array) and 2 (DataTable), both requiring NumPy/
+  Pandas. Added all 10 as new `Exercise` rows with real titles/
+  descriptions and a new `exercise_status = "locked"` (distinct from
+  `"excluded"`: visible in the catalog, greyed out, never recommended by
+  `/exercises/next`, never fabricated as gradable). Catalog now
+  represents the full real 29.
+- **30 Days of Python: real complete import, not ~10 invented-in-spirit
+  exercises.** Real per-day counts (fetched from the source repo's raw
+  markdown, not estimated) turned out far larger than expected — Day 5
+  alone has 31 exercises (27 Level 1 + 4 Level 2 — the real count is 4,
+  not the 3 first estimated). You scoped this to Days 5-8 (Lists/Tuples/
+  Sets/Dictionaries) for this pass, Days 1-4 excluded (covered by
+  Foundations already), Days 22-30 locked (need live network/a database/
+  a web server — don't fit the local function/script grading model; Day
+  30 has no exercises and is omitted). **69 real exercises imported**:
+  Lists 31, Tuples 12, Sets 15, Dictionaries 11 — every one's
+  description preserves the real source instruction text, with a
+  clearly separated `"Python-Gym adaptation: ..."` line only where a
+  callable signature had to be invented to make it hidden-test-gradable.
+  Days 9-21 are explicit backlog for future passes.
+- **Recategorized 6 previously-mislabeled exercises.** The prior pass's
+  `30days-string-methods`/`-list-methods`/`-dict-practice`/
+  `-function-practice`/`-tuple-unpacking`/`-nested-lists` were invented,
+  theme-inspired content, not real imports — their own authoring
+  report said so. Now that real Day 5/6/8 content exists, keeping them
+  labeled `source="30_days_of_python"` would misrepresent them as
+  sourced. Moved to `exercises/python_gym/` with a `pg-` id prefix and
+  `source="python_gym"` — same content, honestly labeled. Fixed the
+  stale references this broke in `notes/lists.json`, `strings.json`,
+  `dictionaries.json`.
+- **Sidebar restructured**: Foundations/Progressive Python/Python-Gym
+  are no longer 3 separate nav items — they're one "Progressive →
+  Foundations" link fetching all three sources in one request (new
+  comma-separated `source` query param, `list_by_source` now does
+  `WHERE source IN (...)`). "Progressive → 30 Days of Python" is now its
+  own dedicated page (`/thirty-days`), not a source filter — Day 01-30
+  accordion structure, populated days expandable, locked days (22-29)
+  shown muted with a reason, not-yet-imported days (1-4, 9-21) shown
+  structurally per the spec but without fabricated content. Added a
+  disabled "Python Exam" entry completing the Progressive → Piscine →
+  Exam path visually.
+- **Status split**: `SOLVED_WITH_HINT` used to mean both "used a hint"
+  and "revealed the solution." Split into `SOLVED_WITH_HINT` (hint used)
+  and new `SOLVED_AFTER_SOLUTION` (solution revealed) — different
+  signals for the future adaptive/exam system. Both still count as
+  "solved" for repeat-eligibility and prerequisite resolution; neither
+  counts toward mastery, unchanged from before.
+- **Learning Notes redesigned**: key-idea card (`--focus` accent),
+  syntax/examples kept as-is, a warning card for common mistakes
+  (`--danger` accent), a "try this" card for the mini exercise
+  (`--success` accent, previously an unused token pair) — replacing the
+  flat stacked-panel layout.
+
+### Files added
+
+Backend: `backend/tests/test_locked_and_multisource.py`.
+
+Content: 10 locked Piscine exercises
+(`exercises/42_python_piscine/locked/*.json`); 69 real Day 5-8 imports
+(`exercises/30_days_of_python/30days-d0{5,6,7,8}-*.json`).
+
+Frontend: `pages/ThirtyDaysPage.tsx` + `.css`, `pages/LearningNote.css`.
+
+### Files modified
+
+Backend: `app/domain/models.py` (`day`/`level` fields,
+`SOLVED_AFTER_SOLUTION`, `"locked"` status documented), `app/models/
+database.py` (schema + migration columns for `day`/`level`),
+`app/repositories/exercise_repository.py` (`day`/`level` round-trip,
+multi-source `list_by_source`, `locked` excluded from
+`get_next_unsolved`, both `solved_family` tuples updated),
+`app/services/exercise_service.py` (`_SOLVED_FAMILY`,
+`_next_status_on_success` split, `day`/`level` pass-through),
+`app/api/exercises.py` (`day`/`level`/`exercise_status` exposed on both
+response schemas), `scripts/seed.py` (parse `day`/`level`). Existing
+tests updated for the status split (`test_exercise_service.py`,
+`test_exercise_repository.py`) and the new real counts
+(`test_seed_content.py`).
+
+Frontend: `components/Sidebar.tsx` + `.css` (Progressive/Piscine/Exam
+restructure), `components/TrainingBar.tsx` + `.css` (status split),
+`pages/ExerciseListPage.tsx` + `.css` (locked-card rendering, merged-
+source heading, new module labels), `pages/LearningNotePage.tsx` (card
+classes), `types/exercise.ts` (`day`/`level`/`exercise_status`,
+`SOLVED_AFTER_SOLUTION`), `App.tsx` (`/thirty-days` route),
+`resources/README.md` (locked-exercise documentation).
+
+6 exercise files moved + edited (source recategorization, see above).
+2 note files edited (stale reference fixes).
+
+### Content
+
+| Addition | Count |
+|---|---|
+| Piscine locked entries (Module 1 + 2) | 10 |
+| 30 Days real imports (Days 5-8) | 69 (Lists 31, Tuples 12, Sets 15, Dicts 11) |
+| Recategorized (30-days-inspired → python_gym) | 6 |
+| **Catalog total** | **168** (up from 89) |
+
+### Tests
+
+**108 tests pass** (`uv run pytest`), up from 93. `uv run flake8 app
+scripts tests` clean. New: `test_locked_and_multisource.py` (10 tests —
+day/level round-trip, locked visible-but-never-recommended, comma-
+separated source merge, both at repository and HTTP layers). Extended:
+`test_seed_content.py` (exact Piscine=29 assertion, 10-locked-exercises
+check, exact per-day counts for Days 5-8 as a regression guard against
+losing real content in a future refactor).
+
+**Content QA**: same solution-vs-own-hidden-tests script as the
+original Sprint 3 pass, re-run against the full 168-exercise catalog.
+All 69 new imports and all 10 locked entries behave exactly as
+expected (locked entries correctly fail — they have no solution by
+design); the same 9 pre-existing Sprint 2 metadata-only exercises still
+fail for the same pre-existing reason (confirmed via `git diff`
+untouched).
+
+### Regression check
+
+- **`get_next_unsolved` excluding locked exercises**: before, only
+  `exercise_status != 'excluded'` was checked, so a locked exercise
+  (once seeded) would have been recommended as "next" despite having no
+  solution — a real bug that would have surfaced immediately once
+  Module 1/2 entries existed. Fixed by excluding `'locked'` too, before
+  any user could hit it (caught in review, not production).
+  Verified: 10 consecutive calls to `/exercises/next?source=
+  42_python_piscine` never returned a locked id.
+- **Status split**: verified both old assertions (hint → `SOLVED_WITH_
+  HINT`) and new (reveal → `SOLVED_AFTER_SOLUTION`) pass, and that
+  `SOLVED_AFTER_SOLUTION` is still repeat-eligible (new test).
+- **Merged-source connection/leak behavior**: hammered
+  `?source=foundations,progressive_python,python_gym` 15x back-to-back
+  post-restart — same technique used to verify the original Sprint 3
+  connection-leak fix — all 200s, confirming the new `IN (...)` query
+  path didn't reintroduce it.
+- Sprint 1/2/3 functionality spot-checked again after the restructure:
+  hint/solution reveal, submit pass/fail, repeat queue, existing
+  Learning Notes API, all still 200 with no backend errors across the
+  full smoke-test session (confirmed via log grep for 4xx/5xx — none
+  found outside expected 404s).
+
+### Problems
+
+- **Days 9-21 of 30 Days of Python remain unimported** — 13 more days,
+  likely 200+ more exercises given the real per-day sizes seen so far.
+  Explicit backlog, not started this pass.
+- **Days 22-29 are locked with zero exercises represented per-day** (no
+  PDF/spec exists to name individual exercises within e.g. "Web
+  scraping," only the day-level topic) — coarser than the Piscine's
+  locked entries, which do have real per-exercise names. Could be
+  refined later if useful.
+- **French content still not started** (infrastructure only, unchanged
+  from the original Sprint 3 pass) — now an even bigger backlog given
+  the catalog nearly doubled again this correction.
+- **The 10 locked Piscine exercises' declared `resources` paths don't
+  exist as real files** (no NumPy/Pandas execution environment to run
+  them against yet) — documented in `resources/README.md`, deliberately
+  not fabricated.
+- **`ThirtyDaysPage`'s day-jump strip and per-day accordions haven't
+  been visually verified in a real browser** (no Claude-in-Chrome
+  connected this session) — confirmed via `curl`/tsc/backend logs that
+  the route serves 200 and the data shape is correct, but actual
+  rendering (accordion open/close, sticky nav, locked-day styling) is
+  unverified beyond code review.
+
+### Next sprint
+
+Unchanged from the original proposal, with two additions from this
+correction: continue the 30-Days import (Days 9-21) as its own
+multi-pass effort, and consider whether the Piscine's Module 1/2 locked
+exercises should get a first real implementation once a NumPy/Pandas-
+capable execution environment is designed (a bigger architectural
+decision than this correction's scope). Sprint 4 not started.

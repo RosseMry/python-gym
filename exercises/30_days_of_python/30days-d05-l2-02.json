@@ -1,0 +1,40 @@
+{
+  "id": "30days-d05-l2-02",
+  "module": "lists",
+  "day": 5,
+  "level": 2,
+  "difficulty": 2,
+  "title": "Find the middle country or countries",
+  "description": "Find the middle country(ies) in the countries list (https://github.com/Asabeneh/30-Days-Of-Python/tree/master/data/countries.py).\n\nPython-Gym adaptation: implement as middle_countries(countries), taking any list of country names and returning a list with the single middle item when the list has an odd length, or the two middle items when it has an even length.",
+  "examples": ">>> middle_countries(['China', 'Russia', 'USA', 'Finland', 'Sweden'])\n['USA']",
+  "starter_code": "def middle_countries(countries):\n    # your code here\n    pass\n",
+  "hints": [
+    "Whether there is one middle item or two depends on whether the list length is odd or even.",
+    "len(countries) // 2 gives the middle index for an odd-length list.",
+    "For an even-length list, slice countries[mid - 1:mid + 1] to get both middle items; otherwise return [countries[mid]]."
+  ],
+  "expected_behavior": "Returns the middle item (odd length) or two middle items (even length) as a list.",
+  "solution": "def middle_countries(countries):\n    n = len(countries)\n    mid = n // 2\n    if n % 2 == 0:\n        return countries[mid - 1:mid + 1]\n    return [countries[mid]]\n",
+  "hidden_tests": [
+    {
+      "call": "middle_countries(['China', 'Russia', 'USA', 'Finland', 'Sweden'])",
+      "expected": "['USA']",
+      "label": "five countries, odd"
+    },
+    {
+      "call": "middle_countries(['China', 'Russia', 'USA', 'Finland'])",
+      "expected": "['Russia', 'USA']",
+      "label": "four countries, even"
+    }
+  ],
+  "explanation": "The same odd/even middle-index logic used for lists in general applies here: one middle index for odd lengths, a two-item slice straddling the center for even lengths.",
+  "concepts": [
+    "lists",
+    "slicing"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

@@ -1,0 +1,40 @@
+{
+  "id": "30days-d05-l1-16",
+  "module": "lists",
+  "day": 5,
+  "level": 1,
+  "difficulty": 1,
+  "title": "Sort the companies list",
+  "description": "Sort the list using sort() method.\n\nPython-Gym adaptation: implement as sort_companies(companies), returning a new list with the companies sorted in ascending (alphabetical) order.",
+  "examples": ">>> sort_companies(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'])\n['Amazon', 'Apple', 'Facebook', 'Google', 'IBM', 'Microsoft', 'Oracle']",
+  "starter_code": "def sort_companies(companies):\n    # your code here\n    pass\n",
+  "hints": [
+    "Lists have a sort() method that reorders the list's contents in place.",
+    "Copy the list first so the caller's original list is left unchanged.",
+    "updated = companies.copy(); updated.sort(); return updated."
+  ],
+  "expected_behavior": "Returns a new list containing the companies sorted alphabetically ascending.",
+  "solution": "def sort_companies(companies):\n    updated = companies.copy()\n    updated.sort()\n    return updated\n",
+  "hidden_tests": [
+    {
+      "call": "sort_companies(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'])",
+      "expected": "['Amazon', 'Apple', 'Facebook', 'Google', 'IBM', 'Microsoft', 'Oracle']",
+      "label": "seven companies sorted"
+    },
+    {
+      "call": "sort_companies(['B', 'A', 'C'])",
+      "expected": "['A', 'B', 'C']",
+      "label": "three letters sorted"
+    }
+  ],
+  "explanation": "list.sort() reorders a list's elements ascending in place; calling it on a copy leaves the original list untouched.",
+  "concepts": [
+    "lists",
+    "sort"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

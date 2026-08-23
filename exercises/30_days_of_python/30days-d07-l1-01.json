@@ -1,0 +1,40 @@
+{
+  "id": "30days-d07-l1-01",
+  "module": "sets",
+  "day": 7,
+  "level": 1,
+  "difficulty": 1,
+  "title": "Length of the it_companies set",
+  "description": "Given the set `it_companies = {'Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'}`: Find the length of the set it_companies.\n\nPython-Gym adaptation: implement as `it_companies_length(it_companies)`, returning the number of elements in the given set.",
+  "examples": "it_companies_length({'Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'}) -> 7",
+  "starter_code": "def it_companies_length(it_companies):\n    # write your code here\n    pass\n",
+  "hints": [
+    "A set stores a collection of unique items, and Python has a built-in way to count how many items any collection holds.",
+    "The same function you'd use to count the items in a list also works directly on a set.",
+    "Use Python's built-in len() function on the set argument and return its result."
+  ],
+  "expected_behavior": "Returns the number of elements contained in the given set.",
+  "hidden_tests": [
+    {
+      "call": "it_companies_length({'Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'})",
+      "expected": "7",
+      "label": "original it_companies set"
+    },
+    {
+      "call": "it_companies_length({'A', 'B', 'C'})",
+      "expected": "3",
+      "label": "smaller three-element set"
+    },
+    {
+      "call": "it_companies_length(set())",
+      "expected": "0",
+      "label": "empty set"
+    }
+  ],
+  "solution": "def it_companies_length(it_companies):\n    return len(it_companies)\n",
+  "explanation": "len() works on any collection type, including sets, and returns the count of elements it currently holds - since sets store only unique values, this is also the count of distinct items.",
+  "concepts": ["set", "len"],
+  "skills": ["basic_data_manipulation"],
+  "source": "30_days_of_python",
+  "exercise_type": "function"
+}

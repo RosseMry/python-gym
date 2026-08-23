@@ -1,5 +1,5 @@
 {
-  "id": "30days-dict-practice",
+  "id": "pg-30days-dict-practice",
   "module": "dictionaries",
   "difficulty": 3,
   "title": "Build a person dictionary",
@@ -38,5 +38,5 @@
     "basic_data_manipulation"
   ],
   "exercise_type": "script",
-  "source": "30_days_of_python"
+  "source": "python_gym"
 }

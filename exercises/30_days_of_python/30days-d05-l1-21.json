@@ -1,0 +1,40 @@
+{
+  "id": "30days-d05-l1-21",
+  "module": "lists",
+  "day": 5,
+  "level": 1,
+  "difficulty": 1,
+  "title": "Remove the first IT company",
+  "description": "Remove the first IT company from the list.\n\nPython-Gym adaptation: implement as remove_first_company(companies), returning a new list without the first item.",
+  "examples": ">>> remove_first_company(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'])\n['Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon']",
+  "starter_code": "def remove_first_company(companies):\n    # your code here\n    pass\n",
+  "hints": [
+    "Slicing can skip over the first item of a list.",
+    "Starting a slice at index 1 leaves out index 0.",
+    "Return companies[1:]."
+  ],
+  "expected_behavior": "Returns a new list with the first item removed.",
+  "solution": "def remove_first_company(companies):\n    return companies[1:]\n",
+  "hidden_tests": [
+    {
+      "call": "remove_first_company(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'])",
+      "expected": "['Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon']",
+      "label": "remove first of seven"
+    },
+    {
+      "call": "remove_first_company(['A', 'B'])",
+      "expected": "['B']",
+      "label": "remove first of two"
+    }
+  ],
+  "explanation": "companies[1:] slices from index 1 to the end, dropping the first item.",
+  "concepts": [
+    "lists",
+    "slicing"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

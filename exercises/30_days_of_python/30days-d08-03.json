@@ -1,0 +1,26 @@
+{
+  "id": "30days-d08-03",
+  "module": "dictionaries",
+  "day": 8,
+  "difficulty": 2,
+  "title": "Create a student dictionary",
+  "description": "Create a student dictionary and add first_name, last_name, gender, age, marital status, skills, country, city and address as keys for the dictionary.\n\nPython-Gym adaptation: implement as `build_student(first_name, last_name, gender, age, marital_status, skills, country, city, address)`, returning a dictionary with keys 'first_name', 'last_name', 'gender', 'age', 'marital_status', 'skills', 'country', 'city' and 'address' (in that order) set from the corresponding arguments.",
+  "examples": "build_student('Asabeneh', 'Yetayeh', 'male', 250, 'married', ['JavaScript', 'React'], 'Finland', 'Helsinki', 'Space street') -> {'first_name': 'Asabeneh', 'last_name': 'Yetayeh', 'gender': 'male', 'age': 250, 'marital_status': 'married', 'skills': ['JavaScript', 'React'], 'country': 'Finland', 'city': 'Helsinki', 'address': 'Space street'}",
+  "starter_code": "def build_student(first_name, last_name, gender, age, marital_status, skills, country, city, address):\n    # write your code here\n    pass\n",
+  "hints": [
+    "This is the same idea as building the dog dictionary, just with nine fields instead of five - one dictionary key per argument.",
+    "The `skills` argument is already a list, so store it as-is under its key; it becomes a nested list value inside the dictionary.",
+    "Build the dictionary with nine square-bracket assignments, in the order first_name, last_name, gender, age, marital_status, skills, country, city, address, then return it."
+  ],
+  "expected_behavior": "Returns a dictionary with exactly the nine given keys, in the order first_name, last_name, gender, age, marital_status, skills, country, city, address, set from the arguments.",
+  "hidden_tests": [
+    {"call": "build_student('Asabeneh', 'Yetayeh', 'male', 250, 'married', ['JavaScript', 'React', 'Node', 'MongoDB', 'Python'], 'Finland', 'Helsinki', 'Space street')", "expected": "{'first_name': 'Asabeneh', 'last_name': 'Yetayeh', 'gender': 'male', 'age': 250, 'marital_status': 'married', 'skills': ['JavaScript', 'React', 'Node', 'MongoDB', 'Python'], 'country': 'Finland', 'city': 'Helsinki', 'address': 'Space street'}", "label": "full student record"},
+    {"call": "build_student('Bo', 'Lee', 'female', 22, 'single', ['Python', 'SQL'], 'Norway', 'Oslo', 'Ocean street')", "expected": "{'first_name': 'Bo', 'last_name': 'Lee', 'gender': 'female', 'age': 22, 'marital_status': 'single', 'skills': ['Python', 'SQL'], 'country': 'Norway', 'city': 'Oslo', 'address': 'Ocean street'}", "label": "different student"}
+  ],
+  "solution": "def build_student(first_name, last_name, gender, age, marital_status, skills, country, city, address):\n    student = {}\n    student['first_name'] = first_name\n    student['last_name'] = last_name\n    student['gender'] = gender\n    student['age'] = age\n    student['marital_status'] = marital_status\n    student['skills'] = skills\n    student['country'] = country\n    student['city'] = city\n    student['address'] = address\n    return student\n",
+  "explanation": "The same key-by-key assignment pattern used for the dog dictionary scales to any number of fields, including a skills field whose value happens to be a list rather than a plain string or number.",
+  "concepts": ["dictionaries", "adding keys", "nested data", "lists"],
+  "skills": ["basic_data_manipulation"],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

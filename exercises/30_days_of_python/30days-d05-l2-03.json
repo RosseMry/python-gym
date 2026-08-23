@@ -1,0 +1,40 @@
+{
+  "id": "30days-d05-l2-03",
+  "module": "lists",
+  "day": 5,
+  "level": 2,
+  "difficulty": 2,
+  "title": "Divide the countries list into two halves",
+  "description": "Divide the countries list into two equal lists if it is even if not one more country for the first half.\n\nPython-Gym adaptation: implement as split_countries_in_half(countries), returning a tuple (first_half, second_half) where, if countries has an odd length, first_half gets the extra item.",
+  "examples": ">>> split_countries_in_half(['China', 'Russia', 'USA', 'Finland', 'Sweden'])\n(['China', 'Russia', 'USA'], ['Finland', 'Sweden'])",
+  "starter_code": "def split_countries_in_half(countries):\n    # your code here\n    pass\n",
+  "hints": [
+    "The size of the first half depends on whether the total count is even or odd.",
+    "For an odd count, the first half should be one item longer than the second half.",
+    "Compute first_len = len(countries) // 2 + len(countries) % 2, then return (countries[:first_len], countries[first_len:])."
+  ],
+  "expected_behavior": "Returns a tuple of two lists splitting countries in half, with the first half getting the extra item when the length is odd.",
+  "solution": "def split_countries_in_half(countries):\n    n = len(countries)\n    first_len = n // 2 + (n % 2)\n    return (countries[:first_len], countries[first_len:])\n",
+  "hidden_tests": [
+    {
+      "call": "split_countries_in_half(['China', 'Russia', 'USA', 'Finland', 'Sweden'])",
+      "expected": "(['China', 'Russia', 'USA'], ['Finland', 'Sweden'])",
+      "label": "five countries, odd"
+    },
+    {
+      "call": "split_countries_in_half(['China', 'Russia', 'USA', 'Finland'])",
+      "expected": "(['China', 'Russia'], ['USA', 'Finland'])",
+      "label": "four countries, even"
+    }
+  ],
+  "explanation": "len(countries) // 2 + len(countries) % 2 rounds the first half's size up when the total is odd, and slicing at that boundary produces both halves.",
+  "concepts": [
+    "lists",
+    "slicing"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

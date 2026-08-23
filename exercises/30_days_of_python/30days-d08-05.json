@@ -1,0 +1,26 @@
+{
+  "id": "30days-d08-05",
+  "module": "dictionaries",
+  "day": 8,
+  "difficulty": 2,
+  "title": "Check the type of the skills value",
+  "description": "Get the value of skills and check the data type, it should be a list.\n\nPython-Gym adaptation: implement as `get_skills_info(student)`, returning a 2-tuple `(skills, is_list)` where `skills` is the value stored under the 'skills' key and `is_list` is a boolean that is True if that value is a list.",
+  "examples": "get_skills_info({'skills': ['Python', 'SQL']}) -> (['Python', 'SQL'], True)",
+  "starter_code": "def get_skills_info(student):\n    # write your code here\n    pass\n",
+  "hints": [
+    "First retrieve the value stored under the 'skills' key from the dictionary, the same way you'd read any other key's value.",
+    "To check a value's data type, compare it against the type you expect, or ask whether it's an instance of that type - there is a built-in function for exactly this.",
+    "Use `student['skills']` to get the value, and `isinstance(skills, list)` to check whether it's a list, then return them together as a tuple `(skills, is_list)`."
+  ],
+  "expected_behavior": "Returns a tuple whose first element is the skills value from the dictionary and whose second element is True when that value is a list.",
+  "hidden_tests": [
+    {"call": "get_skills_info({'first_name': 'Asabeneh', 'skills': ['JavaScript', 'React', 'Node', 'MongoDB', 'Python']})", "expected": "(['JavaScript', 'React', 'Node', 'MongoDB', 'Python'], True)", "label": "typical skills list"},
+    {"call": "get_skills_info({'skills': ['Python']})", "expected": "(['Python'], True)", "label": "single-item skills list"}
+  ],
+  "solution": "def get_skills_info(student):\n    skills = student['skills']\n    return skills, isinstance(skills, list)\n",
+  "explanation": "student['skills'] retrieves the stored value, and isinstance(skills, list) checks its data type at runtime, confirming that a dictionary can hold a list as one of its values.",
+  "concepts": ["dictionaries", "isinstance", "data types", "lists"],
+  "skills": ["basic_data_manipulation"],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

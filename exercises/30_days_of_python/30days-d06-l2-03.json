@@ -1,0 +1,41 @@
+{
+  "id": "30days-d06-l2-03",
+  "module": "tuples",
+  "day": 6,
+  "level": 2,
+  "difficulty": 1,
+  "title": "Change food_stuff_tp tuple to food_stuff_lt list",
+  "description": "Change the about food_stuff_tp tuple to a food_stuff_lt list.\n\nPython-Gym adaptation: implement as food_stuff_to_list(food_stuff_tp), where food_stuff_tp is a tuple, returning food_stuff_lt as a list with the same items in the same order.",
+  "examples": ">>> food_stuff_to_list(('banana', 'orange', 'mango'))\n['banana', 'orange', 'mango']",
+  "starter_code": "def food_stuff_to_list(food_stuff_tp):\n    # your code here\n    pass\n",
+  "hints": [
+    "Converting between the two main ordered sequence types in Python is a one-function job.",
+    "You used tuple() earlier to go from list to tuple - this is the same idea in the opposite direction.",
+    "Return list(food_stuff_tp) - the list() built-in converts a tuple into a list with the same items and order."
+  ],
+  "expected_behavior": "Returns food_stuff_tp converted to a list, preserving item order.",
+  "hidden_tests": [
+    {
+      "call": "food_stuff_to_list(('banana', 'orange', 'mango'))",
+      "expected": "['banana', 'orange', 'mango']",
+      "label": "three items"
+    },
+    {
+      "call": "food_stuff_to_list(())",
+      "expected": "[]",
+      "label": "empty tuple"
+    }
+  ],
+  "solution": "def food_stuff_to_list(food_stuff_tp):\n    return list(food_stuff_tp)\n",
+  "explanation": "list() accepts any iterable, including a tuple, and builds a new list containing the same elements in the same order, since lists (unlike tuples) can be mutated afterward.",
+  "concepts": [
+    "tuples",
+    "lists",
+    "type conversion"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

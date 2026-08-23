@@ -1,0 +1,26 @@
+{
+  "id": "30days-d08-10",
+  "module": "dictionaries",
+  "day": 8,
+  "difficulty": 2,
+  "title": "Delete one item from the dictionary",
+  "description": "Delete one of the items in the dictionary.\n\nPython-Gym adaptation: implement as `delete_item(student, key)`, removing the entry for `key` from the student dictionary and returning the resulting dictionary.",
+  "examples": "delete_item({'a': 1, 'b': 2, 'c': 3}, 'b') -> {'a': 1, 'c': 3}",
+  "starter_code": "def delete_item(student, key):\n    # write your code here\n    pass\n",
+  "hints": [
+    "You want to remove exactly one key-value pair from the dictionary, identified by the key given as an argument, leaving the rest untouched.",
+    "There's a Python statement, used elsewhere for removing variables or list items, that also works to remove a single key from a dictionary.",
+    "Use the `del` statement together with square-bracket key access on the dictionary to remove that one entry, then return the dictionary."
+  ],
+  "expected_behavior": "Removes the entry whose key matches the given key argument from the dictionary, and returns the dictionary without that entry.",
+  "hidden_tests": [
+    {"call": "delete_item({'first_name': 'Asabeneh', 'last_name': 'Yetayeh', 'gender': 'male', 'age': 250}, 'age')", "expected": "{'first_name': 'Asabeneh', 'last_name': 'Yetayeh', 'gender': 'male'}", "label": "delete age from student subset"},
+    {"call": "delete_item({'a': 1, 'b': 2, 'c': 3}, 'b')", "expected": "{'a': 1, 'c': 3}", "label": "delete middle key"}
+  ],
+  "solution": "def delete_item(student, key):\n    del student[key]\n    return student\n",
+  "explanation": "The del statement can remove a single key-value pair from a dictionary by key, in the same way it can remove an element from a list by index.",
+  "concepts": ["dictionaries", "del statement", "removing keys"],
+  "skills": ["basic_data_manipulation"],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

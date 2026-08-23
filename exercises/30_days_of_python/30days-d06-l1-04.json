@@ -1,0 +1,46 @@
+{
+  "id": "30days-d06-l1-04",
+  "module": "tuples",
+  "day": 6,
+  "level": 1,
+  "difficulty": 1,
+  "title": "Count how many siblings",
+  "description": "How many siblings do you have?\n\nPython-Gym adaptation: implement as count_siblings(siblings), where siblings is a tuple of names, returning the number of siblings as an integer.",
+  "examples": ">>> count_siblings(('Martha', 'Jennifer', 'John', 'Michael'))\n4",
+  "starter_code": "def count_siblings(siblings):\n    # your code here\n    pass\n",
+  "hints": [
+    "The number of siblings is just how many items are in the siblings tuple.",
+    "Python has a single built-in function that reports how many items any sequence, including a tuple, contains.",
+    "Return len(siblings) - the length of the tuple is exactly the count you need."
+  ],
+  "expected_behavior": "Returns the number of items in the siblings tuple.",
+  "hidden_tests": [
+    {
+      "call": "count_siblings(('Martha', 'Jennifer', 'John', 'Michael'))",
+      "expected": "4",
+      "label": "four siblings"
+    },
+    {
+      "call": "count_siblings(())",
+      "expected": "0",
+      "label": "no siblings"
+    },
+    {
+      "call": "count_siblings(('Sam',))",
+      "expected": "1",
+      "label": "one sibling"
+    }
+  ],
+  "solution": "def count_siblings(siblings):\n    return len(siblings)\n",
+  "explanation": "len() works on any sequence type, including tuples, and returns the number of elements it holds - here that number is the sibling count.",
+  "concepts": [
+    "tuples",
+    "len",
+    "sequence length"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

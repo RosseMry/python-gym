@@ -1,0 +1,41 @@
+{
+  "id": "30days-d05-l1-22",
+  "module": "lists",
+  "day": 5,
+  "level": 1,
+  "difficulty": 2,
+  "title": "Remove the middle IT company or companies",
+  "description": "Remove the middle IT company or companies from the list.\n\nPython-Gym adaptation: implement as remove_middle_companies(companies), returning a new list with the middle item removed (odd length) or the two middle items removed (even length).",
+  "examples": ">>> remove_middle_companies(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'])\n['Facebook', 'Google', 'Microsoft', 'IBM', 'Oracle', 'Amazon']",
+  "starter_code": "def remove_middle_companies(companies):\n    # your code here\n    pass\n",
+  "hints": [
+    "This mirrors slicing out the middle item(s), but you keep everything except that slice.",
+    "Concatenate the part before the middle with the part after the middle.",
+    "Use mid = len(companies) // 2; for odd n return companies[:mid] + companies[mid + 1:], for even n return companies[:mid - 1] + companies[mid + 1:]."
+  ],
+  "expected_behavior": "Returns a new list with the middle item (odd length) or two middle items (even length) removed.",
+  "solution": "def remove_middle_companies(companies):\n    n = len(companies)\n    mid = n // 2\n    if n % 2 == 0:\n        return companies[:mid - 1] + companies[mid + 1:]\n    return companies[:mid] + companies[mid + 1:]\n",
+  "hidden_tests": [
+    {
+      "call": "remove_middle_companies(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'])",
+      "expected": "['Facebook', 'Google', 'Microsoft', 'IBM', 'Oracle', 'Amazon']",
+      "label": "seven items, odd"
+    },
+    {
+      "call": "remove_middle_companies(['A', 'B', 'C', 'D'])",
+      "expected": "['A', 'D']",
+      "label": "four items, even"
+    }
+  ],
+  "explanation": "Concatenating the slice before the middle with the slice after it removes exactly the middle item(s), matching the odd/even split used to find them.",
+  "concepts": [
+    "lists",
+    "slicing",
+    "concatenation"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

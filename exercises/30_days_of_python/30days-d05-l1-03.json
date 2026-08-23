@@ -1,0 +1,45 @@
+{
+  "id": "30days-d05-l1-03",
+  "module": "lists",
+  "day": 5,
+  "level": 1,
+  "difficulty": 1,
+  "title": "Find the length of a list",
+  "description": "Find the length of your list.\n\nPython-Gym adaptation: implement as list_length(lst), returning the number of items in lst.",
+  "examples": ">>> list_length([1, 2, 3, 4, 5, 6])\n6",
+  "starter_code": "def list_length(lst):\n    # your code here\n    pass\n",
+  "hints": [
+    "Python has a built-in function that reports how many items a sequence holds.",
+    "That function works directly on lists and returns an integer.",
+    "Return len(lst)."
+  ],
+  "expected_behavior": "Returns the length of the given list as an integer.",
+  "solution": "def list_length(lst):\n    return len(lst)\n",
+  "hidden_tests": [
+    {
+      "call": "list_length([1, 2, 3, 4, 5, 6])",
+      "expected": "6",
+      "label": "six items"
+    },
+    {
+      "call": "list_length([])",
+      "expected": "0",
+      "label": "empty list"
+    },
+    {
+      "call": "list_length(['a'])",
+      "expected": "1",
+      "label": "single item"
+    }
+  ],
+  "explanation": "len() is the built-in way to get the number of items in any sequence, including a list.",
+  "concepts": [
+    "lists",
+    "len"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

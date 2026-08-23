@@ -1,0 +1,41 @@
+{
+  "id": "30days-d05-l1-14",
+  "module": "lists",
+  "day": 5,
+  "level": 1,
+  "difficulty": 1,
+  "title": "Join the it_companies with a string",
+  "description": "Join the it_companies with a string '#;&nbsp; '.\n\nPython-Gym adaptation: implement as join_companies(companies), returning the companies joined into a single string using the separator '#; '.",
+  "examples": ">>> join_companies(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'])\n'Facebook#; Google#; Microsoft#; Apple#; IBM#; Oracle#; Amazon'",
+  "starter_code": "def join_companies(companies):\n    # your code here\n    pass\n",
+  "hints": [
+    "Strings have a method for combining a list of strings using a separator.",
+    "The separator string goes in front of the .join() call, and the list goes inside the parentheses.",
+    "Return '#; '.join(companies)."
+  ],
+  "expected_behavior": "Returns a single string with all companies joined by the separator '#; '.",
+  "solution": "def join_companies(companies):\n    return '#; '.join(companies)\n",
+  "hidden_tests": [
+    {
+      "call": "join_companies(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'])",
+      "expected": "'Facebook#; Google#; Microsoft#; Apple#; IBM#; Oracle#; Amazon'",
+      "label": "seven companies joined"
+    },
+    {
+      "call": "join_companies(['A', 'B'])",
+      "expected": "'A#; B'",
+      "label": "two companies joined"
+    }
+  ],
+  "explanation": "str.join() takes an iterable of strings and glues them together with the string it was called on placed between each pair.",
+  "concepts": [
+    "lists",
+    "strings",
+    "join"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

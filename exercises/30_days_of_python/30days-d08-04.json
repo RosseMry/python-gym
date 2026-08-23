@@ -1,0 +1,27 @@
+{
+  "id": "30days-d08-04",
+  "module": "dictionaries",
+  "day": 8,
+  "difficulty": 1,
+  "title": "Get the length of the student dictionary",
+  "description": "Get the length of the student dictionary.\n\nPython-Gym adaptation: implement as `dict_length(student)`, returning the number of keys in the given student dictionary.",
+  "examples": "dict_length({'first_name': 'Asabeneh', 'last_name': 'Yetayeh'}) -> 2",
+  "starter_code": "def dict_length(student):\n    # write your code here\n    pass\n",
+  "hints": [
+    "You need a single number: how many key-value pairs the dictionary holds.",
+    "The same built-in function you'd use to count the items in a list or the characters in a string also works directly on a dictionary.",
+    "Pass the dictionary to the built-in `len()` function and return the result."
+  ],
+  "expected_behavior": "Returns an integer equal to the number of keys in the given dictionary.",
+  "hidden_tests": [
+    {"call": "dict_length({'first_name': 'Asabeneh', 'last_name': 'Yetayeh', 'gender': 'male', 'age': 250, 'marital_status': 'married', 'skills': ['JavaScript', 'React', 'Node', 'MongoDB', 'Python'], 'country': 'Finland', 'city': 'Helsinki', 'address': 'Space street'})", "expected": "9", "label": "full 9-key student dict"},
+    {"call": "dict_length({'a': 1, 'b': 2})", "expected": "2", "label": "small dict"},
+    {"call": "dict_length({})", "expected": "0", "label": "empty dict"}
+  ],
+  "solution": "def dict_length(student):\n    return len(student)\n",
+  "explanation": "The built-in len() function works on dictionaries just as it does on lists and strings, counting the number of key-value pairs stored in it.",
+  "concepts": ["dictionaries", "len", "built-in functions"],
+  "skills": ["basic_data_manipulation"],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

@@ -1,0 +1,41 @@
+{
+  "id": "30days-d05-l1-10",
+  "module": "lists",
+  "day": 5,
+  "level": 1,
+  "difficulty": 2,
+  "title": "Print the list after modifying one company",
+  "description": "Print the list after modifying one of the companies.\n\nPython-Gym adaptation: implement as modify_company(companies, index, new_name), returning a new list equal to companies but with the item at index replaced by new_name.",
+  "examples": ">>> modify_company(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'], 0, 'Meta')\n['Meta', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon']",
+  "starter_code": "def modify_company(companies, index, new_name):\n    # your code here\n    pass\n",
+  "hints": [
+    "Make a copy of the list first so the original companies list you were given isn't mutated.",
+    "List items can be replaced in place with index assignment, e.g. lst[i] = value.",
+    "Copy companies, set updated[index] = new_name, and return updated."
+  ],
+  "expected_behavior": "Returns a new list with the item at the given index replaced by new_name.",
+  "solution": "def modify_company(companies, index, new_name):\n    updated = companies.copy()\n    updated[index] = new_name\n    return updated\n",
+  "hidden_tests": [
+    {
+      "call": "modify_company(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'], 0, 'Meta')",
+      "expected": "['Meta', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon']",
+      "label": "replace first company"
+    },
+    {
+      "call": "modify_company(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'], 4, 'International Business Machines')",
+      "expected": "['Facebook', 'Google', 'Microsoft', 'Apple', 'International Business Machines', 'Oracle', 'Amazon']",
+      "label": "replace IBM"
+    }
+  ],
+  "explanation": "Copying the list keeps the caller's original list intact, and index assignment replaces exactly the item at the requested position.",
+  "concepts": [
+    "lists",
+    "index assignment",
+    "copy"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

@@ -1,0 +1,41 @@
+{
+  "id": "30days-d05-l1-13",
+  "module": "lists",
+  "day": 5,
+  "level": 1,
+  "difficulty": 2,
+  "title": "Change one company name to uppercase",
+  "description": "Change one of the it_companies names to uppercase (IBM excluded!).\n\nPython-Gym adaptation: implement as uppercase_company(companies, index), returning a new list with the item at index converted to uppercase using str.upper().",
+  "examples": ">>> uppercase_company(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'], 0)\n['FACEBOOK', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon']",
+  "starter_code": "def uppercase_company(companies, index):\n    # your code here\n    pass\n",
+  "hints": [
+    "Strings have a method that returns an uppercase copy of themselves.",
+    "Copy the list first, then replace just the one item at the given index.",
+    "updated[index] = updated[index].upper(), then return updated."
+  ],
+  "expected_behavior": "Returns a new list with the item at the given index uppercased.",
+  "solution": "def uppercase_company(companies, index):\n    updated = companies.copy()\n    updated[index] = updated[index].upper()\n    return updated\n",
+  "hidden_tests": [
+    {
+      "call": "uppercase_company(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'], 0)",
+      "expected": "['FACEBOOK', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon']",
+      "label": "uppercase Facebook"
+    },
+    {
+      "call": "uppercase_company(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'], 1)",
+      "expected": "['Facebook', 'GOOGLE', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon']",
+      "label": "uppercase Google"
+    }
+  ],
+  "explanation": "str.upper() returns an uppercase copy of a string; combined with index assignment on a copy of the list, only the chosen company's name changes.",
+  "concepts": [
+    "lists",
+    "strings",
+    "upper"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

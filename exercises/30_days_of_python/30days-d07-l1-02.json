@@ -1,0 +1,40 @@
+{
+  "id": "30days-d07-l1-02",
+  "module": "sets",
+  "day": 7,
+  "level": 1,
+  "difficulty": 1,
+  "title": "Add Twitter to it_companies",
+  "description": "Given the set `it_companies = {'Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'}`: Add 'Twitter' to it_companies.\n\nPython-Gym adaptation: implement as `add_twitter(it_companies)`, adding 'Twitter' to the given set and returning a SORTED list of the resulting set's contents (so the result is order-independent for grading).",
+  "examples": "add_twitter({'Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'}) -> ['Amazon', 'Apple', 'Facebook', 'Google', 'IBM', 'Microsoft', 'Oracle', 'Twitter']",
+  "starter_code": "def add_twitter(it_companies):\n    # write your code here\n    pass\n",
+  "hints": [
+    "Sets have a method for adding a single new element in place.",
+    "Modify the set you were given, then turn it into something with a predictable order before returning it.",
+    "Call the set's .add() method with 'Twitter', then return sorted(it_companies)."
+  ],
+  "expected_behavior": "Adds 'Twitter' to the set and returns a sorted list of all elements in the updated set.",
+  "hidden_tests": [
+    {
+      "call": "add_twitter({'Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'})",
+      "expected": "['Amazon', 'Apple', 'Facebook', 'Google', 'IBM', 'Microsoft', 'Oracle', 'Twitter']",
+      "label": "original it_companies set"
+    },
+    {
+      "call": "add_twitter({'Google'})",
+      "expected": "['Google', 'Twitter']",
+      "label": "single-element set"
+    },
+    {
+      "call": "add_twitter(set())",
+      "expected": "['Twitter']",
+      "label": "empty set"
+    }
+  ],
+  "solution": "def add_twitter(it_companies):\n    it_companies = set(it_companies)\n    it_companies.add('Twitter')\n    return sorted(it_companies)\n",
+  "explanation": "set.add() inserts a single new element into the set in place (it does nothing if the element is already present). Returning a sorted list makes the result predictable to check, since sets themselves have no guaranteed iteration order.",
+  "concepts": ["set", "add", "sorted"],
+  "skills": ["basic_data_manipulation"],
+  "source": "30_days_of_python",
+  "exercise_type": "function"
+}

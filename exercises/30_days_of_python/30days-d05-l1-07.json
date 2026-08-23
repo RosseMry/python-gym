@@ -1,0 +1,41 @@
+{
+  "id": "30days-d05-l1-07",
+  "module": "lists",
+  "day": 5,
+  "level": 1,
+  "difficulty": 1,
+  "title": "Print the it_companies list",
+  "description": "Print the list using print().\n\nPython-Gym adaptation: implement as printed_it_companies(companies), returning the exact string that print(companies) would write to the screen.",
+  "examples": ">>> printed_it_companies(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'])\n\"['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon']\"",
+  "starter_code": "def printed_it_companies(companies):\n    # your code here\n    pass\n",
+  "hints": [
+    "print() shows a list using the same text you'd get from converting it to a string.",
+    "str() applied to a list produces exactly that text, with brackets, commas and quoted strings.",
+    "Return str(companies)."
+  ],
+  "expected_behavior": "Returns the string representation of the companies list, matching what print() would output.",
+  "solution": "def printed_it_companies(companies):\n    return str(companies)\n",
+  "hidden_tests": [
+    {
+      "call": "printed_it_companies(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'])",
+      "expected": "\"['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon']\"",
+      "label": "seven companies"
+    },
+    {
+      "call": "printed_it_companies([])",
+      "expected": "'[]'",
+      "label": "empty list"
+    }
+  ],
+  "explanation": "str() on a list produces the same text that print() writes to the screen, so returning str(companies) mirrors what printing the list would show.",
+  "concepts": [
+    "lists",
+    "print",
+    "str"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

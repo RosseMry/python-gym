@@ -1,0 +1,36 @@
+{
+  "id": "30days-d06-l2-06",
+  "module": "tuples",
+  "day": 6,
+  "level": 2,
+  "difficulty": 2,
+  "title": "Delete the food_stuff_tp tuple completely",
+  "description": "Delete the food_stuff_tp tuple completely.\n\nPython-Gym adaptation: implement as delete_food_stuff_tp(), which creates a local food_stuff_tp tuple, deletes it with the del statement, then confirms the deletion by attempting to reference the name again and catching the resulting NameError, returning True if the deletion succeeded (the name is gone) and False otherwise.",
+  "examples": ">>> delete_food_stuff_tp()\nTrue",
+  "starter_code": "def delete_food_stuff_tp():\n    # your code here\n    pass\n",
+  "hints": [
+    "Python has a statement, not a method, dedicated to removing a variable name from existence entirely.",
+    "After deleting the name, trying to use it again raises a specific exception - catching that exception is how you can prove the deletion worked.",
+    "Use del food_stuff_tp to remove it, then wrap a reference to food_stuff_tp in a try/except NameError, returning True in the except block."
+  ],
+  "expected_behavior": "Creates a tuple, deletes it with del, and returns True once referencing the deleted name raises NameError.",
+  "hidden_tests": [
+    {
+      "call": "delete_food_stuff_tp()",
+      "expected": "True",
+      "label": "tuple is fully deleted, name no longer exists"
+    }
+  ],
+  "solution": "def delete_food_stuff_tp():\n    food_stuff_tp = ('banana', 'orange', 'mango')\n    del food_stuff_tp\n    try:\n        food_stuff_tp\n        return False\n    except NameError:\n        return True\n",
+  "explanation": "del food_stuff_tp removes the variable binding entirely, not just its contents, so any later reference to the name raises NameError - catching that error is the way to demonstrate the tuple is genuinely gone rather than just emptied.",
+  "concepts": [
+    "tuples",
+    "del statement",
+    "exceptions"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

@@ -1,0 +1,40 @@
+{
+  "id": "30days-d07-l2-07",
+  "module": "sets",
+  "day": 7,
+  "level": 2,
+  "difficulty": 2,
+  "title": "Delete the sets completely",
+  "description": "Given the sets `A = {19, 22, 24, 20, 25, 26}` and `B = {19, 22, 20, 25, 26, 24, 28, 27}`: Delete the sets completely.\n\nPython-Gym adaptation: implement as `clear_set(s)`, emptying the given set completely (leaving zero elements) and returning a SORTED list of its (now empty) contents.",
+  "examples": "clear_set({19, 22, 24, 20, 25, 26}) -> []",
+  "starter_code": "def clear_set(s):\n    # write your code here\n    pass\n",
+  "hints": [
+    "Emptying a set entirely is different from removing one element at a time - there's a single method that wipes out everything at once.",
+    "Sets have a method, shared with lists and dictionaries, that removes every element and leaves the collection empty in place.",
+    "Call the set's .clear() method, then return sorted(s), which will be an empty list."
+  ],
+  "expected_behavior": "Removes every element from the given set and returns a sorted list of what remains (always an empty list).",
+  "hidden_tests": [
+    {
+      "call": "clear_set({19, 22, 24, 20, 25, 26})",
+      "expected": "[]",
+      "label": "original A set"
+    },
+    {
+      "call": "clear_set({1, 2, 3})",
+      "expected": "[]",
+      "label": "small set"
+    },
+    {
+      "call": "clear_set(set())",
+      "expected": "[]",
+      "label": "already empty set"
+    }
+  ],
+  "solution": "def clear_set(s):\n    s = set(s)\n    s.clear()\n    return sorted(s)\n",
+  "explanation": "set.clear() removes every element from the set in place, leaving it empty but still a valid set object - this is how you delete a set's contents completely without deleting the variable itself.",
+  "concepts": ["set", "clear"],
+  "skills": ["basic_data_manipulation"],
+  "source": "30_days_of_python",
+  "exercise_type": "function"
+}

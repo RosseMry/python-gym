@@ -1,0 +1,41 @@
+{
+  "id": "30days-d06-l2-05",
+  "module": "tuples",
+  "day": 6,
+  "level": 2,
+  "difficulty": 2,
+  "title": "Slice out the first three and last three items",
+  "description": "Slice out the first three items and the last three items from food_stuff_lt list.\n\nPython-Gym adaptation: implement as first_and_last_three(food_stuff_lt), where food_stuff_lt is a list, returning a tuple (first_three, last_three) where first_three and last_three are lists.",
+  "examples": ">>> first_and_last_three(['banana', 'orange', 'mango', 'lemon', 'tomato', 'potato', 'cabbage'])\n(['banana', 'orange', 'mango'], ['tomato', 'potato', 'cabbage'])",
+  "starter_code": "def first_and_last_three(food_stuff_lt):\n    # your code here\n    pass\n",
+  "hints": [
+    "You need two separate slices from the same list: one from the start, one from the end.",
+    "Python slicing supports leaving one side of the colon blank to mean 'from the beginning' or 'to the end', and negative indices count from the end.",
+    "Return (food_stuff_lt[:3], food_stuff_lt[-3:]) - the first slice takes the first 3 items, the second takes the last 3."
+  ],
+  "expected_behavior": "Returns a tuple of two lists: the first three items and the last three items of food_stuff_lt.",
+  "hidden_tests": [
+    {
+      "call": "first_and_last_three(['banana', 'orange', 'mango', 'lemon', 'tomato', 'potato', 'cabbage'])",
+      "expected": "(['banana', 'orange', 'mango'], ['tomato', 'potato', 'cabbage'])",
+      "label": "seven-item list"
+    },
+    {
+      "call": "first_and_last_three(['a', 'b', 'c', 'd', 'e', 'f'])",
+      "expected": "(['a', 'b', 'c'], ['d', 'e', 'f'])",
+      "label": "six-item list, slices meet exactly in the middle"
+    }
+  ],
+  "solution": "def first_and_last_three(food_stuff_lt):\n    return (food_stuff_lt[:3], food_stuff_lt[-3:])\n",
+  "explanation": "food_stuff_lt[:3] slices from the start up to (but not including) index 3, giving the first three items, while food_stuff_lt[-3:] slices from the third-to-last index to the end, giving the last three items.",
+  "concepts": [
+    "lists",
+    "slicing",
+    "negative indices"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

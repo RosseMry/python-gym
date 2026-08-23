@@ -1,0 +1,40 @@
+{
+  "id": "30days-d07-l1-04",
+  "module": "sets",
+  "day": 7,
+  "level": 1,
+  "difficulty": 1,
+  "title": "Remove one company from it_companies",
+  "description": "Given the set `it_companies = {'Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'}`: Remove one of the companies from the set it_companies.\n\nPython-Gym adaptation: implement as `remove_company(it_companies, company)`, removing the given company name from the set and returning a SORTED list of the remaining elements.",
+  "examples": "remove_company({'Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'}, 'Oracle') -> ['Amazon', 'Apple', 'Facebook', 'Google', 'IBM', 'Microsoft']",
+  "starter_code": "def remove_company(it_companies, company):\n    # write your code here\n    pass\n",
+  "hints": [
+    "Sets have more than one method for taking an element out - pick the one that won't blow up your program if you ever call it with a name that isn't there.",
+    "One removal method raises an error for a missing element, the other quietly does nothing - use the safer one here.",
+    "Call the set's .discard() method with the company name, then return sorted(it_companies)."
+  ],
+  "expected_behavior": "Removes the given company from the set and returns a sorted list of the elements that remain.",
+  "hidden_tests": [
+    {
+      "call": "remove_company({'Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'}, 'Oracle')",
+      "expected": "['Amazon', 'Apple', 'Facebook', 'Google', 'IBM', 'Microsoft']",
+      "label": "remove Oracle from the original set"
+    },
+    {
+      "call": "remove_company({'A', 'B', 'C'}, 'B')",
+      "expected": "['A', 'C']",
+      "label": "remove a present element from a small set"
+    },
+    {
+      "call": "remove_company({'A', 'B'}, 'Z')",
+      "expected": "['A', 'B']",
+      "label": "removing a name that isn't in the set leaves it unchanged"
+    }
+  ],
+  "solution": "def remove_company(it_companies, company):\n    it_companies = set(it_companies)\n    it_companies.discard(company)\n    return sorted(it_companies)\n",
+  "explanation": "set.discard() removes the given element if it is present and does nothing (no error) if it is absent, which makes it the safer default choice compared to .remove() when the element's presence isn't guaranteed.",
+  "concepts": ["set", "discard", "sorted"],
+  "skills": ["basic_data_manipulation"],
+  "source": "30_days_of_python",
+  "exercise_type": "function"
+}

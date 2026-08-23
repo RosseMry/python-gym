@@ -1,0 +1,40 @@
+{
+  "id": "30days-d05-l1-24",
+  "module": "lists",
+  "day": 5,
+  "level": 1,
+  "difficulty": 1,
+  "title": "Remove all IT companies from the list",
+  "description": "Remove all IT companies from the list.\n\nPython-Gym adaptation: implement as clear_companies(companies), returning an empty list regardless of the input.",
+  "examples": ">>> clear_companies(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'])\n[]",
+  "starter_code": "def clear_companies(companies):\n    # your code here\n    pass\n",
+  "hints": [
+    "Removing every item from a list leaves it empty.",
+    "You don't need to look at companies at all to know the result.",
+    "Return []."
+  ],
+  "expected_behavior": "Always returns an empty list.",
+  "solution": "def clear_companies(companies):\n    return []\n",
+  "hidden_tests": [
+    {
+      "call": "clear_companies(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'])",
+      "expected": "[]",
+      "label": "clear seven companies"
+    },
+    {
+      "call": "clear_companies([])",
+      "expected": "[]",
+      "label": "clear an already-empty list"
+    }
+  ],
+  "explanation": "Whatever the input list contains, the result of removing every item from it is always the empty list.",
+  "concepts": [
+    "lists",
+    "clear"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

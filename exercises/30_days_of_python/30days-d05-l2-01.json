@@ -1,0 +1,43 @@
+{
+  "id": "30days-d05-l2-01",
+  "module": "lists",
+  "day": 5,
+  "level": 2,
+  "difficulty": 3,
+  "title": "Analyze the students' ages list",
+  "description": "The following is a list of 10 students ages:\n\nages = [19, 22, 19, 24, 20, 25, 26, 24, 25, 24]\n\n- Sort the list and find the min and max age\n- Add the min age and the max age again to the list\n- Find the median age (one middle item or two middle items divided by two)\n- Find the average age (sum of all items divided by their number)\n- Find the range of the ages (max minus min)\n- Compare the value of (min - average) and (max - average), use abs() method\n\nPython-Gym adaptation: implement as ages_stats(ages), returning a dict with keys 'sorted_ages' (ages sorted ascending), 'min_age', 'max_age', 'ages_with_min_max_appended' (the original ages list with min_age and max_age appended at the end), 'median', 'average', 'age_range' (max_age - min_age), 'min_minus_average_abs' (abs(min_age - average)), and 'max_minus_average_abs' (abs(max_age - average)).",
+  "examples": ">>> ages_stats([19, 22, 19, 24, 20, 25, 26, 24, 25, 24])\n{'sorted_ages': [19, 19, 20, 22, 24, 24, 24, 25, 25, 26], 'min_age': 19, 'max_age': 26, 'ages_with_min_max_appended': [19, 22, 19, 24, 20, 25, 26, 24, 25, 24, 19, 26], 'median': 24.0, 'average': 22.8, 'age_range': 7, 'min_minus_average_abs': 3.8000000000000007, 'max_minus_average_abs': 3.1999999999999993}",
+  "starter_code": "def ages_stats(ages):\n    # your code here\n    pass\n",
+  "hints": [
+    "sorted() gives you an ascending copy of the list to compute min, max and the median from.",
+    "For an even-length list the median is the average of the two middle items of the sorted list; for odd it's the single middle item.",
+    "Build the average with sum(ages) / len(ages), then use abs() to compare (min_age - average) and (max_age - average)."
+  ],
+  "expected_behavior": "Returns a dict summarizing the sorted list, min, max, extended list, median, average, range, and both absolute differences from the average.",
+  "solution": "def ages_stats(ages):\n    sorted_ages = sorted(ages)\n    min_age = min(ages)\n    max_age = max(ages)\n    ages_with_min_max_appended = ages + [min_age, max_age]\n    n = len(ages)\n    if n % 2 == 0:\n        median = (sorted_ages[n // 2 - 1] + sorted_ages[n // 2]) / 2\n    else:\n        median = sorted_ages[n // 2]\n    average = sum(ages) / n\n    age_range = max_age - min_age\n    return {\n        'sorted_ages': sorted_ages,\n        'min_age': min_age,\n        'max_age': max_age,\n        'ages_with_min_max_appended': ages_with_min_max_appended,\n        'median': median,\n        'average': average,\n        'age_range': age_range,\n        'min_minus_average_abs': abs(min_age - average),\n        'max_minus_average_abs': abs(max_age - average),\n    }\n",
+  "hidden_tests": [
+    {
+      "call": "ages_stats([19, 22, 19, 24, 20, 25, 26, 24, 25, 24])",
+      "expected": "{'sorted_ages': [19, 19, 20, 22, 24, 24, 24, 25, 25, 26], 'min_age': 19, 'max_age': 26, 'ages_with_min_max_appended': [19, 22, 19, 24, 20, 25, 26, 24, 25, 24, 19, 26], 'median': 24.0, 'average': 22.8, 'age_range': 7, 'min_minus_average_abs': 3.8000000000000007, 'max_minus_average_abs': 3.1999999999999993}",
+      "label": "ten student ages"
+    },
+    {
+      "call": "ages_stats([1, 2, 3, 4, 5])",
+      "expected": "{'sorted_ages': [1, 2, 3, 4, 5], 'min_age': 1, 'max_age': 5, 'ages_with_min_max_appended': [1, 2, 3, 4, 5, 1, 5], 'median': 3, 'average': 3.0, 'age_range': 4, 'min_minus_average_abs': 2.0, 'max_minus_average_abs': 2.0}",
+      "label": "five odd-length ages"
+    }
+  ],
+  "explanation": "Sorting exposes min/max/median directly; the average is the sum divided by the count; and abs() makes both distances from the average comparable regardless of sign.",
+  "concepts": [
+    "lists",
+    "sorted",
+    "min",
+    "max",
+    "abs"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

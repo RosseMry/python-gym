@@ -22,12 +22,20 @@ class ExerciseStatus(str, Enum):
     - SOLVED_TO_REPEAT: the student solved it, but explicitly asked to
       practice it again later. This is NOT mastery, and is distinct
       from FAILED - the exercise *was* solved.
+
+    Sprint 3 correction splits what used to be one SOLVED_WITH_HINT
+    value into two, since "used a hint" and "revealed the full
+    solution" are different signals for the future adaptive/exam
+    system: SOLVED_WITH_HINT (a hint was used) and
+    SOLVED_AFTER_SOLUTION (the solution was revealed before passing).
+    Neither counts toward mastery on that same pass.
     """
 
     NEW = "NEW"
     ATTEMPTED = "ATTEMPTED"
     FAILED = "FAILED"
     SOLVED_WITH_HINT = "SOLVED_WITH_HINT"
+    SOLVED_AFTER_SOLUTION = "SOLVED_AFTER_SOLUTION"
     SOLVED = "SOLVED"
     SOLVED_TO_REPEAT = "SOLVED_TO_REPEAT"
     MASTERED = "MASTERED"
@@ -91,7 +99,17 @@ class Exercise:
     resources: list[str] = field(default_factory=list)
     validation_profile: str = "standard_python"
     exercise_type: str = "function"  # "function" or "script"
-    exercise_status: str = "active"  # "active" or "excluded"
+    # "active" (normal), "excluded" (never part of the learning path,
+    # e.g. the Piscine compression exercise), or "locked" (a real,
+    # named exercise that can't run yet because its prerequisite track
+    # - e.g. NumPy/Pandas - doesn't exist; still shown in the catalog,
+    # unlike "excluded").
+    exercise_status: str = "active"
+    # Sprint 3 correction: which day/level of 30 Days of Python this
+    # came from, when source="30_days_of_python". None for every other
+    # source.
+    day: int | None = None
+    level: int | None = None
     # Sprint 3 French translations, all optional. Only user-facing
     # prose is translated - starter_code/solution stay code, and
     # concepts/skills stay English taxonomy keys (the frontend maps

@@ -29,6 +29,7 @@ _MASTERY_STREAK_REQUIRED = 2
 _SOLVED_FAMILY = (
     ExerciseStatus.SOLVED,
     ExerciseStatus.SOLVED_WITH_HINT,
+    ExerciseStatus.SOLVED_AFTER_SOLUTION,
     ExerciseStatus.SOLVED_TO_REPEAT,
     ExerciseStatus.MASTERED,
 )
@@ -103,6 +104,8 @@ class ExerciseService:
             validation_profile=exercise.validation_profile,
             exercise_type=exercise.exercise_type,
             exercise_status=exercise.exercise_status,
+            day=exercise.day,
+            level=exercise.level,
             title_fr=exercise.title_fr,
             description_fr=exercise.description_fr,
             examples_fr=exercise.examples_fr,
@@ -224,9 +227,13 @@ class ExerciseService:
         A pass right after the solution was revealed, or after using
         hints, does NOT count as full mastery (spec section 21) - it
         must be solved cleanly, more than once, to become MASTERED.
+        Revealing the solution and using a hint are tracked as distinct
+        statuses (Sprint 3 correction) since they're different signals
+        for the future adaptive/exam system, even though neither counts
+        toward mastery on this pass.
         """
         if progress.solution_revealed:
-            return ExerciseStatus.SOLVED_WITH_HINT
+            return ExerciseStatus.SOLVED_AFTER_SOLUTION
         if progress.hints_used > 0:
             return ExerciseStatus.SOLVED_WITH_HINT
         if progress.status in (

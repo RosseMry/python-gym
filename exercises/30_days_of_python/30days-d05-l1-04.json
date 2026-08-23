@@ -1,0 +1,41 @@
+{
+  "id": "30days-d05-l1-04",
+  "module": "lists",
+  "day": 5,
+  "level": 1,
+  "difficulty": 2,
+  "title": "Get the first, middle and last item of a list",
+  "description": "Get the first item, the middle item and the last item of the list.\n\nPython-Gym adaptation: implement as first_middle_last(lst), where lst has an odd number of items, returning a tuple (first_item, middle_item, last_item).",
+  "examples": ">>> first_middle_last([1, 2, 3, 4, 5])\n(1, 3, 5)",
+  "starter_code": "def first_middle_last(lst):\n    # your code here\n    pass\n",
+  "hints": [
+    "The first item is at index 0 and the last item is at index -1.",
+    "For an odd-length list, integer division of the length by 2 gives the middle index.",
+    "Return (lst[0], lst[len(lst) // 2], lst[-1])."
+  ],
+  "expected_behavior": "Returns a 3-tuple of (first, middle, last) items from lst.",
+  "solution": "def first_middle_last(lst):\n    return (lst[0], lst[len(lst) // 2], lst[-1])\n",
+  "hidden_tests": [
+    {
+      "call": "first_middle_last([1, 2, 3, 4, 5])",
+      "expected": "(1, 3, 5)",
+      "label": "five items"
+    },
+    {
+      "call": "first_middle_last(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'])",
+      "expected": "('Facebook', 'Apple', 'Amazon')",
+      "label": "seven items"
+    }
+  ],
+  "explanation": "Indexing with 0 and -1 reaches the ends of the list, and len(lst) // 2 lands exactly on the middle element when the list has an odd length.",
+  "concepts": [
+    "lists",
+    "indexing",
+    "negative indexing"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

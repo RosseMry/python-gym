@@ -1,0 +1,26 @@
+{
+  "id": "30days-d08-08",
+  "module": "dictionaries",
+  "day": 8,
+  "difficulty": 1,
+  "title": "Get dictionary values as a list",
+  "description": "Get the dictionary values as a list.\n\nPython-Gym adaptation: implement as `dict_values_list(student)`, returning the student dictionary's values as a list.",
+  "examples": "dict_values_list({'a': 1, 'b': 2, 'c': 3}) -> [1, 2, 3]",
+  "starter_code": "def dict_values_list(student):\n    # write your code here\n    pass\n",
+  "hints": [
+    "This mirrors getting the keys, but you want the values attached to each key instead of the keys themselves.",
+    "Dictionaries have a method that gives a view of just the values, in the same insertion order as the keys.",
+    "Call `student.values()` and wrap the result in `list(...)` before returning it."
+  ],
+  "expected_behavior": "Returns a list containing the dictionary's values, in the same order as their keys were inserted.",
+  "hidden_tests": [
+    {"call": "dict_values_list({'first_name': 'Asabeneh', 'last_name': 'Yetayeh', 'gender': 'male'})", "expected": "['Asabeneh', 'Yetayeh', 'male']", "label": "student subset values"},
+    {"call": "dict_values_list({'a': 1, 'b': 2, 'c': 3})", "expected": "[1, 2, 3]", "label": "small dict values"}
+  ],
+  "solution": "def dict_values_list(student):\n    return list(student.values())\n",
+  "explanation": "student.values() returns a dict_values view of the dictionary's values, and list() converts that view into a plain list, preserving insertion order.",
+  "concepts": ["dictionaries", "values", "type conversion"],
+  "skills": ["basic_data_manipulation"],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

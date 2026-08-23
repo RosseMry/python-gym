@@ -1,0 +1,40 @@
+{
+  "id": "30days-d05-l1-20",
+  "module": "lists",
+  "day": 5,
+  "level": 1,
+  "difficulty": 2,
+  "title": "Slice out the middle company or companies",
+  "description": "Slice out the middle IT company or companies from the list.\n\nPython-Gym adaptation: implement as middle_companies(companies), returning a list of the single middle item when companies has an odd length, or the two middle items when it has an even length.",
+  "examples": ">>> middle_companies(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'])\n['Apple']",
+  "starter_code": "def middle_companies(companies):\n    # your code here\n    pass\n",
+  "hints": [
+    "The number of middle items depends on whether the list length is odd or even.",
+    "For an odd length, len(companies) // 2 is the single middle index; for an even length, the two middle indices are one before and at that position.",
+    "Use companies[mid - 1:mid + 1] when n is even and [companies[mid]] when n is odd, with mid = n // 2."
+  ],
+  "expected_behavior": "Returns a list with the middle item (odd length) or two middle items (even length).",
+  "solution": "def middle_companies(companies):\n    n = len(companies)\n    mid = n // 2\n    if n % 2 == 0:\n        return companies[mid - 1:mid + 1]\n    return [companies[mid]]\n",
+  "hidden_tests": [
+    {
+      "call": "middle_companies(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'])",
+      "expected": "['Apple']",
+      "label": "seven items, odd"
+    },
+    {
+      "call": "middle_companies(['A', 'B', 'C', 'D'])",
+      "expected": "['B', 'C']",
+      "label": "four items, even"
+    }
+  ],
+  "explanation": "Odd-length lists have exactly one middle index (n // 2); even-length lists have two middle items straddling the center, found with companies[mid - 1:mid + 1].",
+  "concepts": [
+    "lists",
+    "slicing"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

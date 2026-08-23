@@ -1,0 +1,20 @@
+{
+  "id": "piscine-01-give-bmi",
+  "module": "piscine_01_array",
+  "difficulty": 2,
+  "title": "Give BMI (locked)",
+  "description": "Real Piscine subject: write functions that compute Body Mass Index for a list of weights and heights, and return the indices of people who are considered obese (BMI > 30), using NumPy arrays for the computation instead of a Python loop.\n\nLocked: Python-Gym's execution sandbox does not have NumPy installed yet, and this exercise needs it to be graded correctly (vectorized array math is the actual point of the exercise, not just the BMI formula). It stays represented in the catalog rather than removed, per the Sprint 3 correction spec, until a NumPy-backed track exists.",
+  "examples": "",
+  "starter_code": "",
+  "hints": [],
+  "expected_behavior": "Not gradable yet - requires NumPy.",
+  "hidden_tests": [],
+  "solution": "",
+  "explanation": "Locked pending a NumPy-capable execution environment.",
+  "concepts": ["numpy", "arrays", "vectorization"],
+  "skills": ["numerical_computation"],
+  "source": "42_python_piscine",
+  "track": "python",
+  "validation_profile": "42_piscine",
+  "exercise_status": "locked"
+}

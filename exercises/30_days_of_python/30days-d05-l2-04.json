@@ -1,0 +1,41 @@
+{
+  "id": "30days-d05-l2-04",
+  "module": "lists",
+  "day": 5,
+  "level": 2,
+  "difficulty": 2,
+  "title": "Unpack the first three countries and the scandic rest",
+  "description": "['China', 'Russia', 'USA', 'Finland', 'Sweden', 'Norway', 'Denmark']. Unpack the first three countries and the rest as scandic countries.\n\nPython-Gym adaptation: implement as unpack_scandic_countries(countries), taking a list whose first three items are non-Scandinavian and the rest are Scandinavian, returning a tuple (first, second, third, scandic_countries) where scandic_countries is a list of the remaining items.",
+  "examples": ">>> unpack_scandic_countries(['China', 'Russia', 'USA', 'Finland', 'Sweden', 'Norway', 'Denmark'])\n('China', 'Russia', 'USA', ['Finland', 'Sweden', 'Norway', 'Denmark'])",
+  "starter_code": "def unpack_scandic_countries(countries):\n    # your code here\n    pass\n",
+  "hints": [
+    "Tuple/list unpacking lets you assign several names in one statement.",
+    "A starred name in an unpacking assignment collects all remaining items into a list.",
+    "Use a, b, c, *scandic = countries, then return (a, b, c, scandic)."
+  ],
+  "expected_behavior": "Returns a 4-tuple: the first three countries individually, then the rest as a list.",
+  "solution": "def unpack_scandic_countries(countries):\n    a, b, c, *scandic = countries\n    return (a, b, c, scandic)\n",
+  "hidden_tests": [
+    {
+      "call": "unpack_scandic_countries(['China', 'Russia', 'USA', 'Finland', 'Sweden', 'Norway', 'Denmark'])",
+      "expected": "('China', 'Russia', 'USA', ['Finland', 'Sweden', 'Norway', 'Denmark'])",
+      "label": "seven countries"
+    },
+    {
+      "call": "unpack_scandic_countries(['A', 'B', 'C', 'D'])",
+      "expected": "('A', 'B', 'C', ['D'])",
+      "label": "four items, one scandic"
+    }
+  ],
+  "explanation": "Starred unpacking (a, b, c, *scandic = countries) assigns the first three items to individual names and collects everything after them into the scandic list.",
+  "concepts": [
+    "lists",
+    "unpacking",
+    "starred assignment"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

@@ -1,0 +1,46 @@
+{
+  "id": "30days-d06-l2-04",
+  "module": "tuples",
+  "day": 6,
+  "level": 2,
+  "difficulty": 3,
+  "title": "Slice out the middle item(s)",
+  "description": "Slice out the middle item or items from the food_stuff_tp tuple or food_stuff_lt list.\n\nPython-Gym adaptation: implement as middle_items(food_stuff), where food_stuff is a tuple or list, returning the middle item as a one-item slice when the length is odd, or the two middle items as a two-item slice when the length is even (the return type must match the input type: slicing a tuple yields a tuple, slicing a list yields a list).",
+  "examples": ">>> middle_items(('a', 'b', 'c', 'd', 'e'))\n('c',)\n>>> middle_items(['a', 'b', 'c', 'd'])\n['b', 'c']",
+  "starter_code": "def middle_items(food_stuff):\n    # your code here\n    pass\n",
+  "hints": [
+    "The middle depends on whether the sequence has an odd or even number of items - an odd length has one true middle item, an even length has two.",
+    "Slicing (unlike indexing a single position) naturally returns the same type as the sequence you sliced, whether that's a tuple or a list, which is exactly what's needed here.",
+    "Use mid = len(food_stuff) // 2, then return food_stuff[mid:mid+1] if the length is odd, else food_stuff[mid-1:mid+1]."
+  ],
+  "expected_behavior": "Returns a slice containing the single middle item for odd-length input, or the two middle items for even-length input, matching the input's type.",
+  "hidden_tests": [
+    {
+      "call": "middle_items(('a', 'b', 'c', 'd', 'e'))",
+      "expected": "('c',)",
+      "label": "odd-length tuple, single middle item"
+    },
+    {
+      "call": "middle_items(['a', 'b', 'c', 'd'])",
+      "expected": "['b', 'c']",
+      "label": "even-length list, two middle items"
+    },
+    {
+      "call": "middle_items(('banana', 'orange', 'mango', 'lemon', 'tomato', 'potato', 'cabbage', 'onion', 'carrot', 'milk', 'meat', 'fish', 'yoghurt'))",
+      "expected": "('cabbage',)",
+      "label": "13-item tuple, single middle item"
+    }
+  ],
+  "solution": "def middle_items(food_stuff):\n    n = len(food_stuff)\n    mid = n // 2\n    if n % 2 == 0:\n        return food_stuff[mid - 1: mid + 1]\n    return food_stuff[mid: mid + 1]\n",
+  "explanation": "Integer floor division gives the midpoint index; for an odd length that index alone is the true middle, so a one-item slice around it is taken, while for an even length there are two middle items straddling the midpoint, captured with a two-item slice.",
+  "concepts": [
+    "tuples",
+    "lists",
+    "slicing"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

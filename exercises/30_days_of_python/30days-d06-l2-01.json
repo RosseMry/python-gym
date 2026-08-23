@@ -1,0 +1,41 @@
+{
+  "id": "30days-d06-l2-01",
+  "module": "tuples",
+  "day": 6,
+  "level": 2,
+  "difficulty": 2,
+  "title": "Unpack siblings and parents from family_members",
+  "description": "Unpack siblings and parents from family_members.\n\nPython-Gym adaptation: implement as unpack_family_members(family_members), where family_members is a tuple whose last two items are the father and mother and every earlier item is a sibling, returning a tuple (siblings_tuple, (father, mother)).",
+  "examples": ">>> unpack_family_members(('Martha', 'Jennifer', 'John', 'Michael', 'Daniel', 'Alice'))\n(('Martha', 'Jennifer', 'John', 'Michael'), ('Daniel', 'Alice'))",
+  "starter_code": "def unpack_family_members(family_members):\n    # your code here\n    pass\n",
+  "hints": [
+    "Tuple unpacking lets you pull items into separate names in one assignment, and a starred name can soak up 'everything else' as a list.",
+    "The last two items of family_members are always the parents; whatever comes before them are the siblings.",
+    "Use *siblings, father, mother = family_members, then return (tuple(siblings), (father, mother))."
+  ],
+  "expected_behavior": "Returns a 2-tuple: the siblings as a tuple, and (father, mother) as a tuple.",
+  "hidden_tests": [
+    {
+      "call": "unpack_family_members(('Martha', 'Jennifer', 'John', 'Michael', 'Daniel', 'Alice'))",
+      "expected": "(('Martha', 'Jennifer', 'John', 'Michael'), ('Daniel', 'Alice'))",
+      "label": "four siblings plus two parents"
+    },
+    {
+      "call": "unpack_family_members(('Sam', 'Dad', 'Mom'))",
+      "expected": "(('Sam',), ('Dad', 'Mom'))",
+      "label": "one sibling plus two parents"
+    }
+  ],
+  "solution": "def unpack_family_members(family_members):\n    *siblings, father, mother = family_members\n    return (tuple(siblings), (father, mother))\n",
+  "explanation": "The starred assignment *siblings, father, mother = family_members assigns the last two items to father and mother and collects the remaining leading items into the siblings list, which is then converted back to a tuple.",
+  "concepts": [
+    "tuples",
+    "tuple unpacking",
+    "starred assignment"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

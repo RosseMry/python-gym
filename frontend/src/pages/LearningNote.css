@@ -1,0 +1,55 @@
+.learning-note__card {
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  margin-bottom: 16px;
+}
+
+.learning-note__card-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 0 0 8px;
+}
+
+.learning-note__card-text {
+  margin: 0;
+  font-size: 14px;
+  white-space: pre-wrap;
+  line-height: 1.5;
+}
+
+.learning-note__card--key-idea {
+  background: var(--focus-dim);
+  border: 1px solid var(--focus);
+}
+
+.learning-note__card--key-idea .learning-note__card-label {
+  color: var(--focus);
+}
+
+.learning-note__key-idea-text {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 20px;
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+.learning-note__card--warning {
+  background: var(--danger-dim);
+  border: 1px solid var(--danger);
+}
+
+.learning-note__card--warning .learning-note__card-label {
+  color: var(--danger);
+}
+
+.learning-note__card--try {
+  background: var(--success-dim);
+  border: 1px solid var(--success);
+}
+
+.learning-note__card--try .learning-note__card-label {
+  color: var(--success);
+}

@@ -8,6 +8,9 @@ export interface ExerciseSummary {
   track: string;
   source: string;
   exercise_type: string;
+  exercise_status: string;
+  day: number | null;
+  level: number | null;
 }
 
 export interface Prerequisite {
@@ -37,6 +40,9 @@ export interface ExerciseDetail {
   resources: string[];
   validation_profile: string;
   exercise_type: string;
+  exercise_status: string;
+  day: number | null;
+  level: number | null;
 }
 
 export interface TestOutcome {
@@ -106,6 +112,7 @@ export type ProgressStatus =
   | "ATTEMPTED"
   | "FAILED"
   | "SOLVED_WITH_HINT"
+  | "SOLVED_AFTER_SOLUTION"
   | "SOLVED"
   | "SOLVED_TO_REPEAT"
   | "MASTERED";

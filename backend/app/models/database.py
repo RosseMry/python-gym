@@ -35,6 +35,10 @@ CREATE TABLE IF NOT EXISTS exercises (
     validation_profile TEXT NOT NULL DEFAULT 'standard_python',
     exercise_type TEXT NOT NULL DEFAULT 'function',
     exercise_status TEXT NOT NULL DEFAULT 'active',
+    -- Sprint 3 correction: day/level within 30 Days of Python (NULL
+    -- for every other source):
+    day INTEGER,
+    level INTEGER,
     -- Sprint 3 French translations, all optional (NULL = not
     -- translated yet, frontend falls back to the English field):
     title_fr TEXT,
@@ -110,6 +114,8 @@ _EXERCISE_MIGRATION_COLUMNS = {
     "validation_profile": "TEXT NOT NULL DEFAULT 'standard_python'",
     "exercise_type": "TEXT NOT NULL DEFAULT 'function'",
     "exercise_status": "TEXT NOT NULL DEFAULT 'active'",
+    "day": "INTEGER",
+    "level": "INTEGER",
     # Sprint 3 French translations - see app.domain.models.Exercise.
     "title_fr": "TEXT",
     "description_fr": "TEXT",

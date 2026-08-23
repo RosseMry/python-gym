@@ -1,0 +1,40 @@
+{
+  "id": "30days-d05-l1-02",
+  "module": "lists",
+  "day": 5,
+  "level": 1,
+  "difficulty": 1,
+  "title": "Declare a list with more than 5 items",
+  "description": "Declare a list with more than 5 items.\n\nPython-Gym adaptation: implement as list_with_more_than_five_items(), returning a list of your own choosing that contains more than 5 items.",
+  "examples": ">>> list_with_more_than_five_items()\n['apple', 'banana', 'cherry', 'date', 'fig', 'grape']",
+  "starter_code": "def list_with_more_than_five_items():\n    # your code here\n    pass\n",
+  "hints": [
+    "Any list works as long as it has more than 5 elements - the exact values are up to you.",
+    "Count the items you put between the square brackets before you return them.",
+    "Return a list literal with at least 6 comma-separated items, e.g. [1, 2, 3, 4, 5, 6]."
+  ],
+  "expected_behavior": "Returns a list containing more than 5 items.",
+  "solution": "def list_with_more_than_five_items():\n    return ['apple', 'banana', 'cherry', 'date', 'fig', 'grape']\n",
+  "hidden_tests": [
+    {
+      "call": "len(list_with_more_than_five_items()) > 5",
+      "expected": "True",
+      "label": "list has more than 5 items"
+    },
+    {
+      "call": "isinstance(list_with_more_than_five_items(), list)",
+      "expected": "True",
+      "label": "return type is list"
+    }
+  ],
+  "explanation": "The requirement is only about the count of elements, so any list literal with 6 or more comma-separated values satisfies it.",
+  "concepts": [
+    "lists",
+    "list literal"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

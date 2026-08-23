@@ -1,0 +1,45 @@
+{
+  "id": "30days-d05-l1-05",
+  "module": "lists",
+  "day": 5,
+  "level": 1,
+  "difficulty": 1,
+  "title": "Declare a mixed_data_types list",
+  "description": "Declare a list called mixed_data_types, put your (name, age, height, marital status, address).\n\nPython-Gym adaptation: implement as mixed_data_types(), returning a 5-item list [name, age, height, marital_status, address] where name/marital_status/address are strings and age/height are numbers.",
+  "examples": ">>> mixed_data_types()\n['Jane Doe', 28, 1.65, 'single', '123 Main Street']",
+  "starter_code": "def mixed_data_types():\n    # your code here\n    pass\n",
+  "hints": [
+    "The list must hold exactly 5 items, one per piece of personal information listed in order.",
+    "Age and height should be numbers (int or float), the rest should be strings.",
+    "Return a list literal like ['Name', age, height, 'status', 'address']."
+  ],
+  "expected_behavior": "Returns a list of exactly 5 items: name, age, height, marital status, address.",
+  "solution": "def mixed_data_types():\n    return ['Jane Doe', 28, 1.65, 'single', '123 Main Street']\n",
+  "hidden_tests": [
+    {
+      "call": "len(mixed_data_types())",
+      "expected": "5",
+      "label": "exactly five items"
+    },
+    {
+      "call": "isinstance(mixed_data_types()[0], str)",
+      "expected": "True",
+      "label": "first item is a string (name)"
+    },
+    {
+      "call": "isinstance(mixed_data_types()[1], (int, float))",
+      "expected": "True",
+      "label": "second item is numeric (age)"
+    }
+  ],
+  "explanation": "A single list literal with five comma-separated values, mixing strings and numbers, satisfies the 'mixed data types' requirement.",
+  "concepts": [
+    "lists",
+    "mixed data types"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

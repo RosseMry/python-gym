@@ -1,0 +1,40 @@
+{
+  "id": "30days-d05-l1-12",
+  "module": "lists",
+  "day": 5,
+  "level": 1,
+  "difficulty": 2,
+  "title": "Insert an IT company in the middle",
+  "description": "Insert an IT company in the middle of the companies list.\n\nPython-Gym adaptation: implement as insert_company_middle(companies, company), returning a new list with company inserted at index len(companies) // 2.",
+  "examples": ">>> insert_company_middle(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'], 'Netflix')\n['Facebook', 'Google', 'Microsoft', 'Netflix', 'Apple', 'IBM', 'Oracle', 'Amazon']",
+  "starter_code": "def insert_company_middle(companies, company):\n    # your code here\n    pass\n",
+  "hints": [
+    "Lists have a method for inserting a value at a specific index without overwriting anything.",
+    "Compute the middle index the same way as for reading the middle item: len(companies) // 2.",
+    "Copy companies, then call updated.insert(len(updated) // 2, company)."
+  ],
+  "expected_behavior": "Returns a new list with company inserted at the middle index.",
+  "solution": "def insert_company_middle(companies, company):\n    updated = companies.copy()\n    updated.insert(len(updated) // 2, company)\n    return updated\n",
+  "hidden_tests": [
+    {
+      "call": "insert_company_middle(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'], 'Netflix')",
+      "expected": "['Facebook', 'Google', 'Microsoft', 'Netflix', 'Apple', 'IBM', 'Oracle', 'Amazon']",
+      "label": "insert into seven-item list"
+    },
+    {
+      "call": "insert_company_middle(['A', 'B'], 'X')",
+      "expected": "['A', 'X', 'B']",
+      "label": "insert into two-item list"
+    }
+  ],
+  "explanation": "list.insert(index, value) shifts everything from index onward to the right and places value at that position; len(companies) // 2 is the middle position.",
+  "concepts": [
+    "lists",
+    "insert"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

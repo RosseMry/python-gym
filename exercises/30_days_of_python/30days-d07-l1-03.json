@@ -1,0 +1,40 @@
+{
+  "id": "30days-d07-l1-03",
+  "module": "sets",
+  "day": 7,
+  "level": 1,
+  "difficulty": 1,
+  "title": "Insert multiple companies at once",
+  "description": "Given the set `it_companies = {'Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'}`: Insert multiple IT companies at once to the set it_companies.\n\nPython-Gym adaptation: implement as `add_multiple_companies(it_companies, companies)`, where `companies` is an iterable (e.g. a list) of new company names to insert into the given set all at once, returning a SORTED list of the resulting set's contents.",
+  "examples": "add_multiple_companies({'Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'}, ['Twitter', 'Netflix']) -> ['Amazon', 'Apple', 'Facebook', 'Google', 'IBM', 'Microsoft', 'Netflix', 'Oracle', 'Twitter']",
+  "starter_code": "def add_multiple_companies(it_companies, companies):\n    # write your code here\n    pass\n",
+  "hints": [
+    "Adding elements one at a time with .add() would work, but sets have a method built specifically for inserting many elements at once.",
+    "Look for the set method that takes an iterable (like a list) and merges all of its items into the set in one call.",
+    "Call the set's .update() method with the companies list, then return sorted(it_companies)."
+  ],
+  "expected_behavior": "Inserts every item from the given iterable into the set in one call, and returns a sorted list of the updated set's contents.",
+  "hidden_tests": [
+    {
+      "call": "add_multiple_companies({'Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'}, ['Twitter', 'Netflix'])",
+      "expected": "['Amazon', 'Apple', 'Facebook', 'Google', 'IBM', 'Microsoft', 'Netflix', 'Oracle', 'Twitter']",
+      "label": "original it_companies set plus two new companies"
+    },
+    {
+      "call": "add_multiple_companies({'A'}, ['B', 'C'])",
+      "expected": "['A', 'B', 'C']",
+      "label": "small set plus two new items"
+    },
+    {
+      "call": "add_multiple_companies({'A', 'B'}, ['B'])",
+      "expected": "['A', 'B']",
+      "label": "adding an item that already exists changes nothing"
+    }
+  ],
+  "solution": "def add_multiple_companies(it_companies, companies):\n    it_companies = set(it_companies)\n    it_companies.update(companies)\n    return sorted(it_companies)\n",
+  "explanation": "set.update() merges every element of the given iterable into the set in a single call, which is more direct than looping and calling .add() repeatedly. Duplicate elements are simply ignored since a set can't hold repeats.",
+  "concepts": ["set", "update", "sorted"],
+  "skills": ["basic_data_manipulation"],
+  "source": "30_days_of_python",
+  "exercise_type": "function"
+}

@@ -27,25 +27,32 @@ e.g.:
 |---|---|---|---|---|
 | `python/30-days/03_day_operators.md` | [Asabeneh/30-Days-Of-Python](https://github.com/Asabeneh/30-Days-Of-Python), Day 3 | Reference notes for the two 30-Days exercises seeded this sprint | `30days-triangle-area`, `30days-weekly-earning` | Reference only - not required to solve the exercise |
 
-## Not yet included (Sprint 2 scope note)
+## Locked exercises (Sprint 3 correction)
 
-The 42 Piscine's "Python for Data Science" series (the same set of
-PDFs used to build this sprint's `42_python_piscine` content) also
-includes two data-heavy modules that are **out of scope for Sprint 2**
-per the "no scope creep" rule (NumPy/Pandas are explicitly excluded
-this sprint):
+The 42 Piscine's Module 1 (Array) and Module 2 (DataTable) need
+`numpy`/PIL and `pandas`/Matplotlib respectively, none of which are
+part of Python-Gym's execution sandbox. Reconciled against the real
+Piscine subject list (github.com/zstenger93/python_piscine) in the
+Sprint 3 correction, these 10 real exercises are now seeded with
+`exercise_status = "locked"` - visible in the catalog with their real
+titles, but `hidden_tests`/`solution` are empty since they genuinely
+can't be graded yet. Each declares its real `resources` dependency so
+the path is already correct once a NumPy/Pandas track exists to
+actually run them:
 
-- **Module 1 - Array**: needs `numpy`/PIL and sample images
-  (`landscape.jpg`, `animal.jpeg`).
-- **Module 2 - DataTable**: needs `pandas` and Gapminder CSV datasets
-  (`life_expectancy_years.csv`, `population_total.csv`,
+- **Module 1 - Array** (6 exercises): needs `numpy`/PIL and sample
+  images (`landscape.jpg`/`.png`, `animal.jpeg`, `landscape.jpeg`).
+- **Module 2 - DataTable** (4 exercises): needs `pandas`/Matplotlib and
+  Gapminder CSV datasets (`life_expectancy_years.csv`,
+  `population_total.csv`,
   `income_per_person_gdppercapita_ppp_inflation_adjusted.csv`, all
   CC-BY from gapminder.org per the subject's own instructions).
 
-Their exercise statements exist (in the PDFs) but are not seeded as
-Python-Gym content yet. When a future sprint adds the NumPy/Pandas
-track, `resources/datasets/` is where those CSVs and sample images
-should live, declared as `resources` on the corresponding exercises.
+The actual image/CSV files still don't exist under `resources/` yet -
+only the declared paths do, since nothing can execute against them
+until a NumPy/Pandas-capable execution environment exists. When that
+track is built, add the real files here and flip `exercise_status` to
+`"active"`.
 
 ## Excluded exercises
 

@@ -1,0 +1,41 @@
+{
+  "id": "30days-d05-l1-11",
+  "module": "lists",
+  "day": 5,
+  "level": 1,
+  "difficulty": 1,
+  "title": "Add an IT company to the list",
+  "description": "Add an IT company to it_companies.\n\nPython-Gym adaptation: implement as add_company(companies, company), returning a new list with company appended to the end of companies.",
+  "examples": ">>> add_company(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'], 'Tesla')\n['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon', 'Tesla']",
+  "starter_code": "def add_company(companies, company):\n    # your code here\n    pass\n",
+  "hints": [
+    "Adding to the end of a list is a common list operation.",
+    "You can build a new list by concatenating companies with a one-item list containing company.",
+    "Return companies + [company], or use companies.copy() then .append(company)."
+  ],
+  "expected_behavior": "Returns a new list with company added at the end.",
+  "solution": "def add_company(companies, company):\n    return companies + [company]\n",
+  "hidden_tests": [
+    {
+      "call": "add_company(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'], 'Tesla')",
+      "expected": "['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon', 'Tesla']",
+      "label": "append Tesla"
+    },
+    {
+      "call": "add_company([], 'Netflix')",
+      "expected": "['Netflix']",
+      "label": "append to empty list"
+    }
+  ],
+  "explanation": "Concatenating the original list with a single-item list containing the new company appends it at the end without mutating the input.",
+  "concepts": [
+    "lists",
+    "append",
+    "concatenation"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

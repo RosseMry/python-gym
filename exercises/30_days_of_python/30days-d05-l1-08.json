@@ -1,0 +1,40 @@
+{
+  "id": "30days-d05-l1-08",
+  "module": "lists",
+  "day": 5,
+  "level": 1,
+  "difficulty": 1,
+  "title": "Print the number of companies",
+  "description": "Print the number of companies in the list.\n\nPython-Gym adaptation: implement as company_count(companies), returning the number of companies in the list.",
+  "examples": ">>> company_count(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'])\n7",
+  "starter_code": "def company_count(companies):\n    # your code here\n    pass\n",
+  "hints": [
+    "You need a count of the elements in the companies list.",
+    "The built-in length function works on any list.",
+    "Return len(companies)."
+  ],
+  "expected_behavior": "Returns the number of items in the companies list.",
+  "solution": "def company_count(companies):\n    return len(companies)\n",
+  "hidden_tests": [
+    {
+      "call": "company_count(['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'])",
+      "expected": "7",
+      "label": "seven companies"
+    },
+    {
+      "call": "company_count([])",
+      "expected": "0",
+      "label": "no companies"
+    }
+  ],
+  "explanation": "len() reports how many items the companies list currently holds.",
+  "concepts": [
+    "lists",
+    "len"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

@@ -1,0 +1,40 @@
+{
+  "id": "30days-d07-l2-04",
+  "module": "sets",
+  "day": 7,
+  "level": 2,
+  "difficulty": 2,
+  "title": "Are A and B disjoint sets",
+  "description": "Given the sets `A = {19, 22, 24, 20, 25, 26}` and `B = {19, 22, 20, 25, 26, 24, 28, 27}`: Are A and B disjoint sets?\n\nPython-Gym adaptation: implement as `is_disjoint(a, b)`, returning True if the two sets share no elements at all, False otherwise.",
+  "examples": "is_disjoint({19, 22, 24, 20, 25, 26}, {19, 22, 20, 25, 26, 24, 28, 27}) -> False",
+  "starter_code": "def is_disjoint(a, b):\n    # write your code here\n    pass\n",
+  "hints": [
+    "Two sets are disjoint when they have zero elements in common - not even one.",
+    "Sets have a dedicated method that answers exactly this question with True or False.",
+    "Call a.isdisjoint(b) and return its result directly."
+  ],
+  "expected_behavior": "Returns True if a and b have no elements in common, False if they share at least one element.",
+  "hidden_tests": [
+    {
+      "call": "is_disjoint({19, 22, 24, 20, 25, 26}, {19, 22, 20, 25, 26, 24, 28, 27})",
+      "expected": "False",
+      "label": "A and B share several elements"
+    },
+    {
+      "call": "is_disjoint({1, 2}, {3, 4})",
+      "expected": "True",
+      "label": "no elements in common"
+    },
+    {
+      "call": "is_disjoint(set(), {1, 2})",
+      "expected": "True",
+      "label": "an empty set is disjoint with anything"
+    }
+  ],
+  "solution": "def is_disjoint(a, b):\n    return a.isdisjoint(b)\n",
+  "explanation": "set.isdisjoint() returns True only when the two sets share no elements whatsoever - it's the opposite question from intersection, answered directly as a boolean instead of returning the shared elements themselves.",
+  "concepts": ["set", "isdisjoint", "disjoint sets"],
+  "skills": ["basic_data_manipulation"],
+  "source": "30_days_of_python",
+  "exercise_type": "function"
+}

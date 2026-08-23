@@ -1,0 +1,40 @@
+{
+  "id": "30days-d07-l2-06",
+  "module": "sets",
+  "day": 7,
+  "level": 2,
+  "difficulty": 2,
+  "title": "Symmetric difference between A and B",
+  "description": "Given the sets `A = {19, 22, 24, 20, 25, 26}` and `B = {19, 22, 20, 25, 26, 24, 28, 27}`: What is the symmetric difference between A and B?\n\nPython-Gym adaptation: implement as `sym_diff(a, b)`, returning a SORTED list of the elements that are in exactly one of the two sets (not in both).",
+  "examples": "sym_diff({19, 22, 24, 20, 25, 26}, {19, 22, 20, 25, 26, 24, 28, 27}) -> [27, 28]",
+  "starter_code": "def sym_diff(a, b):\n    # write your code here\n    pass\n",
+  "hints": [
+    "The symmetric difference keeps elements that belong to only one of the two sets, excluding anything shared by both.",
+    "Python has a dedicated operator for this - it's different from both union and intersection.",
+    "Use the ^ operator (or a.symmetric_difference(b)) to get the elements unique to each side, then return sorted(result)."
+  ],
+  "expected_behavior": "Returns a sorted list of the elements that appear in exactly one of the two sets, excluding elements common to both.",
+  "hidden_tests": [
+    {
+      "call": "sym_diff({19, 22, 24, 20, 25, 26}, {19, 22, 20, 25, 26, 24, 28, 27})",
+      "expected": "[27, 28]",
+      "label": "original A and B sets"
+    },
+    {
+      "call": "sym_diff({1, 2, 3}, {2, 3, 4})",
+      "expected": "[1, 4]",
+      "label": "small overlapping sets"
+    },
+    {
+      "call": "sym_diff({1, 2}, {1, 2})",
+      "expected": "[]",
+      "label": "identical sets have no symmetric difference"
+    }
+  ],
+  "solution": "def sym_diff(a, b):\n    return sorted(a ^ b)\n",
+  "explanation": "The ^ operator (equivalently, .symmetric_difference()) returns the elements that belong to exactly one of the two sets - it's the union minus the intersection. Since A here is entirely contained in B, only B's extra elements (27 and 28) remain.",
+  "concepts": ["set", "symmetric difference", "sorted"],
+  "skills": ["basic_data_manipulation"],
+  "source": "30_days_of_python",
+  "exercise_type": "function"
+}

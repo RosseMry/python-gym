@@ -111,7 +111,8 @@
   background: var(--danger-dim);
 }
 
-.status-dot--solved_with_hint {
+.status-dot--solved_with_hint,
+.status-dot--solved_after_solution {
   border-color: var(--hint);
   background: var(--hint-dim);
 }
@@ -124,6 +125,21 @@
 .status-dot--solved_to_repeat {
   border-color: var(--hint);
   background: var(--hint);
+}
+
+.status-dot--locked {
+  border-color: var(--ink-muted);
+  background: var(--surface-sunken);
+}
+
+.exercise-card--locked {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.exercise-card--locked:hover {
+  border-color: var(--border);
+  transform: none;
 }
 
 .status-dot--mastered {

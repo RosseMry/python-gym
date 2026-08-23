@@ -53,6 +53,8 @@ def _row_to_exercise(row: sqlite3.Row) -> Exercise:
         exercise_status=(
             row["exercise_status"] if "exercise_status" in columns else "active"
         ),
+        day=row["day"] if "day" in columns else None,
+        level=row["level"] if "level" in columns else None,
         title_fr=row["title_fr"] if "title_fr" in columns else None,
         description_fr=row["description_fr"] if "description_fr" in columns else None,
         examples_fr=row["examples_fr"] if "examples_fr" in columns else None,
@@ -83,12 +85,12 @@ class ExerciseRepository:
                 starter_code, hints, expected_behavior, hidden_tests,
                 solution, explanation, concepts, track, source, skills,
                 prerequisites, resources, validation_profile,
-                exercise_type, exercise_status, title_fr, description_fr,
-                examples_fr, expected_behavior_fr, explanation_fr,
-                hints_fr
+                exercise_type, exercise_status, day, level, title_fr,
+                description_fr, examples_fr, expected_behavior_fr,
+                explanation_fr, hints_fr
             ) VALUES (
                 ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
-                ?, ?, ?, ?, ?, ?, ?
+                ?, ?, ?, ?, ?, ?, ?, ?, ?
             )
             ON CONFLICT(id) DO UPDATE SET
                 module=excluded.module,
@@ -111,6 +113,8 @@ class ExerciseRepository:
                 validation_profile=excluded.validation_profile,
                 exercise_type=excluded.exercise_type,
                 exercise_status=excluded.exercise_status,
+                day=excluded.day,
+                level=excluded.level,
                 title_fr=excluded.title_fr,
                 description_fr=excluded.description_fr,
                 examples_fr=excluded.examples_fr,
@@ -140,6 +144,8 @@ class ExerciseRepository:
                 exercise.validation_profile,
                 exercise.exercise_type,
                 exercise.exercise_status,
+                exercise.day,
+                exercise.level,
                 exercise.title_fr,
                 exercise.description_fr,
                 exercise.examples_fr,
@@ -178,14 +184,23 @@ class ExerciseRepository:
         return [_row_to_exercise(r) for r in rows]
 
     def list_by_source(self, source: str) -> list[Exercise]:
-        """Return active exercises for a single content source."""
+        """Return active exercises for one or more content sources.
+
+        ``source`` accepts a comma-separated list (e.g.
+        "foundations,progressive_python,python_gym") so the frontend's
+        merged "Progressive -> Foundations" nav item can fetch several
+        sources in one request instead of stitching results together
+        client-side.
+        """
+        sources = [s.strip() for s in source.split(",") if s.strip()]
+        placeholders = ",".join("?" for _ in sources)
         rows = self._conn.execute(
-            """
+            f"""
             SELECT * FROM exercises
-            WHERE source = ? AND exercise_status != 'excluded'
+            WHERE source IN ({placeholders}) AND exercise_status != 'excluded'
             ORDER BY difficulty, id
             """,
-            (source,),
+            sources,
         ).fetchall()
         return [_row_to_exercise(r) for r in rows]
 
@@ -216,6 +231,7 @@ class ExerciseRepository:
         solved_family = (
             ExerciseStatus.SOLVED.value,
             ExerciseStatus.SOLVED_WITH_HINT.value,
+            ExerciseStatus.SOLVED_AFTER_SOLUTION.value,
             ExerciseStatus.SOLVED_TO_REPEAT.value,
             ExerciseStatus.MASTERED.value,
         )
@@ -249,12 +265,13 @@ class ExerciseRepository:
         solved_family = (
             ExerciseStatus.SOLVED.value,
             ExerciseStatus.SOLVED_WITH_HINT.value,
+            ExerciseStatus.SOLVED_AFTER_SOLUTION.value,
             ExerciseStatus.SOLVED_TO_REPEAT.value,
             ExerciseStatus.MASTERED.value,
         )
         solved_placeholders = ",".join("?" for _ in solved_family)
         clauses = [
-            "exercises.exercise_status != 'excluded'",
+            "exercises.exercise_status NOT IN ('excluded', 'locked')",
             f"(progress.status IS NULL OR progress.status NOT IN "
             f"({solved_placeholders}))",
         ]

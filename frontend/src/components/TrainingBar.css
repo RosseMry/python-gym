@@ -50,7 +50,8 @@
   background: var(--danger-dim);
 }
 
-.training-bar__plate--solved_with_hint {
+.training-bar__plate--solved_with_hint,
+.training-bar__plate--solved_after_solution {
   border-color: var(--hint);
   background: var(--hint-dim);
 }
