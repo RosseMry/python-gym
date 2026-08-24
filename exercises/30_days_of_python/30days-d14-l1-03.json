@@ -1,0 +1,41 @@
+{
+  "id": "30days-d14-l1-03",
+  "module": "higher_order_functions",
+  "day": 14,
+  "level": 1,
+  "difficulty": 1,
+  "title": "Define a callback function before using it with map",
+  "description": "Define a call function before map, filter or reduce, see examples.\n\nPython-Gym adaptation: implement as double_numbers(numbers), which first defines a named callback function that doubles a number and then uses map() with that named callback (not a lambda) to double every number in numbers, returning the result as a list.",
+  "examples": ">>> double_numbers([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])\n[2, 4, 6, 8, 10, 12, 14, 16, 18, 20]",
+  "starter_code": "def double_numbers(numbers):\n    # your code here\n    pass\n",
+  "hints": [
+    "Before calling map(), define a normal, named function (with def) that takes one number and returns double that number.",
+    "map() takes that function reference (no parentheses after its name) as its first argument and the iterable as its second.",
+    "Wrap map(double, numbers) in list(...) so you return a concrete list instead of a lazy map object."
+  ],
+  "expected_behavior": "Returns a new list where each number from the input list has been doubled, computed by defining a named callback function first and passing it to map().",
+  "solution": "def double_numbers(numbers):\n    def double(n):\n        return n * 2\n    return list(map(double, numbers))\n",
+  "hidden_tests": [
+    {
+      "call": "double_numbers([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])",
+      "expected": "[2, 4, 6, 8, 10, 12, 14, 16, 18, 20]",
+      "label": "doubles the ten numbers"
+    },
+    {
+      "call": "double_numbers([])",
+      "expected": "[]",
+      "label": "empty list stays empty"
+    }
+  ],
+  "explanation": "Defining the callback with def first (instead of inline as a lambda) makes it reusable and named; map() then applies that named function to every item and list() forces the lazy map object into a concrete list.",
+  "concepts": [
+    "map",
+    "callback function",
+    "named function"
+  ],
+  "skills": [
+    "functional_python"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

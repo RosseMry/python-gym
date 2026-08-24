@@ -1,0 +1,40 @@
+{
+  "source": "30_days_of_python",
+  "day": 4,
+  "level": null,
+  "module": "strings",
+  "exercise_type": "function",
+  "id": "30days-d04-08",
+  "difficulty": 2,
+  "title": "Replace a word",
+  "description": "Write a function `replace_word(text, old, new)` that returns `text` with every occurrence of `old` replaced by `new`.\n\nCovers source items 11-12 (both are `.replace()` calls on different text) as one exercise.",
+  "examples": "replace_word('Coding For All', 'Coding', 'Python')\n-> 'Python For All'",
+  "starter_code": "def replace_word(text, old, new):\n    # your code here\n    pass\n",
+  "hints": [
+    "Method to consider: str.replace()",
+    "text.replace(old, new) returns a new string with every occurrence of old swapped for new - it doesn't modify text itself, since strings are immutable.",
+    "Call .replace() on text with old and new as its two arguments, and return the result."
+  ],
+  "expected_behavior": "Returns text with every occurrence of old replaced by new.",
+  "hidden_tests": [
+    {
+      "call": "replace_word('Coding For All', 'Coding', 'Python')",
+      "expected": "'Python For All'",
+      "label": "source item 11"
+    },
+    {
+      "call": "replace_word('Python for Everyone', 'Everyone', 'All')",
+      "expected": "'Python for All'",
+      "label": "source item 12"
+    }
+  ],
+  "solution": "def replace_word(text, old, new):\n    return text.replace(old, new)\n",
+  "explanation": "str.replace() scans the whole string and swaps every match in one call, returning a new string rather than mutating the original.",
+  "concepts": [
+    "strings",
+    "replace"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

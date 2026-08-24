@@ -3,7 +3,9 @@
   "module": "piscine_03_oop",
   "difficulty": 3,
   "title": "GOT S1E7 (two families + a class method)",
+  "title_fr": "GOT S1E7 (deux familles + une méthode de classe)",
   "description": "Create `Baratheon` and `Lannister` classes that inherit from `Character` and can be instantiated directly (without going through `Character`), each with its own `family_name`, `eyes` and `hairs`. Make `__str__`/`__repr__` return strings (not the objects they wrap). Add a class method on `Lannister` to create Lannister characters in a chain.\n\nThis is not auto-graded here: __str__/__repr__ returning strings that read like 'Representing the Baratheon family.' involves the exact wording being up to the student, so hidden tests would just be checking against fabricated wording, not the actual requirement. Verify against the subject's own tester.py.",
+  "description_fr": "Crée des classes `Baratheon` et `Lannister` qui héritent de `Character` et peuvent être instanciées directement (sans passer par `Character`), chacune avec son propre `family_name`, `eyes` et `hairs`. Fais en sorte que `__str__`/`__repr__` retournent des chaînes (pas les objets qu'ils enveloppent). Ajoute une méthode de classe sur `Lannister` pour créer des personnages Lannister en chaîne.\n\nCe n'est pas noté automatiquement ici : __str__/__repr__ retournant des chaînes du style 'Representing the Baratheon family.' laisse le choix exact du texte à l'étudiant, donc des tests cachés ne feraient que vérifier un texte inventé, pas la vraie exigence. Vérifie avec le tester.py du sujet lui-même.",
   "examples": "Robert = Baratheon('Robert')\nprint(Robert.__dict__)\n# {'first_name': 'Robert', 'is_alive': True, 'family_name': 'Baratheon', 'eyes': 'brown', 'hairs': 'dark'}\n\nJaine = Lannister.create_lannister('Jaine', True)\nprint(Jaine.first_name, Jaine.is_alive)  # Jaine True",
   "starter_code": "from S1E9 import Character\n\n\nclass Baratheon(Character):\n    # your code here\n    pass\n\n\nclass Lannister(Character):\n    # your code here\n    pass\n",
   "hints": [
@@ -11,10 +13,16 @@
     "__str__ and __repr__ are just methods - define them to return an f-string instead of the default object repr.",
     "A @classmethod receives the class itself as its first argument (conventionally `cls`), so it can call `cls(...)` to build and return a new instance."
   ],
+  "hints_fr": [
+    "Chaque sous-classe de famille a besoin de son propre __init__ qui appelle Character.__init__ (via super()) puis fixe ses propres attributs supplémentaires (family_name, eyes, hairs).",
+    "__str__ et __repr__ sont de simples méthodes - définis-les pour qu'elles retournent une f-string au lieu du repr d'objet par défaut.",
+    "Une @classmethod reçoit la classe elle-même comme premier argument (par convention `cls`), ce qui lui permet d'appeler `cls(...)` pour construire et retourner une nouvelle instance."
+  ],
   "expected_behavior": "Baratheon/Lannister instantiate without going through Character; __str__/__repr__ return strings; Lannister.create_lannister(name, alive) returns a new Lannister.",
   "hidden_tests": [],
   "solution": "from S1E9 import Character\n\n\nclass Baratheon(Character):\n    \"\"\"A member of House Baratheon.\"\"\"\n\n    def __init__(self, first_name, is_alive=True):\n        super().__init__(first_name, is_alive)\n        self.family_name = 'Baratheon'\n        self.eyes = 'brown'\n        self.hairs = 'dark'\n\n    def __str__(self):\n        return 'Representing the Baratheon family.'\n\n    def __repr__(self):\n        return 'Representing the Baratheon family.'\n\n\nclass Lannister(Character):\n    \"\"\"A member of House Lannister.\"\"\"\n\n    def __init__(self, first_name, is_alive=True):\n        super().__init__(first_name, is_alive)\n        self.family_name = 'Lannister'\n        self.eyes = 'blue'\n        self.hairs = 'light'\n\n    def __str__(self):\n        return 'Representing the Lannister family.'\n\n    @classmethod\n    def create_lannister(cls, first_name, is_alive=True):\n        \"\"\"Build a new Lannister - a chainable factory.\"\"\"\n        return cls(first_name, is_alive)\n",
   "explanation": "super().__init__(...) reuses Character's constructor logic instead of repeating it; a classmethod factory is just a regular method decorated with @classmethod that returns cls(...) - it's the idiomatic way to offer an alternative constructor.",
+  "explanation_fr": "super().__init__(...) réutilise la logique du constructeur de Character au lieu de la répéter ; une fabrique classmethod est simplement une méthode ordinaire décorée avec @classmethod qui retourne cls(...) - c'est la façon idiomatique d'offrir un constructeur alternatif.",
   "concepts": [
     "inheritance",
     "super",

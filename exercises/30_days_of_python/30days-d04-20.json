@@ -1,0 +1,40 @@
+{
+  "source": "30_days_of_python",
+  "day": 4,
+  "level": null,
+  "module": "strings",
+  "exercise_type": "function",
+  "id": "30days-d04-20",
+  "difficulty": 1,
+  "title": "Check if a string is a valid identifier",
+  "description": "Write a function `is_valid_name(text)` that returns whether `text` would be a valid Python variable name.",
+  "examples": "is_valid_name('30DaysOfPython')\n-> False\nis_valid_name('thirty_days_of_python')\n-> True",
+  "starter_code": "def is_valid_name(text):\n    # your code here\n    pass\n",
+  "hints": [
+    "Method to consider: str.isidentifier()",
+    "text.isidentifier() checks the exact rule Python itself uses for variable names: no leading digit, and only letters, digits and underscores allowed.",
+    "Return the result of .isidentifier() directly."
+  ],
+  "expected_behavior": "Returns True if text is a syntactically valid Python identifier.",
+  "hidden_tests": [
+    {
+      "call": "is_valid_name('30DaysOfPython')",
+      "expected": "False",
+      "label": "source item 31, starts with a digit"
+    },
+    {
+      "call": "is_valid_name('thirty_days_of_python')",
+      "expected": "True",
+      "label": "source item 31, valid"
+    }
+  ],
+  "solution": "def is_valid_name(text):\n    return text.isidentifier()\n",
+  "explanation": "isidentifier() encodes Python's own naming rule directly, rather than reimplementing 'starts with a letter or underscore, then letters/digits/underscores' by hand.",
+  "concepts": [
+    "strings",
+    "isidentifier"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

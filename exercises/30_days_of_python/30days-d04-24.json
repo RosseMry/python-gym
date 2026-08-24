@@ -1,0 +1,36 @@
+{
+  "source": "30_days_of_python",
+  "day": 4,
+  "level": null,
+  "module": "strings",
+  "exercise_type": "function",
+  "id": "30days-d04-24",
+  "difficulty": 2,
+  "title": "Format a circle's area",
+  "description": "Write a function `circle_area_message(radius)` that returns `\"The area of a circle with radius {radius} is {area} meters square.\"`, where `area = 3.14 * radius ** 2`, rounded to the nearest whole number.",
+  "examples": "circle_area_message(10)\n-> 'The area of a circle with radius 10 is 314 meters square.'",
+  "starter_code": "def circle_area_message(radius):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: compute the value first, then format it into an f-string",
+    "3.14 * radius ** 2 gives the area as a float; round() (or an f-string format spec like :.0f) turns it into a whole number for display.",
+    "Compute area, round it to an int, and place both radius and the rounded area into an f-string matching the message exactly."
+  ],
+  "expected_behavior": "Returns the area message with the rounded area substituted in.",
+  "hidden_tests": [
+    {
+      "call": "circle_area_message(10)",
+      "expected": "'The area of a circle with radius 10 is 314 meters square.'",
+      "label": "source item 35"
+    }
+  ],
+  "solution": "def circle_area_message(radius):\n    area = round(3.14 * radius ** 2)\n    return (\n        f\"The area of a circle with radius {radius} is \"\n        f\"{area} meters square.\"\n    )\n",
+  "explanation": "Rounding happens on the computed area before it's inserted into the f-string - formatting is about presentation, the arithmetic itself doesn't change.",
+  "concepts": [
+    "strings",
+    "f-strings",
+    "formatting"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "source": "30_days_of_python",
+  "day": 11,
+  "module": "functions",
+  "exercise_type": "function",
+  "level": 3,
+  "id": "30days-d11-l3-01",
+  "difficulty": 2,
+  "title": "Check if a number is prime",
+  "description": "Write a function `is_prime(n)` that returns whether `n` is a prime number (an integer greater than 1 with no divisors other than 1 and itself).",
+  "examples": "is_prime(7)\n-> True\nis_prime(8)\n-> False",
+  "starter_code": "def is_prime(n):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: check every possible divisor from 2 up to n itself",
+    "If n has any divisor d (2 <= d < n) where n % d == 0, it isn't prime - a single loop checking each candidate divisor answers the question.",
+    "Return False immediately if n < 2. Otherwise loop d from 2 to n - 1, returning False the moment n % d == 0 is found; if the loop finishes without finding one, return True."
+  ],
+  "expected_behavior": "Returns True if n is prime, False otherwise.",
+  "hidden_tests": [
+    {
+      "call": "is_prime(7)",
+      "expected": "True",
+      "label": "source item 1, prime"
+    },
+    {
+      "call": "is_prime(8)",
+      "expected": "False",
+      "label": "not prime"
+    },
+    {
+      "call": "is_prime(1)",
+      "expected": "False",
+      "label": "1 is not prime by definition"
+    },
+    {
+      "call": "is_prime(2)",
+      "expected": "True",
+      "label": "smallest prime"
+    }
+  ],
+  "solution": "def is_prime(n):\n    if n < 2:\n        return False\n    for d in range(2, n):\n        if n % d == 0:\n            return False\n    return True\n",
+  "explanation": "Returning False as soon as a divisor is found avoids checking the rest of the range unnecessarily - the loop only needs one counterexample to disprove primality, but has to check every candidate to confirm it.",
+  "concepts": [
+    "loops",
+    "modulo",
+    "primes"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "source": "30_days_of_python",
+  "day": 14,
+  "module": "higher_order_functions",
+  "exercise_type": "function",
+  "level": 2,
+  "id": "30days-d14-l2-05",
+  "difficulty": 1,
+  "title": "Filter countries by minimum name length",
+  "description": "Write a function `filter_min_length(countries, n)` that returns the countries whose name has at least `n` characters, using `filter()`.",
+  "examples": "filter_min_length(['Estonia', 'Finland', 'Sweden', 'Denmark', 'Norway', 'Iceland'], 7)\n-> ['Estonia', 'Finland', 'Denmark', 'Iceland']",
+  "starter_code": "def filter_min_length(countries, n):\n    # your code here\n    pass\n",
+  "hints": [
+    "Function to consider: filter(), combined with len()",
+    "len(c) >= n is the per-item condition here - a single comparison operator (>= instead of ==) is the only difference from filter_exact_length.",
+    "Return list(filter(lambda c: len(c) >= n, countries))."
+  ],
+  "expected_behavior": "Returns the countries whose name has n or more characters.",
+  "hidden_tests": [
+    {
+      "call": "filter_min_length(['Estonia', 'Finland', 'Sweden', 'Denmark', 'Norway', 'Iceland'], 6)",
+      "expected": "['Estonia', 'Finland', 'Sweden', 'Denmark', 'Norway', 'Iceland']",
+      "label": "source item 6, every name qualifies"
+    },
+    {
+      "call": "filter_min_length(['Estonia', 'Finland', 'Sweden', 'Denmark', 'Norway', 'Iceland'], 7)",
+      "expected": "['Estonia', 'Finland', 'Denmark', 'Iceland']",
+      "label": "stricter threshold"
+    }
+  ],
+  "solution": "def filter_min_length(countries, n):\n    return list(filter(lambda c: len(c) >= n, countries))\n",
+  "explanation": "With a 6-country list where the shortest names are 6 letters long, 'six letters or more' happens to match everyone - a good reminder to check the actual data rather than assume a filter narrows the results.",
+  "concepts": [
+    "filter",
+    "lambda",
+    "len"
+  ],
+  "skills": [
+    "functional_python"
+  ]
+}

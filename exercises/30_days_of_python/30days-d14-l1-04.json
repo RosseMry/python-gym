@@ -1,0 +1,41 @@
+{
+  "id": "30days-d14-l1-04",
+  "module": "higher_order_functions",
+  "day": 14,
+  "level": 1,
+  "difficulty": 1,
+  "title": "Print each country with a for loop",
+  "description": "Use for loop to print each country in the countries list.\n\nPython-Gym adaptation: implement as printed_countries(countries), returning the exact multi-line string that a for loop printing each country on its own line would write to the screen (lines joined with '\\n').",
+  "examples": ">>> printed_countries(['Estonia', 'Finland', 'Sweden', 'Denmark', 'Norway', 'Iceland'])\n'Estonia\\nFinland\\nSweden\\nDenmark\\nNorway\\nIceland'",
+  "starter_code": "def printed_countries(countries):\n    # your code here\n    pass\n",
+  "hints": [
+    "A for loop like `for country in countries: print(country)` writes one line per country, each ending in a newline.",
+    "'\\n'.join(...) builds exactly that text - one item per line - without actually calling print().",
+    "Return '\\n'.join(str(c) for c in countries)."
+  ],
+  "expected_behavior": "Returns the string that a for loop printing each country on its own line would produce, with lines separated by newline characters.",
+  "solution": "def printed_countries(countries):\n    return '\\n'.join(str(c) for c in countries)\n",
+  "hidden_tests": [
+    {
+      "call": "printed_countries(['Estonia', 'Finland', 'Sweden', 'Denmark', 'Norway', 'Iceland'])",
+      "expected": "'Estonia\\nFinland\\nSweden\\nDenmark\\nNorway\\nIceland'",
+      "label": "six countries printed one per line"
+    },
+    {
+      "call": "printed_countries([])",
+      "expected": "''",
+      "label": "empty list produces an empty string"
+    }
+  ],
+  "explanation": "'\\n'.join() places a newline between each country name, which is exactly the text a for loop calling print(country) on each item would send to the screen.",
+  "concepts": [
+    "for loop",
+    "print",
+    "join"
+  ],
+  "skills": [
+    "functional_python"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

@@ -1,0 +1,47 @@
+{
+  "id": "30days-d12-l3-02",
+  "module": "modules",
+  "day": 12,
+  "level": 3,
+  "difficulty": 2,
+  "title": "Seven unique random numbers",
+  "description": "Write a function which returns an array of seven random numbers in a range of 0-9. All the numbers must be unique.\n\nPython-Gym adaptation: since the source exercise names no function, implement as unique_random_numbers(seed=None). When seed is provided, seed the random module with it first. Return a list of seven distinct integers, each in the range 0-9 inclusive.",
+  "examples": ">>> unique_random_numbers(0)\n[6, 9, 0, 2, 4, 3, 5]\n>>> unique_random_numbers(1)\n[2, 1, 4, 0, 3, 5, 7]",
+  "starter_code": "import random\n\ndef unique_random_numbers(seed=None):\n    # your code here\n    pass\n",
+  "hints": [
+    "random.sample() picks a given number of unique elements from a population without repeats, unlike random.choice() which can repeat.",
+    "The available range 0-9 has exactly 10 numbers, and you need 7 unique ones from it, so random.sample(range(10), 7) is a natural fit.",
+    "Seed random first (only if seed is not None), then return random.sample(range(10), 7) as the list of seven unique numbers."
+  ],
+  "expected_behavior": "Returns a list of 7 integers, each between 0 and 9 inclusive, with no repeated values. With the same seed, the returned list is always identical.",
+  "solution": "import random\n\ndef unique_random_numbers(seed=None):\n    if seed is not None:\n        random.seed(seed)\n    return random.sample(range(10), 7)\n",
+  "hidden_tests": [
+    {
+      "call": "unique_random_numbers(0)",
+      "expected": "[6, 9, 0, 2, 4, 3, 5]",
+      "label": "seed 0 produces the expected deterministic list of 7 unique numbers"
+    },
+    {
+      "call": "unique_random_numbers(1)",
+      "expected": "[2, 1, 4, 0, 3, 5, 7]",
+      "label": "seed 1 produces the expected deterministic list of 7 unique numbers"
+    },
+    {
+      "call": "len(set(unique_random_numbers(3)))",
+      "expected": "7",
+      "label": "all 7 returned numbers are unique"
+    }
+  ],
+  "explanation": "random.sample(range(10), 7) draws 7 distinct values without replacement from the 10 possible numbers 0-9, which directly satisfies the uniqueness requirement; seeding random beforehand makes the drawn sample reproducible.",
+  "concepts": [
+    "modules",
+    "random module",
+    "random.sample",
+    "uniqueness"
+  ],
+  "skills": [
+    "using_standard_library_modules"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

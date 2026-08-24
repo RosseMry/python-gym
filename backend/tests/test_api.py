@@ -89,10 +89,10 @@ def test_get_missing_exercise_returns_404(client: TestClient) -> None:
 def test_hint_endpoint_returns_hints_in_order(client: TestClient) -> None:
     first = client.post("/api/exercises/loop-003/hint")
     assert first.status_code == 200
-    assert first.json() == {"hint": "hint 1", "hint_fr": None}
+    assert first.json() == {"hint": "hint 1", "hint_fr": None, "hint_function": None}
 
     second = client.post("/api/exercises/loop-003/hint")
-    assert second.json() == {"hint": "hint 2", "hint_fr": None}
+    assert second.json() == {"hint": "hint 2", "hint_fr": None, "hint_function": None}
 
 
 def test_submit_endpoint_reports_pass_fail(client: TestClient) -> None:

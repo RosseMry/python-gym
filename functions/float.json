@@ -1,0 +1,13 @@
+{
+  "id": "float",
+  "name": "float()",
+  "what_it_does": "Converts a value - most often a string typed by the user, or an int - into a floating-point number (a number that can have a decimal part).",
+  "syntax": "float(x)",
+  "parameters": "x - a string that looks like a number (e.g. \"3.5\", \"20\"), an int, or another number-like value.",
+  "return_value": "The value converted to a float, e.g. float(\"3.5\") -> 3.5, float(20) -> 20.0.",
+  "example": "base = float(input('Enter base: '))\nheight = float(input('Enter height: '))\nprint(0.5 * base * height)",
+  "example_output": "(depends on input - e.g. for base=20, height=10: 100.0)",
+  "common_mistakes": "input() always returns a string, even if the user types a number - arithmetic on the raw string either fails (for + on non-matching operands) or does the wrong thing (string '*' repeats text instead of multiplying). Using int() instead of float() when the calculation needs a decimal result (e.g. an average or an area) truncates or fails on non-whole-number input, and produces a result of the wrong type - int(input()) on \"20\" works, but the formula's result should often stay a float even when the inputs happen to be whole numbers, since a later input might not be.",
+  "when_to_use": "Any time you read a number from input() (or another string source) and the calculation involves division, multiplication by a fraction, or could produce a non-whole-number result - use float() instead of int() so you don't lose precision or crash on decimal input.",
+  "related_exercise_ids": ["30days-triangle-area", "30days-weekly-earning"]
+}

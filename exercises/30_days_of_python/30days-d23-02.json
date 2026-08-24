@@ -1,0 +1,42 @@
+{
+  "source": "30_days_of_python",
+  "day": 23,
+  "level": null,
+  "module": "virtual_environment",
+  "id": "30days-d23-02",
+  "difficulty": 2,
+  "title": "Parse a requirements.txt file",
+  "description": "Write a function `parse_requirements(text)` that parses `pip freeze`-style content and returns a list of `(name, version)` tuples - one per `name==version` line. Blank lines and `#`-comments (whether on their own line or trailing after a requirement) are ignored.",
+  "examples": "parse_requirements('fastapi==0.115.0\\n# dev tools\\npytest==8.0.0  # test runner\\n')\n-> [('fastapi', '0.115.0'), ('pytest', '8.0.0')]",
+  "starter_code": "import re\n\n\ndef parse_requirements(text):\n    # your code here\n    pass\n",
+  "hints": [
+    "💡 Idea to consider: process the file one line at a time, stripping comments before checking anything else",
+    "text.splitlines() gives you one line per requirement; splitting each line on '#' and keeping only the part before it removes both whole-line and trailing comments in the same step.",
+    "For each non-blank line left after stripping comments, split on '==' to get the package name and version - a regular expression like ^([\\w.-]+)==([\\w.-]+)$ (or a plain .split('==', 1)) pulls both parts out."
+  ],
+  "expected_behavior": "Returns (name, version) tuples for every requirement line, comments and blank lines skipped.",
+  "hidden_tests": [
+    {
+      "call": "parse_requirements('# core deps\\nfastapi==0.115.0\\nuvicorn==0.30.0\\n\\npytest==8.0.0  # dev only\\n')",
+      "expected": "[('fastapi', '0.115.0'), ('uvicorn', '0.30.0'), ('pytest', '8.0.0')]",
+      "label": "comments and blank lines skipped"
+    },
+    {
+      "call": "parse_requirements('')",
+      "expected": "[]",
+      "label": "empty file"
+    }
+  ],
+  "solution": "import re\n\n\ndef parse_requirements(text):\n    result = []\n    for line in text.splitlines():\n        line = line.split(\"#\", 1)[0].strip()\n        if not line:\n            continue\n        match = re.match(r\"^([A-Za-z0-9_.-]+)==([A-Za-z0-9_.-]+)$\", line)\n        if match:\n            result.append((match.group(1), match.group(2)))\n    return result\n",
+  "explanation": "Stripping comments before anything else means the rest of the parsing never has to think about '#' at all - splitting on '==' or matching a regex only ever sees a clean 'name==version' string by that point.",
+  "concepts": [
+    "regular expressions",
+    "requirements.txt",
+    "string parsing"
+  ],
+  "skills": [
+    "text_processing",
+    "using_standard_library_modules"
+  ],
+  "exercise_type": "function"
+}

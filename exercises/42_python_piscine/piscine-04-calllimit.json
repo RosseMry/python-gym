@@ -3,18 +3,26 @@
   "module": "piscine_04_data_oriented_design",
   "difficulty": 3,
   "title": "My first decorating (call limit)",
+  "title_fr": "Mon premier décorateur (limite d'appels)",
   "description": "Write `callLimit(limit)`, a decorator factory that blocks a function from running more than `limit` times, printing an error message (naming the function and its memory address, in the style of the subject's example) once the limit is exceeded instead of calling it again.\n\nNot auto-graded: the expected output embeds the wrapped function's memory address (`0x7fabdc243ee0`-style), which is different every run and every machine, so an exact-match hidden test isn't meaningful here.",
+  "description_fr": "Écris `callLimit(limit)`, une fabrique de décorateur qui empêche une fonction de s'exécuter plus de `limit` fois, en affichant un message d'erreur (nommant la fonction et son adresse mémoire, dans le style de l'exemple du sujet) une fois la limite dépassée au lieu de l'appeler à nouveau.\n\nNon noté automatiquement : la sortie attendue inclut l'adresse mémoire de la fonction enveloppée (style `0x7fabdc243ee0`), différente à chaque exécution et sur chaque machine, donc un test caché d'égalité exacte n'a pas de sens ici.",
   "examples": "@callLimit(1)\ndef g():\n    print('g()')\n\ng()  # g()\ng()  # Error: <function g at 0x...> call too many times",
   "starter_code": "def callLimit(limit):\n    count = 0\n\n    def callLimiter(function):\n        def limit_function(*args, **kwds):\n            # your code here\n            pass\n        return limit_function\n\n    return callLimiter\n",
   "hints": [
     "Each decorated function needs its own independent call counter - putting `count = 0` at the `callLimit(limit)` level (not `limit_function` level) gives every decorated function its own closure over a fresh `count`.",
     "`nonlocal count` again, same reasoning as the previous exercise's inner().",
-    "def limit_function(*args, **kwds):\n    nonlocal count\n    if count >= limit:\n        print(f'Error: {function} call too many times')\n        return\n    count += 1\n    return function(*args, **kwds)"
+    "Inside limit_function, declare nonlocal count, check whether count has already reached limit (print the error and return early if so), and otherwise increment count before calling and returning function(*args, **kwds)."
+  ],
+  "hints_fr": [
+    "Chaque fonction décorée a besoin de son propre compteur d'appels indépendant - placer `count = 0` au niveau de `callLimit(limit)` (pas au niveau de `limit_function`) donne à chaque fonction décorée sa propre fermeture sur un `count` neuf.",
+    "`nonlocal count` à nouveau, même raisonnement que le inner() de l'exercice précédent.",
+    "Dans limit_function, déclare nonlocal count, vérifie si count a déjà atteint limit (affiche l'erreur et retourne tôt si c'est le cas), sinon incrémente count avant d'appeler et de retourner function(*args, **kwds)."
   ],
   "expected_behavior": "Calls beyond the limit print an error instead of running the function.",
   "hidden_tests": [],
   "solution": "def callLimit(limit):\n    \"\"\"Decorator factory limiting how many times a function runs.\"\"\"\n    count = 0\n\n    def callLimiter(function):\n        \"\"\"Wrap function with the call-limit check.\"\"\"\n        def limit_function(*args, **kwds):\n            nonlocal count\n            if count >= limit:\n                print(f'Error: {function} call too many times')\n                return None\n            count += 1\n            return function(*args, **kwds)\n        return limit_function\n\n    return callLimiter\n",
   "explanation": "callLimit(limit) is a decorator *factory*: calling it returns callLimiter, the actual decorator, which closes over both `limit` and a per-function `count`.",
+  "explanation_fr": "callLimit(limit) est une *fabrique* de décorateur : l'appeler retourne callLimiter, le véritable décorateur, qui referme à la fois sur `limit` et sur un `count` propre à chaque fonction.",
   "concepts": [
     "decorators",
     "closures",

@@ -1,0 +1,39 @@
+{
+  "id": "30days-d16-06",
+  "module": "datetime",
+  "day": 16,
+  "difficulty": 1,
+  "title": "Uses of the datetime module",
+  "description": "Think, what can you use the datetime module for? Examples: Time series analysis, To get a timestamp of any activities in an application, Adding posts on a blog\n\nPython-Gym adaptation: this is an open-ended reflection question in the original material with no single correct answer, so it can't be checked against one fixed expected value. Implement as datetime_module_use_cases(), returning a list of the example use cases given in the exercise, as strings.",
+  "examples": ">>> datetime_module_use_cases()\n['Time series analysis', 'To get a timestamp of any activities in an application', 'Adding posts on a blog']",
+  "starter_code": "def datetime_module_use_cases():\n    # your code here\n    pass\n",
+  "hints": [
+    "This is a reflection question - there is no calculation involved, just list some real-world uses of dates and times in software.",
+    "The exercise itself names three examples: time series analysis, timestamping activities in an application, and adding posts on a blog.",
+    "Return a list literal containing at least those example use cases as strings, e.g. ['Time series analysis', ...]."
+  ],
+  "expected_behavior": "Returns a list of strings naming example real-world use cases for the datetime module.",
+  "solution": "def datetime_module_use_cases():\n    return [\n        \"Time series analysis\",\n        \"To get a timestamp of any activities in an application\",\n        \"Adding posts on a blog\",\n    ]\n",
+  "hidden_tests": [
+    {
+      "call": "len(datetime_module_use_cases()) >= 3",
+      "expected": "True",
+      "label": "lists at least 3 use cases"
+    },
+    {
+      "call": "all(isinstance(x, str) for x in datetime_module_use_cases())",
+      "expected": "True",
+      "label": "every use case is a string"
+    }
+  ],
+  "explanation": "This exercise is a reflection prompt rather than a calculation, so the hidden tests only check the shape of the answer (a list of at least 3 strings) rather than its exact wording, since the original material itself only offers open-ended examples.",
+  "concepts": [
+    "datetime module",
+    "real-world applications"
+  ],
+  "skills": [
+    "date_time_handling"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

@@ -1,0 +1,48 @@
+{
+  "id": "30days-d12-l1-02",
+  "module": "modules",
+  "day": 12,
+  "level": 1,
+  "difficulty": 2,
+  "title": "User-configurable ID generator",
+  "description": "Modify the previous task. Declare a function named user_id_gen_by_user. It doesn't take any parameters but it takes two inputs using input(). One of the inputs is the number of characters and the second input is the number of IDs which are supposed to be generated.\n\n```py\nprint(user_id_gen_by_user()) # user input: 5 5\n#output:\n#kcsy2\n#SMFYb\n#bWmeq\n#ZXOYh\n#2Rgxf\n\nprint(user_id_gen_by_user()) # 16 5\n#1GCSgPLMaBAVQZ26\n#YD7eFwNQKNs7qXaT\n#ycArC5yrRupyG00S\n#UbGxOFI7UXSWAyKN\n#dIV0SSUTgAdKwStr\n```\n\nPython-Gym adaptation: since Python-Gym exercises are graded as function calls rather than interactive input() sessions, implement as user_id_gen_by_user(num_chars, num_ids, seed=None), replacing the two input() calls with the num_chars and num_ids parameters. When seed is provided, seed the random module with it first. Return a list of num_ids strings, each num_chars characters long, built from letters (upper and lower case) and digits.",
+  "examples": ">>> user_id_gen_by_user(5, 3, seed=1)\n['iK2ZW', 'eqhFW', 'CEPyY']\n>>> [len(x) for x in user_id_gen_by_user(6, 4, seed=3)]\n[6, 6, 6, 6]",
+  "starter_code": "import random\nimport string\n\ndef user_id_gen_by_user(num_chars, num_ids, seed=None):\n    # your code here\n    pass\n",
+  "hints": [
+    "string.ascii_letters includes both uppercase and lowercase letters; combine it with string.digits to match the mixed-case example ids shown in the exercise.",
+    "Seed random first (only if seed is not None), then generate num_ids separate ids, each built from num_chars random characters.",
+    "Use a loop over range(num_ids), and inside it build each id with ''.join(random.choice(characters) for _ in range(num_chars)); collect the ids into a list to return."
+  ],
+  "expected_behavior": "Returns a list containing num_ids strings, each exactly num_chars characters long, made of letters and digits. With the same seed, num_chars and num_ids, the returned list is always identical.",
+  "solution": "import random\nimport string\n\ndef user_id_gen_by_user(num_chars, num_ids, seed=None):\n    if seed is not None:\n        random.seed(seed)\n    characters = string.ascii_letters + string.digits\n    ids = []\n    for _ in range(num_ids):\n        ids.append(''.join(random.choice(characters) for _ in range(num_chars)))\n    return ids\n",
+  "hidden_tests": [
+    {
+      "call": "user_id_gen_by_user(5, 3, seed=1)",
+      "expected": "['iK2ZW', 'eqhFW', 'CEPyY']",
+      "label": "seed 1 produces the expected deterministic list of 5-character ids"
+    },
+    {
+      "call": "user_id_gen_by_user(8, 2, seed=2)",
+      "expected": "['9382dffx', '1kVZQ2tq']",
+      "label": "seed 2 produces the expected deterministic list of 8-character ids"
+    },
+    {
+      "call": "[len(x) for x in user_id_gen_by_user(6, 4, seed=3)]",
+      "expected": "[6, 6, 6, 6]",
+      "label": "every generated id has exactly num_chars characters"
+    }
+  ],
+  "explanation": "Replacing the two input() prompts with function parameters keeps the same generation logic - for each of num_ids iterations, num_chars random characters are drawn from letters+digits and joined into one id string, all collected into a list.",
+  "concepts": [
+    "modules",
+    "random module",
+    "string module",
+    "functions with parameters",
+    "list building"
+  ],
+  "skills": [
+    "using_standard_library_modules"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

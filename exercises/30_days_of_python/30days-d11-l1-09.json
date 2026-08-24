@@ -1,0 +1,47 @@
+{
+  "id": "30days-d11-l1-09",
+  "module": "functions",
+  "day": 11,
+  "level": 1,
+  "difficulty": 2,
+  "title": "Reverse a list using loops",
+  "description": "Declare a function named reverse_list. It takes an array as a parameter and it returns the reverse of the array (use loops).\n\nprint(reverse_list([1, 2, 3, 4, 5]))\n# [5, 4, 3, 2, 1]\nprint(reverse_list([\"A\", \"B\", \"C\"]))\n# [\"C\", \"B\", \"A\"]",
+  "examples": ">>> reverse_list([1, 2, 3, 4, 5])\n[5, 4, 3, 2, 1]\n>>> reverse_list(['A', 'B', 'C'])\n['C', 'B', 'A']",
+  "starter_code": "def reverse_list(lst):\n    # your code here\n    pass\n",
+  "hints": [
+    "Build a new empty list to hold the result instead of mutating the input.",
+    "Loop over lst from the last index down to the first, using a range with a negative step.",
+    "Append each visited item to the new list: range(len(lst) - 1, -1, -1)."
+  ],
+  "expected_behavior": "Returns a new list containing the elements of lst in reverse order, built using a loop.",
+  "explanation": "Looping over the indices from len(lst) - 1 down to 0 (a step of -1) visits every element from last to first, and appending each one builds the reversed list.",
+  "concepts": [
+    "functions",
+    "for loop",
+    "range",
+    "lists"
+  ],
+  "skills": [
+    "functional_python"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python",
+  "hidden_tests": [
+    {
+      "call": "reverse_list([1, 2, 3, 4, 5])",
+      "expected": "[5, 4, 3, 2, 1]",
+      "label": "reverse a list of numbers"
+    },
+    {
+      "call": "reverse_list(['A', 'B', 'C'])",
+      "expected": "['C', 'B', 'A']",
+      "label": "reverse a list of strings"
+    },
+    {
+      "call": "reverse_list([])",
+      "expected": "[]",
+      "label": "reverse an empty list"
+    }
+  ],
+  "solution": "def reverse_list(lst):\n    reversed_lst = []\n    for i in range(len(lst) - 1, -1, -1):\n        reversed_lst.append(lst[i])\n    return reversed_lst\n"
+}

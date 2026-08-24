@@ -1,0 +1,34 @@
+{
+  "id": "30days-d13-06",
+  "module": "list_comprehension",
+  "day": 13,
+  "difficulty": 2,
+  "title": "Concatenate names from nested tuples",
+  "description": "Change the following list of lists to a list of concatenated strings:\n\n```py\nnames = [[('Asabeneh', 'Yetayeh')], [('David', 'Smith')], [('Donald', 'Trump')], [('Bill', 'Gates')]]\noutput\n['Asabeneh Yetaeyeh', 'David Smith', 'Donald Trump', 'Bill Gates']\n```\n\nPython-Gym adaptation: implement as `concatenate_names(names)`, returning a list of strings, one per `(first, last)` tuple found in the nested input, each formatted as `\"first last\"` separated by a single space.",
+  "examples": "concatenate_names([[('Asabeneh', 'Yetayeh')], [('David', 'Smith')], [('Donald', 'Trump')], [('Bill', 'Gates')]]) -> ['Asabeneh Yetayeh', 'David Smith', 'Donald Trump', 'Bill Gates']",
+  "starter_code": "def concatenate_names(names):\n    # write your code here\n    pass\n",
+  "hints": [
+    "Use a nested list comprehension: an outer `for` over the one-item groups, and an inner unpacking of the `(first, last)` tuple.",
+    "Build each string with an f-string or by joining, keeping a single space between first and last name.",
+    "The comprehension shape is `[f\"{first} {last}\" for group in names for (first, last) in group]`."
+  ],
+  "expected_behavior": "Returns a list of strings, one per (first, last) tuple in the nested input, each being the first and last name joined by a single space.",
+  "hidden_tests": [
+    {
+      "call": "concatenate_names([[('Asabeneh', 'Yetayeh')], [('David', 'Smith')], [('Donald', 'Trump')], [('Bill', 'Gates')]])",
+      "expected": "['Asabeneh Yetayeh', 'David Smith', 'Donald Trump', 'Bill Gates']",
+      "label": "source example: four names"
+    },
+    {
+      "call": "concatenate_names([[('Ada', 'Lovelace')]])",
+      "expected": "['Ada Lovelace']",
+      "label": "single name"
+    }
+  ],
+  "solution": "def concatenate_names(names):\n    return [f\"{first} {last}\" for group in names for (first, last) in group]\n",
+  "explanation": "The nested comprehension unpacks each `(first, last)` tuple from its one-item group and formats it as a single string with an f-string, collecting one concatenated name per tuple into the resulting list.",
+  "concepts": ["list comprehension", "nested comprehension", "tuple unpacking", "f-strings"],
+  "skills": ["functional_python"],
+  "source": "30_days_of_python",
+  "exercise_type": "function"
+}

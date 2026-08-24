@@ -3,18 +3,26 @@
   "module": "piscine_00_starting",
   "difficulty": 3,
   "title": "Loading ... (ft_tqdm)",
+  "title_fr": "Chargement ... (ft_tqdm)",
   "description": "Write a generator function `ft_tqdm(lst)` that copies the behaviour of the `tqdm` progress bar package using `yield`, printing a live percentage/progress bar as the caller iterates.\n\nThis one is best checked by eye against the real `tqdm` package side by side (see the subject's tester.py), since its output updates in place over time rather than producing a single fixed string - it isn't auto-graded here yet.",
+  "description_fr": "Écris une fonction génératrice `ft_tqdm(lst)` qui reproduit le comportement du package de barre de progression `tqdm` en utilisant `yield`, en affichant un pourcentage/une barre de progression en direct au fur et à mesure que l'appelant itère.\n\nCelui-ci se vérifie mieux à l'œil, en comparant avec le vrai package `tqdm` côte à côte (voir le tester.py du sujet), puisque sa sortie se met à jour sur place au fil du temps plutôt que de produire une seule chaîne fixe - il n'est pas encore noté automatiquement ici.",
   "examples": "for elem in ft_tqdm(range(333)):\n    sleep(0.005)\n-> shows a live progress bar similar to:\n100%|[===================================>]| 333/333",
   "starter_code": "def ft_tqdm(lst):\n    # your code here\n    pass\n",
   "hints": [
     "You need to know the total length up front (len(lst)) to compute a percentage as you go.",
     "os.get_terminal_size() tells you how wide to draw the bar so it fits the terminal.",
-    "for i, item in enumerate(lst):\n    yield item\n    percent = (i + 1) / len(lst)\n    print(f'\\r{percent:.0%}|...', end='')"
+    "Inside a loop over enumerate(lst), yield the item first, then compute how far through the total you are and print a carriage-return-prefixed progress line ('\\r...', end='') so it overwrites in place instead of printing a new line each time."
+  ],
+  "hints_fr": [
+    "Tu dois connaître la longueur totale à l'avance (len(lst)) pour calculer un pourcentage au fil de l'avancement.",
+    "os.get_terminal_size() te dit sur quelle largeur dessiner la barre pour qu'elle tienne dans le terminal.",
+    "Dans une boucle sur enumerate(lst), fais d'abord yield de l'élément, puis calcule où tu en es dans le total et affiche une ligne de progression préfixée par un retour chariot ('\\r...', end='') pour qu'elle s'écrase sur place au lieu d'afficher une nouvelle ligne à chaque fois."
   ],
   "expected_behavior": "Behaves like a generator wrapping the given iterable, printing progress as it's consumed.",
   "hidden_tests": [],
   "solution": "import os\n\n\ndef ft_tqdm(lst):\n    \"\"\"Yield from lst while printing a tqdm-style progress bar.\"\"\"\n    total = len(lst)\n    width = max(os.get_terminal_size().columns - 20, 10)\n    for i, item in enumerate(lst):\n        yield item\n        done = (i + 1) / total\n        filled = int(width * done)\n        bar = ('=' * filled + '>')[:width].ljust(width)\n        percent = int(done * 100)\n        print(\n            f'\\r{percent}%|[{bar}]| {i + 1}/{total}',\n            end='',\n        )\n    print()\n",
   "explanation": "A generator can run code both before and after each `yield` - the loop body around the yield is exactly where the progress percentage gets recomputed and reprinted.",
+  "explanation_fr": "Un générateur peut exécuter du code aussi bien avant qu'après chaque `yield` - le corps de boucle autour du yield est exactement l'endroit où le pourcentage de progression est recalculé et réaffiché.",
   "concepts": [
     "generators",
     "yield",

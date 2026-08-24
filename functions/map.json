@@ -1,0 +1,13 @@
+{
+  "id": "map",
+  "name": "map()",
+  "what_it_does": "Applies a function to every item of an iterable, producing a new sequence of the results, without writing an explicit loop.",
+  "syntax": "map(function, iterable)",
+  "parameters": "function - a function (or lambda) that takes one item and returns a new value. iterable - what to apply it to.",
+  "return_value": "A map object (lazy) - usually wrapped in list() to see the results, or consumed directly in a for loop.",
+  "example": "numbers = [1, 2, 3]\ndoubled = list(map(lambda x: x * 2, numbers))\nprint(doubled)",
+  "example_output": "[2, 4, 6]",
+  "common_mistakes": "Forgetting map() returns a lazy map object, not a list - printing it directly shows something like <map object at 0x...> instead of the values, until you wrap it in list(). A list comprehension ([x * 2 for x in numbers]) does the same thing and is often considered more readable in Python.",
+  "when_to_use": "Transforming every item in a collection the same way - though for most simple cases, a list comprehension is the more idiomatic Python choice.",
+  "related_exercise_ids": []
+}

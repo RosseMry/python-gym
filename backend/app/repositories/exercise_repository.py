@@ -67,6 +67,11 @@ def _row_to_exercise(row: sqlite3.Row) -> Exercise:
             if "hints_fr" in columns and row["hints_fr"]
             else None
         ),
+        hint_functions=(
+            json.loads(row["hint_functions"])
+            if "hint_functions" in columns and row["hint_functions"]
+            else None
+        ),
     )
 
 
@@ -87,10 +92,10 @@ class ExerciseRepository:
                 prerequisites, resources, validation_profile,
                 exercise_type, exercise_status, day, level, title_fr,
                 description_fr, examples_fr, expected_behavior_fr,
-                explanation_fr, hints_fr
+                explanation_fr, hints_fr, hint_functions
             ) VALUES (
                 ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
-                ?, ?, ?, ?, ?, ?, ?, ?, ?
+                ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
             )
             ON CONFLICT(id) DO UPDATE SET
                 module=excluded.module,
@@ -120,7 +125,8 @@ class ExerciseRepository:
                 examples_fr=excluded.examples_fr,
                 expected_behavior_fr=excluded.expected_behavior_fr,
                 explanation_fr=excluded.explanation_fr,
-                hints_fr=excluded.hints_fr
+                hints_fr=excluded.hints_fr,
+                hint_functions=excluded.hint_functions
             """,
             (
                 exercise.id,
@@ -152,6 +158,11 @@ class ExerciseRepository:
                 exercise.expected_behavior_fr,
                 exercise.explanation_fr,
                 json.dumps(exercise.hints_fr) if exercise.hints_fr else None,
+                (
+                    json.dumps(exercise.hint_functions)
+                    if exercise.hint_functions
+                    else None
+                ),
             ),
         )
         self._conn.execute(

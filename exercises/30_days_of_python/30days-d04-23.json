@@ -1,0 +1,36 @@
+{
+  "source": "30_days_of_python",
+  "day": 4,
+  "level": null,
+  "module": "strings",
+  "exercise_type": "function",
+  "id": "30days-d04-23",
+  "difficulty": 1,
+  "title": "Align columns with a tab",
+  "description": "Write a function `table_row(name, age, country, city)` that joins the four values with tab escape sequences between them.",
+  "examples": "print(table_row('Asabeneh', 250, 'Finland', 'Helsinki'))\n# Asabeneh\\t250\\tFinland\\tHelsinki",
+  "starter_code": "def table_row(name, age, country, city):\n    # your code here\n    pass\n",
+  "hints": [
+    "Escape sequence to consider: \\t",
+    "\\t inside a string inserts a tab character, which most terminals render as enough spaces to align to the next tab stop - handy for lining up columns without counting spaces.",
+    "Build an f-string that places \\t between the four values, and return it."
+  ],
+  "expected_behavior": "Returns the four values separated by tab characters.",
+  "hidden_tests": [
+    {
+      "call": "table_row('Asabeneh', 250, 'Finland', 'Helsinki')",
+      "expected": "'Asabeneh\\t250\\tFinland\\tHelsinki'",
+      "label": "source item 34"
+    }
+  ],
+  "solution": "def table_row(name, age, country, city):\n    return f\"{name}\\t{age}\\t{country}\\t{city}\"\n",
+  "explanation": "\\t behaves like \\n but inserts a tab instead of a line break - both are single-character escape sequences, not two separate characters.",
+  "concepts": [
+    "strings",
+    "escape sequences",
+    "f-strings"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

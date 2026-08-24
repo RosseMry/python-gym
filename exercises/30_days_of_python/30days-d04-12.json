@@ -1,0 +1,40 @@
+{
+  "source": "30_days_of_python",
+  "day": 4,
+  "level": null,
+  "module": "strings",
+  "exercise_type": "function",
+  "id": "30days-d04-12",
+  "difficulty": 1,
+  "title": "Find the first index of a character",
+  "description": "Write a function `first_index(text, char)` that returns the position of the first occurrence of `char` in `text`.\n\nCovers source items 20-21 (first index of 'C', first index of 'F') as one exercise.",
+  "examples": "first_index('Coding For All', 'C')\n-> 0",
+  "starter_code": "def first_index(text, char):\n    # your code here\n    pass\n",
+  "hints": [
+    "Method to consider: str.index()",
+    "text.index(char) scans from the start and returns the position of the first match - unlike .find(), it raises an error if char isn't present at all, which is fine here since every test case is guaranteed to match.",
+    "Call .index() on text with char and return the result."
+  ],
+  "expected_behavior": "Returns the index of the first occurrence of char.",
+  "hidden_tests": [
+    {
+      "call": "first_index('Coding For All', 'C')",
+      "expected": "0",
+      "label": "source item 20"
+    },
+    {
+      "call": "first_index('Coding For All', 'F')",
+      "expected": "7",
+      "label": "source item 21"
+    }
+  ],
+  "solution": "def first_index(text, char):\n    return text.index(char)\n",
+  "explanation": "str.index() and str.find() both search forward from the start, but index() raises ValueError on no match while find() returns -1 - index() is the right choice when the caller already knows the character is present.",
+  "concepts": [
+    "strings",
+    "index"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

@@ -3,13 +3,20 @@
   "module": "piscine_00_starting",
   "difficulty": 1,
   "title": "NULL not found",
+  "title_fr": "NULL introuvable",
   "description": "Write a function `NULL_not_found(object)` that prints the object's type for every flavour of 'nothing' in Python (None, NaN, 0, empty string, False), and prints 'Type not Found' for anything else. Return 0 on success, 1 on error.\n\nExpected print format: 'Nothing: None <class \\'NoneType\\'>' style - the value, then its type.",
+  "description_fr": "Écris une fonction `NULL_not_found(object)` qui affiche le type de l'objet pour chaque forme de « rien » en Python (None, NaN, 0, chaîne vide, False), et affiche 'Type not Found' pour tout le reste. Retourne 0 en cas de succès, 1 en cas d'erreur.\n\nFormat d'affichage attendu : style 'Nothing: None <class \\'NoneType\\'>' - la valeur, puis son type.",
   "examples": "NULL_not_found(None) -> prints \"None <class 'NoneType'>\"\nNULL_not_found(float('nan')) -> prints \"nan <class 'float'>\"\nprint(NULL_not_found('Brian')) -> prints \"Type not Found\", then 1",
   "starter_code": "def NULL_not_found(object):\n    # your code here\n    pass\n",
   "hints": [
     "None, NaN, 0, '' and False are five distinct 'falsy' values with five different types - you can't just check `if not object`, because that would also match values you should report as 'Type not Found' (like an empty list).",
     "NaN is tricky: `float('nan') == float('nan')` is False. Checking the exact type (`type(object) is float` combined with `object != object`) is one reliable way to detect it.",
-    "if object is None:\n    ...\nelif type(object) is float and object != object:\n    ...  # NaN\nelif object is False:\n    ...\nelif type(object) is int and object == 0:\n    ...\nelif type(object) is str and object == '':\n    ...\nelse:\n    print(\"Type not Found\")\n    return 1\nreturn 0"
+    "Chain an if/elif checking, in turn, `object is None`, the NaN condition above, `object is False`, `type(object) is int and object == 0`, and `type(object) is str and object == ''` - each branch prints its own labeled message, a final else prints 'Type not Found' and returns 1, and every other branch falls through to a single return 0 at the end."
+  ],
+  "hints_fr": [
+    "None, NaN, 0, '' et False sont cinq valeurs « fausses » distinctes avec cinq types différents - tu ne peux pas juste vérifier `if not object`, car cela correspondrait aussi à des valeurs que tu dois signaler comme 'Type not Found' (comme une liste vide).",
+    "NaN est piégeux : `float('nan') == float('nan')` vaut False. Vérifier le type exact (`type(object) is float` combiné à `object != object`) est un moyen fiable de le détecter.",
+    "Enchaîne un if/elif vérifiant, tour à tour, `object is None`, la condition NaN ci-dessus, `object is False`, `type(object) is int and object == 0`, et `type(object) is str and object == ''` - chaque branche affiche son propre message étiqueté, un else final affiche 'Type not Found' et retourne 1, et toutes les autres branches aboutissent à un seul return 0 à la fin."
   ],
   "expected_behavior": "Returns 0 for a recognised 'null' value, 1 otherwise.",
   "hidden_tests": [
@@ -40,6 +47,7 @@
   ],
   "solution": "def NULL_not_found(object):\n    if object is None:\n        print(f\"Nothing: {object} {type(object)}\")\n    elif type(object) is float and object != object:\n        print(f\"Cheese: {object} {type(object)}\")\n    elif object is False:\n        print(f\"Fake: {object} {type(object)}\")\n    elif type(object) is int and object == 0:\n        print(f\"Zero: {object} {type(object)}\")\n    elif type(object) is str and object == '':\n        print(f\"Empty: {type(object)}\")\n    else:\n        print(\"Type not Found\")\n        return 1\n    return 0\n",
   "explanation": "Each 'null-like' value needs its own check because they're different types with different equality quirks - especially NaN, whose defining property is that it never equals itself.",
+  "explanation_fr": "Chaque valeur « proche de null » a besoin de sa propre vérification, car ce sont des types différents avec des particularités d'égalité différentes - en particulier NaN, dont la propriété caractéristique est de ne jamais être égal à lui-même.",
   "concepts": [
     "None",
     "NaN",

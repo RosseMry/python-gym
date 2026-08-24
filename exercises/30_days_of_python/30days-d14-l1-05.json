@@ -1,0 +1,41 @@
+{
+  "id": "30days-d14-l1-05",
+  "module": "higher_order_functions",
+  "day": 14,
+  "level": 1,
+  "difficulty": 1,
+  "title": "Print each name with a for loop",
+  "description": "Use for to print each name in the names list.\n\nPython-Gym adaptation: implement as printed_names(names), returning the exact multi-line string that a for loop printing each name on its own line would write to the screen (lines joined with '\\n').",
+  "examples": ">>> printed_names(['Asabeneh', 'Lidiya', 'Ermias', 'Abraham'])\n'Asabeneh\\nLidiya\\nErmias\\nAbraham'",
+  "starter_code": "def printed_names(names):\n    # your code here\n    pass\n",
+  "hints": [
+    "A for loop like `for name in names: print(name)` writes one line per name, each ending in a newline.",
+    "'\\n'.join(...) builds exactly that text - one item per line - without actually calling print().",
+    "Return '\\n'.join(str(n) for n in names)."
+  ],
+  "expected_behavior": "Returns the string that a for loop printing each name on its own line would produce, with lines separated by newline characters.",
+  "solution": "def printed_names(names):\n    return '\\n'.join(str(n) for n in names)\n",
+  "hidden_tests": [
+    {
+      "call": "printed_names(['Asabeneh', 'Lidiya', 'Ermias', 'Abraham'])",
+      "expected": "'Asabeneh\\nLidiya\\nErmias\\nAbraham'",
+      "label": "four names printed one per line"
+    },
+    {
+      "call": "printed_names([])",
+      "expected": "''",
+      "label": "empty list produces an empty string"
+    }
+  ],
+  "explanation": "'\\n'.join() places a newline between each name, which is exactly the text a for loop calling print(name) on each item would send to the screen.",
+  "concepts": [
+    "for loop",
+    "print",
+    "join"
+  ],
+  "skills": [
+    "functional_python"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

@@ -1,0 +1,46 @@
+{
+  "id": "piscine-02-income-projection",
+  "module": "piscine_02_datatable",
+  "difficulty": 3,
+  "title": "Income Projection",
+  "title_fr": "Projection de revenu",
+  "description": "Write a function `project_income(path, years, rate)` that reads `countries.csv` (columns `country, population, life_expectancy, income`) and returns a dict mapping each country name to its projected income after `years` years of compound growth at annual rate `rate` (e.g. `rate=0.03` for 3% per year), rounded to the nearest whole number.\n\nCompound growth for one country: `income * (1 + rate) ** years`. Do this for every row in the DataFrame at once, without a Python for-loop.",
+  "description_fr": "Ecris une fonction `project_income(path, years, rate)` qui lit `countries.csv` (colonnes `country, population, life_expectancy, income`) et retourne un dict associant chaque pays a son revenu projete apres `years` annees de croissance composee au taux annuel `rate` (par exemple `rate=0.03` pour 3% par an), arrondi a l'entier le plus proche.\n\nCroissance composee pour un pays : `income * (1 + rate) ** years`. Fais-le pour toutes les lignes du DataFrame en une fois, sans boucle for Python.",
+  "examples": "project_income('countries.csv', 5, 0.03)\n-> {'Finland': 56804, 'Japan': 47530, 'Brazil': 17389, 'Nigeria': 6144, 'India': 9738, 'Canada': 60282, 'Egypt': 15071, 'Peru': 16809}",
+  "examples_fr": "project_income('countries.csv', 5, 0.03)\n-> {'Finland': 56804, 'Japan': 47530, 'Brazil': 17389, 'Nigeria': 6144, 'India': 9738, 'Canada': 60282, 'Egypt': 15071, 'Peru': 16809}",
+  "starter_code": "import pandas as pd\n\n\ndef project_income(path, years, rate):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: applying a formula to a whole DataFrame column at once, then zip()",
+    "df['income'] * (1 + rate) ** years computes the compound-growth formula for every row's income in a single vectorized expression, the same way NumPy arrays work - pandas Series support the same +, *, ** operators element-wise.",
+    "Compute the projected income column, round it and convert it to whole numbers, then build the dict by pairing it with the 'country' column - dict(zip(names, values)) turns two matching sequences into key/value pairs."
+  ],
+  "hints_fr": [
+    "Idee a considerer : appliquer une formule a toute une colonne du DataFrame d'un coup, puis zip()",
+    "df['income'] * (1 + rate) ** years calcule la formule de croissance composee pour le revenu de chaque ligne en une seule expression vectorisee, comme le font les tableaux NumPy - les Series pandas supportent les memes operateurs +, *, ** element par element.",
+    "Calcule la colonne de revenu projete, arrondis-la et convertis-la en nombres entiers, puis construis le dict en l'associant a la colonne 'country' - dict(zip(noms, valeurs)) transforme deux sequences correspondantes en paires cle/valeur."
+  ],
+  "expected_behavior": "Returns a dict of {country: projected_income} with every value rounded to the nearest int.",
+  "hidden_tests": [
+    {
+      "call": "project_income('countries.csv', 5, 0.03)",
+      "expected": "{'Finland': 56804, 'Japan': 47530, 'Brazil': 17389, 'Nigeria': 6144, 'India': 9738, 'Canada': 60282, 'Egypt': 15071, 'Peru': 16809}",
+      "label": "5 years at 3%"
+    },
+    {
+      "call": "project_income('countries.csv', 0, 0.05)",
+      "expected": "{'Finland': 49000, 'Japan': 41000, 'Brazil': 15000, 'Nigeria': 5300, 'India': 8400, 'Canada': 52000, 'Egypt': 13000, 'Peru': 14500}",
+      "label": "0 years matches original income"
+    }
+  ],
+  "solution": "import pandas as pd\n\n\ndef project_income(path, years, rate):\n    df = pd.read_csv(path)\n    projected = (df[\"income\"] * (1 + rate) ** years).round().astype(int)\n    return dict(zip(df[\"country\"], projected))\n",
+  "explanation": "The whole compound-growth formula runs once over the 'income' Series rather than once per country, which is what pandas/NumPy vectorization means in practice. .round().astype(int) turns the resulting floats into whole numbers before they're paired up with country names via zip.",
+  "explanation_fr": "Toute la formule de croissance composee s'execute une fois sur la Series 'income' plutot qu'une fois par pays, ce qu'est concretement la vectorisation pandas/NumPy. .round().astype(int) transforme les flottants resultants en nombres entiers avant qu'ils ne soient associes aux noms de pays via zip.",
+  "concepts": ["pandas", "dataframe", "vectorization", "compound growth"],
+  "skills": ["data_analysis"],
+  "source": "42_python_piscine",
+  "track": "python",
+  "validation_profile": "42_piscine",
+  "exercise_type": "function",
+  "exercise_status": "active",
+  "resources": ["python/42-piscine/countries.csv"]
+}

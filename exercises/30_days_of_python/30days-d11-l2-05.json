@@ -1,0 +1,40 @@
+{
+  "source": "30_days_of_python",
+  "day": 11,
+  "module": "functions",
+  "exercise_type": "function",
+  "level": 2,
+  "id": "30days-d11-l2-05",
+  "difficulty": 1,
+  "title": "Greet with a default argument",
+  "description": "Write a function `greet(name=\"Guest\")` that returns `f\"Hello, {name}!\"`, defaulting to 'Guest' when called with no argument.",
+  "examples": "greet()\n-> 'Hello, Guest!'\ngreet('Alice')\n-> 'Hello, Alice!'",
+  "starter_code": "def greet(name=\"Guest\"):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: a default parameter value, set once in the function signature",
+    "def greet(name='Guest') already gives name the value 'Guest' whenever the caller doesn't supply one - no need for an if/else inside the function body to check whether an argument was passed.",
+    "Return f'Hello, {name}!' - the default in the signature handles the no-argument case automatically."
+  ],
+  "expected_behavior": "Returns a greeting using name, or 'Guest' if no name is given.",
+  "hidden_tests": [
+    {
+      "call": "greet()",
+      "expected": "'Hello, Guest!'",
+      "label": "source item 5, no argument"
+    },
+    {
+      "call": "greet('Alice')",
+      "expected": "'Hello, Alice!'",
+      "label": "with argument"
+    }
+  ],
+  "solution": "def greet(name=\"Guest\"):\n    return f\"Hello, {name}!\"\n",
+  "explanation": "A default parameter value is evaluated once and used automatically whenever the caller omits that argument - it replaces an if/else that would otherwise check 'was name provided?' inside the function.",
+  "concepts": [
+    "default arguments",
+    "f-strings"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

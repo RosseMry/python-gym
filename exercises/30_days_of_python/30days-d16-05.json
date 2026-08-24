@@ -1,0 +1,41 @@
+{
+  "id": "30days-d16-05",
+  "module": "datetime",
+  "day": 16,
+  "difficulty": 2,
+  "title": "Time difference between 1 January 1970 and now",
+  "description": "Calculate the time difference between 1 January 1970 and now.\n\nPython-Gym adaptation: reading the live clock would make the expected result non-deterministic, so implement as time_since_epoch(now), taking a fixed datetime.datetime object now instead of the real current time, and returning the timedelta between 1 January 1970 (midnight) and now.",
+  "examples": ">>> import datetime\n>>> time_since_epoch(datetime.datetime(1970, 1, 2, 0, 0, 0))\ndatetime.timedelta(days=1)",
+  "starter_code": "import datetime\n\ndef time_since_epoch(now):\n    # your code here\n    pass\n",
+  "hints": [
+    "Subtracting one datetime object from another gives you a timedelta representing the difference between them.",
+    "The reference point '1 January 1970' can be built directly with datetime.datetime(1970, 1, 1).",
+    "Construct epoch = datetime.datetime(1970, 1, 1) and return now - epoch."
+  ],
+  "expected_behavior": "Given a fixed 'now' datetime, returns the timedelta elapsed since midnight of 1 January 1970.",
+  "solution": "import datetime\n\ndef time_since_epoch(now):\n    epoch = datetime.datetime(1970, 1, 1)\n    return now - epoch\n",
+  "hidden_tests": [
+    {
+      "call": "time_since_epoch(datetime.datetime(2023, 6, 15, 14, 30, 0))",
+      "expected": "datetime.timedelta(days=19523, seconds=52200)",
+      "label": "time elapsed from epoch to 2023-06-15 14:30:00"
+    },
+    {
+      "call": "time_since_epoch(datetime.datetime(1970, 1, 2, 0, 0, 0))",
+      "expected": "datetime.timedelta(days=1)",
+      "label": "time elapsed from epoch to the very next day"
+    }
+  ],
+  "explanation": "Subtracting one datetime.datetime from another produces a datetime.timedelta representing the elapsed time between them. Using datetime.datetime(1970, 1, 1) as the reference point mirrors the well-known Unix epoch used throughout computing.",
+  "concepts": [
+    "datetime module",
+    "timedelta",
+    "unix epoch",
+    "date arithmetic"
+  ],
+  "skills": [
+    "date_time_handling"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

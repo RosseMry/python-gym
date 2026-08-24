@@ -1,0 +1,36 @@
+{
+  "source": "30_days_of_python",
+  "day": 10,
+  "module": "loops",
+  "exercise_type": "function",
+  "level": 1,
+  "id": "30days-d10-l1-06",
+  "difficulty": 1,
+  "title": "Collect the even numbers",
+  "description": "Write a function `evens_up_to(n)` that returns a list of every even number from 0 to `n`, inclusive.",
+  "examples": "evens_up_to(10)\n-> [0, 2, 4, 6, 8, 10]",
+  "starter_code": "def evens_up_to(n):\n    # your code here\n    pass\n",
+  "hints": [
+    "Function to consider: range() with a step of 2",
+    "range(0, n + 1, 2) starts at 0 and jumps by 2 each time, landing on every even number up to and including n (when n itself is even).",
+    "Return list(range(0, n + 1, 2))."
+  ],
+  "expected_behavior": "Returns every even number from 0 to n inclusive, ascending.",
+  "hidden_tests": [
+    {
+      "call": "evens_up_to(100)",
+      "expected": "[0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 62, 64, 66, 68, 70, 72, 74, 76, 78, 80, 82, 84, 86, 88, 90, 92, 94, 96, 98, 100]",
+      "label": "source item 7"
+    }
+  ],
+  "solution": "def evens_up_to(n):\n    return list(range(0, n + 1, 2))\n",
+  "explanation": "range()'s step argument does the filtering for free - stepping by 2 starting from 0 never touches an odd number, so there's no need for an `if number % 2 == 0` check inside a loop.",
+  "concepts": [
+    "loops",
+    "range",
+    "modulo"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "id": "30days-d12-l1-01",
+  "module": "modules",
+  "day": 12,
+  "level": 1,
+  "difficulty": 2,
+  "title": "Random user ID generator",
+  "description": "Write a function which generates a six digit/character random_user_id.\n\n```py\n  print(random_user_id())\n  '1ee33d'\n```\n\nPython-Gym adaptation: implement as random_user_id(seed=None). When seed is provided, seed the random module with it first (for deterministic testing) before generating the id; return the 6-character id as a string built from lowercase letters and digits.",
+  "examples": ">>> random_user_id(0)\n'y0cq65'\n>>> len(random_user_id(7))\n6",
+  "starter_code": "import random\nimport string\n\ndef random_user_id(seed=None):\n    # your code here\n    pass\n",
+  "hints": [
+    "Import both the random and string modules - string gives you ready-made character pools like string.ascii_lowercase and string.digits.",
+    "If seed is not None, call random.seed(seed) before doing any random generation so the output becomes reproducible.",
+    "Build a pool of allowed characters, then use a loop or a generator expression with random.choice() to pick 6 characters and join them into one string."
+  ],
+  "expected_behavior": "Returns a 6-character string made of lowercase letters and digits. When called with the same seed, always returns the exact same id.",
+  "solution": "import random\nimport string\n\ndef random_user_id(seed=None):\n    if seed is not None:\n        random.seed(seed)\n    characters = string.ascii_lowercase + string.digits\n    return ''.join(random.choice(characters) for _ in range(6))\n",
+  "hidden_tests": [
+    {
+      "call": "random_user_id(0)",
+      "expected": "'y0cq65'",
+      "label": "seed 0 produces the expected deterministic id"
+    },
+    {
+      "call": "random_user_id(42)",
+      "expected": "'hbrpoi'",
+      "label": "seed 42 produces the expected deterministic id"
+    },
+    {
+      "call": "len(random_user_id(7))",
+      "expected": "6",
+      "label": "generated id is always 6 characters long"
+    }
+  ],
+  "explanation": "random.seed(seed) puts the pseudo-random generator into a known, reproducible state, so random.choice() then returns the same sequence of characters every time for that seed. string.ascii_lowercase + string.digits gives the pool of allowed characters, and joining 6 random picks from it produces the id.",
+  "concepts": [
+    "modules",
+    "random module",
+    "string module",
+    "random.choice",
+    "random.seed"
+  ],
+  "skills": [
+    "using_standard_library_modules"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

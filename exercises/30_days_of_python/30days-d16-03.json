@@ -1,0 +1,40 @@
+{
+  "id": "30days-d16-03",
+  "module": "datetime",
+  "day": 16,
+  "difficulty": 2,
+  "title": "Change a date string to a datetime object",
+  "description": "Today is 5 December, 2019. Change this time string to time.\n\nPython-Gym adaptation: implement as parse_date_string(date_string), which takes a date string in the same \"5 December, 2019\" style (day, full month name, comma, 4-digit year) and returns the corresponding datetime.datetime object.",
+  "examples": ">>> parse_date_string(\"5 December, 2019\")\ndatetime.datetime(2019, 12, 5, 0, 0)",
+  "starter_code": "import datetime\n\ndef parse_date_string(date_string):\n    # your code here\n    pass\n",
+  "hints": [
+    "The datetime module has a method that turns a string into a datetime object given a matching format, the mirror image of strftime.",
+    "The format codes you need are %d for the day, %B for the full month name, and %Y for a 4-digit year, separated the same way as in the string.",
+    "Use datetime.datetime.strptime(date_string, \"%d %B, %Y\") to parse the string into a datetime object."
+  ],
+  "expected_behavior": "Given a date string like '5 December, 2019', returns the equivalent datetime.datetime object.",
+  "solution": "import datetime\n\ndef parse_date_string(date_string):\n    return datetime.datetime.strptime(date_string, \"%d %B, %Y\")\n",
+  "hidden_tests": [
+    {
+      "call": "parse_date_string('5 December, 2019')",
+      "expected": "datetime.datetime(2019, 12, 5, 0, 0)",
+      "label": "parses '5 December, 2019' correctly"
+    },
+    {
+      "call": "parse_date_string('1 January, 2000')",
+      "expected": "datetime.datetime(2000, 1, 1, 0, 0)",
+      "label": "parses '1 January, 2000' correctly"
+    }
+  ],
+  "explanation": "datetime.datetime.strptime(string, format) parses a string into a datetime object using the given format codes. \"%d %B, %Y\" matches a day number, a full month name, a comma, and a 4-digit year - exactly the shape of \"5 December, 2019\" - and produces a datetime.datetime with the time set to midnight since no time was given.",
+  "concepts": [
+    "datetime module",
+    "strptime",
+    "parsing dates"
+  ],
+  "skills": [
+    "date_time_handling"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

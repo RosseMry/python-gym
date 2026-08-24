@@ -1,0 +1,39 @@
+{
+  "source": "30_days_of_python",
+  "day": 3,
+  "level": null,
+  "module": "operators",
+  "exercise_type": "function",
+  "id": "30days-d03-11",
+  "difficulty": 1,
+  "title": "Check a word in a sentence",
+  "description": "Write a function `sentence_contains(sentence, word)` that returns whether `word` appears in `sentence`, using the `in` operator.",
+  "examples": "sentence_contains('I hope this course is not full of jargon', 'jargon')\n-> True",
+  "starter_code": "def sentence_contains(sentence, word):\n    # your code here\n    pass\n",
+  "hints": [
+    "Operator to consider: in",
+    "The `in` operator checks membership directly on the whole sentence string - it doesn't require splitting the sentence into individual words first.",
+    "Return word in sentence."
+  ],
+  "expected_behavior": "Returns True if word is a substring of sentence.",
+  "hidden_tests": [
+    {
+      "call": "sentence_contains('I hope this course is not full of jargon', 'jargon')",
+      "expected": "True",
+      "label": "source item 14"
+    },
+    {
+      "call": "sentence_contains('I hope this course is not full of jargon', 'boring')",
+      "expected": "False",
+      "label": "absent word"
+    }
+  ],
+  "solution": "def sentence_contains(sentence, word):\n    return word in sentence\n",
+  "explanation": "in doesn't care whether the surrounding text is a single word or a whole sentence - it's a substring check either way.",
+  "concepts": [
+    "in operator"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

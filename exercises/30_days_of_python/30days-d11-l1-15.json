@@ -1,0 +1,47 @@
+{
+  "id": "30days-d11-l1-15",
+  "module": "functions",
+  "day": 11,
+  "level": 1,
+  "difficulty": 1,
+  "title": "Sum of even numbers in a range",
+  "description": "Declare a function named sum_of_even. It takes a number parameter and it adds all the even numbers in that range.",
+  "examples": ">>> sum_of_even(5)\n6\n>>> sum_of_even(10)\n30",
+  "starter_code": "def sum_of_even(n):\n    # your code here\n    pass\n",
+  "hints": [
+    "range(1, n + 1) walks through every whole number from 1 to n inclusive.",
+    "A number is even when number % 2 equals 0.",
+    "Sum only the numbers that pass that even check, e.g. with sum(x for x in range(1, n + 1) if x % 2 == 0)."
+  ],
+  "expected_behavior": "Returns the sum of all even whole numbers from 1 to n inclusive.",
+  "explanation": "Filtering range(1, n + 1) down to the numbers where x % 2 == 0 keeps only the even numbers, which sum() then adds together.",
+  "concepts": [
+    "functions",
+    "range",
+    "modulo",
+    "sum"
+  ],
+  "skills": [
+    "functional_python"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python",
+  "hidden_tests": [
+    {
+      "call": "sum_of_even(5)",
+      "expected": "6",
+      "label": "evens from 1 to 5"
+    },
+    {
+      "call": "sum_of_even(10)",
+      "expected": "30",
+      "label": "evens from 1 to 10"
+    },
+    {
+      "call": "sum_of_even(2)",
+      "expected": "2",
+      "label": "single even number"
+    }
+  ],
+  "solution": "def sum_of_even(n):\n    return sum(x for x in range(1, n + 1) if x % 2 == 0)\n"
+}

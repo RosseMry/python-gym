@@ -1,0 +1,46 @@
+{
+  "source": "30_days_of_python",
+  "day": 11,
+  "module": "functions",
+  "exercise_type": "function",
+  "level": 3,
+  "id": "30days-d11-l3-03",
+  "difficulty": 1,
+  "title": "Check if all list items share a type",
+  "description": "Write a function `same_data_type(items)` that returns whether every item in `items` has the same type.",
+  "examples": "same_data_type([1, 2, 3])\n-> True\nsame_data_type([1, '2', 3])\n-> False",
+  "starter_code": "def same_data_type(items):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: collect every item's type into a set",
+    "{type(item) for item in items} is a set comprehension - it collapses every item's type down to the distinct ones present. If only one type appears, the set has exactly one element.",
+    "Build a set of type(item) for item in items, and return whether its length is 1 (or 0, for an empty list - already 'the same type' by default)."
+  ],
+  "expected_behavior": "Returns True if every item has the same type (or the list is empty).",
+  "hidden_tests": [
+    {
+      "call": "same_data_type([1, 2, 3])",
+      "expected": "True",
+      "label": "source item 3, all int"
+    },
+    {
+      "call": "same_data_type([1, '2', 3])",
+      "expected": "False",
+      "label": "mixed types"
+    },
+    {
+      "call": "same_data_type([])",
+      "expected": "True",
+      "label": "empty list"
+    }
+  ],
+  "solution": "def same_data_type(items):\n    return len({type(item) for item in items}) <= 1\n",
+  "explanation": "A set comprehension over the types (not the values) answers 'how many distinct types are present' in one expression - at most 1 means uniform, same idea as all_unique but applied to types instead of values.",
+  "concepts": [
+    "sets",
+    "type",
+    "set comprehension"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

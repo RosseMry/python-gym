@@ -1,0 +1,95 @@
+{
+  "id": "30days-d21-l1-01",
+  "module": "classes_and_objects",
+  "day": 21,
+  "level": 1,
+  "difficulty": 4,
+  "title": "Statistics class",
+  "description": "Python has the module called statistics and we can use this module to do all the statistical calculations. However, to learn how to make function and reuse function let us try to develop a program, which calculates the measure of central tendency of a sample (mean, median, mode) and measure of variability (range, variance, standard deviation). In addition to those measures, find the min, max, count, percentile, and frequency distribution of the sample. You can create a class called Statistics and create all the functions that do statistical calculations as methods for the Statistics class. Check the output below.\n\n```py\nages = [31, 26, 34, 37, 27, 26, 32, 32, 26, 27, 27, 24, 32, 33, 27, 25, 26, 38, 37, 31, 34, 24, 33, 29, 26]\n\nprint('Count:', data.count()) # 25\nprint('Sum: ', data.sum()) # 744\nprint('Min: ', data.min()) # 24\nprint('Max: ', data.max()) # 38\nprint('Range: ', data.range()) # 14\nprint('Mean: ', data.mean()) # 30\nprint('Median: ', data.median()) # 29\nprint('Mode: ', data.mode()) # {'mode': 26, 'count': 5}\nprint('Standard Deviation: ', data.std()) # 4.2\nprint('Variance: ', data.var()) # 17.5\nprint('Frequency Distribution: ', data.freq_dist()) # [(20.0, 26), (16.0, 27), (12.0, 32), (8.0, 37), (8.0, 34), (8.0, 33), (8.0, 31), (8.0, 24), (4.0, 38), (4.0, 29), (4.0, 25)]\n```\n\n```sh\n# you output should look like this\nprint(data.describe())\nCount: 25\nSum:  744\nMin:  24\nMax:  38\nRange:  14\nMean:  30\nMedian:  29\nMode:  (26, 5)\nVariance:  17.5\nStandard Deviation:  4.2\nFrequency Distribution: [(20.0, 26), (16.0, 27), (12.0, 32), (8.0, 37), (8.0, 34), (8.0, 33), (8.0, 31), (8.0, 24), (4.0, 38), (4.0, 29), (4.0, 25)]\n```\n\nPython-Gym adaptation: implement as class Statistics(data), where data is a list of numbers stored on the instance. Provide the instance methods count(), sum(), min(), max(), range(), mean(), median(), mode(), var(), std(), percentile(p) and freq_dist(), each returning (not printing) a value computed from the stored data. mean() returns the average rounded to the nearest whole number (matching the '# 30' example above, since the true mean of the sample is 29.76). var() and std() use the population variance/standard deviation, each rounded to 1 decimal place. mode() returns a dict in the form {'mode': <most common value>, 'count': <how many times it appears>} (following the first code sample's dict form, since the shell block's '(26, 5)' tuple form conflicts with it). percentile(p) returns the value at the p-th percentile of the sorted data using the nearest-rank method. freq_dist() returns a list of (percentage, value) tuples, most frequent value first, where percentage is how often that value occurs in the data.",
+  "examples": ">>> data = Statistics([31, 26, 34, 37, 27, 26, 32, 32, 26, 27, 27, 24, 32, 33, 27, 25, 26, 38, 37, 31, 34, 24, 33, 29, 26])\n>>> data.count()\n25\n>>> data.mean()\n30\n>>> data.mode()\n{'mode': 26, 'count': 5}\n>>> data.var()\n17.5",
+  "starter_code": "from collections import Counter\n\n\nclass Statistics:\n    def __init__(self, data):\n        self.data = list(data)\n\n    def count(self):\n        # your code here\n        pass\n\n    def sum(self):\n        # your code here\n        pass\n\n    def min(self):\n        # your code here\n        pass\n\n    def max(self):\n        # your code here\n        pass\n\n    def range(self):\n        # your code here\n        pass\n\n    def mean(self):\n        # your code here\n        pass\n\n    def median(self):\n        # your code here\n        pass\n\n    def mode(self):\n        # your code here\n        pass\n\n    def var(self):\n        # your code here\n        pass\n\n    def std(self):\n        # your code here\n        pass\n\n    def percentile(self, p):\n        # your code here\n        pass\n\n    def freq_dist(self):\n        # your code here\n        pass\n",
+  "hints": [
+    "Store the incoming data as self.data in __init__, then write every method to read from self.data rather than taking a fresh argument - that way one Statistics object answers every question about the same sample.",
+    "Use Python's collections.Counter on self.data to get value counts in one line - Counter(...).most_common() gives you value/count pairs already sorted from most to least frequent, which both mode() and freq_dist() need.",
+    "This exercise is about instance methods: each method (mean, median, mode, var, std, ...) is a separate self-based computation over the same stored state, which is exactly what makes an object more reusable than a pile of standalone functions each taking the list as an argument."
+  ],
+  "expected_behavior": "Statistics(data) stores the sample. count(), sum(), min(), max() and range() return the corresponding basic statistic. mean() returns the average rounded to the nearest whole number. median() returns the middle value (average of the two middle values for an even-sized sample). mode() returns {'mode': value, 'count': count} for the most frequent value. var() and std() return the population variance and standard deviation, each rounded to 1 decimal place. percentile(p) returns the value at the p-th percentile using the nearest-rank method. freq_dist() returns a list of (percentage, value) tuples ordered from most to least frequent.",
+  "hidden_tests": [
+    {
+      "call": "Statistics([31, 26, 34, 37, 27, 26, 32, 32, 26, 27, 27, 24, 32, 33, 27, 25, 26, 38, 37, 31, 34, 24, 33, 29, 26]).count()",
+      "expected": "25",
+      "label": "count() returns the number of samples"
+    },
+    {
+      "call": "Statistics([31, 26, 34, 37, 27, 26, 32, 32, 26, 27, 27, 24, 32, 33, 27, 25, 26, 38, 37, 31, 34, 24, 33, 29, 26]).sum()",
+      "expected": "744",
+      "label": "sum() returns the total of all samples"
+    },
+    {
+      "call": "Statistics([31, 26, 34, 37, 27, 26, 32, 32, 26, 27, 27, 24, 32, 33, 27, 25, 26, 38, 37, 31, 34, 24, 33, 29, 26]).min()",
+      "expected": "24",
+      "label": "min() returns the smallest value"
+    },
+    {
+      "call": "Statistics([31, 26, 34, 37, 27, 26, 32, 32, 26, 27, 27, 24, 32, 33, 27, 25, 26, 38, 37, 31, 34, 24, 33, 29, 26]).max()",
+      "expected": "38",
+      "label": "max() returns the largest value"
+    },
+    {
+      "call": "Statistics([31, 26, 34, 37, 27, 26, 32, 32, 26, 27, 27, 24, 32, 33, 27, 25, 26, 38, 37, 31, 34, 24, 33, 29, 26]).range()",
+      "expected": "14",
+      "label": "range() returns max minus min"
+    },
+    {
+      "call": "Statistics([31, 26, 34, 37, 27, 26, 32, 32, 26, 27, 27, 24, 32, 33, 27, 25, 26, 38, 37, 31, 34, 24, 33, 29, 26]).mean()",
+      "expected": "30",
+      "label": "mean() returns the average rounded to the nearest whole number"
+    },
+    {
+      "call": "Statistics([31, 26, 34, 37, 27, 26, 32, 32, 26, 27, 27, 24, 32, 33, 27, 25, 26, 38, 37, 31, 34, 24, 33, 29, 26]).median()",
+      "expected": "29",
+      "label": "median() returns the middle value"
+    },
+    {
+      "call": "Statistics([31, 26, 34, 37, 27, 26, 32, 32, 26, 27, 27, 24, 32, 33, 27, 25, 26, 38, 37, 31, 34, 24, 33, 29, 26]).mode()",
+      "expected": "{'mode': 26, 'count': 5}",
+      "label": "mode() returns the most frequent value and its count"
+    },
+    {
+      "call": "Statistics([31, 26, 34, 37, 27, 26, 32, 32, 26, 27, 27, 24, 32, 33, 27, 25, 26, 38, 37, 31, 34, 24, 33, 29, 26]).var()",
+      "expected": "17.5",
+      "label": "var() returns the population variance rounded to 1 decimal"
+    },
+    {
+      "call": "Statistics([31, 26, 34, 37, 27, 26, 32, 32, 26, 27, 27, 24, 32, 33, 27, 25, 26, 38, 37, 31, 34, 24, 33, 29, 26]).std()",
+      "expected": "4.2",
+      "label": "std() returns the population standard deviation rounded to 1 decimal"
+    },
+    {
+      "call": "Statistics([31, 26, 34, 37, 27, 26, 32, 32, 26, 27, 27, 24, 32, 33, 27, 25, 26, 38, 37, 31, 34, 24, 33, 29, 26]).percentile(50)",
+      "expected": "29",
+      "label": "the 50th percentile matches the median"
+    },
+    {
+      "call": "Statistics([31, 26, 34, 37, 27, 26, 32, 32, 26, 27, 27, 24, 32, 33, 27, 25, 26, 38, 37, 31, 34, 24, 33, 29, 26]).freq_dist()",
+      "expected": "[(20.0, 26), (16.0, 27), (12.0, 32), (8.0, 31), (8.0, 34), (8.0, 37), (8.0, 24), (8.0, 33), (4.0, 25), (4.0, 38), (4.0, 29)]",
+      "label": "freq_dist() returns (percentage, value) pairs from most to least frequent"
+    }
+  ],
+  "solution": "from collections import Counter\n\n\nclass Statistics:\n    def __init__(self, data):\n        self.data = list(data)\n\n    def count(self):\n        return len(self.data)\n\n    def sum(self):\n        return sum(self.data)\n\n    def min(self):\n        return min(self.data)\n\n    def max(self):\n        return max(self.data)\n\n    def range(self):\n        return self.max() - self.min()\n\n    def mean(self):\n        return round(self.sum() / self.count())\n\n    def median(self):\n        sorted_data = sorted(self.data)\n        n = len(sorted_data)\n        mid = n // 2\n        if n % 2 == 0:\n            return (sorted_data[mid - 1] + sorted_data[mid]) / 2\n        return sorted_data[mid]\n\n    def mode(self):\n        counts = Counter(self.data)\n        mode_value, mode_count = counts.most_common(1)[0]\n        return {'mode': mode_value, 'count': mode_count}\n\n    def var(self):\n        mean = self.sum() / self.count()\n        squared_diffs = sum((x - mean) ** 2 for x in self.data)\n        return round(squared_diffs / self.count(), 1)\n\n    def std(self):\n        return round(self.var() ** 0.5, 1)\n\n    def percentile(self, p):\n        sorted_data = sorted(self.data)\n        idx = int(p / 100 * len(sorted_data))\n        if idx >= len(sorted_data):\n            idx = len(sorted_data) - 1\n        return sorted_data[idx]\n\n    def freq_dist(self):\n        counts = Counter(self.data)\n        n = self.count()\n        return [(round(c / n * 100, 2), v) for v, c in counts.most_common()]\n",
+  "explanation": "Each measure is expressed as an instance method that reads self.data, so one Statistics object answers every question about the same sample without re-passing the list. collections.Counter(self.data) tallies how many times each value occurs; most_common() sorts those tallies from most to least frequent, which powers both mode() (take the top pair) and freq_dist() (convert every pair's count into a percentage of self.count()). median() and percentile() both sort a copy of the data first since order matters for locating the middle or the p-th ranked value, while var() applies the definition of variance directly (mean of squared deviations from the mean) and std() takes its square root.",
+  "concepts": [
+    "classes",
+    "objects",
+    "instance methods",
+    "self",
+    "collections.counter",
+    "statistics"
+  ],
+  "skills": [
+    "object_oriented_design",
+    "data_analysis"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

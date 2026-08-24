@@ -1,0 +1,41 @@
+{
+  "source": "30_days_of_python",
+  "day": 18,
+  "module": "regular_expressions",
+  "exercise_type": "function",
+  "id": "30days-d18-l1-01",
+  "level": 1,
+  "difficulty": 2,
+  "title": "Find the most frequent word",
+  "description": "Write a function `most_frequent_word(paragraph)` that returns the most frequent word in `paragraph` as a `(word, count)` tuple. Extract words with a regular expression (letters only, punctuation stripped) rather than `.split()`, since `.split()` would leave 'teaching.' and 'teaching' as two different words.\n\nIf two words tie for the highest count, return whichever comes first alphabetically.",
+  "examples": "most_frequent_word(\n    'I love teaching. If you do not love teaching what else '\n    'can you love.'\n)\n-> ('love', 3)",
+  "starter_code": "import re\nfrom collections import Counter\n\n\ndef most_frequent_word(paragraph):\n    # your code here\n    pass\n",
+  "hints": [
+    "Function to consider: re.findall(), combined with collections.Counter",
+    "re.findall(r'[A-Za-z]+', paragraph) pulls out every run of letters as its own word, ignoring the punctuation stuck to them - unlike paragraph.split(), 'teaching.' becomes 'teaching' automatically.",
+    "Extract the words with re.findall(), count them with Counter, and use .most_common(1) to get the single most frequent (word, count) pair - Counter breaks ties by first-seen order, so sort explicitly by (-count, word) instead if you need the alphabetical tie-break."
+  ],
+  "expected_behavior": "Returns the most frequent word and its count as a tuple, ties broken alphabetically.",
+  "hidden_tests": [
+    {
+      "call": "most_frequent_word('I love teaching. If you do not love teaching what else can you love. I love Python if you do not love something which can give you all the capabilities to develop an application what else can you love.')",
+      "expected": "('love', 6)",
+      "label": "source item 1"
+    },
+    {
+      "call": "most_frequent_word('a a b b b')",
+      "expected": "('b', 3)",
+      "label": "clear winner"
+    }
+  ],
+  "solution": "import re\nfrom collections import Counter\n\n\ndef most_frequent_word(paragraph):\n    words = re.findall(r\"[A-Za-z]+\", paragraph)\n    counts = Counter(words)\n    ranked = sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))\n    return ranked[0]\n",
+  "explanation": "re.findall(r'[A-Za-z]+', ...) tokenizes on runs of letters directly, which is more reliable than splitting on spaces and then stripping punctuation off each piece separately.",
+  "concepts": [
+    "regular expressions",
+    "re.findall",
+    "collections.Counter"
+  ],
+  "skills": [
+    "text_processing"
+  ]
+}

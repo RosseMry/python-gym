@@ -3,8 +3,12 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { api } from "../services/api";
 import type { ExerciseDetail, SubmissionResult } from "../types/exercise";
 import { CodeEditor } from "../components/CodeEditor";
+import { PrerequisiteWarningModal } from "../components/PrerequisiteWarningModal";
+import { FunctionReferencePanel } from "../components/FunctionReferencePanel";
 import { useLocale, useLocalized } from "../i18n/LocaleContext";
 import "./ExercisePage.css";
+
+const HINT_STEP_KEYS = ["hint.step1", "hint.step2", "hint.step3"];
 
 interface ExercisePageProps {
   onRepeatChanged: () => void;
@@ -18,8 +22,12 @@ export function ExercisePage({ onRepeatChanged }: ExercisePageProps) {
 
   const [exercise, setExercise] = useState<ExerciseDetail | null>(null);
   const [code, setCode] = useState("");
-  const [hints, setHints] = useState<{ text: string; textFr: string | null }[]>([]);
+  const [hints, setHints] = useState<
+    { text: string; textFr: string | null; functionId: string | null }[]
+  >([]);
   const [hintsExhausted, setHintsExhausted] = useState(false);
+  const [prereqAcknowledged, setPrereqAcknowledged] = useState(false);
+  const [openFunctionRef, setOpenFunctionRef] = useState<string | null>(null);
   const [result, setResult] = useState<SubmissionResult | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [solution, setSolution] = useState<{
@@ -43,6 +51,8 @@ export function ExercisePage({ onRepeatChanged }: ExercisePageProps) {
     setExplanation("");
     setExplanationSaved(false);
     setRepeatMarked(false);
+    setPrereqAcknowledged(false);
+    setOpenFunctionRef(null);
     api
       .getExercise(id)
       .then((data) => {
@@ -65,12 +75,15 @@ export function ExercisePage({ onRepeatChanged }: ExercisePageProps) {
   }
 
   async function handleRequestHint() {
-    const { hint, hint_fr } = await api.requestHint(id!);
+    const { hint, hint_fr, hint_function } = await api.requestHint(id!);
     if (hint === "No more hints available for this exercise.") {
       setHintsExhausted(true);
       return;
     }
-    setHints((prev) => [...prev, { text: hint, textFr: hint_fr }]);
+    setHints((prev) => [
+      ...prev,
+      { text: hint, textFr: hint_fr, functionId: hint_function },
+    ]);
   }
 
   async function handleSubmit() {
@@ -109,9 +122,25 @@ export function ExercisePage({ onRepeatChanged }: ExercisePageProps) {
   }
 
   const isScript = exercise.exercise_type === "script";
+  const hasIncompletePrerequisites = exercise.prerequisites.some((p) => !p.solved);
+  const showPrereqWarning = hasIncompletePrerequisites && !prereqAcknowledged;
 
   return (
     <div className="page">
+      {showPrereqWarning && (
+        <PrerequisiteWarningModal
+          onGoBack={() => navigate("/")}
+          onContinueAnyway={() => setPrereqAcknowledged(true)}
+        />
+      )}
+
+      {openFunctionRef && (
+        <FunctionReferencePanel
+          functionId={openFunctionRef}
+          onClose={() => setOpenFunctionRef(null)}
+        />
+      )}
+
       <Link to="/" className="back-link">
         {t("exercise.backToExercises")}
       </Link>
@@ -170,7 +199,20 @@ export function ExercisePage({ onRepeatChanged }: ExercisePageProps) {
           <h2>{t("exercise.hints")}</h2>
           <ol>
             {hints.map((hint, i) => (
-              <li key={i}>{localize(hint.text, hint.textFr)}</li>
+              <li key={i}>
+                <p className="hints-panel__step">
+                  {t(HINT_STEP_KEYS[Math.min(i, HINT_STEP_KEYS.length - 1)])}
+                </p>
+                <p className="hints-panel__text">{localize(hint.text, hint.textFr)}</p>
+                {hint.functionId && (
+                  <button
+                    className="hints-panel__learn-link"
+                    onClick={() => setOpenFunctionRef(hint.functionId)}
+                  >
+                    {t("hint.learnMore")} {hint.functionId}()
+                  </button>
+                )}
+              </li>
             ))}
           </ol>
         </section>

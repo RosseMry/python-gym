@@ -1,0 +1,41 @@
+{
+  "id": "30days-d15-08",
+  "module": "type_errors",
+  "day": 15,
+  "difficulty": 3,
+  "title": "Catch an ImportError",
+  "description": "Source instruction (Exercises: Day 15, item 1): \"Open you python interactive shell and try all the examples covered in this section.\"\n\nImportError example: `from math import power` raises `ImportError: cannot import name 'power' from 'math'` (\"There is no function called power in the math module, it goes with a different name: pow\"); fixed by `from math import pow` then `pow(2, 3)` which returns `8.0`.\n\nPython-Gym adaptation: implement as `safe_from_import(code)`, executing the given `from ... import ...` statement (optionally followed by a line assigning to `result`) and returning the value bound to `result` (or \"OK\" if none was assigned), or a string \"ImportError: <message>\" if the import itself fails.",
+  "examples": "safe_from_import(\"from math import power\") -> \"ImportError: cannot import name 'power' from 'math' (unknown location)\"\nsafe_from_import(\"from math import pow\\nresult = pow(2, 3)\") -> 8.0",
+  "starter_code": "def safe_from_import(code):\n    # your code here\n    pass\n",
+  "hints": [
+    "A `from module import name` statement raises ImportError (not AttributeError) when name doesn't exist in module, so run the given code string with exec() to trigger the real error.",
+    "Give exec() its own local namespace dict so you can read back any variables the executed code assigns, such as a `result = ...` line.",
+    "Wrap the exec(code, {}, local_ns) call in try/except ImportError, and in the except branch return an f-string starting with 'ImportError: ' followed by the caught exception object; otherwise return local_ns.get('result', 'OK')."
+  ],
+  "expected_behavior": "Executes the given code string (a from-import, optionally followed by a `result = ...` line) in its own namespace. If it runs successfully, returns the value bound to `result`, or \"OK\" if nothing was assigned. If the from-import raises an ImportError, catches it and returns a descriptive string in the form \"ImportError: <message>\" instead of letting the exception propagate.",
+  "hidden_tests": [
+    {
+      "call": "safe_from_import(\"from math import power\")",
+      "expected": "\"ImportError: cannot import name 'power' from 'math' (unknown location)\"",
+      "label": "no 'power' name in math, mirrors the source example"
+    },
+    {
+      "call": "safe_from_import(\"from math import pow\\nresult = pow(2, 3)\")",
+      "expected": "8.0",
+      "label": "valid import and call, mirrors the source's fix"
+    }
+  ],
+  "solution": "def safe_from_import(code):\n    local_ns = {}\n    try:\n        exec(code, {}, local_ns)\n        return local_ns.get('result', 'OK')\n    except ImportError as e:\n        return f\"ImportError: {e}\"\n",
+  "explanation": "A `from module import name` statement raises ImportError when the module exists but has no attribute with that name - `power` doesn't exist in math (it's called `pow`), so `from math import power` raises ImportError, which is caught and turned into a descriptive string. exec() with an explicit namespace lets the function read back any value the executed code assigns to `result`.",
+  "concepts": [
+    "importerror",
+    "exception handling",
+    "try/except",
+    "imports"
+  ],
+  "skills": [
+    "error_handling"
+  ],
+  "source": "30_days_of_python",
+  "exercise_type": "function"
+}

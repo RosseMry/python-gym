@@ -1,0 +1,45 @@
+{
+  "source": "30_days_of_python",
+  "day": 2,
+  "module": "variables",
+  "exercise_type": "function",
+  "level": 2,
+  "id": "30days-d02-l2-05",
+  "difficulty": 1,
+  "title": "Check if a word is a Python keyword",
+  "description": "Write a function `is_python_keyword(word)` that returns whether `word` is a reserved Python keyword (like `if`, `for`, `class`), using the `keyword` module.\n\nPython-Gym adaptation of source item 14 ('run help(\"keywords\") to check for the Python reserved words') - `help()` prints to the console for a human to read, so it isn't something a hidden test can check. `keyword.iskeyword()` answers the same underlying question (is this name reserved?) as a real return value instead.",
+  "examples": "is_python_keyword('for')\n-> True\nis_python_keyword('foreach')\n-> False",
+  "starter_code": "import keyword\n\n\ndef is_python_keyword(word):\n    # your code here\n    pass\n",
+  "hints": [
+    "Module to consider: keyword, specifically keyword.iskeyword()",
+    "The keyword module's iskeyword(name) checks a string against Python's exact reserved-word list (the same one help('keywords') prints) - it's a lookup, not a guess.",
+    "Return keyword.iskeyword(word) directly."
+  ],
+  "expected_behavior": "Returns True if word is a reserved Python keyword, False otherwise.",
+  "hidden_tests": [
+    {
+      "call": "is_python_keyword('for')",
+      "expected": "True",
+      "label": "reserved word"
+    },
+    {
+      "call": "is_python_keyword('class')",
+      "expected": "True",
+      "label": "reserved word"
+    },
+    {
+      "call": "is_python_keyword('foreach')",
+      "expected": "False",
+      "label": "not reserved"
+    }
+  ],
+  "solution": "import keyword\n\n\ndef is_python_keyword(word):\n    return keyword.iskeyword(word)\n",
+  "explanation": "help('keywords') and keyword.iskeyword() draw from the same underlying list - the module form is just usable from inside a program instead of only at an interactive prompt.",
+  "concepts": [
+    "keyword module",
+    "reserved words"
+  ],
+  "skills": [
+    "using_standard_library_modules"
+  ]
+}

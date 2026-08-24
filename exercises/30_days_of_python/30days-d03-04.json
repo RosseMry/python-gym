@@ -1,0 +1,42 @@
+{
+  "source": "30_days_of_python",
+  "day": 3,
+  "level": null,
+  "module": "operators",
+  "exercise_type": "script",
+  "id": "30days-d03-04",
+  "difficulty": 2,
+  "title": "Circle area and circumference from user input",
+  "description": "Write a script that asks the user for a circle's radius (prompt 'Enter radius: ') and prints its area (`3.14 * r * r`) and circumference (`2 * 3.14 * r`), one per line.",
+  "examples": "Enter radius: 10\nThe area of the circle is 314.0\nThe circumference of the circle is 62.8",
+  "starter_code": "# your code here\n",
+  "hints": [
+    "💡 Function to consider: float()",
+    "What does it do? float() converts a value - such as the text input() gives you - into a number that can have a decimal part.\n\nExample:\nvalue = float(\"3.5\")\n\nResult:\n3.5",
+    "Apply it: convert the prompted radius with float(), then compute the two formulas and round each to 2 decimals before printing - 3.14 can't be represented exactly in binary, so an unrounded result can come out as 62.800000000000004 instead of a clean 62.8."
+  ],
+  "hint_functions": [
+    "float",
+    null,
+    null
+  ],
+  "expected_behavior": "Prints the circle's area then its circumference, each on its own line.",
+  "hidden_tests": [
+    {
+      "args": [],
+      "stdin": "10\n",
+      "expected_stdout": "Enter radius: The area of the circle is 314.0\nThe circumference of the circle is 62.8",
+      "label": "source item 7"
+    }
+  ],
+  "solution": "def main():\n    radius = float(input('Enter radius: '))\n    pi = 3.14\n    area = round(pi * radius * radius, 2)\n    circumference = round(2 * pi * radius, 2)\n    print(f'The area of the circle is {area}')\n    print(f'The circumference of the circle is {circumference}')\n\n\nif __name__ == '__main__':\n    main()\n",
+  "explanation": "Same shape as the rectangle exercise - one converted input feeding two related formulas, printed in a fixed order.",
+  "concepts": [
+    "input",
+    "float",
+    "formulas"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

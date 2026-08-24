@@ -1,0 +1,36 @@
+{
+  "source": "30_days_of_python",
+  "day": 14,
+  "module": "higher_order_functions",
+  "exercise_type": "function",
+  "level": 2,
+  "id": "30days-d14-l2-10",
+  "difficulty": 2,
+  "title": "Concatenate a list into a sentence with reduce",
+  "description": "Write a function `reduce_concatenate_sentence(countries)` that joins `countries` into the sentence `\"A, B, C, ..., and Z are north European countries\"` (a comma after every name except the last, which gets ', and ' before it), using `functools.reduce()`.",
+  "examples": "reduce_concatenate_sentence(['Estonia', 'Finland', 'Sweden', 'Denmark', 'Norway', 'Iceland'])\n-> 'Estonia, Finland, Sweden, Denmark, Norway, and Iceland are north European countries'",
+  "starter_code": "from functools import reduce\n\n\ndef reduce_concatenate_sentence(countries):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: build the comma-separated list first, then attach the fixed wrapper text",
+    "reduce() can combine the country names two at a time, but the very last join needs ', and ' instead of a plain ', ' - separating out the last name before reducing over the rest keeps that special case simple.",
+    "Use reduce() to join countries[:-1] with ', ', then append ', and ' plus the last country, then the fixed sentence tail ' are north European countries'."
+  ],
+  "expected_behavior": "Returns the countries joined into the described sentence.",
+  "hidden_tests": [
+    {
+      "call": "reduce_concatenate_sentence(['Estonia', 'Finland', 'Sweden', 'Denmark', 'Norway', 'Iceland'])",
+      "expected": "'Estonia, Finland, Sweden, Denmark, Norway, and Iceland are north European countries'",
+      "label": "source item 11"
+    }
+  ],
+  "solution": "from functools import reduce\n\n\ndef reduce_concatenate_sentence(countries):\n    head = reduce(lambda a, b: f\"{a}, {b}\", countries[:-1])\n    return f\"{head}, and {countries[-1]} are north European countries\"\n",
+  "explanation": "reduce() handles the repetitive part (joining every name but the last with a plain comma), while the 'and' before the final item is handled as its own explicit step rather than forced into the same reduction.",
+  "concepts": [
+    "reduce",
+    "lambda",
+    "f-strings"
+  ],
+  "skills": [
+    "functional_python"
+  ]
+}

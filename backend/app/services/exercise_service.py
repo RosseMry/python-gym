@@ -115,12 +115,14 @@ class ExerciseService:
             # request_hint()/reveal_solution().
         )
 
-    def request_hint(self, exercise_id: str) -> tuple[str, str | None]:
+    def request_hint(self, exercise_id: str) -> tuple[str, str | None, str | None]:
         """Reveal the next hint the student hasn't seen yet.
 
-        Returns ``(hint, hint_fr)`` - ``hint_fr`` is ``None`` when that
-        hint hasn't been translated yet, so the frontend falls back to
-        the English text.
+        Returns ``(hint, hint_fr, hint_function)`` - ``hint_fr`` is
+        ``None`` when that hint hasn't been translated yet (frontend
+        falls back to English); ``hint_function`` is the id of a linked
+        Function Reference entry when this hint names a builtin worth
+        a reusable "Learn: x()" explanation, else ``None``.
         """
         exercise = self._repo.get(exercise_id)
         if exercise is None:
@@ -128,7 +130,7 @@ class ExerciseService:
         progress = self._get_or_create_progress(exercise_id)
 
         if progress.hints_used >= len(exercise.hints):
-            return "No more hints available for this exercise.", None
+            return "No more hints available for this exercise.", None, None
 
         index = progress.hints_used
         hint_text = exercise.hints[index]
@@ -137,11 +139,16 @@ class ExerciseService:
             if exercise.hints_fr and index < len(exercise.hints_fr)
             else None
         )
+        hint_function = (
+            exercise.hint_functions[index]
+            if exercise.hint_functions and index < len(exercise.hint_functions)
+            else None
+        )
         progress.hints_used += 1
         if progress.status == ExerciseStatus.NEW:
             progress.status = ExerciseStatus.ATTEMPTED
         self._repo.save_progress(progress)
-        return hint_text, hint_text_fr
+        return hint_text, hint_text_fr, hint_function
 
     def reveal_solution(self, exercise_id: str) -> tuple[str, str, str | None]:
         """Explicitly reveal the solution and explanation.

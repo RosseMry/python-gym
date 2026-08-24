@@ -1,0 +1,36 @@
+{
+  "source": "30_days_of_python",
+  "day": 4,
+  "level": null,
+  "module": "strings",
+  "exercise_type": "function",
+  "id": "30days-d04-22",
+  "difficulty": 1,
+  "title": "Join two lines with a newline",
+  "description": "Write a function `two_lines(first, second)` that returns `first` and `second` joined by a newline escape sequence, so printing the result shows them on separate lines.",
+  "examples": "print(two_lines('I am enjoying this challenge.', 'I just wonder what is next.'))\n# I am enjoying this challenge.\n# I just wonder what is next.",
+  "starter_code": "def two_lines(first, second):\n    # your code here\n    pass\n",
+  "hints": [
+    "Escape sequence to consider: \\n",
+    "\\n inside a string is a single character meaning 'start a new line' - it isn't a backslash followed by the letter n.",
+    "Build an f-string (or use +) that places \\n between first and second, and return it."
+  ],
+  "expected_behavior": "Returns first and second separated by a newline character.",
+  "hidden_tests": [
+    {
+      "call": "two_lines('I am enjoying this challenge.', 'I just wonder what is next.')",
+      "expected": "'I am enjoying this challenge.\\nI just wonder what is next.'",
+      "label": "source item 33"
+    }
+  ],
+  "solution": "def two_lines(first, second):\n    return f\"{first}\\n{second}\"\n",
+  "explanation": "\\n is Python's newline escape sequence - it's stored as one character in the string, and a terminal or print() renders it as a line break.",
+  "concepts": [
+    "strings",
+    "escape sequences",
+    "f-strings"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

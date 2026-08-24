@@ -1,0 +1,13 @@
+{
+  "id": "len",
+  "name": "len()",
+  "what_it_does": "Returns how many items a sequence or collection has - the number of characters in a string, elements in a list/tuple/set, or key-value pairs in a dict.",
+  "syntax": "len(obj)",
+  "parameters": "obj - a string, list, tuple, dict, set, or anything else that defines a length (any object with a __len__ method).",
+  "return_value": "An int: the number of items in obj.",
+  "example": "numbers = [1, 2, 3, 4]\nprint(len(numbers))",
+  "example_output": "4",
+  "common_mistakes": "Calling len() on something that doesn't have a length (like an int or a generator that hasn't been converted to a list) raises TypeError. len() on a dict counts key-value pairs, not just keys or just values.",
+  "when_to_use": "Whenever you need a count - looping a fixed number of times, checking if a list is empty (len(x) == 0), or validating input size.",
+  "related_exercise_ids": []
+}

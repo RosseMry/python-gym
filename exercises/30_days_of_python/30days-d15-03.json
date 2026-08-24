@@ -1,0 +1,41 @@
+{
+  "id": "30days-d15-03",
+  "module": "type_errors",
+  "day": 15,
+  "difficulty": 2,
+  "title": "Catch an IndexError",
+  "description": "Source instruction (Exercises: Day 15, item 1): \"Open you python interactive shell and try all the examples covered in this section.\"\n\nIndexError example: `numbers = [1, 2, 3, 4, 5]` then `numbers[5]` raises `IndexError: list index out of range` (\"the list has only indexes from 0 to 4, so it was out of range\").\n\nPython-Gym adaptation: implement as `safe_get_index(lst, index)`, returning `lst[index]`, or a string \"IndexError: <message>\" if the index is out of range.",
+  "examples": "safe_get_index([1, 2, 3, 4, 5], 5) -> 'IndexError: list index out of range'\nsafe_get_index([1, 2, 3, 4, 5], 0) -> 1",
+  "starter_code": "def safe_get_index(lst, index):\n    # your code here\n    pass\n",
+  "hints": [
+    "Indexing a list with `lst[index]` raises IndexError when index is outside the valid range of the list.",
+    "You don't need to check the length yourself - let Python raise the error and catch it.",
+    "Wrap `return lst[index]` in try/except IndexError, and in the except branch return an f-string starting with 'IndexError: ' followed by the caught exception object."
+  ],
+  "expected_behavior": "Returns lst[index] when the index is valid. If the index is out of range, catches the IndexError and returns a descriptive string in the form \"IndexError: <message>\" instead of letting the exception propagate.",
+  "hidden_tests": [
+    {
+      "call": "safe_get_index([1, 2, 3, 4, 5], 5)",
+      "expected": "'IndexError: list index out of range'",
+      "label": "index 5 is out of range, mirrors the source example"
+    },
+    {
+      "call": "safe_get_index([1, 2, 3, 4, 5], 0)",
+      "expected": "1",
+      "label": "valid index returns the element"
+    }
+  ],
+  "solution": "def safe_get_index(lst, index):\n    try:\n        return lst[index]\n    except IndexError as e:\n        return f\"IndexError: {e}\"\n",
+  "explanation": "Lists support indexing with `lst[index]`, but only for indexes from 0 up to len(lst) - 1. Accessing index 5 of a 5-element list, as in the source example, raises IndexError; the except block catches it and returns a descriptive string instead of crashing.",
+  "concepts": [
+    "indexerror",
+    "exception handling",
+    "try/except",
+    "lists"
+  ],
+  "skills": [
+    "error_handling"
+  ],
+  "source": "30_days_of_python",
+  "exercise_type": "function"
+}

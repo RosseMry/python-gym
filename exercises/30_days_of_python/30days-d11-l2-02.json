@@ -1,0 +1,45 @@
+{
+  "source": "30_days_of_python",
+  "day": 11,
+  "module": "functions",
+  "exercise_type": "function",
+  "level": 2,
+  "id": "30days-d11-l2-02",
+  "difficulty": 1,
+  "title": "Calculate a factorial",
+  "description": "Write a function `factorial(n)` that returns `n!` (the product of every integer from 1 to `n`). `factorial(0)` is `1`.",
+  "examples": "factorial(5)\n-> 120",
+  "starter_code": "def factorial(n):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: an accumulator that multiplies, the same shape as a summing loop but with * instead of +",
+    "Starting a running total at 1 (not 0 - multiplying by 0 would zero everything out) and multiplying it by each number from 1 to n builds up the factorial one step at a time.",
+    "Loop i from 1 to n inclusive, multiplying an accumulator starting at 1 by i each time, and return the accumulator."
+  ],
+  "expected_behavior": "Returns n factorial.",
+  "hidden_tests": [
+    {
+      "call": "factorial(5)",
+      "expected": "120",
+      "label": "source item 2"
+    },
+    {
+      "call": "factorial(0)",
+      "expected": "1",
+      "label": "0! is 1 by definition"
+    },
+    {
+      "call": "factorial(1)",
+      "expected": "1",
+      "label": "1! is 1"
+    }
+  ],
+  "solution": "def factorial(n):\n    result = 1\n    for i in range(1, n + 1):\n        result *= i\n    return result\n",
+  "explanation": "The accumulator starts at 1 (the multiplicative identity) rather than 0, since multiplying anything by 0 would collapse the whole product to 0 on the very first step.",
+  "concepts": [
+    "loops",
+    "accumulator pattern"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

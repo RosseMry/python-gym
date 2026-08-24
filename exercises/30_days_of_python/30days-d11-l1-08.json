@@ -1,0 +1,42 @@
+{
+  "id": "30days-d11-l1-08",
+  "module": "functions",
+  "day": 11,
+  "level": 1,
+  "difficulty": 1,
+  "title": "Print each list item",
+  "description": "Declare a function named print_list. It takes a list as a parameter and it prints out each element of the list.\n\nPython-Gym adaptation: implement as print_list(lst), printing each element of lst on its own line and returning None (the function's job is the printing, like the original exercise).",
+  "examples": ">>> print_list([1, 2, 3])\n1\n2\n3",
+  "starter_code": "def print_list(lst):\n    # your code here\n    pass\n",
+  "hints": [
+    "Use a for loop to visit every element of lst in order.",
+    "Call print() on each element inside the loop body.",
+    "The function does not need a return statement - printing is its only job, so it implicitly returns None."
+  ],
+  "expected_behavior": "Prints every element of lst on its own line, in order, and returns None.",
+  "explanation": "A for loop walks through lst and print() outputs each element on its own line; since nothing is returned explicitly, the function's return value is None.",
+  "concepts": [
+    "functions",
+    "for loop",
+    "print",
+    "none"
+  ],
+  "skills": [
+    "functional_python"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python",
+  "hidden_tests": [
+    {
+      "call": "(lambda ns={'print_list': print_list}: (exec(\"import io, contextlib\\nbuf = io.StringIO()\\nwith contextlib.redirect_stdout(buf):\\n    print_list([1, 2, 3])\\n__captured__ = buf.getvalue()\", ns), ns['__captured__'])[-1])()",
+      "expected": "'1\\n2\\n3\\n'",
+      "label": "prints each number on its own line"
+    },
+    {
+      "call": "(lambda ns={'print_list': print_list}: (exec(\"import io, contextlib\\nbuf = io.StringIO()\\nwith contextlib.redirect_stdout(buf):\\n    print_list(['a', 'b'])\\n__captured__ = buf.getvalue()\", ns), ns['__captured__'])[-1])()",
+      "expected": "'a\\nb\\n'",
+      "label": "prints each string on its own line"
+    }
+  ],
+  "solution": "def print_list(lst):\n    for item in lst:\n        print(item)\n"
+}

@@ -1,0 +1,35 @@
+{
+  "source": "30_days_of_python",
+  "day": 1,
+  "level": null,
+  "module": "introduction",
+  "id": "30days-d01-02",
+  "difficulty": 1,
+  "title": "Check the type of common data types",
+  "description": "Write a function `type_names(*values)` that returns a tuple of the type name of each argument, using `type()`.\n\nContinues Day 1's walkthrough script, which checks the type of one example each of: int, float, complex, string, list, and dict. Its last example, `{9.8, 3.14, 2.7}`, is commented '# Tuple' in the source - that comment is wrong; curly braces with no colons make it a set, and type() correctly reports 'set', which is what this exercise checks for too.",
+  "examples": "type_names(10, 3.14, 1 + 3j, 'Asabeneh', [1, 2, 3], {'name': 'Asabeneh'}, {9.8, 3.14, 2.7})\n-> ('int', 'float', 'complex', 'str', 'list', 'dict', 'set')",
+  "starter_code": "def type_names(*values):\n    # your code here\n    pass\n",
+  "hints": [
+    "💡 Function to consider: type()",
+    "type(value).__name__ gives the plain-text name of a value's type ('int', 'set', ...) rather than the full <class '...'> form.",
+    "Build a tuple of type(v).__name__ for each v in values - *values already collects every positional argument into one iterable to loop over."
+  ],
+  "expected_behavior": "Returns the type name of each argument, in the order given.",
+  "hidden_tests": [
+    {
+      "call": "type_names(10, 3.14, 1 + 3j, 'Asabeneh', [1, 2, 3], {'name': 'Asabeneh'}, {9.8, 3.14, 2.7})",
+      "expected": "('int', 'float', 'complex', 'str', 'list', 'dict', 'set')",
+      "label": "source content (helloworld.py type() examples)"
+    }
+  ],
+  "solution": "def type_names(*values):\n    return tuple(type(v).__name__ for v in values)\n",
+  "explanation": "*values collects every positional argument into a single tuple inside the function, which a generator expression can then map over with type(v).__name__ - the same idea as Day 3's numeric_type_names, applied to a wider mix of built-in types.",
+  "concepts": [
+    "type",
+    "*args"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "function"
+}

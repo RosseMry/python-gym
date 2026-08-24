@@ -1,0 +1,36 @@
+{
+  "source": "30_days_of_python",
+  "day": 10,
+  "module": "loops",
+  "exercise_type": "function",
+  "level": 1,
+  "id": "30days-d10-l1-03",
+  "difficulty": 2,
+  "title": "Build a grid with nested loops",
+  "description": "Write a function `build_grid(rows, cols)` that returns a multi-line string: `rows` lines, each containing `cols` `#` characters separated by single spaces.",
+  "examples": "print(build_grid(2, 4))\n# # # #\n# # # #",
+  "starter_code": "def build_grid(rows, cols):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: nested loops - one for the row, one for the columns within it",
+    "' '.join(['#'] * cols) builds one row's worth of spaced hashes. The outer loop just repeats that same row rows times.",
+    "Build each row with ' '.join(['#'] * cols), collect rows of them, and join those rows with '\\n'."
+  ],
+  "expected_behavior": "Returns rows lines of cols space-separated '#' characters.",
+  "hidden_tests": [
+    {
+      "call": "build_grid(8, 8)",
+      "expected": "'# # # # # # # #\\n# # # # # # # #\\n# # # # # # # #\\n# # # # # # # #\\n# # # # # # # #\\n# # # # # # # #\\n# # # # # # # #\\n# # # # # # # #'",
+      "label": "source item 4"
+    }
+  ],
+  "solution": "def build_grid(rows, cols):\n    row = \" \".join([\"#\"] * cols)\n    return \"\\n\".join([row] * rows)\n",
+  "explanation": "Both dimensions of a grid can be built with repetition ([x] * n) instead of an explicit nested for loop - the 'nested loops' concept and repeating a fixed unit twice produce the same grid.",
+  "concepts": [
+    "loops",
+    "nested loops",
+    "string repetition"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

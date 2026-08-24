@@ -1,0 +1,35 @@
+{
+  "source": "30_days_of_python",
+  "day": 2,
+  "module": "variables",
+  "exercise_type": "function",
+  "level": 2,
+  "id": "30days-d02-l2-01",
+  "difficulty": 1,
+  "title": "Check the type of several values",
+  "description": "Write a function `type_names(values)` that returns a list of the type name of each value in `values`, using `type()`.",
+  "examples": "type_names(['hi', 5, 5.0, True, [1, 2]])\n-> ['str', 'int', 'float', 'bool', 'list']",
+  "starter_code": "def type_names(values):\n    # your code here\n    pass\n",
+  "hints": [
+    "Function to consider: type()",
+    "type(value).__name__ gives the type's plain name as a string ('str', 'int', ...) rather than the full repr like <class 'str'>.",
+    "Build a list comprehension over values that computes type(v).__name__ for each v."
+  ],
+  "expected_behavior": "Returns the type name of each value, in order.",
+  "hidden_tests": [
+    {
+      "call": "type_names(['hi', 5, 5.0, True, [1, 2]])",
+      "expected": "['str', 'int', 'float', 'bool', 'list']",
+      "label": "source item 1"
+    }
+  ],
+  "solution": "def type_names(values):\n    return [type(v).__name__ for v in values]\n",
+  "explanation": "type(v) returns the type object itself; .__name__ reads off just its plain-text name, which is what's actually useful to compare or print.",
+  "concepts": [
+    "type",
+    "list comprehension"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "source": "30_days_of_python",
+  "day": 10,
+  "module": "loops",
+  "exercise_type": "function",
+  "level": 3,
+  "id": "30days-d10-l3-02",
+  "difficulty": 1,
+  "title": "Reverse a list with a loop",
+  "description": "Write a function `reverse_list(items)` that returns `items` in reverse order, without using `list.reverse()`.",
+  "examples": "reverse_list(['banana', 'orange', 'mango', 'lemon'])\n-> ['lemon', 'mango', 'orange', 'banana']",
+  "starter_code": "def reverse_list(items):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: a slice with a negative step visits every item back-to-front",
+    "items[::-1] is a slice that starts at the end and steps backward by 1 through the whole list - it's the loop-free equivalent of iterating from the last index down to 0.",
+    "Return items[::-1] directly - it already builds a new, reversed list."
+  ],
+  "expected_behavior": "Returns a new list with items in reverse order.",
+  "hidden_tests": [
+    {
+      "call": "reverse_list(['banana', 'orange', 'mango', 'lemon'])",
+      "expected": "['lemon', 'mango', 'orange', 'banana']",
+      "label": "source item 2"
+    }
+  ],
+  "solution": "def reverse_list(items):\n    return items[::-1]\n",
+  "explanation": "A slice's step argument can be negative, which walks the sequence backward - items[::-1] is equivalent to a loop that appends items from the last index down to the first.",
+  "concepts": [
+    "loops",
+    "slicing"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

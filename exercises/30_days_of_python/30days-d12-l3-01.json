@@ -1,0 +1,48 @@
+{
+  "id": "30days-d12-l3-01",
+  "module": "modules",
+  "day": 12,
+  "level": 3,
+  "difficulty": 2,
+  "title": "Shuffle a list",
+  "description": "Call your function shuffle_list, it takes a list as a parameter and it returns a shuffled list.\n\nPython-Gym adaptation: implement as shuffle_list(lst, seed=None). When seed is provided, seed the random module with it first. Return a new list containing the same elements as lst but in shuffled order, without modifying the original lst.",
+  "examples": ">>> shuffle_list([1, 2, 3, 4, 5], seed=0)\n[3, 2, 1, 5, 4]\n>>> shuffle_list(['a', 'b', 'c'], seed=1)\n['b', 'c', 'a']",
+  "starter_code": "import random\n\ndef shuffle_list(lst, seed=None):\n    # your code here\n    pass\n",
+  "hints": [
+    "random.shuffle() shuffles a list in place and returns None, so shuffle a copy of lst rather than lst itself.",
+    "Make a copy first (for example lst.copy() or list(lst)) so the caller's original list is left untouched.",
+    "Seed random first (only if seed is not None), call random.shuffle() on the copy, and return that copy."
+  ],
+  "expected_behavior": "Returns a new list with the same elements as lst in shuffled order. The original lst passed in is left unmodified. With the same seed, the shuffled order is always identical.",
+  "solution": "import random\n\ndef shuffle_list(lst, seed=None):\n    if seed is not None:\n        random.seed(seed)\n    new_list = lst.copy()\n    random.shuffle(new_list)\n    return new_list\n",
+  "hidden_tests": [
+    {
+      "call": "shuffle_list([1, 2, 3, 4, 5], seed=0)",
+      "expected": "[3, 2, 1, 5, 4]",
+      "label": "seed 0 produces the expected deterministic shuffle order"
+    },
+    {
+      "call": "shuffle_list(['a', 'b', 'c'], seed=1)",
+      "expected": "['b', 'c', 'a']",
+      "label": "seed 1 produces the expected deterministic shuffle order"
+    },
+    {
+      "call": "(lambda o: (shuffle_list(o, seed=0), o)[1])([1, 2, 3])",
+      "expected": "[1, 2, 3]",
+      "label": "original list passed in is not mutated"
+    }
+  ],
+  "explanation": "random.shuffle() reorders a list in place, so calling it on a copy of lst (rather than lst itself) both randomizes the order and leaves the caller's original list untouched; seeding random beforehand makes the resulting order reproducible.",
+  "concepts": [
+    "modules",
+    "random module",
+    "random.shuffle",
+    "list copying",
+    "mutation"
+  ],
+  "skills": [
+    "using_standard_library_modules"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

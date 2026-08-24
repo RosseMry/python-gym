@@ -1,0 +1,30 @@
+{
+  "source": "30_days_of_python",
+  "day": 23,
+  "level": null,
+  "module": "virtual_environment",
+  "id": "30days-d23-01",
+  "difficulty": 1,
+  "title": "Create a project virtual environment (reference)",
+  "description": "Source item 1: create a project directory with a virtual environment.\n\nThis is a shell/tooling task, not Python code - there is nothing here for a hidden test to check. The steps: `mkdir my_project && cd my_project`, `python -m venv venv` (creates an isolated `venv/` folder with its own Python and package set), then activate it - `source venv/bin/activate` on macOS/Linux, `venv\\Scripts\\activate` on Windows. Your shell prompt changes to show the active environment; `pip install <package>` from that point installs only into `venv/`, not system-wide. `deactivate` leaves the environment.",
+  "examples": "$ mkdir my_project && cd my_project\n$ python -m venv venv\n$ source venv/bin/activate\n(venv) $ pip install requests\n(venv) $ deactivate\n$",
+  "starter_code": "# See the description for the actual commands.\n",
+  "hints": [
+    "This entry documents the real workflow rather than asking you to write code - there's no fixed output for a virtual environment to print.",
+    "python -m venv <name> is the standard-library way to create one - no separate package (like virtualenv) is required on a modern Python install.",
+    "Try it directly in a terminal: create one, activate it, run `pip list` to see it starts nearly empty, then deactivate and run `pip list` again to see the difference."
+  ],
+  "expected_behavior": "Not auto-gradable - a shell workflow, verified by trying it yourself.",
+  "hidden_tests": [],
+  "solution": "# See the description for the actual commands.\n",
+  "explanation": "A virtual environment is just a self-contained copy of the Python interpreter plus an empty (or nearly empty) site-packages directory - activating it changes which `python`/`pip` your shell finds first, so installs go there instead of system-wide.",
+  "concepts": [
+    "virtual environments",
+    "pip",
+    "venv"
+  ],
+  "skills": [
+    "using_standard_library_modules"
+  ],
+  "exercise_type": "script"
+}

@@ -1,0 +1,35 @@
+{
+  "source": "30_days_of_python",
+  "day": 3,
+  "level": null,
+  "module": "operators",
+  "exercise_type": "function",
+  "id": "30days-d03-17",
+  "difficulty": 1,
+  "title": "Seconds lived over a number of years",
+  "description": "Write a function `seconds_lived(years)` that returns how many seconds a person lives in `years` years, assuming 365 days per year.",
+  "examples": "seconds_lived(100)\n-> 3153600000",
+  "starter_code": "def seconds_lived(years):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: build the conversion from smaller units up",
+    "A year has 365 days, a day has 24 hours, an hour has 3600 seconds - multiplying years by each of those in turn converts all the way down to seconds.",
+    "Return years * 365 * 24 * 60 * 60."
+  ],
+  "expected_behavior": "Returns the total number of seconds in the given number of years (365-day years).",
+  "hidden_tests": [
+    {
+      "call": "seconds_lived(100)",
+      "expected": "3153600000",
+      "label": "source item 22"
+    }
+  ],
+  "solution": "def seconds_lived(years):\n    return years * 365 * 24 * 60 * 60\n",
+  "explanation": "Unit conversions chain by multiplication - years to days, days to hours, hours to minutes, minutes to seconds - each factor is just the count of the smaller unit inside the larger one.",
+  "concepts": [
+    "arithmetic operators",
+    "formulas"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

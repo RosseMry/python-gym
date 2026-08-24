@@ -1,0 +1,45 @@
+{
+  "source": "30_days_of_python",
+  "day": 19,
+  "module": "file_handling",
+  "exercise_type": "function",
+  "level": 2,
+  "id": "30days-d19-l2-01",
+  "difficulty": 2,
+  "title": "Extract email addresses from a file",
+  "description": "Write a function `extract_emails(path)` that reads the text file at `path` and returns every email address found in it, in the order they appear.\n\n`email_exchanges_big.txt` (a real mailing-list archive, 1138 email addresses) is available in your working directory.",
+  "examples": "extract_emails('email_exchanges_big.txt')[:2]\n-> ['stephen.marquard@uct.ac.za', 'postmaster@collab.sakaiproject.org']",
+  "starter_code": "import re\n\n\ndef extract_emails(path):\n    # your code here\n    pass\n",
+  "hints": [
+    "Pattern to consider: [\\w.+-]+@[\\w-]+\\.[\\w.-]+",
+    "An email address has three parts a regular expression can match directly: characters before the @ (letters, digits, dots, plus, hyphen), the @ itself, and a domain made of dot-separated labels after it.",
+    "Read the file, then use re.findall() with that pattern to pull out every matching address as a list, in the order they occur in the text."
+  ],
+  "expected_behavior": "Returns every email address found in the file, in order of appearance.",
+  "hidden_tests": [
+    {
+      "call": "len(extract_emails('email_exchanges_big.txt'))",
+      "expected": "1138",
+      "label": "source item 1, total count"
+    },
+    {
+      "call": "extract_emails('email_exchanges_big.txt')[:3]",
+      "expected": "['stephen.marquard@uct.ac.za', 'postmaster@collab.sakaiproject.org', '200801051412.m05ECIaH010327@nakamura.uits.iupui.edu']",
+      "label": "source item 1, first three"
+    }
+  ],
+  "solution": "import re\n\n\ndef extract_emails(path):\n    with open(path, encoding=\"utf-8\") as f:\n        text = f.read()\n    return re.findall(r\"[\\w.+-]+@[\\w-]+\\.[\\w.-]+\", text)\n",
+  "explanation": "re.findall() returns every non-overlapping match in the order it finds them in the text, which is exactly the order email addresses appear in the file - no separate loop or index tracking is needed.",
+  "concepts": [
+    "regular expressions",
+    "re.findall",
+    "file reading"
+  ],
+  "skills": [
+    "using_standard_library_modules",
+    "text_processing"
+  ],
+  "resources": [
+    "python/30-days/email_exchanges_big.txt"
+  ]
+}

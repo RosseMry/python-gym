@@ -1,0 +1,39 @@
+{
+  "source": "30_days_of_python",
+  "day": 3,
+  "level": null,
+  "module": "operators",
+  "exercise_type": "function",
+  "id": "30days-d03-07",
+  "difficulty": 1,
+  "title": "Compare two slopes",
+  "description": "Write a function `slopes_are_equal(slope1, slope2)` that returns whether two slopes are equal.\n\nSource item 10 asks to compare the slopes from items 8 and 9 - both come out to 2, meaning the two lines from those exercises are actually parallel.",
+  "examples": "slopes_are_equal(2, 2.0)\n-> True",
+  "starter_code": "def slopes_are_equal(slope1, slope2):\n    # your code here\n    pass\n",
+  "hints": [
+    "Operator to consider: ==",
+    "Python's == compares values, not types - 2 == 2.0 is True even though one is an int and the other a float.",
+    "Return slope1 == slope2 directly."
+  ],
+  "expected_behavior": "Returns True if the two slopes are equal, False otherwise.",
+  "hidden_tests": [
+    {
+      "call": "slopes_are_equal(2, 2.0)",
+      "expected": "True",
+      "label": "source item 10, lines from items 8 and 9 are parallel"
+    },
+    {
+      "call": "slopes_are_equal(2, 3)",
+      "expected": "False",
+      "label": "different slopes"
+    }
+  ],
+  "solution": "def slopes_are_equal(slope1, slope2):\n    return slope1 == slope2\n",
+  "explanation": "== checks numeric equality regardless of whether the values are stored as int or float, which is exactly what's needed to compare the two lines' slopes.",
+  "concepts": [
+    "comparison operators"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

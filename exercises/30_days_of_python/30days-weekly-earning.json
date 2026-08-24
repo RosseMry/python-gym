@@ -1,16 +1,19 @@
 {
   "id": "30days-weekly-earning",
-  "module": "input_and_formulas",
+  "module": "operators",
+  "day": 3,
+  "level": null,
   "difficulty": 2,
   "title": "Weekly earning from hours and rate",
   "description": "Write a script that asks the user for hours worked and rate per hour (as two separate prompts) and prints the weekly earning (hours * rate).",
   "examples": "Enter hours: 40\nEnter rate per hour: 28\nYour weekly earning is 1120.0",
   "starter_code": "# your code here\n",
   "hints": [
-    "Same shape as the triangle-area exercise: two prompts, then one calculation from both values.",
-    "Weekly earning is simply hours multiplied by the hourly rate.",
-    "hours = float(input('Enter hours: '))\nrate = float(input('Enter rate per hour: '))\nprint(f'Your weekly earning is {hours * rate}')"
+    "💡 Function to consider: float()",
+    "What does it do? float() converts a value - such as the text input() gives you - into a number that can have a decimal part.\n\nExample:\nvalue = float(\"3.5\")\n\nResult:\n3.5",
+    "Apply it: input() always hands back a string, even when the person types a number - both hours and rate need to go through float() before you multiply them, or you'd be multiplying two strings together instead of two numbers."
   ],
+  "hint_functions": ["float", null, null],
   "expected_behavior": "Prints the weekly earning after reading hours and rate.",
   "hidden_tests": [
     {

@@ -1,0 +1,41 @@
+{
+  "source": "30_days_of_python",
+  "day": 18,
+  "module": "regular_expressions",
+  "exercise_type": "function",
+  "id": "30days-d18-l3-01",
+  "level": 3,
+  "difficulty": 2,
+  "title": "Clean text and find the most frequent words",
+  "description": "Write two functions:\n\n- `clean_text(text)` removes every character that isn't a letter or whitespace, then collapses repeated whitespace down to single spaces.\n- `most_frequent_words(text, n)` cleans `text`, then returns the `n` most frequent words as `(count, word)` tuples, ties broken alphabetically.",
+  "examples": "sentence = '%I $am@% a %tea@cher%, &and&...'\nclean_text(sentence)\n-> 'I am a teacher and...'\nmost_frequent_words(clean_text(sentence), 3)\n-> [(3, 'I'), (2, 'a'), (2, 'and')]",
+  "starter_code": "import re\nfrom collections import Counter\n\n\ndef clean_text(text):\n    # your code here\n    pass\n\n\ndef most_frequent_words(text, n):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: two regex substitutions - one to drop unwanted characters, one to collapse whitespace",
+    "re.sub(r'[^A-Za-z\\s]', '', text) removes anything that isn't a letter or whitespace in one pass; re.sub(r'\\s+', ' ', ...) afterward then collapses any resulting double spaces down to one.",
+    "clean_text does both substitutions in sequence and strips the result. most_frequent_words calls clean_text, splits on whitespace, counts with Counter, and returns the top n sorted by (-count, word)."
+  ],
+  "expected_behavior": "clean_text strips punctuation and normalizes whitespace; most_frequent_words returns the n most common words from the cleaned text.",
+  "hidden_tests": [
+    {
+      "call": "clean_text('%I $am@% a %tea@cher%, &and& I lo%#ve %tea@ching%;. There $is nothing; &as& mo@re rewarding as educa@ting &and& @emp%o@wering peo@ple. ;I found tea@ching m%o@re interesting tha@n any other %jo@bs. %Do@es thi%s mo@tivate yo@u to be a tea@cher!?')",
+      "expected": "'I am a teacher and I love teaching There is nothing as more rewarding as educating and empowering people I found teaching more interesting than any other jobs Does this motivate you to be a teacher'",
+      "label": "source item 1, clean_text"
+    },
+    {
+      "call": "most_frequent_words('I am a teacher and I love teaching There is nothing as more rewarding as educating and empowering people I found teaching more interesting than any other jobs Does this motivate you to be a teacher', 3)",
+      "expected": "[(3, 'I'), (2, 'a'), (2, 'and')]",
+      "label": "source item 1, most_frequent_words"
+    }
+  ],
+  "solution": "import re\nfrom collections import Counter\n\n\ndef clean_text(text):\n    without_symbols = re.sub(r\"[^A-Za-z\\s]\", \"\", text)\n    return re.sub(r\"\\s+\", \" \", without_symbols).strip()\n\n\ndef most_frequent_words(text, n):\n    cleaned = clean_text(text)\n    counts = Counter(cleaned.split())\n    ranked = sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))\n    return [(count, word) for word, count in ranked[:n]]\n",
+  "explanation": "Two focused substitutions are easier to get right than one combined pattern: first strip everything that isn't a letter or whitespace, then separately clean up the whitespace that stripping left behind.",
+  "concepts": [
+    "regular expressions",
+    "re.sub",
+    "collections.Counter"
+  ],
+  "skills": [
+    "text_processing"
+  ]
+}

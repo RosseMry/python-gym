@@ -1,0 +1,40 @@
+{
+  "id": "30days-d16-04",
+  "module": "datetime",
+  "day": 16,
+  "difficulty": 2,
+  "title": "Time difference between now and New Year",
+  "description": "Calculate the time difference between now and new year.\n\nPython-Gym adaptation: reading the live clock would make the expected result non-deterministic, so implement as time_until_new_year(now), taking a fixed datetime.datetime object now instead of the real current time, and returning the timedelta between now and midnight of the next 1 January after it.",
+  "examples": ">>> import datetime\n>>> time_until_new_year(datetime.datetime(2023, 12, 25, 10, 0, 0))\ndatetime.timedelta(days=6, seconds=50400)",
+  "starter_code": "import datetime\n\ndef time_until_new_year(now):\n    # your code here\n    pass\n",
+  "hints": [
+    "Subtracting one datetime object from another gives you a timedelta representing the difference between them.",
+    "New Year always falls on the next 1 January - build that target datetime using now.year + 1 as the year, month 1, day 1.",
+    "Construct next_new_year = datetime.datetime(year=now.year + 1, month=1, day=1) and return next_new_year - now."
+  ],
+  "expected_behavior": "Given a fixed 'now' datetime, returns the timedelta remaining until midnight of the following 1 January.",
+  "solution": "import datetime\n\ndef time_until_new_year(now):\n    next_new_year = datetime.datetime(year=now.year + 1, month=1, day=1)\n    return next_new_year - now\n",
+  "hidden_tests": [
+    {
+      "call": "time_until_new_year(datetime.datetime(2023, 12, 25, 10, 0, 0))",
+      "expected": "datetime.timedelta(days=6, seconds=50400)",
+      "label": "time left from 2023-12-25 10:00:00 to New Year"
+    },
+    {
+      "call": "time_until_new_year(datetime.datetime(2023, 1, 1, 0, 0, 1))",
+      "expected": "datetime.timedelta(days=364, seconds=86399)",
+      "label": "time left from just after New Year to the next one"
+    }
+  ],
+  "explanation": "Subtracting one datetime.datetime from another produces a datetime.timedelta representing the elapsed time between them. Building next_new_year with now.year + 1 guarantees the target is always the next upcoming New Year relative to now, regardless of what date now falls on.",
+  "concepts": [
+    "datetime module",
+    "timedelta",
+    "date arithmetic"
+  ],
+  "skills": [
+    "date_time_handling"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

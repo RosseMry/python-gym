@@ -1,0 +1,47 @@
+{
+  "id": "30days-d11-l1-14",
+  "module": "functions",
+  "day": 11,
+  "level": 1,
+  "difficulty": 1,
+  "title": "Sum of odd numbers in a range",
+  "description": "Declare a function named sum_of_odds. It takes a number parameter and it adds all the odd numbers in that range.",
+  "examples": ">>> sum_of_odds(5)\n9\n>>> sum_of_odds(10)\n25",
+  "starter_code": "def sum_of_odds(n):\n    # your code here\n    pass\n",
+  "hints": [
+    "range(1, n + 1) walks through every whole number from 1 to n inclusive.",
+    "A number is odd when number % 2 is not 0.",
+    "Sum only the numbers that pass that odd check, e.g. with sum(x for x in range(1, n + 1) if x % 2 != 0)."
+  ],
+  "expected_behavior": "Returns the sum of all odd whole numbers from 1 to n inclusive.",
+  "explanation": "Filtering range(1, n + 1) down to the numbers where x % 2 != 0 keeps only the odd numbers, which sum() then adds together.",
+  "concepts": [
+    "functions",
+    "range",
+    "modulo",
+    "sum"
+  ],
+  "skills": [
+    "functional_python"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python",
+  "hidden_tests": [
+    {
+      "call": "sum_of_odds(5)",
+      "expected": "9",
+      "label": "odds from 1 to 5"
+    },
+    {
+      "call": "sum_of_odds(10)",
+      "expected": "25",
+      "label": "odds from 1 to 10"
+    },
+    {
+      "call": "sum_of_odds(1)",
+      "expected": "1",
+      "label": "single odd number"
+    }
+  ],
+  "solution": "def sum_of_odds(n):\n    return sum(x for x in range(1, n + 1) if x % 2 != 0)\n"
+}

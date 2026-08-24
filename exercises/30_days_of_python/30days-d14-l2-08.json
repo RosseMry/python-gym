@@ -1,0 +1,35 @@
+{
+  "source": "30_days_of_python",
+  "day": 14,
+  "module": "higher_order_functions",
+  "exercise_type": "function",
+  "level": 2,
+  "id": "30days-d14-l2-08",
+  "difficulty": 1,
+  "title": "Keep only the string items",
+  "description": "Write a function `get_string_lists(items)` that returns a new list containing only the items of `items` that are strings.",
+  "examples": "get_string_lists(['Estonia', 5, 'Finland', 3.14, True])\n-> ['Estonia', 'Finland']",
+  "starter_code": "def get_string_lists(items):\n    # your code here\n    pass\n",
+  "hints": [
+    "Function to consider: isinstance(), inside a filter() lambda or list comprehension",
+    "isinstance(item, str) answers 'is this specifically a string' - it's the right tool here since type(item) == str would also work but isinstance() is the more idiomatic type check.",
+    "Return list(filter(lambda item: isinstance(item, str), items)), or the equivalent list comprehension."
+  ],
+  "expected_behavior": "Returns only the string items, in their original order.",
+  "hidden_tests": [
+    {
+      "call": "get_string_lists(['Estonia', 5, 'Finland', 3.14, True])",
+      "expected": "['Estonia', 'Finland']",
+      "label": "source item 9"
+    }
+  ],
+  "solution": "def get_string_lists(items):\n    return [item for item in items if isinstance(item, str)]\n",
+  "explanation": "isinstance() is the standard way to ask 'is this a string' in Python - it also correctly handles subclasses of str, which a strict type(item) == str comparison would not.",
+  "concepts": [
+    "isinstance",
+    "list comprehension"
+  ],
+  "skills": [
+    "functional_python"
+  ]
+}

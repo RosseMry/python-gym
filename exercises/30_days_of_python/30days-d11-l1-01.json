@@ -1,0 +1,47 @@
+{
+  "id": "30days-d11-l1-01",
+  "module": "functions",
+  "day": 11,
+  "level": 1,
+  "difficulty": 1,
+  "title": "Add two numbers",
+  "description": "Declare a function add_two_numbers. It takes two parameters and it returns a sum.",
+  "examples": ">>> add_two_numbers(2, 3)\n5",
+  "starter_code": "def add_two_numbers(a, b):\n    # your code here\n    pass\n",
+  "hints": [
+    "A function is declared with def, a name, and parentheses containing its parameters.",
+    "The function body should compute the sum of the two parameters.",
+    "Use return, not print, so the caller receives the value: return a + b."
+  ],
+  "expected_behavior": "Returns the sum of the two numeric arguments.",
+  "explanation": "The function takes two parameters, a and b, and returns their sum using the + operator.",
+  "concepts": [
+    "functions",
+    "parameters",
+    "return",
+    "arithmetic"
+  ],
+  "skills": [
+    "functional_python"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python",
+  "hidden_tests": [
+    {
+      "call": "add_two_numbers(2, 3)",
+      "expected": "5",
+      "label": "positive integers"
+    },
+    {
+      "call": "add_two_numbers(-4, 10)",
+      "expected": "6",
+      "label": "negative and positive"
+    },
+    {
+      "call": "add_two_numbers(2.5, 1.5)",
+      "expected": "4.0",
+      "label": "floats"
+    }
+  ],
+  "solution": "def add_two_numbers(a, b):\n    return a + b\n"
+}

@@ -1,0 +1,36 @@
+{
+  "source": "30_days_of_python",
+  "day": 4,
+  "level": null,
+  "module": "strings",
+  "exercise_type": "function",
+  "id": "30days-d04-16",
+  "difficulty": 2,
+  "title": "Slice out a repeated phrase",
+  "description": "Write a function `extract_phrase(text, word)` that returns the substring starting at the first occurrence of `word` and ending at the end of its third consecutive repetition.",
+  "examples": "extract_phrase(\n    'You cannot end a sentence with because because because is a conjunction',\n    'because',\n)\n-> 'because because because'",
+  "starter_code": "def extract_phrase(text, word):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: combine index() with slicing",
+    "text.index(word) gives you where the repeated phrase starts. The phrase itself is word repeated 3 times with single spaces between - you can build its length from len(word) and that spacing instead of counting characters by hand.",
+    "Find the start position with index(), compute how long 'word word word' is, and slice text from the start position for that many characters."
+  ],
+  "expected_behavior": "Returns the three consecutive repetitions of word, space-separated.",
+  "hidden_tests": [
+    {
+      "call": "extract_phrase('You cannot end a sentence with because because because is a conjunction', 'because')",
+      "expected": "'because because because'",
+      "label": "source items 25 and 27 (duplicates in source)"
+    }
+  ],
+  "solution": "def extract_phrase(text, word):\n    start = text.index(word)\n    phrase = ' '.join([word] * 3)\n    return text[start:start + len(phrase)]\n",
+  "explanation": "Building the target phrase ('word word word') separately gives its exact length, which combined with the start position from index() defines exactly the slice to take - no hardcoded character counts.",
+  "concepts": [
+    "strings",
+    "slicing",
+    "index"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

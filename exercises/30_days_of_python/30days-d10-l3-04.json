@@ -1,0 +1,41 @@
+{
+  "source": "30_days_of_python",
+  "day": 10,
+  "module": "loops",
+  "exercise_type": "function",
+  "level": 3,
+  "id": "30days-d10-l3-04",
+  "difficulty": 3,
+  "title": "Find the ten most spoken languages",
+  "description": "Write a function `most_spoken_languages(path)` that reads the country data JSON file at `path` and returns the 10 languages spoken by the most countries, as a list of `(count, language)` tuples, most spoken first.",
+  "examples": "most_spoken_languages('countries_data.json')\n-> [(91, 'English'), (45, 'French'), ...]",
+  "starter_code": "import json\nfrom collections import Counter\n\n\ndef most_spoken_languages(path):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: collections.Counter, the tool built for exactly this kind of tally",
+    "Counter(list_of_languages) counts how many times each language appears across every country in one call, and .most_common(10) already returns them sorted, most frequent first.",
+    "Load the file, build one flat list of every language mentioned by any country, feed it to Counter, and return .most_common(10) - each entry from most_common() comes as (item, count), so reorder to (count, item) if the example order matters to you."
+  ],
+  "expected_behavior": "Returns the 10 most common languages as (count, language) tuples, descending by count.",
+  "hidden_tests": [
+    {
+      "call": "most_spoken_languages('countries_data.json')",
+      "expected": "[(91, 'English'), (45, 'French'), (25, 'Arabic'), (24, 'Spanish'), (9, 'Portuguese'), (9, 'Russian'), (8, 'Dutch'), (7, 'German'), (5, 'Chinese'), (4, 'Serbian')]",
+      "label": "source item 3, part 2"
+    }
+  ],
+  "solution": "import json\nfrom collections import Counter\n\n\ndef most_spoken_languages(path):\n    with open(path, encoding=\"utf-8\") as f:\n        countries = json.load(f)\n    all_languages = [lang for c in countries for lang in c[\"languages\"]]\n    counts = Counter(all_languages)\n    return [(count, lang) for lang, count in counts.most_common(10)]\n",
+  "explanation": "Counter.most_common(n) does the sorting-by-frequency step that would otherwise need sorted() with a custom key - it's built specifically for 'which values appear most often' questions.",
+  "concepts": [
+    "loops",
+    "collections.Counter",
+    "file reading",
+    "json"
+  ],
+  "skills": [
+    "basic_data_manipulation",
+    "using_standard_library_modules"
+  ],
+  "resources": [
+    "python/30-days/countries_data.json"
+  ]
+}

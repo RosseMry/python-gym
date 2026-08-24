@@ -1,0 +1,28 @@
+{
+  "source": "30_days_of_python",
+  "day": 2,
+  "module": "variables",
+  "exercise_type": "script",
+  "level": 1,
+  "id": "30days-d02-l1-01",
+  "difficulty": 1,
+  "title": "A commented Python file",
+  "description": "Source items 1-2: inside a `day_2` folder, create a `variables.py` file, and write a Python comment saying 'Day 2: 30 Days of python programming'.\n\nThis is a file-system and editor exercise, not something with a checkable output - there is no code to grade here. Kept in the catalog rather than dropped, verified by eye: create the file, and start it with the comment below.",
+  "examples": "# Day 2: 30 Days of python programming",
+  "starter_code": "# Day 2: 30 Days of python programming\n",
+  "hints": [
+    "A comment starts with a # character - anything after it on the same line is ignored by Python.",
+    "This isn't a graded step - it's about the habit of dating/labeling a working file before writing any code in it.",
+    "Once the comment is there, you're ready for the rest of Day 2's exercises in the same file."
+  ],
+  "expected_behavior": "Not auto-gradable - a file/comment exists, verified manually.",
+  "hidden_tests": [],
+  "solution": "# Day 2: 30 Days of python programming\n",
+  "explanation": "Comments document intent for a human reader; Python itself skips them entirely, so they never affect what a program does.",
+  "concepts": [
+    "comments"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "source": "30_days_of_python",
+  "day": 4,
+  "level": null,
+  "module": "strings",
+  "exercise_type": "function",
+  "id": "30days-d04-15",
+  "difficulty": 1,
+  "title": "Find the last occurrence of a word",
+  "description": "Write a function `last_occurrence(text, word)` that returns the index of the last occurrence of `word` in `text`, using `rindex()`.",
+  "examples": "last_occurrence(\n    'You cannot end a sentence with because because because is a conjunction',\n    'because',\n)\n-> 47",
+  "starter_code": "def last_occurrence(text, word):\n    # your code here\n    pass\n",
+  "hints": [
+    "Method to consider: str.rindex()",
+    "text.rindex(word) is to .index() what .rfind() is to .find() - it searches from the end, and raises an error rather than returning -1 if there's no match.",
+    "Call .rindex() on text with word and return the result."
+  ],
+  "expected_behavior": "Returns the index where word last appears in text.",
+  "hidden_tests": [
+    {
+      "call": "last_occurrence('You cannot end a sentence with because because because is a conjunction', 'because')",
+      "expected": "47",
+      "label": "source item 24"
+    }
+  ],
+  "solution": "def last_occurrence(text, word):\n    return text.rindex(word)\n",
+  "explanation": "rindex() combines rfind()'s backward search direction with index()'s error-on-no-match behavior.",
+  "concepts": [
+    "strings",
+    "rindex"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

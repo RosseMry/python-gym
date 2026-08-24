@@ -1,0 +1,13 @@
+{
+  "id": "int",
+  "name": "int()",
+  "what_it_does": "Converts a value - most often a string typed by the user, or a float - into a whole number (an integer, no decimal part).",
+  "syntax": "int(x)",
+  "parameters": "x - a string that looks like a whole number (e.g. \"20\"), a float, or another number-like value.",
+  "return_value": "The value converted to an int. int(\"20\") -> 20. int(3.9) -> 3 (truncates toward zero, it does NOT round).",
+  "example": "age = int(input('Enter your age: '))\nprint(age + 1)",
+  "example_output": "(depends on input - e.g. for 20: 21)",
+  "common_mistakes": "int(3.9) gives 3, not 4 - it chops off the decimal part rather than rounding (use round() if you want rounding). int(\"3.5\") raises ValueError - int() can't parse a string that has a decimal point, even though the number itself would fit; convert with float() first if the string might have a decimal point. Using int() on input that's meant to feed a formula with a fractional result (like an average, a rate, or an area) silently discards precision.",
+  "when_to_use": "Converting input you know represents a whole number - a count, an index, an age - where losing any decimal part is either impossible or intentional. If the value might have a decimal part, or the result of a calculation could be fractional, use float() instead.",
+  "related_exercise_ids": []
+}

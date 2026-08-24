@@ -1,0 +1,35 @@
+{
+  "source": "30_days_of_python",
+  "day": 4,
+  "level": null,
+  "module": "strings",
+  "exercise_type": "function",
+  "id": "30days-d04-13",
+  "difficulty": 1,
+  "title": "Find the last index of a character",
+  "description": "Write a function `last_index(text, char)` that returns the position of the last occurrence of `char` in `text`, using `rfind()`.",
+  "examples": "last_index('Coding For All People', 'l')\n-> 19",
+  "starter_code": "def last_index(text, char):\n    # your code here\n    pass\n",
+  "hints": [
+    "Method to consider: str.rfind()",
+    "text.rfind(char) works like .find() but searches backward from the end, so it returns the position of the last match instead of the first.",
+    "Call .rfind() on text with char and return the result."
+  ],
+  "expected_behavior": "Returns the index of the last occurrence of char.",
+  "hidden_tests": [
+    {
+      "call": "last_index('Coding For All People', 'l')",
+      "expected": "19",
+      "label": "source item 22"
+    }
+  ],
+  "solution": "def last_index(text, char):\n    return text.rfind(char)\n",
+  "explanation": "The 'r' in rfind stands for 'reverse' - same lookup as find(), just anchored from the end of the string instead of the start.",
+  "concepts": [
+    "strings",
+    "rfind"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

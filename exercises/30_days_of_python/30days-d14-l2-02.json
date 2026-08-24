@@ -1,0 +1,35 @@
+{
+  "source": "30_days_of_python",
+  "day": 14,
+  "module": "higher_order_functions",
+  "exercise_type": "function",
+  "level": 2,
+  "id": "30days-d14-l2-02",
+  "difficulty": 1,
+  "title": "Map numbers to their squares",
+  "description": "Write a function `map_square(numbers)` that returns a new list with every number squared, using `map()`.",
+  "examples": "map_square([1, 2, 3, 4, 5])\n-> [1, 4, 9, 16, 25]",
+  "starter_code": "def map_square(numbers):\n    # your code here\n    pass\n",
+  "hints": [
+    "Function to consider: map(), with a lambda as the callback",
+    "map(lambda x: x ** 2, numbers) applies that one-line function to every number - a lambda is used here (instead of str.upper's name) because squaring isn't already a built-in method to reference by name.",
+    "Return list(map(lambda x: x ** 2, numbers))."
+  ],
+  "expected_behavior": "Returns every number squared, in the original order.",
+  "hidden_tests": [
+    {
+      "call": "map_square([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])",
+      "expected": "[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]",
+      "label": "source item 2"
+    }
+  ],
+  "solution": "def map_square(numbers):\n    return list(map(lambda x: x ** 2, numbers))\n",
+  "explanation": "A lambda is just a small anonymous function - map() doesn't care whether its callback is a named function, a method reference like str.upper, or an inline lambda.",
+  "concepts": [
+    "map",
+    "lambda"
+  ],
+  "skills": [
+    "functional_python"
+  ]
+}

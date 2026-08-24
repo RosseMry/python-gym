@@ -1,0 +1,13 @@
+{
+  "id": "sorted",
+  "name": "sorted()",
+  "what_it_does": "Returns a NEW list with the items of an iterable arranged in order, without changing the original.",
+  "syntax": "sorted(iterable, key=None, reverse=False)",
+  "parameters": "iterable - what to sort. key (optional) - a function applied to each item to decide sort order. reverse (optional) - True for descending order.",
+  "return_value": "A new, sorted list. The original iterable is never modified.",
+  "example": "numbers = [3, 1, 2]\nprint(sorted(numbers))",
+  "example_output": "[1, 2, 3]",
+  "common_mistakes": "Confusing sorted(x) (returns a new list, x unchanged) with x.sort() (sorts a list in place, returns None) - assigning `x = x.sort()` is a classic bug that sets x to None. Sorting a list with mixed incompatible types raises TypeError.",
+  "when_to_use": "Whenever you need an ordered version of some data without disturbing the original order elsewhere in your program.",
+  "related_exercise_ids": []
+}

@@ -1,0 +1,36 @@
+{
+  "source": "30_days_of_python",
+  "day": 10,
+  "module": "loops",
+  "exercise_type": "function",
+  "level": 2,
+  "id": "30days-d10-l2-01",
+  "difficulty": 1,
+  "title": "Sum a range of numbers",
+  "description": "Write a function `sum_up_to(n)` that returns the sum of every integer from 0 to `n`, inclusive.",
+  "examples": "sum_up_to(100)\n-> 5050",
+  "starter_code": "def sum_up_to(n):\n    # your code here\n    pass\n",
+  "hints": [
+    "Function to consider: sum(), combined with range()",
+    "sum(range(n + 1)) adds up every value range produces in one call - a running total variable updated inside a for loop reaches the same number.",
+    "Return sum(range(n + 1))."
+  ],
+  "expected_behavior": "Returns the sum of integers from 0 to n.",
+  "hidden_tests": [
+    {
+      "call": "sum_up_to(100)",
+      "expected": "5050",
+      "label": "source item 1"
+    }
+  ],
+  "solution": "def sum_up_to(n):\n    return sum(range(n + 1))\n",
+  "explanation": "sum() is a reduction over an iterable, exactly like a loop that accumulates into a total variable - range(n + 1) supplies the same sequence of numbers a for loop would iterate over.",
+  "concepts": [
+    "loops",
+    "sum",
+    "range"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

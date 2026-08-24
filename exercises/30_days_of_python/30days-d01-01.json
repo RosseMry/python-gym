@@ -1,0 +1,35 @@
+{
+  "source": "30_days_of_python",
+  "day": 1,
+  "level": null,
+  "module": "introduction",
+  "id": "30days-d01-01",
+  "difficulty": 1,
+  "title": "Hello World and basic arithmetic",
+  "description": "Write a script that prints \"Hello World!\", then the result of each of these arithmetic operations, one per line, in order: `2 + 3`, `3 - 1`, `2 * 3`, `3 + 2`, `3 - 2`, `3 * 2`, `3 / 2`, `3 ** 2`, `3 % 2`, `3 // 2`.\n\nThis is Day 1's real content: unlike every other day, the source repository has no numbered exercise list for Day 1 - just a single walkthrough script (01_Day_Introduction/helloworld.py). This exercise reproduces that script.",
+  "examples": "Hello World!\n5\n2\n6\n5\n1\n6\n1.5\n9\n1\n1",
+  "starter_code": "# your code here\n",
+  "hints": [
+    "💡 Operators to consider: + - * / ** % //",
+    "Each line is its own print() call: one for the greeting text, then one per arithmetic expression, in the exact order listed above.",
+    "/ always gives a float result (even 3 / 2 -> 1.5), while // (floor division) and % (modulus/remainder) both give whole-number results for these inputs - that's why the last two lines are 1 and 1, not decimals."
+  ],
+  "expected_behavior": "Prints the greeting, then the ten arithmetic results, each on its own line.",
+  "hidden_tests": [
+    {
+      "args": [],
+      "expected_stdout": "Hello World!\n5\n2\n6\n5\n1\n6\n1.5\n9\n1\n1",
+      "label": "source content (helloworld.py)"
+    }
+  ],
+  "solution": "print(\"Hello World!\")\n\nprint(2 + 3)\nprint(3 - 1)\nprint(2 * 3)\nprint(3 + 2)\nprint(3 - 2)\nprint(3 * 2)\nprint(3 / 2)\nprint(3 ** 2)\nprint(3 % 2)\nprint(3 // 2)\n",
+  "explanation": "Each operator does exactly what its symbol suggests, applied to two small integers - the only one that might surprise is /, which always produces a float in Python 3 even when the division is exact in a different sense than // is.",
+  "concepts": [
+    "print",
+    "arithmetic operators"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ],
+  "exercise_type": "script"
+}

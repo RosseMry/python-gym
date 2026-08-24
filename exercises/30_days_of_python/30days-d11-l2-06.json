@@ -1,0 +1,41 @@
+{
+  "source": "30_days_of_python",
+  "day": 11,
+  "module": "functions",
+  "exercise_type": "function",
+  "level": 2,
+  "id": "30days-d11-l2-06",
+  "difficulty": 2,
+  "title": "Show arbitrary named arguments",
+  "description": "Write a function `show_args(**kwargs)` that returns `\"Received: \"` followed by each keyword argument as `name: value`, comma-separated, in the order they were given.",
+  "examples": "show_args(name='Alice', age=30, city='New York')\n-> 'Received: name: Alice, age: 30, city: New York'",
+  "starter_code": "def show_args(**kwargs):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: **kwargs collects any number of named arguments into a dict",
+    "kwargs.items() gives you (name, value) pairs in the order they were passed - a list comprehension can format each pair as 'name: value', ready to be joined with ', '.",
+    "Build a list of f'{key}: {value}' for each pair in kwargs.items(), join them with ', ', and prepend 'Received: '."
+  ],
+  "expected_behavior": "Returns 'Received: ' followed by each keyword argument, comma-separated.",
+  "hidden_tests": [
+    {
+      "call": "show_args(name='Alice', age=30, city='New York')",
+      "expected": "'Received: name: Alice, age: 30, city: New York'",
+      "label": "source item 6, three arguments"
+    },
+    {
+      "call": "show_args(name='Bob', pet='Fluffy, the bunny')",
+      "expected": "'Received: name: Bob, pet: Fluffy, the bunny'",
+      "label": "source item 6, two arguments"
+    }
+  ],
+  "solution": "def show_args(**kwargs):\n    pairs = [f\"{key}: {value}\" for key, value in kwargs.items()]\n    return \"Received: \" + \", \".join(pairs)\n",
+  "explanation": "**kwargs is the mechanism that lets a function accept any number of named arguments at all - inside the function it's just a regular dict, so .items() and a comprehension work on it exactly like any other dict.",
+  "concepts": [
+    "**kwargs",
+    "dict",
+    "f-strings"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

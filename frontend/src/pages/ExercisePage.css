@@ -207,7 +207,33 @@
 }
 
 .hints-panel li {
-  margin-bottom: 6px;
+  margin-bottom: 14px;
+}
+
+.hints-panel__step {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--hint);
+  margin: 0 0 4px;
+}
+
+.hints-panel__text {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.hints-panel__learn-link {
+  margin-top: 6px;
+  border: 1px solid var(--focus);
+  background: var(--focus-dim);
+  color: var(--focus);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
 }
 
 .explanation-panel__prompt {

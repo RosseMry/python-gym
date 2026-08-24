@@ -4,8 +4,16 @@ import { api } from "../services/api";
 import type { LearningNoteSummary } from "../types/exercise";
 import { useLocale, useLocalized } from "../i18n/LocaleContext";
 import "./ExerciseListPage.css";
+import "./LearningNote.css";
 
-/** Index of all Learning Notes (Sprint 3), grouped as a flat list. */
+const TOPIC_ICONS: Record<string, string> = {
+  lists: "🧺",
+  dictionaries: "🗂️",
+  strings: "🔤",
+  for_loops: "🔁",
+};
+
+/** Index of all Learning Notes, as a card grid. */
 export function LearningNotesListPage() {
   const [notes, setNotes] = useState<LearningNoteSummary[] | null>(null);
   const { t } = useLocale();
@@ -27,17 +35,18 @@ export function LearningNotesListPage() {
         <p className="subtitle">{t("notes.subtitle")}</p>
       </header>
 
-      <ul className="exercise-list">
+      <div className="learning-note-grid">
         {notes.map((note) => (
-          <li key={note.id}>
-            <Link to={`/notes/${note.id}`} className="exercise-card">
-              <span className="exercise-card__title">
-                {localize(note.title, note.title_fr)}
-              </span>
-            </Link>
-          </li>
+          <Link key={note.id} to={`/notes/${note.id}`} className="learning-note-grid__card">
+            <span className="learning-note-grid__icon" aria-hidden="true">
+              {TOPIC_ICONS[note.module] ?? "📘"}
+            </span>
+            <span className="learning-note-grid__title">
+              {localize(note.title, note.title_fr)}
+            </span>
+          </Link>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

@@ -1,0 +1,43 @@
+{
+  "id": "30days-d12-l2-03",
+  "module": "modules",
+  "day": 12,
+  "level": 2,
+  "difficulty": 3,
+  "title": "Generate hexa or RGB colors",
+  "description": "Write a function generate_colors which can generate any number of hexa or rgb colors.\n\n```py\n   generate_colors('hexa', 3) # ['#a3e12f','#03ed55','#eb3d2b'] \n   generate_colors('hexa', 1) # ['#b334ef']\n   generate_colors('rgb', 3)  # ['rgb(5, 55, 175','rgb(50, 105, 100','rgb(15, 26, 80'] \n   generate_colors('rgb', 1)  # ['rgb(33,79, 176)']\n   ```\n\nPython-Gym adaptation: implement as generate_colors(color_format, count, seed=None), where color_format is the string 'hexa' or 'rgb'. When seed is provided, seed the random module with it first. Return a list of count colors: '#xxxxxx' strings (lowercase hex digits) when color_format is 'hexa', or well-formed 'rgb(r,g,b)' strings when color_format is 'rgb'.",
+  "examples": ">>> generate_colors('hexa', 3, seed=0)\n['#cd18fc', '#9fb649', '#438493']\n>>> generate_colors('rgb', 2, seed=1)\n['rgb(68,32,130)', 'rgb(60,253,230)']",
+  "starter_code": "import random\n\ndef generate_colors(color_format, count, seed=None):\n    # your code here\n    pass\n",
+  "hints": [
+    "This combines the previous two exercises behind one dispatcher: check color_format and branch to hex-color logic or rgb-color logic.",
+    "Seed random first (only if seed is not None), then loop count times, appending a new color built according to color_format on each iteration.",
+    "For 'hexa' build '#' + 6 random hex characters; for 'rgb' build f\"rgb({r},{g},{b})\" from three random.randint(0, 255) calls; raise a ValueError (or similar) for any other color_format."
+  ],
+  "expected_behavior": "Returns a list of count color strings in the requested format ('hexa' -> '#xxxxxx', 'rgb' -> 'rgb(r,g,b)'). With the same seed, format and count, the list is always identical.",
+  "solution": "import random\n\ndef generate_colors(color_format, count, seed=None):\n    if seed is not None:\n        random.seed(seed)\n    colors = []\n    hex_chars = '0123456789abcdef'\n    for _ in range(count):\n        if color_format == 'hexa':\n            colors.append('#' + ''.join(random.choice(hex_chars) for _ in range(6)))\n        elif color_format == 'rgb':\n            r = random.randint(0, 255)\n            g = random.randint(0, 255)\n            b = random.randint(0, 255)\n            colors.append(f\"rgb({r},{g},{b})\")\n        else:\n            raise ValueError(\"color_format must be 'hexa' or 'rgb'\")\n    return colors\n",
+  "hidden_tests": [
+    {
+      "call": "generate_colors('hexa', 3, seed=0)",
+      "expected": "['#cd18fc', '#9fb649', '#438493']",
+      "label": "seed 0 produces the expected deterministic list of 3 hexa colors"
+    },
+    {
+      "call": "generate_colors('rgb', 2, seed=1)",
+      "expected": "['rgb(68,32,130)', 'rgb(60,253,230)']",
+      "label": "seed 1 produces the expected deterministic list of 2 rgb colors"
+    }
+  ],
+  "explanation": "generate_colors dispatches on color_format: for 'hexa' it draws 6 random hex characters per color and prefixes with '#', for 'rgb' it draws three random.randint(0, 255) values per color and formats them as 'rgb(r,g,b)', repeating count times and collecting the results into a list.",
+  "concepts": [
+    "modules",
+    "random module",
+    "conditional branching",
+    "f-strings",
+    "list building"
+  ],
+  "skills": [
+    "using_standard_library_modules"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

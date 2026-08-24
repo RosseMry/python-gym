@@ -122,6 +122,13 @@ class Exercise:
     expected_behavior_fr: str | None = None
     explanation_fr: str | None = None
     hints_fr: list[str] | None = None
+    # Sprint 3 finalization: optional per-hint link into the Function
+    # Reference catalog (see FunctionReference below), same length as
+    # ``hints`` when set, an entry being None means that hint has no
+    # linked reference. Lets a hint that names e.g. sum() offer a
+    # "Learn: sum()" popover without duplicating the explanation in
+    # every exercise that happens to use it.
+    hint_functions: list[str | None] | None = None
 
 
 @dataclass(frozen=True)
@@ -190,6 +197,37 @@ class LearningNote:
     examples_fr: str | None = None
     common_mistakes_fr: str | None = None
     mini_exercise_fr: str | None = None
+
+
+@dataclass(frozen=True)
+class FunctionReference:
+    """A reusable explanation of one Python builtin/concept.
+
+    Sprint 3 finalization (spec sections 6-7): hints should teach which
+    tool to reach for, then let the student open a reusable explanation
+    instead of duplicating it in every exercise that happens to use the
+    same function. Deliberately small and flat - this is not meant to
+    grow into a full documentation system, just enough structure for a
+    hint to reference a name and the UI to render it.
+    """
+
+    id: str
+    name: str
+    what_it_does: str
+    syntax: str
+    parameters: str
+    return_value: str
+    example: str
+    example_output: str
+    common_mistakes: str
+    when_to_use: str
+    related_exercise_ids: list[str] = field(default_factory=list)
+    name_fr: str | None = None
+    what_it_does_fr: str | None = None
+    parameters_fr: str | None = None
+    return_value_fr: str | None = None
+    common_mistakes_fr: str | None = None
+    when_to_use_fr: str | None = None
 
 
 @dataclass

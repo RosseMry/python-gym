@@ -58,6 +58,7 @@ def load_exercise(path: Path) -> Exercise:
         expected_behavior_fr=data.get("expected_behavior_fr"),
         explanation_fr=data.get("explanation_fr"),
         hints_fr=data.get("hints_fr"),
+        hint_functions=data.get("hint_functions"),
     )
 
 
@@ -71,18 +72,52 @@ def main() -> None:
         print(f"No exercise files found under {EXERCISES_DIR}")
         return
 
-    for path in json_files:
-        exercise = load_exercise(path)
+    exercises = [load_exercise(path) for path in json_files]
+
+    seen_ids: dict[str, Path] = {}
+    for path, exercise in zip(json_files, exercises):
+        if exercise.id in seen_ids:
+            raise ValueError(
+                f"Duplicate exercise id {exercise.id!r} in {path} "
+                f"(already defined in {seen_ids[exercise.id]})"
+            )
+        seen_ids[exercise.id] = path
+
+    for exercise in exercises:
         repo.upsert(exercise)
         print(f"seeded {exercise.id} ({exercise.source}/{exercise.module})")
 
     print(f"\nSeeded {len(json_files)} exercises.")
     by_source: dict[str, int] = {}
-    for path in json_files:
-        source = load_exercise(path).source
-        by_source[source] = by_source.get(source, 0) + 1
+    for exercise in exercises:
+        by_source[exercise.source] = by_source.get(exercise.source, 0) + 1
     for source, count in sorted(by_source.items()):
         print(f"  {source}: {count}")
+
+    # Seed-integrity audit (spec: compare source vs seed with real
+    # numbers, not estimates) - per-day breakdown for 30 Days of Python.
+    by_day: dict[int, int] = {}
+    for exercise in exercises:
+        if exercise.source == "30_days_of_python" and exercise.day is not None:
+            by_day[exercise.day] = by_day.get(exercise.day, 0) + 1
+    if by_day:
+        print("\n  30_days_of_python by day:")
+        for day, count in sorted(by_day.items()):
+            print(f"    day {day:02d}: {count}")
+
+    # Per-module breakdown for the 42 Piscine, including locked/excluded.
+    piscine_by_module: dict[str, dict[str, int]] = {}
+    for exercise in exercises:
+        if exercise.source != "42_python_piscine":
+            continue
+        bucket = piscine_by_module.setdefault(
+            exercise.module, {"active": 0, "locked": 0, "excluded": 0}
+        )
+        bucket[exercise.exercise_status] = bucket.get(exercise.exercise_status, 0) + 1
+    if piscine_by_module:
+        print("\n  42_python_piscine by module:")
+        for module, counts in sorted(piscine_by_module.items()):
+            print(f"    {module}: {counts}")
 
 
 if __name__ == "__main__":

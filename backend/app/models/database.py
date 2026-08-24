@@ -46,7 +46,10 @@ CREATE TABLE IF NOT EXISTS exercises (
     examples_fr TEXT,
     expected_behavior_fr TEXT,
     explanation_fr TEXT,
-    hints_fr TEXT
+    hints_fr TEXT,
+    -- Sprint 3 finalization: optional per-hint Function Reference link,
+    -- same length as hints - JSON list[str | None]:
+    hint_functions TEXT
 );
 
 CREATE TABLE IF NOT EXISTS progress (
@@ -99,6 +102,26 @@ CREATE TABLE IF NOT EXISTS learning_notes (
     common_mistakes_fr TEXT,
     mini_exercise_fr TEXT
 );
+
+CREATE TABLE IF NOT EXISTS function_references (
+    id TEXT PRIMARY KEY,
+    name TEXT NOT NULL,
+    what_it_does TEXT NOT NULL,
+    syntax TEXT NOT NULL,
+    parameters TEXT NOT NULL,
+    return_value TEXT NOT NULL,
+    example TEXT NOT NULL,
+    example_output TEXT NOT NULL,
+    common_mistakes TEXT NOT NULL,
+    when_to_use TEXT NOT NULL,
+    related_exercise_ids TEXT NOT NULL DEFAULT '[]', -- JSON list[str]
+    name_fr TEXT,
+    what_it_does_fr TEXT,
+    parameters_fr TEXT,
+    return_value_fr TEXT,
+    common_mistakes_fr TEXT,
+    when_to_use_fr TEXT
+);
 """
 
 
@@ -123,6 +146,7 @@ _EXERCISE_MIGRATION_COLUMNS = {
     "expected_behavior_fr": "TEXT",
     "explanation_fr": "TEXT",
     "hints_fr": "TEXT",
+    "hint_functions": "TEXT",
 }
 
 _SUBMISSION_MIGRATION_COLUMNS = {

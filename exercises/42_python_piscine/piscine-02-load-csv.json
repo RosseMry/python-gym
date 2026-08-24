@@ -1,0 +1,41 @@
+{
+  "id": "piscine-02-load-csv",
+  "module": "piscine_02_datatable",
+  "difficulty": 1,
+  "title": "Load CSV",
+  "title_fr": "Charger un CSV",
+  "description": "Write a function `load_csv(path)` that reads the CSV file at `path` into a pandas DataFrame and returns its `.shape` (number of rows, number of columns).\n\n`countries.csv` is available in your working directory, with columns `country, population, life_expectancy, income` - one row per country. Every other Module 2 exercise reuses this same file.",
+  "description_fr": "Ecris une fonction `load_csv(path)` qui lit le fichier CSV situe a `path` dans un DataFrame pandas et retourne son `.shape` (nombre de lignes, nombre de colonnes).\n\n`countries.csv` est disponible dans ton dossier de travail, avec les colonnes `country, population, life_expectancy, income` - une ligne par pays. Tous les autres exercices du Module 2 reutilisent ce meme fichier.",
+  "examples": "load_csv('countries.csv')\n-> (8, 4)",
+  "examples_fr": "load_csv('countries.csv')\n-> (8, 4)",
+  "starter_code": "import pandas as pd\n\n\ndef load_csv(path):\n    # your code here\n    pass\n",
+  "hints": [
+    "Function to consider: pd.read_csv()",
+    "pd.read_csv(path) reads a CSV file straight into a DataFrame, using the first line as column headers by default. A DataFrame's .shape is a tuple (rows, columns), the same idea as a NumPy array's .shape.",
+    "Read the file with pd.read_csv, then return the .shape of the DataFrame you get back - one line does the reading, the next line reports its shape."
+  ],
+  "hints_fr": [
+    "Fonction a considerer : pd.read_csv()",
+    "pd.read_csv(path) lit un fichier CSV directement dans un DataFrame, en utilisant la premiere ligne comme en-tetes de colonnes par defaut. Le .shape d'un DataFrame est un tuple (lignes, colonnes), la meme idee que le .shape d'un tableau NumPy.",
+    "Lis le fichier avec pd.read_csv, puis retourne le .shape du DataFrame obtenu - une ligne fait la lecture, l'autre rapporte sa forme."
+  ],
+  "expected_behavior": "Returns a 2-tuple (row_count, column_count) for the loaded CSV.",
+  "hidden_tests": [
+    {
+      "call": "load_csv('countries.csv')",
+      "expected": "(8, 4)",
+      "label": "countries.csv shape"
+    }
+  ],
+  "solution": "import pandas as pd\n\n\ndef load_csv(path):\n    return pd.read_csv(path).shape\n",
+  "explanation": "pd.read_csv does the header parsing and type inference in one call - the DataFrame it returns already knows its own row/column count through .shape, the same attribute NumPy arrays expose.",
+  "explanation_fr": "pd.read_csv fait l'analyse des en-tetes et l'inference des types en un seul appel - le DataFrame retourne connait deja son propre nombre de lignes/colonnes via .shape, le meme attribut que les tableaux NumPy exposent.",
+  "concepts": ["pandas", "dataframe", "csv"],
+  "skills": ["data_analysis"],
+  "source": "42_python_piscine",
+  "track": "python",
+  "validation_profile": "42_piscine",
+  "exercise_type": "function",
+  "exercise_status": "active",
+  "resources": ["python/42-piscine/countries.csv"]
+}

@@ -3,7 +3,9 @@
   "module": "piscine_04_data_oriented_design",
   "difficulty": 2,
   "title": "Data class (Student)",
+  "title_fr": "Classe de données (Student)",
   "description": "Write a `@dataclass` `Student` with `name` and `surname` as required fields, `active` defaulting to True, a `login` computed from name/surname (first letter of the name + full surname, capitalised), and a random 15-character `id` from `generate_id()`. Neither `login` nor `id` should be settable via the constructor - passing `id=...` should raise a TypeError. Do not define `__str__`/`__repr__` yourself - use the dataclass-generated one.",
+  "description_fr": "Écris un `@dataclass` `Student` avec `name` et `surname` comme champs obligatoires, `active` valant True par défaut, un `login` calculé à partir de name/surname (première lettre du prénom + nom de famille complet, avec majuscule), et un `id` aléatoire de 15 caractères venant de `generate_id()`. Ni `login` ni `id` ne doivent pouvoir être fixés via le constructeur - passer `id=...` doit lever une TypeError. Ne définis pas toi-même `__str__`/`__repr__` - utilise celui généré par le dataclass.",
   "examples": "student = Student(name='Edward', surname='agle')\nprint(student)\n# Student(name='Edward', surname='agle', active=True, login='Eagle', id='trannxhndgtolvh')",
   "starter_code": "import random\nimport string\nfrom dataclasses import dataclass, field\n\n\ndef generate_id():\n    \"\"\"Return a random 15-character lowercase id.\"\"\"\n    return \"\".join(random.choices(string.ascii_lowercase, k=15))\n\n\n@dataclass\nclass Student:\n    # your code here\n    pass\n",
   "hints": [
@@ -11,10 +13,16 @@
     "`field(default_factory=generate_id)` computes `id` once per instance, at construction time, without it being a settable argument.",
     "A field with no default set directly in __post_init__ (or computed via default_factory referencing other fields indirectly) is one way to derive login from name/surname after the other fields are set."
   ],
+  "hints_fr": [
+    "`login` et `id` dépendent tous deux d'autres champs (ou du hasard), ils ne peuvent donc pas être de simples paramètres du constructeur - ils ont besoin de `field(init=False, ...)`.",
+    "`field(default_factory=generate_id)` calcule `id` une fois par instance, au moment de la construction, sans que ce soit un argument modifiable.",
+    "Un champ sans valeur par défaut fixé directement dans __post_init__ (ou calculé via un default_factory référençant indirectement d'autres champs) est un moyen de dériver login à partir de name/surname une fois les autres champs fixés."
+  ],
   "expected_behavior": "Student(name=..., surname=...) works; Student(..., id=...) raises TypeError; the printed repr shows all five fields.",
   "hidden_tests": [],
   "solution": "import random\nimport string\nfrom dataclasses import dataclass, field\n\n\ndef generate_id():\n    \"\"\"Return a random 15-character lowercase id.\"\"\"\n    return \"\".join(random.choices(string.ascii_lowercase, k=15))\n\n\n@dataclass\nclass Student:\n    \"\"\"A student with an auto-generated login and id.\"\"\"\n\n    name: str\n    surname: str\n    active: bool = True\n    login: str = field(init=False)\n    id: str = field(init=False, default_factory=generate_id)\n\n    def __post_init__(self):\n        \"\"\"Derive login from name and surname.\"\"\"\n        self.login = self.name[0].upper() + self.surname.lower()\n",
   "explanation": "`field(init=False)` removes a field from the generated __init__ signature entirely, so passing it as a keyword argument raises TypeError. `__post_init__` runs right after the generated __init__, which is where `login` can be derived from the already-set `name`/`surname`.",
+  "explanation_fr": "`field(init=False)` retire entièrement un champ de la signature de __init__ générée, donc le passer en argument nommé lève une TypeError. `__post_init__` s'exécute juste après le __init__ généré, ce qui est l'endroit où `login` peut être dérivé de `name`/`surname` déjà fixés.",
   "concepts": [
     "dataclasses",
     "field",

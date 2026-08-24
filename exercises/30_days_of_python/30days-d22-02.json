@@ -1,0 +1,28 @@
+{
+  "source": "30_days_of_python",
+  "day": 22,
+  "level": null,
+  "module": "web_scraping",
+  "id": "30days-d22-02",
+  "difficulty": 1,
+  "title": "Scraping targets that no longer exist (reference)",
+  "description": "Source items 1 and 2 (Boston University's facts/stats page as JSON, and a table extracted from the UCI Machine Learning Repository's datasets page) both target real pages - checked directly rather than assumed dead:\n\n- BU's facts/stats page (bu.edu/president/boston-university-facts-stats/) loads successfully but no longer contains a single `<table>` element anywhere in its HTML - the page has been redesigned since the source repo was written, into a layout of individual stat widgets instead of a table.\n- The UCI ML Repository's datasets page (archive.ics.uci.edu/ml/datasets.php) now loads as a client-rendered single-page app - its raw HTML has no `<table>` either, since the dataset list is fetched and rendered by JavaScript after the page loads, which `requests` + BeautifulSoup can't execute.\n\nNeither is a real scraping target anymore, static or otherwise - see 30days-d22-01 for a real, still-working scraping exercise (Wikipedia's presidents table) using the same tools (BeautifulSoup) this day is actually about.",
+  "examples": "",
+  "starter_code": "# See the description for what changed and why.\n",
+  "hints": [
+    "This entry documents a real, verified state of two external pages, rather than asking you to write code against them.",
+    "30days-d22-01 in this same day is the live scraping exercise - same BeautifulSoup skills, a target that still works.",
+    "If you want to see what these pages look like today, open them directly in a browser - that's the fastest way to judge whether a page is worth scraping."
+  ],
+  "expected_behavior": "Not auto-gradable - a reference entry, not a coding exercise.",
+  "hidden_tests": [],
+  "solution": "# See the description for what changed and why.\n",
+  "explanation": "Web scraping exercises age unusually fast compared to most programming exercises - the code doesn't change, but the target website does, and there's no way to know that in advance without actually fetching the page and looking.",
+  "concepts": [
+    "web scraping"
+  ],
+  "skills": [
+    "using_standard_library_modules"
+  ],
+  "exercise_type": "script"
+}

@@ -1,0 +1,36 @@
+{
+  "source": "30_days_of_python",
+  "day": 20,
+  "module": "package_manager",
+  "exercise_type": "function",
+  "id": "30days-d20-02",
+  "level": null,
+  "difficulty": 2,
+  "title": "Build a country/breed frequency table",
+  "description": "Write a function `breed_frequency_table(records)` that takes a list of `{'country': ..., 'breed': ...}` records and returns a nested dict: `{country: {breed: count}}`.\n\nCovers the frequency-table sub-part of source item 2 (reading thecatapi.com and building a country/breed frequency table). `api.thecatapi.com` now requires an API key it didn't in ~2020 (returns 403 without one, checked directly), so this uses a small illustrative sample of records shaped like what that API returns - not real fetched data. Item 2's other sub-part (min/max/mean/median/stdev) is the same task as 30days-d11-l2-04's `stats_summary` and isn't repeated here.",
+  "examples": "breed_frequency_table([\n    {'country': 'United States', 'breed': 'Maine Coon'},\n    {'country': 'United States', 'breed': 'Ragdoll'},\n    {'country': 'United States', 'breed': 'Maine Coon'},\n])\n-> {'United States': {'Maine Coon': 2, 'Ragdoll': 1}}",
+  "starter_code": "def breed_frequency_table(records):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: a dict of dicts, filled in one record at a time",
+    "For each record, the outer dict needs an entry for its country (starting as an empty dict the first time that country appears), and the inner dict needs its breed count increased by one.",
+    "Loop over records, using .setdefault(country, {}) to get-or-create each country's inner dict, then increment that inner dict's count for the record's breed (also defaulting to 0 the first time a breed appears)."
+  ],
+  "expected_behavior": "Returns a nested dict counting how many records have each (country, breed) combination.",
+  "hidden_tests": [
+    {
+      "call": "breed_frequency_table([\n    {'country': 'United States', 'breed': 'Maine Coon'},\n    {'country': 'United States', 'breed': 'Ragdoll'},\n    {'country': 'United States', 'breed': 'Maine Coon'},\n    {'country': 'United Kingdom', 'breed': 'British Shorthair'},\n    {'country': 'United Kingdom', 'breed': 'British Shorthair'},\n    {'country': 'Turkey', 'breed': 'Turkish Angora'},\n    {'country': 'Turkey', 'breed': 'Turkish Van'},\n    {'country': 'Thailand', 'breed': 'Siamese'},\n    {'country': 'Norway', 'breed': 'Norwegian Forest'},\n    {'country': 'Egypt', 'breed': 'Egyptian Mau'},\n])",
+      "expected": "{'United States': {'Maine Coon': 2, 'Ragdoll': 1}, 'United Kingdom': {'British Shorthair': 2}, 'Turkey': {'Turkish Angora': 1, 'Turkish Van': 1}, 'Thailand': {'Siamese': 1}, 'Norway': {'Norwegian Forest': 1}, 'Egypt': {'Egyptian Mau': 1}}",
+      "label": "source item 2, frequency table sub-part"
+    }
+  ],
+  "solution": "def breed_frequency_table(records):\n    table = {}\n    for record in records:\n        country_counts = table.setdefault(record[\"country\"], {})\n        breed = record[\"breed\"]\n        country_counts[breed] = country_counts.get(breed, 0) + 1\n    return table\n",
+  "explanation": "dict.setdefault(key, {}) either returns the dict already stored for that key, or creates and stores a fresh empty one - it's what lets a nested dict be built incrementally without checking 'have I seen this country before?' as a separate step.",
+  "concepts": [
+    "dict",
+    "setdefault",
+    "nested data structures"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

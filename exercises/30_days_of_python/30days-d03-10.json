@@ -1,0 +1,40 @@
+{
+  "source": "30_days_of_python",
+  "day": 3,
+  "level": null,
+  "module": "operators",
+  "exercise_type": "function",
+  "id": "30days-d03-10",
+  "difficulty": 1,
+  "title": "Check a substring in two strings",
+  "description": "Write a function `contains_in_both(word1, word2, substring)` that returns whether `substring` is found in both `word1` and `word2`, using the `and` operator.\n\nCovers source items 13 and 15 as one exercise - both ask the same question about 'on' in 'python' and 'dragon' (item 15's text implies the answer is no, but 'python' and 'dragon' both end in 'on', so it's actually yes).",
+  "examples": "contains_in_both('python', 'dragon', 'on')\n-> True",
+  "starter_code": "def contains_in_both(word1, word2, substring):\n    # your code here\n    pass\n",
+  "hints": [
+    "Operator to consider: in, combined with and",
+    "substring in word1 and substring in word2 is True only when both individual checks are True - the same short-circuiting and used anywhere else in Python.",
+    "Return (substring in word1) and (substring in word2)."
+  ],
+  "expected_behavior": "Returns True only if substring appears in both words.",
+  "hidden_tests": [
+    {
+      "call": "contains_in_both('python', 'dragon', 'on')",
+      "expected": "True",
+      "label": "source items 13 and 15 - 'on' is in both"
+    },
+    {
+      "call": "contains_in_both('python', 'dragon', 'py')",
+      "expected": "False",
+      "label": "only in one word"
+    }
+  ],
+  "solution": "def contains_in_both(word1, word2, substring):\n    return substring in word1 and substring in word2\n",
+  "explanation": "Both 'python' and 'dragon' end in the letters 'on', so the and-combined check is True for both words at once - a good reminder to test an assumption instead of guessing at it.",
+  "concepts": [
+    "in operator",
+    "and operator"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

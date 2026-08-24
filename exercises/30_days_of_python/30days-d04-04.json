@@ -1,0 +1,35 @@
+{
+  "source": "30_days_of_python",
+  "day": 4,
+  "level": null,
+  "module": "strings",
+  "exercise_type": "function",
+  "id": "30days-d04-04",
+  "difficulty": 1,
+  "title": "Lowercase a string",
+  "description": "Write a function `to_lower(text)` that returns `text` with every character changed to lowercase.",
+  "examples": "to_lower('Coding For All')\n-> 'coding for all'",
+  "starter_code": "def to_lower(text):\n    # your code here\n    pass\n",
+  "hints": [
+    "Method to consider: str.lower()",
+    "Every string has a .lower() method, the mirror image of .upper() - it returns a new string with every letter in lowercase.",
+    "Call .lower() on text and return the result directly."
+  ],
+  "expected_behavior": "Returns the text fully lowercased.",
+  "hidden_tests": [
+    {
+      "call": "to_lower('Coding For All')",
+      "expected": "'coding for all'",
+      "label": "source item 7"
+    }
+  ],
+  "solution": "def to_lower(text):\n    return text.lower()\n",
+  "explanation": "str.lower() mirrors .upper() - both return a new string rather than modifying the original, since strings are immutable in Python.",
+  "concepts": [
+    "strings",
+    "lower"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

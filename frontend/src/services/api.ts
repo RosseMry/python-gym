@@ -1,6 +1,8 @@
 import type {
   ExerciseDetail,
   ExerciseSummary,
+  FunctionReferenceDetail,
+  FunctionReferenceSummary,
   HintResponse,
   LearningNoteDetail,
   LearningNoteSummary,
@@ -70,4 +72,8 @@ export const api = {
   listNotes: () => request<LearningNoteSummary[]>("/notes"),
 
   getNote: (id: string) => request<LearningNoteDetail>(`/notes/${id}`),
+
+  listFunctions: () => request<FunctionReferenceSummary[]>("/functions"),
+
+  getFunction: (id: string) => request<FunctionReferenceDetail>(`/functions/${id}`),
 };

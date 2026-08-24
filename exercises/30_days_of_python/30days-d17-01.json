@@ -1,0 +1,50 @@
+{
+  "id": "30days-d17-01",
+  "module": "exception_handling",
+  "day": 17,
+  "difficulty": 2,
+  "title": "Unpack Nordic countries safely",
+  "description": "names = ['Finland', 'Sweden', 'Norway','Denmark','Iceland', 'Estonia','Russia']. Unpack the first five countries and store them in a variable nordic_countries, store Estonia and Russia in es, and ru respectively.\n\nPython-Gym adaptation: implement as `unpack_countries(names)`, using starred unpacking (`*nordic_countries, es, ru = names`) so that, for any list of country names passed in, every item except the last two is collected into nordic_countries and the last two items go into es and ru, returning the tuple `(nordic_countries, es, ru)`. Because this day's topic is exception handling, if names has fewer than two elements the unpacking raises a ValueError - catch it internally and return a descriptive string instead of letting it propagate.",
+  "examples": ">>> unpack_countries(['Finland', 'Sweden', 'Norway', 'Denmark', 'Iceland', 'Estonia', 'Russia'])\n(['Finland', 'Sweden', 'Norway', 'Denmark', 'Iceland'], 'Estonia', 'Russia')\n>>> unpack_countries(['OnlyOne'])\n'Unpacking error: not enough values to unpack (expected at least 2, got 1)'",
+  "starter_code": "def unpack_countries(names):\n    # write your code here\n    # unpack names so every item except the last two goes into\n    # nordic_countries, and the last two go into es and ru\n    # catch the ValueError raised when names has fewer than 2 items\n    pass\n",
+  "hints": [
+    "Python can unpack a list into several variables in one assignment, and a starred variable (like *rest) scoops up 'everything else' into a list while plain variables take the remaining ends of the sequence.",
+    "The pattern `*nordic_countries, es, ru = names` puts every element of names except the last two into nordic_countries as a list, then assigns the last two elements to es and ru.",
+    "When names has fewer than two elements that unpacking raises a ValueError ('not enough values to unpack') - wrap the unpacking line in a try/except ValueError block and return a descriptive string from the except branch instead of letting the exception crash the program."
+  ],
+  "expected_behavior": "Returns a 3-tuple (nordic_countries, es, ru) where nordic_countries is a list of every element of names except the last two, es is the second-to-last element, and ru is the last element. If names has fewer than two elements, the ValueError raised by the unpacking is caught internally and a descriptive error string ('Unpacking error: ' followed by the exception message) is returned instead of raising.",
+  "hidden_tests": [
+    {
+      "call": "unpack_countries(['Finland', 'Sweden', 'Norway', 'Denmark', 'Iceland', 'Estonia', 'Russia'])",
+      "expected": "(['Finland', 'Sweden', 'Norway', 'Denmark', 'Iceland'], 'Estonia', 'Russia')",
+      "label": "source example: seven countries split into nordic_countries, es, ru"
+    },
+    {
+      "call": "unpack_countries(['A', 'B'])",
+      "expected": "([], 'A', 'B')",
+      "label": "exactly two elements: nordic_countries is empty"
+    },
+    {
+      "call": "unpack_countries(['OnlyOne'])",
+      "expected": "'Unpacking error: not enough values to unpack (expected at least 2, got 1)'",
+      "label": "exception path: single-element list caught and reported"
+    },
+    {
+      "call": "unpack_countries([])",
+      "expected": "'Unpacking error: not enough values to unpack (expected at least 2, got 0)'",
+      "label": "exception path: empty list caught and reported"
+    }
+  ],
+  "solution": "def unpack_countries(names):\n    try:\n        *nordic_countries, es, ru = names\n        return (nordic_countries, es, ru)\n    except ValueError as e:\n        return f\"Unpacking error: {e}\"\n",
+  "explanation": "Starred assignment (`*nordic_countries, es, ru = names`) unpacks a sequence by first reserving the last two positions for es and ru, then collecting everything else into the nordic_countries list. This only works if names has at least two items to fill es and ru; otherwise Python raises a ValueError describing how many values it needed versus how many it got. Wrapping the unpacking in try/except ValueError lets the function handle that failure gracefully and hand back a descriptive string instead of crashing, which is exactly the graceful-exit idiom this lesson introduces.",
+  "concepts": [
+    "exception handling",
+    "try except",
+    "value error",
+    "unpacking",
+    "starred assignment"
+  ],
+  "skills": ["error_handling"],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

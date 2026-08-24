@@ -1,0 +1,40 @@
+{
+  "source": "30_days_of_python",
+  "day": 4,
+  "level": null,
+  "module": "strings",
+  "exercise_type": "function",
+  "id": "30days-d04-09",
+  "difficulty": 1,
+  "title": "Split a string by a separator",
+  "description": "Write a function `split_text(text, separator)` that splits `text` on `separator` and returns the resulting list.\n\nCovers source items 13-14 (splitting on a space, and splitting on a comma) as one exercise.",
+  "examples": "split_text('Coding For All', ' ')\n-> ['Coding', 'For', 'All']\nsplit_text('Facebook, Google, Microsoft', ',')\n-> ['Facebook', ' Google', ' Microsoft']",
+  "starter_code": "def split_text(text, separator):\n    # your code here\n    pass\n",
+  "hints": [
+    "Method to consider: str.split()",
+    "text.split(separator) breaks text into a list everywhere separator occurs, dropping the separator itself from the results.",
+    "Call .split(separator) on text and return the result - no loop needed."
+  ],
+  "expected_behavior": "Returns text split on separator, as a list of strings.",
+  "hidden_tests": [
+    {
+      "call": "split_text('Coding For All', ' ')",
+      "expected": "['Coding', 'For', 'All']",
+      "label": "source item 13, split on space"
+    },
+    {
+      "call": "split_text('Facebook, Google, Microsoft, Apple, IBM, Oracle, Amazon', ',')",
+      "expected": "['Facebook', ' Google', ' Microsoft', ' Apple', ' IBM', ' Oracle', ' Amazon']",
+      "label": "source item 14, split on comma"
+    }
+  ],
+  "solution": "def split_text(text, separator):\n    return text.split(separator)\n",
+  "explanation": "str.split(separator) is the general form - passing a space or a comma is just a different argument to the same method, not a different technique.",
+  "concepts": [
+    "strings",
+    "split"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "source": "30_days_of_python",
+  "day": 14,
+  "module": "higher_order_functions",
+  "exercise_type": "function",
+  "level": 2,
+  "id": "30days-d14-l2-06",
+  "difficulty": 1,
+  "title": "Filter countries by starting letter",
+  "description": "Write a function `filter_starts_with(countries, prefix)` that returns the countries whose name starts with `prefix`, using `filter()`.",
+  "examples": "filter_starts_with(['Estonia', 'Finland', 'Sweden', 'Denmark', 'Norway', 'Iceland'], 'E')\n-> ['Estonia']",
+  "starter_code": "def filter_starts_with(countries, prefix):\n    # your code here\n    pass\n",
+  "hints": [
+    "Method to consider: str.startswith(), inside a filter() lambda",
+    "c.startswith(prefix) answers 'does this name start with prefix' per country - the same method used for this in Day 4's string exercises, now driving a filter() instead of being called on a single string.",
+    "Return list(filter(lambda c: c.startswith(prefix), countries))."
+  ],
+  "expected_behavior": "Returns the countries whose name starts with prefix.",
+  "hidden_tests": [
+    {
+      "call": "filter_starts_with(['Estonia', 'Finland', 'Sweden', 'Denmark', 'Norway', 'Iceland'], 'E')",
+      "expected": "['Estonia']",
+      "label": "source item 7"
+    }
+  ],
+  "solution": "def filter_starts_with(countries, prefix):\n    return list(filter(lambda c: c.startswith(prefix), countries))\n",
+  "explanation": "startswith() inside the filter lambda works exactly like it did as a standalone string method - filter() is just the loop that applies it to every item and keeps the True ones.",
+  "concepts": [
+    "filter",
+    "lambda",
+    "str.startswith"
+  ],
+  "skills": [
+    "functional_python"
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "id": "30days-d13-01",
+  "module": "list_comprehension",
+  "day": 13,
+  "difficulty": 1,
+  "title": "Filter negative and zero",
+  "description": "Filter only negative and zero in the list using list comprehension\n\n```py\nnumbers = [-4, -3, -2, -1, 0, 2, 4, 6]\n```\n\nPython-Gym adaptation: implement as `filter_negative_and_zero(numbers)`, returning a new list containing only the elements of `numbers` that are less than or equal to zero, in their original order.",
+  "examples": "filter_negative_and_zero([-4, -3, -2, -1, 0, 2, 4, 6]) -> [-4, -3, -2, -1, 0]\nfilter_negative_and_zero([1, 2, 3]) -> []",
+  "starter_code": "def filter_negative_and_zero(numbers):\n    # write your code here\n    pass\n",
+  "hints": [
+    "You need a single list comprehension with a condition, not a for loop with append.",
+    "The condition to keep a number is that it is less than or equal to 0.",
+    "Use `[n for n in numbers if n <= 0]` as the shape of your comprehension."
+  ],
+  "expected_behavior": "Returns a list comprehension result containing only the numbers from the input list that are negative or zero, preserving their original order.",
+  "hidden_tests": [
+    {
+      "call": "filter_negative_and_zero([-4, -3, -2, -1, 0, 2, 4, 6])",
+      "expected": "[-4, -3, -2, -1, 0]",
+      "label": "source example: mixed positives, negatives, and zero"
+    },
+    {
+      "call": "filter_negative_and_zero([1, 2, 3])",
+      "expected": "[]",
+      "label": "all positive, no matches"
+    },
+    {
+      "call": "filter_negative_and_zero([0, -1, -5])",
+      "expected": "[0, -1, -5]",
+      "label": "all negative or zero"
+    }
+  ],
+  "solution": "def filter_negative_and_zero(numbers):\n    return [n for n in numbers if n <= 0]\n",
+  "explanation": "A list comprehension iterates over each number and keeps it only when the condition `n <= 0` is true, producing a filtered list in one line without an explicit loop or append calls.",
+  "concepts": ["list comprehension", "filtering", "conditional expression"],
+  "skills": ["functional_python"],
+  "source": "30_days_of_python",
+  "exercise_type": "function"
+}

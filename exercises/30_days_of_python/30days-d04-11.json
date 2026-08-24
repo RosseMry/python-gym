@@ -1,0 +1,42 @@
+{
+  "source": "30_days_of_python",
+  "day": 4,
+  "level": null,
+  "module": "strings",
+  "exercise_type": "function",
+  "id": "30days-d04-11",
+  "difficulty": 2,
+  "title": "Build an acronym",
+  "description": "Write a function `acronym(text)` that builds an acronym from `text`: the first letter of every word, uppercased, joined together.\n\nCovers source items 18-19 (acronyms for two different phrases) as one exercise.",
+  "examples": "acronym('Python For Everyone')\n-> 'PFE'",
+  "starter_code": "def acronym(text):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: split into words, then take each word's first letter",
+    "text.split() breaks the phrase into a list of words. A list comprehension like [word[0] for word in words] collects just the first character of each word.",
+    "Split text into words, collect each word's first character with a list comprehension, join them with ''.join(), and uppercase the result."
+  ],
+  "expected_behavior": "Returns the uppercase acronym formed from the first letter of every word.",
+  "hidden_tests": [
+    {
+      "call": "acronym('Python For Everyone')",
+      "expected": "'PFE'",
+      "label": "source item 18"
+    },
+    {
+      "call": "acronym('Coding For All')",
+      "expected": "'CFA'",
+      "label": "source item 19"
+    }
+  ],
+  "solution": "def acronym(text):\n    return ''.join(word[0] for word in text.split()).upper()\n",
+  "explanation": "split() first turns the phrase into words; a generator expression then picks out just the first character of each before ''.join() glues them back into one string.",
+  "concepts": [
+    "strings",
+    "split",
+    "join",
+    "comprehension"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

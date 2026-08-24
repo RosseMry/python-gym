@@ -1,0 +1,37 @@
+{
+  "source": "30_days_of_python",
+  "day": 3,
+  "level": null,
+  "module": "operators",
+  "exercise_type": "function",
+  "id": "30days-d03-12",
+  "difficulty": 1,
+  "title": "Convert a length to a float string",
+  "description": "Write a function `length_as_string(word)` that returns `len(word)` first converted to a float, then to a string.",
+  "examples": "length_as_string('python')\n-> '6.0'",
+  "starter_code": "def length_as_string(word):\n    # your code here\n    pass\n",
+  "hints": [
+    "Functions to consider: len(), float(), str()",
+    "Each conversion is a separate step: len() gives an int, float() turns that int into a float, and str() turns that float into text - the three calls chain together, innermost first.",
+    "Return str(float(len(word)))."
+  ],
+  "expected_behavior": "Returns the word's length as a float, then as a string.",
+  "hidden_tests": [
+    {
+      "call": "length_as_string('python')",
+      "expected": "'6.0'",
+      "label": "source item 16"
+    }
+  ],
+  "solution": "def length_as_string(word):\n    return str(float(len(word)))\n",
+  "explanation": "Chaining conversions (str(float(len(word)))) reads inside-out, the same as any nested function call - len() runs first, then float() on its result, then str() on that.",
+  "concepts": [
+    "len",
+    "float",
+    "str",
+    "type conversion"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

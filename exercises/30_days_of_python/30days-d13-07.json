@@ -1,0 +1,39 @@
+{
+  "id": "30days-d13-07",
+  "module": "list_comprehension",
+  "day": 13,
+  "difficulty": 2,
+  "title": "Lambda for slope and y-intercept",
+  "description": "Write a lambda function which can solve a slope or y-intercept of linear functions.\n\nPython-Gym adaptation: implement as `slope_and_intercept(x1, y1, x2, y2)`, using lambda functions internally to compute the slope `m = (y2 - y1) / (x2 - x1)` and the y-intercept `b = y1 - m * x1` of the line through the two points `(x1, y1)` and `(x2, y2)`, returning the tuple `(m, b)`.",
+  "examples": "slope_and_intercept(0, 1, 2, 5) -> (2.0, 1.0)\nslope_and_intercept(1, 2, 3, 8) -> (3.0, -1.0)",
+  "starter_code": "def slope_and_intercept(x1, y1, x2, y2):\n    # write your code here, using lambda functions to compute the slope and y-intercept\n    pass\n",
+  "hints": [
+    "The slope of a line through two points is `(y2 - y1) / (x2 - x1)`.",
+    "Once you have the slope `m`, the y-intercept is `y1 - m * x1`.",
+    "Define each formula as a `lambda` (e.g. `lambda x1, y1, x2, y2: (y2 - y1) / (x2 - x1)`) and call them to build the returned tuple `(m, b)`."
+  ],
+  "expected_behavior": "Returns a tuple (slope, y_intercept) for the line passing through the two given points, computed using lambda functions.",
+  "hidden_tests": [
+    {
+      "call": "slope_and_intercept(0, 1, 2, 5)",
+      "expected": "(2.0, 1.0)",
+      "label": "simple positive slope through the y-axis"
+    },
+    {
+      "call": "slope_and_intercept(1, 2, 3, 8)",
+      "expected": "(3.0, -1.0)",
+      "label": "negative y-intercept"
+    },
+    {
+      "call": "slope_and_intercept(-2, -3, 2, 5)",
+      "expected": "(2.0, 1.0)",
+      "label": "points straddling the origin"
+    }
+  ],
+  "solution": "def slope_and_intercept(x1, y1, x2, y2):\n    slope = (lambda a1, b1, a2, b2: (b2 - b1) / (a2 - a1))(x1, y1, x2, y2)\n    intercept = (lambda a1, b1, m: b1 - m * a1)(x1, y1, slope)\n    return (slope, intercept)\n",
+  "explanation": "One lambda computes the slope from the rise-over-run formula `(y2 - y1) / (x2 - x1)`, and a second lambda plugs that slope into `y1 - m * x1` to get the y-intercept. Both lambdas are called immediately and their results returned together as a tuple.",
+  "concepts": ["lambda", "linear functions", "tuples", "anonymous functions"],
+  "skills": ["functional_python"],
+  "source": "30_days_of_python",
+  "exercise_type": "function"
+}

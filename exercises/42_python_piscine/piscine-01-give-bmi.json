@@ -1,0 +1,50 @@
+{
+  "id": "piscine-01-give-bmi",
+  "module": "piscine_01_array",
+  "difficulty": 2,
+  "title": "Give BMI",
+  "title_fr": "Donne l'IMC",
+  "description": "Write two functions:\n\n- `give_bmi(height, weight)` takes two NumPy arrays of equal length (heights in meters, weights in kg) and returns a NumPy array of each person's BMI (`weight / height ** 2`), rounded to 2 decimals.\n- `apply_limit(bmi, limit)` takes a BMI array and a limit, and returns a plain Python list of booleans - one per person - True if that person's BMI is strictly above the limit.\n\nBoth arrays are always the same length; you don't need to validate that.",
+  "description_fr": "Ecris deux fonctions :\n\n- `give_bmi(height, weight)` prend deux tableaux NumPy de meme longueur (tailles en metres, poids en kg) et retourne un tableau NumPy de l'IMC de chaque personne (`weight / height ** 2`), arrondi a 2 decimales.\n- `apply_limit(bmi, limit)` prend un tableau d'IMC et une limite, et retourne une liste Python de booleens - un par personne - True si l'IMC de cette personne depasse strictement la limite.\n\nLes deux tableaux ont toujours la meme longueur ; pas besoin de le verifier.",
+  "examples": "height = np.array([1.8, 1.6, 1.7])\nweight = np.array([80.0, 55.0, 90.0])\nbmi = give_bmi(height, weight)\n-> array([24.69, 21.48, 31.14])\napply_limit(bmi, 25)\n-> [False, False, True]",
+  "examples_fr": "height = np.array([1.8, 1.6, 1.7])\nweight = np.array([80.0, 55.0, 90.0])\nbmi = give_bmi(height, weight)\n-> array([24.69, 21.48, 31.14])\napply_limit(bmi, 25)\n-> [False, False, True]",
+  "starter_code": "import numpy as np\n\n\ndef give_bmi(height, weight):\n    # your code here\n    pass\n\n\ndef apply_limit(bmi, limit):\n    # your code here\n    pass\n",
+  "hints": [
+    "Operations to consider: vectorized array math (weight / height ** 2), np.round(), and a comparison operator on a whole array",
+    "NumPy arrays support arithmetic element-by-element without a loop: height ** 2 squares every element at once, and dividing two same-length arrays divides them pairwise. np.round(array, 2) rounds every element to 2 decimals in one call.",
+    "give_bmi is one arithmetic expression over the two arrays, wrapped in np.round. For apply_limit, comparing an array to a number (bmi > limit) already produces an array of True/False - you just need to hand that back as a plain list."
+  ],
+  "hints_fr": [
+    "Operations a considerer : calcul vectorise sur tableau (weight / height ** 2), np.round(), et un operateur de comparaison sur tout un tableau",
+    "Les tableaux NumPy supportent les operations arithmetiques element par element sans boucle : height ** 2 met au carre chaque element d'un coup, et diviser deux tableaux de meme longueur les divise deux a deux. np.round(array, 2) arrondit chaque element a 2 decimales en un seul appel.",
+    "give_bmi est une seule expression arithmetique sur les deux tableaux, enveloppee dans np.round. Pour apply_limit, comparer un tableau a un nombre (bmi > limit) produit deja un tableau de True/False - il suffit de le renvoyer sous forme de liste simple."
+  ],
+  "expected_behavior": "give_bmi returns a rounded NumPy array; apply_limit returns a plain Python list of booleans.",
+  "hidden_tests": [
+    {
+      "call": "give_bmi(np.array([1.8, 1.6, 1.7]), np.array([80.0, 55.0, 90.0]))",
+      "expected": "array([24.69, 21.48, 31.14])",
+      "label": "give_bmi basic"
+    },
+    {
+      "call": "apply_limit(give_bmi(np.array([1.8, 1.6, 1.7]), np.array([80.0, 55.0, 90.0])), 25)",
+      "expected": "[False, False, True]",
+      "label": "apply_limit basic"
+    },
+    {
+      "call": "apply_limit(give_bmi(np.array([2.0]), np.array([100.0])), 20)",
+      "expected": "[True]",
+      "label": "apply_limit single over limit"
+    }
+  ],
+  "solution": "import numpy as np\n\n\ndef give_bmi(height, weight):\n    return np.round(weight / height ** 2, 2)\n\n\ndef apply_limit(bmi, limit):\n    return (bmi > limit).tolist()\n",
+  "explanation": "NumPy's element-wise arithmetic means give_bmi never needs a loop: height ** 2 and the division both apply to every element at once. bmi > limit similarly produces a boolean array in one comparison - .tolist() converts it to plain Python booleans instead of NumPy's own boolean type.",
+  "explanation_fr": "Le calcul element par element de NumPy fait que give_bmi n'a jamais besoin de boucle : height ** 2 et la division s'appliquent toutes deux a chaque element d'un coup. bmi > limit produit de la meme facon un tableau de booleens en une seule comparaison - .tolist() le convertit en booleens Python simples plutot qu'en type booleen NumPy.",
+  "concepts": ["numpy", "vectorization", "broadcasting", "boolean arrays"],
+  "skills": ["numerical_computation"],
+  "source": "42_python_piscine",
+  "track": "python",
+  "validation_profile": "42_piscine",
+  "exercise_type": "function",
+  "exercise_status": "active"
+}

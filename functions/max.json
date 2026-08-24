@@ -1,0 +1,13 @@
+{
+  "id": "max",
+  "name": "max()",
+  "what_it_does": "Returns the largest item in an iterable, or the largest of several arguments passed directly.",
+  "syntax": "max(iterable) or max(a, b, c, ...) or max(iterable, key=func)",
+  "parameters": "Either one iterable of comparable values, or two or more individual values. Optional key= - a function applied to each item before comparing.",
+  "return_value": "The largest item found.",
+  "example": "scores = [42, 7, 19]\nprint(max(scores))",
+  "example_output": "42",
+  "common_mistakes": "max() on an empty list raises ValueError. Like min(), mixing incompatible types raises TypeError.",
+  "when_to_use": "Finding the highest value in a dataset, or (with key=) finding the item that scores highest by some custom measure, e.g. max(words, key=len) for the longest word.",
+  "related_exercise_ids": []
+}

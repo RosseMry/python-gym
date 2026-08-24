@@ -3,18 +3,26 @@
   "module": "piscine_04_data_oriented_design",
   "difficulty": 3,
   "title": "Calculate my statistics",
+  "title_fr": "Calcule mes statistiques",
   "description": "Write `ft_statistics(*args, **kwargs)`: `args` are the numbers to analyse, and `kwargs` picks which statistics to print - the *value* of each kwarg names the statistic (mean, median, quartile, std, var), regardless of what the keyword's own name is. Handle bad input (e.g. no numbers, or an unrecognised statistic name) by printing 'ERROR' instead of crashing.",
+  "description_fr": "Écris `ft_statistics(*args, **kwargs)` : `args` sont les nombres à analyser, et `kwargs` choisit quelles statistiques afficher - c'est la *valeur* de chaque kwarg qui nomme la statistique (mean, median, quartile, std, var), peu importe le nom du mot-clé lui-même. Gère les entrées invalides (par exemple aucun nombre, ou un nom de statistique non reconnu) en affichant 'ERROR' au lieu de planter.",
   "examples": "ft_statistics(1, 42, 360, 11, 64, toto='mean', tutu='median', tata='quartile')\n# mean : 95.6\n# median : 42\n# quartile : [11.0, 64.0]",
   "starter_code": "def ft_statistics(*args, **kwargs):\n    # your code here\n    pass\n",
   "hints": [
     "It's the *values* of kwargs that matter ('mean', 'median', ...), not their key names - loop over kwargs.values(), not kwargs.keys().",
     "Guard the whole per-statistic computation in a try/except so an unknown statistic name, or an empty args, prints 'ERROR' for that entry instead of stopping the whole function.",
-    "for stat in kwargs.values():\n    try:\n        if stat == 'mean':\n            print('mean :', sum(args) / len(args))\n        ...\n    except (ZeroDivisionError, ValueError):\n        print('ERROR')"
+    "For each value in kwargs.values(), branch on which statistic name it is (mean, median, quartile, std, var) and print the matching computation over args, with an else branch raising for an unrecognised name - wrap the whole per-statistic block in one try/except so any failure (empty args, unknown name) prints 'ERROR' for just that entry and moves on to the next."
+  ],
+  "hints_fr": [
+    "Ce sont les *valeurs* de kwargs qui comptent ('mean', 'median', ...), pas leurs noms de clés - itère sur kwargs.values(), pas kwargs.keys().",
+    "Protège tout le calcul par statistique dans un try/except pour qu'un nom de statistique inconnu, ou un args vide, affiche 'ERROR' pour cette entrée au lieu d'arrêter toute la fonction.",
+    "Pour chaque valeur de kwargs.values(), teste de quelle statistique il s'agit (mean, median, quartile, std, var) et affiche le calcul correspondant sur args, avec une branche else qui lève une erreur pour un nom non reconnu - enrobe tout ce bloc par statistique dans un seul try/except pour qu'un échec (args vide, nom inconnu) affiche 'ERROR' pour cette seule entrée et passe à la suivante."
   ],
   "expected_behavior": "Prints one line per requested statistic, in the order given, or 'ERROR' for anything it can't compute.",
   "hidden_tests": [],
   "solution": "def ft_statistics(*args, **kwargs):\n    \"\"\"Print the requested statistics for the given numbers.\"\"\"\n    for stat in kwargs.values():\n        try:\n            if not args:\n                raise ValueError('no data')\n            ordered = sorted(args)\n            n = len(ordered)\n            if stat == 'mean':\n                print('mean :', sum(args) / n)\n            elif stat == 'median':\n                mid = n // 2\n                if n % 2 == 0:\n                    print('median :', (ordered[mid - 1] + ordered[mid]) / 2)\n                else:\n                    print('median :', ordered[mid])\n            elif stat == 'quartile':\n                q1 = ordered[n // 4]\n                q3 = ordered[(3 * n) // 4]\n                print('quartile :', [float(q1), float(q3)])\n            elif stat == 'std':\n                mean = sum(args) / n\n                variance = sum((x - mean) ** 2 for x in args) / n\n                print('std :', variance ** 0.5)\n            elif stat == 'var':\n                mean = sum(args) / n\n                variance = sum((x - mean) ** 2 for x in args) / n\n                print('var :', variance)\n            else:\n                raise ValueError('unknown statistic')\n        except (ValueError, ZeroDivisionError):\n            print('ERROR')\n",
   "explanation": "**kwargs is a plain dict, so its .values() give the statistic names the caller asked for regardless of what they named the keyword itself - that indirection is the whole point of the exercise.",
+  "explanation_fr": "**kwargs est un simple dict, donc son .values() donne les noms de statistiques demandés par l'appelant, peu importe comment il a nommé le mot-clé lui-même - cette indirection est tout l'intérêt de l'exercice.",
   "concepts": [
     "*args",
     "**kwargs",

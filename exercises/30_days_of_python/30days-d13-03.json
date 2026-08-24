@@ -1,0 +1,34 @@
+{
+  "id": "30days-d13-03",
+  "module": "list_comprehension",
+  "day": 13,
+  "difficulty": 3,
+  "title": "Table of powers as tuples",
+  "description": "Using list comprehension create the following list of tuples:\n\n```py\n[(0, 1, 0, 0, 0, 0, 0),\n(1, 1, 1, 1, 1, 1, 1),\n(2, 1, 2, 4, 8, 16, 32),\n(3, 1, 3, 9, 27, 81, 243),\n(4, 1, 4, 16, 64, 256, 1024),\n(5, 1, 5, 25, 125, 625, 3125),\n(6, 1, 6, 36, 216, 1296, 7776),\n(7, 1, 7, 49, 343, 2401, 16807),\n(8, 1, 8, 64, 512, 4096, 32768),\n(9, 1, 9, 81, 729, 6561, 59049),\n(10, 1, 10, 100, 1000, 10000, 100000)]\n```\n\nPython-Gym adaptation: implement as `build_power_tuples(n=10)`, returning the list of tuples `(i, i**0, i**1, i**2, i**3, i**4, i**5)` for `i` in `range(n + 1)`, matching the pattern shown above.",
+  "examples": "build_power_tuples() -> [(0, 1, 0, 0, 0, 0, 0), (1, 1, 1, 1, 1, 1, 1), (2, 1, 2, 4, 8, 16, 32), ..., (10, 1, 10, 100, 1000, 10000, 100000)]\nbuild_power_tuples(3) -> [(0, 1, 0, 0, 0, 0, 0), (1, 1, 1, 1, 1, 1, 1), (2, 1, 2, 4, 8, 16, 32), (3, 1, 3, 9, 27, 81, 243)]",
+  "starter_code": "def build_power_tuples(n=10):\n    # write your code here\n    pass\n",
+  "hints": [
+    "Each tuple starts with `i` itself, followed by six successive powers of `i` from `i**0` up to `i**5`.",
+    "You can build the power part with a small comprehension or generator expression: `tuple(i**p for p in range(6))`.",
+    "Combine `i` with the power tuple using tuple concatenation, e.g. `(i,) + tuple(i**p for p in range(6))`, inside a comprehension over `range(n + 1)`."
+  ],
+  "expected_behavior": "Returns a list of tuples, one per integer from 0 to n inclusive, where each tuple holds the integer followed by its powers from 0 through 5.",
+  "hidden_tests": [
+    {
+      "call": "build_power_tuples()",
+      "expected": "[(0, 1, 0, 0, 0, 0, 0), (1, 1, 1, 1, 1, 1, 1), (2, 1, 2, 4, 8, 16, 32), (3, 1, 3, 9, 27, 81, 243), (4, 1, 4, 16, 64, 256, 1024), (5, 1, 5, 25, 125, 625, 3125), (6, 1, 6, 36, 216, 1296, 7776), (7, 1, 7, 49, 343, 2401, 16807), (8, 1, 8, 64, 512, 4096, 32768), (9, 1, 9, 81, 729, 6561, 59049), (10, 1, 10, 100, 1000, 10000, 100000)]",
+      "label": "default n=10, matches source example exactly"
+    },
+    {
+      "call": "build_power_tuples(3)",
+      "expected": "[(0, 1, 0, 0, 0, 0, 0), (1, 1, 1, 1, 1, 1, 1), (2, 1, 2, 4, 8, 16, 32), (3, 1, 3, 9, 27, 81, 243)]",
+      "label": "smaller n"
+    }
+  ],
+  "solution": "def build_power_tuples(n=10):\n    return [(i,) + tuple(i**p for p in range(6)) for i in range(n + 1)]\n",
+  "explanation": "For each integer `i` from 0 to n, a generator expression computes `i` raised to the powers 0 through 5, which is converted to a tuple and concatenated after `i` itself. The outer list comprehension repeats this for every `i` in the range, producing the full table.",
+  "concepts": ["list comprehension", "generator expression", "tuples", "exponentiation"],
+  "skills": ["functional_python"],
+  "source": "30_days_of_python",
+  "exercise_type": "function"
+}

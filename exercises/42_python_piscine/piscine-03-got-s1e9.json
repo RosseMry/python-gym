@@ -3,13 +3,20 @@
   "module": "piscine_03_oop",
   "difficulty": 2,
   "title": "GOT S1E9 (abstract Character class)",
+  "title_fr": "GOT S1E9 (classe abstraite Character)",
   "description": "Create an abstract class `Character` (using `abc.ABC` and `@abstractmethod`) that takes `first_name` as its first parameter and `is_alive` as an optional second parameter defaulting to True. It must not be possible to instantiate `Character` directly.\n\nCreate a `Stark` class that inherits from `Character`, with a `die()` method that sets `is_alive` to False.",
+  "description_fr": "Crée une classe abstraite `Character` (avec `abc.ABC` et `@abstractmethod`) qui prend `first_name` comme premier paramètre et `is_alive` comme second paramètre optionnel valant True par défaut. Il ne doit pas être possible d'instancier `Character` directement.\n\nCrée une classe `Stark` qui hérite de `Character`, avec une méthode `die()` qui met `is_alive` à False.",
   "examples": "Ned = Stark('Ned')\nprint(Ned.__dict__)   # {'first_name': 'Ned', 'is_alive': True}\nNed.die()\nprint(Ned.is_alive)   # False\n\nCharacter('hodor')  # TypeError: Can't instantiate abstract class Character with abstract method ...",
   "starter_code": "from abc import ABC, abstractmethod\n\n\nclass Character(ABC):\n    \"\"\"Your docstring for Class\"\"\"\n\n    @abstractmethod\n    def __init__(self, first_name, is_alive=True):\n        pass\n\n\nclass Stark(Character):\n    \"\"\"Your docstring for Class\"\"\"\n    # your code here\n",
   "hints": [
     "Marking __init__ itself as @abstractmethod is enough to block direct instantiation of Character, as long as Stark provides its own concrete __init__.",
     "Stark's __init__ needs to actually set self.first_name and self.is_alive - inheriting from an abstract class doesn't give you that for free.",
-    "class Stark(Character):\n    def __init__(self, first_name, is_alive=True):\n        self.first_name = first_name\n        self.is_alive = is_alive\n\n    def die(self):\n        self.is_alive = False"
+    "Give Stark its own __init__ that assigns first_name and is_alive onto self (either directly, or via super().__init__() if Character's abstract __init__ already does that assignment), and a die() method that sets self.is_alive to False."
+  ],
+  "hints_fr": [
+    "Marquer __init__ lui-même comme @abstractmethod suffit à bloquer l'instanciation directe de Character, tant que Stark fournit son propre __init__ concret.",
+    "Le __init__ de Stark doit vraiment fixer self.first_name et self.is_alive - hériter d'une classe abstraite ne te les donne pas gratuitement.",
+    "Donne à Stark son propre __init__ qui affecte first_name et is_alive sur self (directement, ou via super().__init__() si le __init__ abstrait de Character fait déjà cette affectation), et une méthode die() qui met self.is_alive à False."
   ],
   "expected_behavior": "Stark('Ned').__dict__ == {'first_name': 'Ned', 'is_alive': True}; calling die() flips is_alive to False; Character(...) cannot be instantiated directly.",
   "hidden_tests": [
@@ -31,6 +38,7 @@
   ],
   "solution": "from abc import ABC, abstractmethod\n\n\nclass Character(ABC):\n    \"\"\"A character that may or may not still be alive.\"\"\"\n\n    @abstractmethod\n    def __init__(self, first_name, is_alive=True):\n        \"\"\"Store the first name and life status.\"\"\"\n        self.first_name = first_name\n        self.is_alive = is_alive\n\n    def die(self):\n        \"\"\"Mark this character as no longer alive.\"\"\"\n        self.is_alive = False\n\n\nclass Stark(Character):\n    \"\"\"A member of House Stark.\"\"\"\n\n    def __init__(self, first_name, is_alive=True):\n        \"\"\"Build a Stark with a name and life status.\"\"\"\n        super().__init__(first_name, is_alive)\n",
   "explanation": "@abstractmethod on __init__ prevents Character() itself from being built, but any concrete subclass that defines its own __init__ (even one that just calls super().__init__()) satisfies the ABC and can be instantiated normally.",
+  "explanation_fr": "@abstractmethod sur __init__ empêche la construction de Character() elle-même, mais toute sous-classe concrète qui définit son propre __init__ (même une qui se contente d'appeler super().__init__()) satisfait l'ABC et peut être instanciée normalement.",
   "concepts": [
     "abc",
     "abstractmethod",

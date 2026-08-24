@@ -1,0 +1,45 @@
+{
+  "id": "30days-d09-l2-02",
+  "module": "conditionals",
+  "day": 9,
+  "level": 2,
+  "difficulty": 2,
+  "title": "Which season is it?",
+  "description": "Get the month from user input then check if the season is Autumn, Winter, Spring or Summer. If the user input is:\nSeptember, October or November, the season is Autumn.\nDecember, January or February, the season is Winter.\nMarch, April or May, the season is Spring\nJune, July or August, the season is Summer\n\nPython-Gym adaptation: implement as `get_season(month)`, returning `'Autumn'`, `'Winter'`, `'Spring'`, or `'Summer'` for the given month name.",
+  "examples": "get_season('September') -> 'Autumn'\nget_season('January') -> 'Winter'\nget_season('April') -> 'Spring'\nget_season('July') -> 'Summer'",
+  "starter_code": "def get_season(month):\n    # write your code here\n    pass\n",
+  "hints": [
+    "Group the month names for each season into their own list or set.",
+    "Use the `in` operator to check whether month belongs to a given group.",
+    "Chain the four checks with if / elif / elif / elif, one per season group."
+  ],
+  "expected_behavior": "Returns the season name that the given month (as a string, e.g. 'September') belongs to.",
+  "hidden_tests": [
+    {
+      "call": "get_season('September')",
+      "expected": "'Autumn'",
+      "label": "autumn month"
+    },
+    {
+      "call": "get_season('January')",
+      "expected": "'Winter'",
+      "label": "winter month"
+    },
+    {
+      "call": "get_season('April')",
+      "expected": "'Spring'",
+      "label": "spring month"
+    },
+    {
+      "call": "get_season('July')",
+      "expected": "'Summer'",
+      "label": "summer month"
+    }
+  ],
+  "solution": "def get_season(month):\n    autumn = ['September', 'October', 'November']\n    winter = ['December', 'January', 'February']\n    spring = ['March', 'April', 'May']\n    summer = ['June', 'July', 'August']\n    if month in autumn:\n        return 'Autumn'\n    elif month in winter:\n        return 'Winter'\n    elif month in spring:\n        return 'Spring'\n    elif month in summer:\n        return 'Summer'\n    else:\n        return 'Invalid month'\n",
+  "explanation": "Each season maps to a fixed group of three month names. Storing each group as a list and checking membership with `in` lets a simple elif chain pick the season the given month belongs to.",
+  "concepts": ["if", "elif", "else", "in operator", "list membership"],
+  "skills": ["basic_data_manipulation"],
+  "source": "30_days_of_python",
+  "exercise_type": "function"
+}

@@ -1,0 +1,45 @@
+{
+  "id": "30days-d09-l3-03",
+  "module": "conditionals",
+  "day": 9,
+  "level": 3,
+  "difficulty": 3,
+  "title": "Classify the developer by skill set",
+  "description": "Here we have a person dictionary. Feel free to modify it!\n\n```py\nperson={\n    'first_name': 'Asabeneh',\n    'last_name': 'Yetayeh',\n    'age': 250,\n    'country': 'Finland',\n    'is_married': True,\n    'skills': ['JavaScript', 'React', 'Node', 'MongoDB', 'Python'],\n    'address': {\n        'street': 'Space street',\n        'zipcode': '02210'\n    }\n}\n```\n\nIf a person skills has only JavaScript and React, print('He is a front end developer'), if the person skills has Node, Python, MongoDB, print('He is a backend developer'), if the person skills has React, Node and MongoDB, Print('He is a fullstack developer'), else print('unknown title') - for more accurate results more conditions can be nested!\n\nPython-Gym adaptation: implement as `get_developer_title(person)`, returning `'He is a front end developer'`, `'He is a backend developer'`, `'He is a fullstack developer'`, or `'unknown title'` based on `person['skills']`.",
+  "examples": "get_developer_title({'skills': ['JavaScript', 'React']}) -> 'He is a front end developer'\nget_developer_title({'skills': ['React', 'Node', 'MongoDB']}) -> 'He is a fullstack developer'\nget_developer_title({'skills': ['C++']}) -> 'unknown title'",
+  "starter_code": "def get_developer_title(person):\n    # write your code here\n    pass\n",
+  "hints": [
+    "Turn person.get('skills', []) into a set so you can compare and check subsets easily.",
+    "'Only JavaScript and React' means the skill set must be exactly equal to {'JavaScript', 'React'}; the other two titles just require the relevant skills to be present among possibly more, which is a subset check.",
+    "Check the front end exact match first, then use set.issubset() for the backend group {'Node', 'Python', 'MongoDB'} and the fullstack group {'React', 'Node', 'MongoDB'}, falling back to 'unknown title'."
+  ],
+  "expected_behavior": "Returns the developer title string that best matches the skills found in person['skills'], or 'unknown title' when none of the skill groups match.",
+  "hidden_tests": [
+    {
+      "call": "get_developer_title({'first_name': 'Asabeneh', 'last_name': 'Yetayeh', 'age': 250, 'country': 'Finland', 'is_married': True, 'skills': ['JavaScript', 'React', 'Node', 'MongoDB', 'Python'], 'address': {'street': 'Space street', 'zipcode': '02210'}})",
+      "expected": "'He is a backend developer'",
+      "label": "full person dictionary, all 5 skills"
+    },
+    {
+      "call": "get_developer_title({'skills': ['JavaScript', 'React']})",
+      "expected": "'He is a front end developer'",
+      "label": "exactly JavaScript and React"
+    },
+    {
+      "call": "get_developer_title({'skills': ['React', 'Node', 'MongoDB']})",
+      "expected": "'He is a fullstack developer'",
+      "label": "exactly the fullstack trio"
+    },
+    {
+      "call": "get_developer_title({'skills': ['C++']})",
+      "expected": "'unknown title'",
+      "label": "no matching group"
+    }
+  ],
+  "solution": "def get_developer_title(person):\n    skills = set(person.get('skills', []))\n    frontend = {'JavaScript', 'React'}\n    backend = {'Node', 'Python', 'MongoDB'}\n    fullstack = {'React', 'Node', 'MongoDB'}\n    if skills == frontend:\n        return 'He is a front end developer'\n    elif backend.issubset(skills):\n        return 'He is a backend developer'\n    elif fullstack.issubset(skills):\n        return 'He is a fullstack developer'\n    else:\n        return 'unknown title'\n",
+  "explanation": "Converting the skills list to a set enables both exact-match (==) and subset (issubset()) comparisons against the three named skill groups. The front end case requires an exact match since it is described as 'only' those two skills, while backend and fullstack only require their skills to be present, which is why they're checked with issubset() and why backend is checked before fullstack for the full person example (it contains both groups' skills, and backend is listed first in the source).",
+  "concepts": ["if", "elif", "else", "sets", "set equality", "issubset"],
+  "skills": ["basic_data_manipulation"],
+  "source": "30_days_of_python",
+  "exercise_type": "function"
+}

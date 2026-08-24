@@ -1,0 +1,46 @@
+{
+  "id": "30days-d14-l1-02",
+  "module": "higher_order_functions",
+  "day": 14,
+  "level": 1,
+  "difficulty": 2,
+  "title": "Higher order function, closure, and decorator differences",
+  "description": "Explain the difference between higher order function, closure and decorator.\n\nPython-Gym adaptation: implement as concept_properties(name), where name is one of the strings 'higher_order_function', 'closure', or 'decorator'. Return a tuple (operates_on_functions, remembers_enclosing_scope, extends_function_behavior) of booleans describing that concept's defining traits.",
+  "examples": ">>> concept_properties('closure')\n(False, True, False)\n>>> concept_properties('decorator')\n(True, True, True)",
+  "starter_code": "def concept_properties(name):\n    # your code here\n    pass\n",
+  "hints": [
+    "A higher order function is defined by what it does with functions: it takes one as an argument and/or returns one.",
+    "A closure is a function that remembers variables from the scope it was defined in, even after that outer scope has finished running.",
+    "A decorator is a higher order function - usually built with a closure - whose whole purpose is to extend or modify another function's behavior; combine those three traits in a dict keyed by name."
+  ],
+  "expected_behavior": "Returns a 3-tuple of booleans describing whether the named concept operates on functions, remembers its enclosing scope, or exists specifically to extend a function's behavior.",
+  "solution": "def concept_properties(name):\n    props = {\n        'higher_order_function': (True, False, False),\n        'closure': (False, True, False),\n        'decorator': (True, True, True),\n    }\n    return props[name]\n",
+  "hidden_tests": [
+    {
+      "call": "concept_properties('higher_order_function')",
+      "expected": "(True, False, False)",
+      "label": "a higher order function operates on functions"
+    },
+    {
+      "call": "concept_properties('closure')",
+      "expected": "(False, True, False)",
+      "label": "a closure remembers its enclosing scope"
+    },
+    {
+      "call": "concept_properties('decorator')",
+      "expected": "(True, True, True)",
+      "label": "a decorator operates on functions, remembers scope, and extends behavior"
+    }
+  ],
+  "explanation": "A higher order function takes another function as an argument or returns a function. A closure is a function that captures and remembers variables from its enclosing lexical scope after that scope has returned. A decorator combines both ideas - it is a higher order function, typically implemented with a closure, used specifically to wrap and extend the behavior of another function.",
+  "concepts": [
+    "higher order functions",
+    "closures",
+    "decorators"
+  ],
+  "skills": [
+    "functional_python"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

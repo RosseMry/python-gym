@@ -1,0 +1,51 @@
+{
+  "source": "30_days_of_python",
+  "day": 22,
+  "level": null,
+  "module": "web_scraping",
+  "id": "30days-d22-01",
+  "difficulty": 3,
+  "title": "Scrape the US presidents table",
+  "description": "Write a function `extract_presidents(path)` that parses the HTML file at `path` (a real snapshot of Wikipedia's 'List of presidents of the United States' table) and returns a list of `{'number': int, 'name': str}` dicts, one per president, in table order.\n\nThe table is exactly as messy as a real scraping target: when a president served non-consecutive terms or was re-elected, the continuation row doesn't repeat their number - only rows that actually start with a number are a new president. Skip anything else.",
+  "examples": "extract_presidents('us_presidents_table.html')[:2]\n-> [{'number': 1, 'name': 'George Washington'}, {'number': 2, 'name': 'John Adams'}]",
+  "starter_code": "import re\nfrom bs4 import BeautifulSoup\n\n\ndef extract_presidents(path):\n    # your code here\n    pass\n",
+  "hints": [
+    "💡 Function to consider: BeautifulSoup, with find_all('tr') and find_all(['td', 'th'])",
+    "Not every table row is a new president - continuation rows for a re-elected president have fewer cells and don't start with a number, so checking that the first cell's text is a digit (str.isdigit()) filters those out.",
+    "For a row that does start with a number, the name is in the third cell but comes bundled with birth/death years in parentheses and footnote markers in brackets - a couple of re.sub() calls (or splitting on '(' / '[') strip those off to leave just the name."
+  ],
+  "expected_behavior": "Returns one {'number', 'name'} dict per real president row, skipping re-election continuation rows.",
+  "hidden_tests": [
+    {
+      "call": "len(extract_presidents('us_presidents_table.html'))",
+      "expected": "47",
+      "label": "47 president entries (Cleveland and Trump each served twice)"
+    },
+    {
+      "call": "extract_presidents('us_presidents_table.html')[:3]",
+      "expected": "[{'number': 1, 'name': 'George Washington'}, {'number': 2, 'name': 'John Adams'}, {'number': 3, 'name': 'Thomas Jefferson'}]",
+      "label": "first three presidents"
+    },
+    {
+      "call": "extract_presidents('us_presidents_table.html')[-1]",
+      "expected": "{'number': 47, 'name': 'Donald Trump'}",
+      "label": "most recent entry"
+    }
+  ],
+  "solution": "import re\nfrom bs4 import BeautifulSoup\n\n\ndef extract_presidents(path):\n    with open(path, encoding=\"utf-8\") as f:\n        soup = BeautifulSoup(f.read(), \"html.parser\")\n    table = soup.find(\"table\")\n    presidents = []\n    for row in table.find_all(\"tr\")[1:]:\n        cells = row.find_all([\"td\", \"th\"])\n        if len(cells) < 3:\n            continue\n        number_text = cells[0].get_text(strip=True)\n        if not number_text.isdigit():\n            continue\n        name_text = cells[2].get_text(\" \", strip=True)\n        name = re.sub(r\"\\s*\\(.*\", \"\", name_text)\n        name = re.sub(r\"\\s*\\[.*\", \"\", name).strip()\n        presidents.append({\"number\": int(number_text), \"name\": name})\n    return presidents\n",
+  "explanation": "Real scraping is mostly filtering: BeautifulSoup finds every <tr>, but only rows whose first cell is actually a number represent a new president - the rest are HTML rowspan artifacts from re-elections, and get skipped rather than misparsed.",
+  "concepts": [
+    "beautifulsoup4",
+    "web scraping",
+    "regular expressions",
+    "html parsing"
+  ],
+  "skills": [
+    "text_processing",
+    "using_standard_library_modules"
+  ],
+  "exercise_type": "function",
+  "resources": [
+    "python/30-days/us_presidents_table.html"
+  ]
+}

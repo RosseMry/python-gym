@@ -3,13 +3,20 @@
   "module": "piscine_00_starting",
   "difficulty": 2,
   "title": "Dictionaries SoS",
+  "title_fr": "SoS Dictionnaires",
   "description": "Write a program that takes a string argument and encodes it into Morse code, using a dictionary to store the code table. Complete Morse characters are separated by a single space; a literal space character becomes a slash (/).\n\nIf the argument count is wrong, or the argument contains characters your table doesn't cover, print an AssertionError.",
+  "description_fr": "Écris un programme qui prend une chaîne en argument et l'encode en morse, en utilisant un dictionnaire pour stocker la table de codes. Les caractères morse complets sont séparés par un seul espace ; un espace littéral devient une barre oblique (/).\n\nSi le nombre d'arguments est incorrect, ou si l'argument contient des caractères que ta table ne couvre pas, affiche une AssertionError.",
   "examples": "$> python sos.py \"sos\" | cat -e\n... --- ...$\n$> python sos.py 'h$llo'\nAssertionError: the arguments are bad",
   "starter_code": "import sys\n\n\ndef main():\n    pass\n\n\nif __name__ == \"__main__\":\n    main()\n",
   "hints": [
     "You'll need a dictionary mapping every letter/digit (and space) to its Morse code.",
     "Build the output by looking up each character of the input in your dictionary and joining the results with a space.",
-    "MORSE = {'s': '...', 'o': '---', ' ': '/'}\nprint(' '.join(MORSE[c] for c in text.lower()))"
+    "Wrap the argument-count assert and the dictionary lookups in one try/except catching both AssertionError and KeyError, so an unsupported character produces the same clean message as a bad argument count; on success, join the looked-up codes with a single space."
+  ],
+  "hints_fr": [
+    "Il te faut un dictionnaire associant chaque lettre/chiffre (et l'espace) à son code morse.",
+    "Construis la sortie en cherchant chaque caractère de l'entrée dans ton dictionnaire, puis en joignant les résultats avec un espace.",
+    "Enrobe l'assert sur le nombre d'arguments et les recherches dans le dictionnaire dans un seul try/except qui intercepte à la fois AssertionError et KeyError, pour qu'un caractère non supporté produise le même message propre qu'un mauvais nombre d'arguments ; en cas de succès, joins les codes trouvés avec un seul espace."
   ],
   "expected_behavior": "Prints the Morse-encoded string.",
   "hidden_tests": [
@@ -23,6 +30,7 @@
   ],
   "solution": "import sys\n\n\nMORSE = {\n    'a': '.-', 'b': '-...', 'c': '-.-.', 'd': '-..', 'e': '.',\n    'f': '..-.', 'g': '--.', 'h': '....', 'i': '..', 'j': '.---',\n    'k': '-.-', 'l': '.-..', 'm': '--', 'n': '-.', 'o': '---',\n    'p': '.--.', 'q': '--.-', 'r': '.-.', 's': '...', 't': '-',\n    'u': '..-', 'v': '...-', 'w': '.--', 'x': '-..-', 'y': '-.--',\n    'z': '--..', '0': '-----', '1': '.----', '2': '..---',\n    '3': '...--', '4': '....-', '5': '.....', '6': '-....',\n    '7': '--...', '8': '---..', '9': '----.', ' ': '/',\n}\n\n\ndef main():\n    try:\n        assert len(sys.argv) == 2\n        text = sys.argv[1].lower()\n        code = [MORSE[c] for c in text]\n    except (AssertionError, KeyError):\n        print(\"AssertionError: the arguments are bad\")\n        return\n    print(' '.join(code))\n\n\nif __name__ == \"__main__\":\n    main()\n",
   "explanation": "A dictionary maps each character to its Morse code once; a list comprehension looks each character up, and ' '.join puts single spaces between the resulting codes.",
+  "explanation_fr": "Un dictionnaire associe une fois pour toutes chaque caractère à son code morse ; une compréhension de liste cherche chaque caractère, et ' '.join place des espaces simples entre les codes obtenus.",
   "concepts": [
     "dict",
     "sys.argv",

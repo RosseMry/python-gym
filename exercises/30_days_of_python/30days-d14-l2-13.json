@@ -1,0 +1,39 @@
+{
+  "source": "30_days_of_python",
+  "day": 14,
+  "module": "higher_order_functions",
+  "exercise_type": "function",
+  "level": 2,
+  "id": "30days-d14-l2-13",
+  "difficulty": 2,
+  "title": "First and last N countries",
+  "description": "Write a function `first_and_last_n(path, n)` that reads the country data JSON file at `path` and returns `(first_n_names, last_n_names)`.\n\nCovers source items 14-15 (first ten countries, last ten countries) as one exercise - both are slicing the same loaded list from opposite ends.",
+  "examples": "first_and_last_n('countries_data.json', 3)\n-> (['Afghanistan', 'Åland Islands', 'Albania'], ['Yemen', 'Zambia', 'Zimbabwe'])",
+  "starter_code": "import json\n\n\ndef first_and_last_n(path, n):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: slicing from the front and from the back",
+    "names[:n] takes the first n items; names[-n:] takes the last n - the same slice syntax, just anchored at opposite ends of the list.",
+    "Load the file, extract every country's name into one list, and return (names[:n], names[-n:])."
+  ],
+  "expected_behavior": "Returns the first n and last n country names as a tuple of two lists.",
+  "hidden_tests": [
+    {
+      "call": "first_and_last_n('countries_data.json', 10)",
+      "expected": "(['Afghanistan', 'Åland Islands', 'Albania', 'Algeria', 'American Samoa', 'Andorra', 'Angola', 'Anguilla', 'Antarctica', 'Antigua and Barbuda'], ['Uruguay', 'Uzbekistan', 'Vanuatu', 'Venezuela (Bolivarian Republic of)', 'Viet Nam', 'Wallis and Futuna', 'Western Sahara', 'Yemen', 'Zambia', 'Zimbabwe'])",
+      "label": "source items 14-15"
+    }
+  ],
+  "solution": "import json\n\n\ndef first_and_last_n(path, n):\n    with open(path, encoding=\"utf-8\") as f:\n        countries = json.load(f)\n    names = [c[\"name\"] for c in countries]\n    return names[:n], names[-n:]\n",
+  "explanation": "names[:n] and names[-n:] are the same slicing tool used throughout this correction (Day 4's char_at, Day 10's reverse_list) - only the position of the slice changes.",
+  "concepts": [
+    "file reading",
+    "json",
+    "slicing"
+  ],
+  "skills": [
+    "using_standard_library_modules"
+  ],
+  "resources": [
+    "python/30-days/countries_data.json"
+  ]
+}

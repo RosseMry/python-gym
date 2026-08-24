@@ -1,0 +1,13 @@
+{
+  "id": "filter",
+  "name": "filter()",
+  "what_it_does": "Keeps only the items of an iterable for which a function returns True, discarding the rest.",
+  "syntax": "filter(function, iterable)",
+  "parameters": "function - a function (or lambda) that takes one item and returns True/False. If function is None, filter() just keeps items that are truthy. iterable - what to filter.",
+  "return_value": "A filter object (lazy) - usually wrapped in list() to see the results, or consumed directly in a for loop.",
+  "example": "numbers = [1, 2, 3, 4, 5, 6]\nevens = list(filter(lambda x: x % 2 == 0, numbers))\nprint(evens)",
+  "example_output": "[2, 4, 6]",
+  "common_mistakes": "Forgetting filter() returns a lazy filter object, not a list - wrap it in list() to see the actual items. A list comprehension with an if clause ([x for x in numbers if x % 2 == 0]) does the same thing and reads more clearly to most Python developers.",
+  "when_to_use": "Keeping only the items of a collection that match some condition - though a list comprehension with `if` is often preferred for simple conditions.",
+  "related_exercise_ids": ["loop-007"]
+}

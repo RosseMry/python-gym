@@ -1,0 +1,41 @@
+{
+  "id": "30days-d15-07",
+  "module": "type_errors",
+  "day": 15,
+  "difficulty": 2,
+  "title": "Catch a TypeError",
+  "description": "Source instruction (Exercises: Day 15, item 1): \"Open you python interactive shell and try all the examples covered in this section.\"\n\nTypeError example: `4 + '3'` raises `TypeError: unsupported operand type(s) for +: 'int' and 'str'` (\"a TypeError is raised because we cannot add a number to a string\"); fixed by converting the string first, e.g. `4 + int('3')` which returns `7`.\n\nPython-Gym adaptation: implement as `safe_add(a, b)`, returning `a + b`, or a string \"TypeError: <message>\" if the two operands cannot be added.",
+  "examples": "safe_add(4, '3') -> \"TypeError: unsupported operand type(s) for +: 'int' and 'str'\"\nsafe_add(4, 3) -> 7",
+  "starter_code": "def safe_add(a, b):\n    # your code here\n    pass\n",
+  "hints": [
+    "The + operator raises TypeError when the two operand types can't be combined, such as an int and a str.",
+    "You don't need to check the types of a and b yourself - let Python raise the error and catch it.",
+    "Wrap `return a + b` in try/except TypeError, and in the except branch return an f-string starting with 'TypeError: ' followed by the caught exception object."
+  ],
+  "expected_behavior": "Returns a + b when the operands support addition. If they don't, catches the TypeError and returns a descriptive string in the form \"TypeError: <message>\" instead of letting the exception propagate.",
+  "hidden_tests": [
+    {
+      "call": "safe_add(4, '3')",
+      "expected": "\"TypeError: unsupported operand type(s) for +: 'int' and 'str'\"",
+      "label": "int plus str, mirrors the source example"
+    },
+    {
+      "call": "safe_add(4, 3)",
+      "expected": "7",
+      "label": "two ints add normally"
+    }
+  ],
+  "solution": "def safe_add(a, b):\n    try:\n        return a + b\n    except TypeError as e:\n        return f\"TypeError: {e}\"\n",
+  "explanation": "The + operator raises TypeError when it can't combine the operand types, as with `4 + '3'` in the source example (an int and a str). The except block catches that TypeError and returns a descriptive string instead of crashing.",
+  "concepts": [
+    "typeerror",
+    "exception handling",
+    "try/except",
+    "operators"
+  ],
+  "skills": [
+    "error_handling"
+  ],
+  "source": "30_days_of_python",
+  "exercise_type": "function"
+}

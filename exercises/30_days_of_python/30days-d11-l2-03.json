@@ -1,0 +1,49 @@
+{
+  "source": "30_days_of_python",
+  "day": 11,
+  "module": "functions",
+  "exercise_type": "function",
+  "level": 2,
+  "id": "30days-d11-l2-03",
+  "difficulty": 1,
+  "title": "Check if a value is empty",
+  "description": "Write a function `is_empty(value)` that returns whether `value` (a string, list, tuple, dict, or set) has no elements.",
+  "examples": "is_empty([])\n-> True\nis_empty('hi')\n-> False",
+  "starter_code": "def is_empty(value):\n    # your code here\n    pass\n",
+  "hints": [
+    "Function to consider: len()",
+    "len() works the same way across strings, lists, tuples, dicts, and sets - it always answers 'how many elements does this hold', and 0 elements means empty.",
+    "Return len(value) == 0."
+  ],
+  "expected_behavior": "Returns True if value has zero elements, False otherwise.",
+  "hidden_tests": [
+    {
+      "call": "is_empty([])",
+      "expected": "True",
+      "label": "source item 3, empty list"
+    },
+    {
+      "call": "is_empty('')",
+      "expected": "True",
+      "label": "empty string"
+    },
+    {
+      "call": "is_empty([1, 2])",
+      "expected": "False",
+      "label": "non-empty list"
+    },
+    {
+      "call": "is_empty('hi')",
+      "expected": "False",
+      "label": "non-empty string"
+    }
+  ],
+  "solution": "def is_empty(value):\n    return len(value) == 0\n",
+  "explanation": "len() is a single interface that works the same way across every built-in container type, so is_empty doesn't need a separate check per type.",
+  "concepts": [
+    "len"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

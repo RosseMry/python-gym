@@ -1,0 +1,40 @@
+{
+  "source": "30_days_of_python",
+  "day": 3,
+  "level": null,
+  "module": "operators",
+  "exercise_type": "function",
+  "id": "30days-d03-09",
+  "difficulty": 1,
+  "title": "Compare word lengths",
+  "description": "Write a function `compare_word_lengths(word1, word2)` that returns whether `word1` is strictly longer than `word2`, using `len()`.",
+  "examples": "compare_word_lengths('python', 'dragon')\n-> False",
+  "starter_code": "def compare_word_lengths(word1, word2):\n    # your code here\n    pass\n",
+  "hints": [
+    "Function to consider: len()",
+    "len('python') and len('dragon') are both 6 - a strictly-greater-than comparison between two equal lengths is False, which is the 'falsy comparison' the source exercise is asking to observe.",
+    "Return len(word1) > len(word2) directly."
+  ],
+  "expected_behavior": "Returns True if word1 is strictly longer than word2.",
+  "hidden_tests": [
+    {
+      "call": "compare_word_lengths('python', 'dragon')",
+      "expected": "False",
+      "label": "source item 12, equal length"
+    },
+    {
+      "call": "compare_word_lengths('python', 'dog')",
+      "expected": "True",
+      "label": "first word longer"
+    }
+  ],
+  "solution": "def compare_word_lengths(word1, word2):\n    return len(word1) > len(word2)\n",
+  "explanation": "'python' and 'dragon' are both 6 letters - the comparison itself is correct, it's just that the correct answer to 'is 6 > 6' is False.",
+  "concepts": [
+    "len",
+    "comparison operators"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

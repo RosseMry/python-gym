@@ -1,0 +1,58 @@
+{
+  "id": "30days-d21-l2-01",
+  "source": "30_days_of_python",
+  "day": 21,
+  "level": 2,
+  "module": "classes_and_objects",
+  "difficulty": 3,
+  "title": "PersonAccount class",
+  "description": "Create a class `PersonAccount` with `firstname` and `lastname` properties, and methods `add_income(amount, description)`, `add_expense(amount, description)`, `total_income()`, `total_expense()`, `account_balance()`, and `account_info()` (returns `'{firstname} {lastname}'`).\n\nPython-Gym adaptation: incomes and expenses are recorded as a list of `(amount, description)` tuples (added one at a time via add_income/add_expense) rather than the source's 'set of incomes and its description' - a set would silently collapse two entries that happen to share both the same amount and description (e.g. two identical $20 lunch expenses), which isn't the intended behavior for a running ledger.",
+  "examples": ">>> account = PersonAccount('Asabeneh', 'Yetayeh')\n>>> account.add_income(5000, 'Salary')\n>>> account.add_income(200, 'Side gig')\n>>> account.add_expense(500, 'Rent')\n>>> account.add_expense(100, 'Groceries')\n>>> account.total_income()\n5200\n>>> account.total_expense()\n600\n>>> account.account_balance()\n4600\n>>> account.account_info()\n'Asabeneh Yetayeh'",
+  "starter_code": "class PersonAccount:\n    def __init__(self, firstname, lastname):\n        # your code here\n        pass\n\n    def add_income(self, amount, description):\n        # your code here\n        pass\n\n    def add_expense(self, amount, description):\n        # your code here\n        pass\n\n    def total_income(self):\n        # your code here\n        pass\n\n    def total_expense(self):\n        # your code here\n        pass\n\n    def account_balance(self):\n        # your code here\n        pass\n\n    def account_info(self):\n        # your code here\n        pass\n",
+  "hints": [
+    "Idea to consider: store two running lists on the instance, one for incomes and one for expenses",
+    "__init__ should set self.incomes and self.expenses to empty lists - add_income/add_expense then append an (amount, description) tuple to the matching list, so every entry ever added stays available for the total_* methods to sum over later.",
+    "total_income()/total_expense() sum just the amount half of each tuple in their list (e.g. sum(amount for amount, _ in self.incomes)); account_balance() is total_income() minus total_expense(); account_info() is an f-string combining firstname and lastname."
+  ],
+  "expected_behavior": "Tracks incomes/expenses added over time and reports totals, balance, and account info.",
+  "hidden_tests": [
+    {
+      "call": "PersonAccount('Asabeneh', 'Yetayeh').account_info()",
+      "expected": "'Asabeneh Yetayeh'",
+      "label": "account_info combines first and last name"
+    },
+    {
+      "call": "(lambda a: (a.add_income(5000, 'Salary'), a.add_income(200, 'Side gig'), a.total_income())[-1])(PersonAccount('Asabeneh', 'Yetayeh'))",
+      "expected": "5200",
+      "label": "total_income sums every added income"
+    },
+    {
+      "call": "(lambda a: (a.add_expense(500, 'Rent'), a.add_expense(100, 'Groceries'), a.total_expense())[-1])(PersonAccount('Asabeneh', 'Yetayeh'))",
+      "expected": "600",
+      "label": "total_expense sums every added expense"
+    },
+    {
+      "call": "(lambda a: (a.add_income(5000, 'Salary'), a.add_expense(500, 'Rent'), a.account_balance())[-1])(PersonAccount('Asabeneh', 'Yetayeh'))",
+      "expected": "4500",
+      "label": "account_balance is total_income minus total_expense"
+    },
+    {
+      "call": "PersonAccount('Ada', 'Lovelace').account_balance()",
+      "expected": "0",
+      "label": "a fresh account has zero balance"
+    }
+  ],
+  "solution": "class PersonAccount:\n    def __init__(self, firstname, lastname):\n        self.firstname = firstname\n        self.lastname = lastname\n        self.incomes = []\n        self.expenses = []\n\n    def add_income(self, amount, description):\n        self.incomes.append((amount, description))\n\n    def add_expense(self, amount, description):\n        self.expenses.append((amount, description))\n\n    def total_income(self):\n        return sum(amount for amount, _ in self.incomes)\n\n    def total_expense(self):\n        return sum(amount for amount, _ in self.expenses)\n\n    def account_balance(self):\n        return self.total_income() - self.total_expense()\n\n    def account_info(self):\n        return f\"{self.firstname} {self.lastname}\"\n",
+  "explanation": "The incomes and expenses lists are the object's running state - add_income/add_expense only ever append to them, and every total_*/balance method recomputes its answer from that same state rather than tracking a separate running total that could drift out of sync.",
+  "concepts": [
+    "classes",
+    "objects",
+    "instance methods",
+    "self",
+    "lists"
+  ],
+  "skills": [
+    "object_oriented_design"
+  ],
+  "exercise_type": "function"
+}

@@ -1,0 +1,35 @@
+{
+  "id": "30days-d09-l2-03",
+  "module": "conditionals",
+  "day": 9,
+  "level": 2,
+  "difficulty": 1,
+  "title": "Add a fruit to the list",
+  "description": "The following list contains some fruits:\n\n```sh\nfruits = ['banana', 'orange', 'mango', 'lemon']\n```\n\nIf a fruit doesn't exist in the list add the fruit to the list and print the modified list. If the fruit exists print('That fruit already exist in the list')\n\nPython-Gym adaptation: implement as `add_fruit(fruits, fruit)`. If `fruit` is not already in `fruits`, append it and return the modified list. If it already exists, return the string `'That fruit already exist in the list'` instead.",
+  "examples": "add_fruit(['banana', 'orange', 'mango', 'lemon'], 'apple') -> ['banana', 'orange', 'mango', 'lemon', 'apple']\nadd_fruit(['banana', 'orange', 'mango', 'lemon'], 'banana') -> 'That fruit already exist in the list'",
+  "starter_code": "def add_fruit(fruits, fruit):\n    # write your code here\n    pass\n",
+  "hints": [
+    "Use the `in` operator to check whether fruit is already present in fruits.",
+    "If it's not present, use list.append() to add it, then return the list.",
+    "If it is present, skip the append entirely and return the string 'That fruit already exist in the list' instead."
+  ],
+  "expected_behavior": "Returns the list with the new fruit appended when it wasn't already present, or the message string 'That fruit already exist in the list' when it was.",
+  "hidden_tests": [
+    {
+      "call": "add_fruit(['banana', 'orange', 'mango', 'lemon'], 'apple')",
+      "expected": "['banana', 'orange', 'mango', 'lemon', 'apple']",
+      "label": "new fruit gets appended"
+    },
+    {
+      "call": "add_fruit(['banana', 'orange', 'mango', 'lemon'], 'banana')",
+      "expected": "'That fruit already exist in the list'",
+      "label": "existing fruit returns message"
+    }
+  ],
+  "solution": "def add_fruit(fruits, fruit):\n    if fruit in fruits:\n        return 'That fruit already exist in the list'\n    else:\n        fruits.append(fruit)\n        return fruits\n",
+  "explanation": "Checking membership with `in` before appending avoids duplicate entries: if the fruit is already present the function returns the informational message, otherwise it mutates the list with append() and returns it.",
+  "concepts": ["if", "else", "in operator", "list append"],
+  "skills": ["basic_data_manipulation"],
+  "source": "30_days_of_python",
+  "exercise_type": "function"
+}

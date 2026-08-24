@@ -1,0 +1,42 @@
+{
+  "source": "30_days_of_python",
+  "day": 3,
+  "level": null,
+  "module": "operators",
+  "exercise_type": "script",
+  "id": "30days-d03-02",
+  "difficulty": 2,
+  "title": "Triangle perimeter from user input",
+  "description": "Write a script that asks the user for a triangle's three side lengths (as three separate prompts: 'Enter side a: ', 'Enter side b: ', 'Enter side c: ') and prints its perimeter (`perimeter = a + b + c`).",
+  "examples": "Enter side a: 5\nEnter side b: 4\nEnter side c: 3\nThe perimeter of the triangle is 12.0",
+  "starter_code": "# your code here\n",
+  "hints": [
+    "💡 Function to consider: float()",
+    "What does it do? float() converts a value - such as the text input() gives you - into a number that can have a decimal part.\n\nExample:\nvalue = float(\"3.5\")\n\nResult:\n3.5",
+    "Apply it: each of the three input() calls returns a string - convert all three to numbers with float() before adding them together, the same way the triangle-area exercise converts base and height."
+  ],
+  "hint_functions": [
+    "float",
+    null,
+    null
+  ],
+  "expected_behavior": "Prints the triangle's perimeter after reading its three sides.",
+  "hidden_tests": [
+    {
+      "args": [],
+      "stdin": "5\n4\n3\n",
+      "expected_stdout": "Enter side a: Enter side b: Enter side c: The perimeter of the triangle is 12.0",
+      "label": "source item 5"
+    }
+  ],
+  "solution": "def main():\n    a = float(input('Enter side a: '))\n    b = float(input('Enter side b: '))\n    c = float(input('Enter side c: '))\n    print(f'The perimeter of the triangle is {a + b + c}')\n\n\nif __name__ == '__main__':\n    main()\n",
+  "explanation": "Three separate input() calls, each converted with float(), then summed - the same pattern as the two-input triangle-area exercise, just with one more value.",
+  "concepts": [
+    "input",
+    "float",
+    "formulas"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

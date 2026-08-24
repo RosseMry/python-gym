@@ -1,0 +1,35 @@
+{
+  "source": "30_days_of_python",
+  "day": 4,
+  "level": null,
+  "module": "strings",
+  "exercise_type": "function",
+  "id": "30days-d04-21",
+  "difficulty": 1,
+  "title": "Join a list with a separator",
+  "description": "Write a function `join_with_hash(items)` that joins a list of strings with `' # '` between each pair.",
+  "examples": "join_with_hash(['Django', 'Flask', 'Bottle', 'Pyramid', 'Falcon'])\n-> 'Django # Flask # Bottle # Pyramid # Falcon'",
+  "starter_code": "def join_with_hash(items):\n    # your code here\n    pass\n",
+  "hints": [
+    "Method to consider: str.join()",
+    "The separator string can be anything, not just a single space - ' # '.join(items) uses the 3-character string ' # ' between every pair of items.",
+    "Call ' # '.join(items) and return the result."
+  ],
+  "expected_behavior": "Returns the items joined with ' # ' between each pair.",
+  "hidden_tests": [
+    {
+      "call": "join_with_hash(['Django', 'Flask', 'Bottle', 'Pyramid', 'Falcon'])",
+      "expected": "'Django # Flask # Bottle # Pyramid # Falcon'",
+      "label": "source item 32"
+    }
+  ],
+  "solution": "def join_with_hash(items):\n    return ' # '.join(items)\n",
+  "explanation": "join()'s separator is whatever string it's called on - ' # ' works exactly like ' ' did earlier, just with a longer separator.",
+  "concepts": [
+    "strings",
+    "join"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

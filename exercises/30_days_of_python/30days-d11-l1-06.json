@@ -1,0 +1,47 @@
+{
+  "id": "30days-d11-l1-06",
+  "module": "functions",
+  "day": 11,
+  "level": 1,
+  "difficulty": 2,
+  "title": "Calculate the slope of a line",
+  "description": "Write a function called calculate_slope which return the slope of a linear equation.\n\nPython-Gym adaptation: implement as calculate_slope(x1, y1, x2, y2), returning the slope (y2 - y1) / (x2 - x1) of the line through points (x1, y1) and (x2, y2).",
+  "examples": ">>> calculate_slope(1, 2, 3, 6)\n2.0",
+  "starter_code": "def calculate_slope(x1, y1, x2, y2):\n    # your code here\n    pass\n",
+  "hints": [
+    "Slope is defined as the change in y divided by the change in x between two points.",
+    "Compute the change in y as (y2 - y1) and the change in x as (x2 - x1).",
+    "Return (y2 - y1) / (x2 - x1)."
+  ],
+  "expected_behavior": "Returns the slope of the line through (x1, y1) and (x2, y2), computed as (y2 - y1) / (x2 - x1).",
+  "explanation": "The slope of a line through two points is the ratio of the vertical change to the horizontal change between them: (y2 - y1) / (x2 - x1).",
+  "concepts": [
+    "functions",
+    "arithmetic",
+    "return",
+    "geometry"
+  ],
+  "skills": [
+    "functional_python"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python",
+  "hidden_tests": [
+    {
+      "call": "calculate_slope(1, 2, 3, 6)",
+      "expected": "2.0",
+      "label": "positive slope"
+    },
+    {
+      "call": "calculate_slope(0, 0, 5, 0)",
+      "expected": "0.0",
+      "label": "horizontal line, slope 0"
+    },
+    {
+      "call": "calculate_slope(0, 5, 2, 1)",
+      "expected": "-2.0",
+      "label": "negative slope"
+    }
+  ],
+  "solution": "def calculate_slope(x1, y1, x2, y2):\n    return (y2 - y1) / (x2 - x1)\n"
+}

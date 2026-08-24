@@ -35,13 +35,15 @@ def test_get_missing_exercise_raises(service: ExerciseService) -> None:
 
 
 def test_hints_are_revealed_one_at_a_time(service: ExerciseService) -> None:
-    assert service.request_hint("loop-003") == ("hint 1", None)
-    assert service.request_hint("loop-003") == ("hint 2", None)
-    hint, hint_fr = service.request_hint("loop-003")
+    assert service.request_hint("loop-003") == ("hint 1", None, None)
+    assert service.request_hint("loop-003") == ("hint 2", None, None)
+    hint, hint_fr, hint_function = service.request_hint("loop-003")
     assert "total = 0" in hint
     assert hint_fr is None
+    assert hint_function is None
     assert service.request_hint("loop-003") == (
         "No more hints available for this exercise.",
+        None,
         None,
     )
 

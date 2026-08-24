@@ -1,0 +1,35 @@
+{
+  "source": "30_days_of_python",
+  "day": 4,
+  "level": null,
+  "module": "strings",
+  "exercise_type": "function",
+  "id": "30days-d04-19",
+  "difficulty": 1,
+  "title": "Strip surrounding whitespace",
+  "description": "Write a function `strip_spaces(text)` that removes leading and trailing whitespace from `text`.",
+  "examples": "strip_spaces('   Coding For All      ')\n-> 'Coding For All'",
+  "starter_code": "def strip_spaces(text):\n    # your code here\n    pass\n",
+  "hints": [
+    "Method to consider: str.strip()",
+    "text.strip() removes whitespace from both ends of the string, but leaves whitespace in the middle untouched.",
+    "Call .strip() on text and return the result."
+  ],
+  "expected_behavior": "Returns text with leading/trailing whitespace removed, interior spaces unchanged.",
+  "hidden_tests": [
+    {
+      "call": "strip_spaces('   Coding For All      ')",
+      "expected": "'Coding For All'",
+      "label": "source item 30"
+    }
+  ],
+  "solution": "def strip_spaces(text):\n    return text.strip()\n",
+  "explanation": "strip() only trims the edges of the string - it's not the same as replace(' ', ''), which would also remove the space between 'Coding' and 'For'.",
+  "concepts": [
+    "strings",
+    "strip"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

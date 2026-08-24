@@ -1,0 +1,39 @@
+{
+  "id": "30days-d13-02",
+  "module": "list_comprehension",
+  "day": 13,
+  "difficulty": 2,
+  "title": "Flatten a list of lists",
+  "description": "Flatten the following list of lists of lists to a one dimensional list :\n\n```py\nlist_of_lists =[[1, 2, 3], [4, 5, 6], [7, 8, 9]]\n\noutput\n[1, 2, 3, 4, 5, 6, 7, 8, 9]\n```\n\nPython-Gym adaptation: implement as `flatten_list(list_of_lists)`, returning the flattened one-dimensional list using a nested list comprehension.",
+  "examples": "flatten_list([[1, 2, 3], [4, 5, 6], [7, 8, 9]]) -> [1, 2, 3, 4, 5, 6, 7, 8, 9]\nflatten_list([[1], [2, 3], []]) -> [1, 2, 3]",
+  "starter_code": "def flatten_list(list_of_lists):\n    # write your code here\n    pass\n",
+  "hints": [
+    "A nested list comprehension has two `for` clauses: one over the outer list, one over each inner list.",
+    "The outer `for` picks each sublist, the inner `for` picks each item inside that sublist.",
+    "Use `[item for sublist in list_of_lists for item in sublist]` as the shape of your comprehension."
+  ],
+  "expected_behavior": "Returns a single flat list containing every element from every sublist of the input, in order.",
+  "hidden_tests": [
+    {
+      "call": "flatten_list([[1, 2, 3], [4, 5, 6], [7, 8, 9]])",
+      "expected": "[1, 2, 3, 4, 5, 6, 7, 8, 9]",
+      "label": "source example: three sublists of three"
+    },
+    {
+      "call": "flatten_list([[1], [2, 3], []])",
+      "expected": "[1, 2, 3]",
+      "label": "sublists of varying length including empty"
+    },
+    {
+      "call": "flatten_list([[]])",
+      "expected": "[]",
+      "label": "single empty sublist"
+    }
+  ],
+  "solution": "def flatten_list(list_of_lists):\n    return [item for sublist in list_of_lists for item in sublist]\n",
+  "explanation": "A nested list comprehension with two `for` clauses walks through each sublist and then each item inside it, collecting every item into a single flat list in the same order they were encountered.",
+  "concepts": ["list comprehension", "nested comprehension", "flattening"],
+  "skills": ["functional_python"],
+  "source": "30_days_of_python",
+  "exercise_type": "function"
+}

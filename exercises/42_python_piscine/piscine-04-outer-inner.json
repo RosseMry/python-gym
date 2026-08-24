@@ -3,13 +3,20 @@
   "module": "piscine_04_data_oriented_design",
   "difficulty": 3,
   "title": "Outer_inner (closures)",
+  "title_fr": "Outer_inner (fermetures)",
   "description": "Write `square(x)` (returns x squared), `pow(x)` (returns x raised to itself), and `outer(x, function)` which returns a callable `inner()` that, each time it's called, applies `function` to `x` raised to an internal call-count power (so repeated calls give repeatedly-exponentiated results) - without using any global variable.",
+  "description_fr": "Écris `square(x)` (retourne x au carré), `pow(x)` (retourne x élevé à lui-même), et `outer(x, function)` qui retourne un `inner()` appelable qui, à chaque appel, applique `function` à `x` élevé à une puissance interne comptant les appels (les appels répétés donnent donc des résultats de plus en plus exponentiés) - sans utiliser de variable globale.",
   "examples": "my_counter = outer(3, square)\nprint(my_counter())  # 9\nprint(my_counter())  # 81\nprint(my_counter())  # 6561",
   "starter_code": "def square(x):\n    # your code here\n    pass\n\n\ndef pow(x):\n    # your code here\n    pass\n\n\ndef outer(x, function):\n    count = 0\n\n    def inner():\n        # your code here\n        pass\n\n    return inner\n",
   "hints": [
     "`count` needs to change between calls to `inner()` without being a global - that's exactly what a closure variable in the enclosing `outer()` scope is for.",
     "Modifying a variable from an enclosing (not global) scope inside a nested function requires the `nonlocal` keyword.",
-    "def inner():\n    nonlocal count\n    count += 1\n    return function(x ** count)"
+    "Inside inner(), declare nonlocal count, increment it, and return function applied to x raised to the (now-incremented) count - the increment has to happen before the call so the first call uses count == 1, not 0."
+  ],
+  "hints_fr": [
+    "`count` doit changer entre les appels à `inner()` sans être une globale - c'est exactement à ça que sert une variable de fermeture dans la portée englobante `outer()`.",
+    "Modifier une variable d'une portée englobante (pas globale) depuis une fonction imbriquée nécessite le mot-clé `nonlocal`.",
+    "Dans inner(), déclare nonlocal count, incrémente-la, et retourne function appliquée à x élevé à la puissance count (maintenant incrémenté) - l'incrémentation doit avoir lieu avant l'appel pour que le premier appel utilise count == 1, pas 0."
   ],
   "expected_behavior": "Each call to the returned inner() applies function to x raised to an increasing power, starting from the first call.",
   "hidden_tests": [
@@ -26,6 +33,7 @@
   ],
   "solution": "def square(x):\n    \"\"\"Return x squared.\"\"\"\n    return x ** 2\n\n\ndef pow(x):\n    \"\"\"Return x raised to the power of itself.\"\"\"\n    return x ** x\n\n\ndef outer(x, function):\n    \"\"\"Return a counter closure applying function to x^n.\"\"\"\n    count = 0\n\n    def inner():\n        \"\"\"Apply function to x raised to the call count.\"\"\"\n        nonlocal count\n        count += 1\n        return function(x ** count)\n\n    return inner\n",
   "explanation": "`inner()` closes over both `x` and `count` from `outer()`'s scope. `nonlocal count` is what lets it mutate that enclosing variable across separate calls, instead of creating a fresh local each time (which plain assignment would do).",
+  "explanation_fr": "`inner()` referme à la fois sur `x` et `count` de la portée de `outer()`. `nonlocal count` est ce qui lui permet de modifier cette variable englobante à travers des appels séparés, au lieu de créer une nouvelle locale à chaque fois (ce que ferait une simple affectation).",
   "concepts": [
     "closures",
     "nonlocal",

@@ -1,0 +1,40 @@
+{
+  "id": "30days-d16-02",
+  "module": "datetime",
+  "day": 16,
+  "difficulty": 1,
+  "title": "Format a date as %m/%d/%Y, %H:%M:%S",
+  "description": "Format the current date using this format: \"%m/%d/%Y, %H:%M:%S\")\n\nPython-Gym adaptation: reading the live clock would make the expected result non-deterministic, so implement as format_datetime(dt), taking a fixed datetime.datetime object dt instead of the real current time, and returning the string produced by formatting dt with \"%m/%d/%Y, %H:%M:%S\".",
+  "examples": ">>> import datetime\n>>> format_datetime(datetime.datetime(2023, 6, 15, 14, 30, 45))\n'06/15/2023, 14:30:45'",
+  "starter_code": "import datetime\n\ndef format_datetime(dt):\n    # your code here\n    pass\n",
+  "hints": [
+    "The datetime module has a method that turns a datetime object into a string according to a format code, the mirror image of strptime.",
+    "The format codes you need are %m for month, %d for day, %Y for a 4-digit year, and %H, %M, %S for hour, minute, second.",
+    "Use dt.strftime(\"%m/%d/%Y, %H:%M:%S\") to produce the formatted string."
+  ],
+  "expected_behavior": "Given a fixed datetime.datetime object, returns it formatted as a string in %m/%d/%Y, %H:%M:%S form.",
+  "solution": "import datetime\n\ndef format_datetime(dt):\n    return dt.strftime(\"%m/%d/%Y, %H:%M:%S\")\n",
+  "hidden_tests": [
+    {
+      "call": "format_datetime(datetime.datetime(2023, 6, 15, 14, 30, 45))",
+      "expected": "'06/15/2023, 14:30:45'",
+      "label": "formats 2023-06-15 14:30:45 correctly"
+    },
+    {
+      "call": "format_datetime(datetime.datetime(2000, 1, 1, 0, 5, 9))",
+      "expected": "'01/01/2000, 00:05:09'",
+      "label": "formats 2000-01-01 00:05:09 with correct zero-padding"
+    }
+  ],
+  "explanation": "dt.strftime(fmt) builds a string from a datetime object according to the given format codes: %m/%d/%Y produces a zero-padded month/day/4-digit-year date, and %H:%M:%S produces zero-padded 24-hour time, matching the format requested.",
+  "concepts": [
+    "datetime module",
+    "strftime",
+    "date formatting"
+  ],
+  "skills": [
+    "date_time_handling"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

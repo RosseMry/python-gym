@@ -1,0 +1,43 @@
+.prereq-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(27, 31, 39, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 20px;
+}
+
+.prereq-modal {
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1px solid var(--hint);
+  padding: 28px 26px;
+  max-width: 420px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.prereq-modal__headline {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 12px;
+  color: var(--hint);
+}
+
+.prereq-modal__body {
+  font-size: 14px;
+  margin: 0 0 10px;
+  color: var(--ink);
+}
+
+.prereq-modal__question {
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.prereq-modal__actions {
+  margin-top: 20px;
+}

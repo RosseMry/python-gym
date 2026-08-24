@@ -1,0 +1,35 @@
+{
+  "source": "30_days_of_python",
+  "day": 19,
+  "module": "file_handling",
+  "exercise_type": "function",
+  "level": 2,
+  "id": "30days-d19-l2-02",
+  "difficulty": 2,
+  "title": "Find the most common words in a string",
+  "description": "Write a function `find_most_common_words(text, n)` that returns the `n` most common words in `text` (case-insensitive) as `(count, word)` tuples, most common first, ties broken alphabetically.",
+  "examples": "find_most_common_words(\n    'The quick brown fox jumps over the lazy dog. The dog barks at the fox.', 3\n)\n-> [(4, 'the'), (2, 'dog'), (2, 'fox')]",
+  "starter_code": "import re\nfrom collections import Counter\n\n\ndef find_most_common_words(text, n):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: this is the same tokenize-then-Counter pattern from Day 18's regex exercises",
+    "re.findall(r\"[A-Za-z']+\", text.lower()) tokenizes case-insensitively; Counter then tallies the resulting words directly.",
+    "Tokenize, lowercase, count with Counter, and return the top n sorted by (-count, word)."
+  ],
+  "expected_behavior": "Returns the n most common words (case-insensitive) as (count, word) tuples.",
+  "hidden_tests": [
+    {
+      "call": "find_most_common_words('The quick brown fox jumps over the lazy dog. The dog barks at the fox, but the fox runs away. The lazy dog just watches the quick fox go.', 5)",
+      "expected": "[(7, 'the'), (4, 'fox'), (3, 'dog'), (2, 'lazy'), (2, 'quick')]",
+      "label": "source item 2"
+    }
+  ],
+  "solution": "import re\nfrom collections import Counter\n\n\ndef find_most_common_words(text, n):\n    words = re.findall(r\"[A-Za-z']+\", text.lower())\n    counts = Counter(words)\n    ranked = sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))\n    return [(count, word) for word, count in ranked[:n]]\n",
+  "explanation": "Lowercasing before tokenizing means 'The' and 'the' count as the same word - without it, capitalization would silently split one word's count across two entries.",
+  "concepts": [
+    "regular expressions",
+    "collections.Counter"
+  ],
+  "skills": [
+    "text_processing"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "id": "30days-d15-05",
+  "module": "type_errors",
+  "day": 15,
+  "difficulty": 2,
+  "title": "Catch an AttributeError",
+  "description": "Source instruction (Exercises: Day 15, item 1): \"Open you python interactive shell and try all the examples covered in this section.\"\n\nAttributeError example: after `import math`, `math.PI` raises `AttributeError: module 'math' has no attribute 'PI'` (\"Instead of pi, I tried to call a PI constant\"); fixed by using `math.pi` which returns `3.141592653589793`.\n\nPython-Gym adaptation: implement as `safe_getattr(obj, attr)`, returning `getattr(obj, attr)`, or a string \"AttributeError: <message>\" if the object has no such attribute.",
+  "examples": "safe_getattr(__import__('math'), 'PI') -> \"AttributeError: module 'math' has no attribute 'PI'\"\nsafe_getattr(__import__('math'), 'pi') -> 3.141592653589793",
+  "starter_code": "def safe_getattr(obj, attr):\n    # your code here\n    pass\n",
+  "hints": [
+    "getattr(obj, attr) looks up an attribute on obj by name, the same way obj.attr does, but takes the attribute name as a string argument.",
+    "getattr() raises AttributeError when the object has no attribute with that name, just like math.PI did in the source example.",
+    "Wrap `return getattr(obj, attr)` in try/except AttributeError, and in the except branch return an f-string starting with 'AttributeError: ' followed by the caught exception object."
+  ],
+  "expected_behavior": "Returns getattr(obj, attr) when the attribute exists. If it doesn't, catches the AttributeError and returns a descriptive string in the form \"AttributeError: <message>\" instead of letting the exception propagate.",
+  "hidden_tests": [
+    {
+      "call": "safe_getattr(__import__('math'), 'PI')",
+      "expected": "\"AttributeError: module 'math' has no attribute 'PI'\"",
+      "label": "wrong-case constant name, mirrors the source example"
+    },
+    {
+      "call": "safe_getattr(__import__('math'), 'pi')",
+      "expected": "3.141592653589793",
+      "label": "valid attribute name returns the value"
+    }
+  ],
+  "solution": "def safe_getattr(obj, attr):\n    try:\n        return getattr(obj, attr)\n    except AttributeError as e:\n        return f\"AttributeError: {e}\"\n",
+  "explanation": "getattr() fetches an attribute by name and raises AttributeError if it isn't found. The math module has a lowercase `pi` attribute but no `PI`, so requesting 'PI' raises AttributeError, which is caught and turned into a descriptive string.",
+  "concepts": [
+    "attributeerror",
+    "exception handling",
+    "try/except",
+    "getattr"
+  ],
+  "skills": [
+    "error_handling"
+  ],
+  "source": "30_days_of_python",
+  "exercise_type": "function"
+}

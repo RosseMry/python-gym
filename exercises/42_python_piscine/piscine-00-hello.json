@@ -3,7 +3,9 @@
   "module": "piscine_00_starting",
   "difficulty": 1,
   "title": "First python script (Hello)",
+  "title_fr": "Premier script python (Hello)",
   "description": "You need to modify the string of each data object to display the following greetings: \"Hello World\", \"Hello «country of your campus»\", \"Hello «city of your campus»\", \"Hello «name of your campus»\".\n\nStarter data:\nft_list = [\"Hello\", \"tata!\"]\nft_tuple = (\"Hello\", \"toto!\")\nft_set = {\"Hello\", \"tutu!\"}\nft_dict = {\"Hello\" : \"titi!\"}\n\nThen print each of the four objects, one per line.\n\nFor this exercise, use the 42 Paris campus as your reference campus (France / Paris / 42Paris).",
+  "description_fr": "Tu dois modifier la chaîne de chaque objet de données pour afficher les salutations suivantes : \"Hello World\", \"Hello «pays de ton campus»\", \"Hello «ville de ton campus»\", \"Hello «nom de ton campus»\".\n\nDonnées de départ :\nft_list = [\"Hello\", \"tata!\"]\nft_tuple = (\"Hello\", \"toto!\")\nft_set = {\"Hello\", \"tutu!\"}\nft_dict = {\"Hello\" : \"titi!\"}\n\nAffiche ensuite chacun des quatre objets, un par ligne.\n\nPour cet exercice, utilise le campus 42 Paris comme campus de référence (France / Paris / 42Paris).",
   "examples": "$> python Hello.py | cat -e\n['Hello', 'World!']$\n('Hello', 'France!')$\n{'Hello', 'Paris!'}$\n{'Hello': '42Paris!'}$\n$>",
   "starter_code": "ft_list = [\"Hello\", \"tata!\"]\nft_tuple = (\"Hello\", \"toto!\")\nft_set = {\"Hello\", \"tutu!\"}\nft_dict = {\"Hello\" : \"titi!\"}\n\n# your code here\n\nprint(ft_list)\nprint(ft_tuple)\nprint(ft_set)\nprint(ft_dict)\n",
   "hints": [
@@ -11,10 +13,16 @@
     "Lists support item assignment by index (ft_list[1] = ...). Tuples don't - you'll need to rebuild the tuple. Sets don't support indexing either - remove the old value and add the new one.",
     "For the list use index assignment, for the tuple build a brand-new tuple literal, for the set call .remove() then .add(), and for the dict assign to the existing key - you still need to fill in the actual campus/country/city values yourself."
   ],
+  "hints_fr": [
+    "Tu dois remplacer le deuxième élément de la liste/du tuple, le deuxième élément de l'ensemble, et la valeur du dictionnaire - pas créer de nouveaux objets.",
+    "Les listes supportent l'affectation par indice (ft_list[1] = ...). Les tuples non - il faudra reconstruire le tuple. Les ensembles n'ont pas d'indice non plus - supprime l'ancienne valeur et ajoute la nouvelle.",
+    "Pour la liste utilise l'affectation par indice, pour le tuple construis un tout nouveau tuple littéral, pour l'ensemble appelle .remove() puis .add(), et pour le dictionnaire affecte la clé existante - il te reste à remplir toi-même les vraies valeurs de campus/pays/ville."
+  ],
   "expected_behavior": "Prints the four objects, each showing 'Hello' paired with World/France/Paris/42Paris.",
   "hidden_tests": [],
   "solution": "ft_list = [\"Hello\", \"tata!\"]\nft_tuple = (\"Hello\", \"toto!\")\nft_set = {\"Hello\", \"tutu!\"}\nft_dict = {\"Hello\" : \"titi!\"}\n\nft_list[1] = \"World!\"\nft_tuple = (\"Hello\", \"France!\")\nft_set.remove(\"tutu!\")\nft_set.add(\"Paris!\")\nft_dict[\"Hello\"] = \"42Paris!\"\n\nprint(ft_list)\nprint(ft_tuple)\nprint(ft_set)\nprint(ft_dict)\n",
   "explanation": "Lists are mutable and support index assignment. Tuples are immutable, so a new tuple has to be built. Sets have no index, so the old value is removed and the new one added. Dicts are updated by assigning to the existing key. (Not auto-graded: the set line has no guaranteed print order in Python, so an exact-stdout hidden test would be flaky by design - verify the list/tuple/dict lines and the set contents by eye.)",
+  "explanation_fr": "Les listes sont modifiables et supportent l'affectation par indice. Les tuples sont immuables, il faut donc en construire un nouveau. Les ensembles n'ont pas d'indice, on retire donc l'ancienne valeur et on ajoute la nouvelle. Les dictionnaires sont mis à jour en affectant la clé existante. (Non noté automatiquement : la ligne de l'ensemble n'a pas d'ordre d'affichage garanti en Python, un test caché sur la sortie exacte serait donc instable par nature - vérifie les lignes liste/tuple/dictionnaire et le contenu de l'ensemble à l'œil.)",
   "concepts": [
     "list",
     "tuple",

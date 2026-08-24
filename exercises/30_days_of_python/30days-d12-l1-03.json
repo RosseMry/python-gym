@@ -1,0 +1,42 @@
+{
+  "id": "30days-d12-l1-03",
+  "module": "modules",
+  "day": 12,
+  "level": 1,
+  "difficulty": 1,
+  "title": "RGB color generator",
+  "description": "Write a function named rgb_color_gen. It will generate rgb colors (3 values ranging from 0 to 255 each).\n\n```py\nprint(rgb_color_gen())\n# rgb(125,244,255) - the output should be in this form\n```\n\nPython-Gym adaptation: implement as rgb_color_gen(seed=None). When seed is provided, seed the random module with it first. Return the color as a string in the exact form 'rgb(r,g,b)' with no spaces, where r, g and b are each integers between 0 and 255 inclusive.",
+  "examples": ">>> rgb_color_gen(0)\n'rgb(197,215,20)'\n>>> rgb_color_gen(5)\n'rgb(130,183,14)'",
+  "starter_code": "import random\n\ndef rgb_color_gen(seed=None):\n    # your code here\n    pass\n",
+  "hints": [
+    "Seed random first (only if seed is not None) so results are reproducible.",
+    "Use random.randint(0, 255) three separate times to get the r, g and b values.",
+    "Build the return value with an f-string like f\"rgb({r},{g},{b})\" - note there are no spaces after the commas."
+  ],
+  "expected_behavior": "Returns a string of the exact form 'rgb(r,g,b)' where r, g, b are integers in [0, 255]. With the same seed, the returned string is always identical.",
+  "solution": "import random\n\ndef rgb_color_gen(seed=None):\n    if seed is not None:\n        random.seed(seed)\n    r = random.randint(0, 255)\n    g = random.randint(0, 255)\n    b = random.randint(0, 255)\n    return f\"rgb({r},{g},{b})\"\n",
+  "hidden_tests": [
+    {
+      "call": "rgb_color_gen(0)",
+      "expected": "'rgb(197,215,20)'",
+      "label": "seed 0 produces the expected deterministic rgb string"
+    },
+    {
+      "call": "rgb_color_gen(5)",
+      "expected": "'rgb(130,183,14)'",
+      "label": "seed 5 produces the expected deterministic rgb string"
+    }
+  ],
+  "explanation": "random.randint(0, 255) draws an inclusive random integer for each of the r, g and b channels, and an f-string assembles them into the required 'rgb(r,g,b)' text form.",
+  "concepts": [
+    "modules",
+    "random module",
+    "random.randint",
+    "f-strings"
+  ],
+  "skills": [
+    "using_standard_library_modules"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

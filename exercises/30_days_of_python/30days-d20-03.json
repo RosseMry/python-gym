@@ -1,0 +1,29 @@
+{
+  "source": "30_days_of_python",
+  "day": 20,
+  "module": "package_manager",
+  "exercise_type": "script",
+  "id": "30days-d20-03",
+  "level": null,
+  "difficulty": 1,
+  "title": "APIs requiring live network access (reference)",
+  "description": "Source item 2's statistics sub-part, item 3 (countries API), and item 4 (UCI dataset page) all need either a live third-party API or web scraping - checked directly rather than assumed:\n\n- Item 2 (min/max/mean/median/stdev of cats' weight and lifespan): the same task as `stats_summary` in 30days-d11-l2-04 - see that exercise instead of duplicating it here.\n- Item 3.2 (10 most spoken languages) and 3.3 (total number of languages): the same task, with real data, as 30days-d19-l1-02 and 30days-d10-l3-03.\n- Item 3.1 (10 largest countries): restcountries.eu (the source's URL) is dead; the country data already bundled in this repo (countries_data.json) has no land-area field, so this can't be answered faithfully - interpreting 'largest' as 'most populated' would just repeat 30days-d19-l1-03.\n- Item 4 (UCI ML dataset repository): a page to scrape with BeautifulSoup4 (not installed in this sandbox), with no single fixed correct answer - explore it directly in a browser instead.",
+  "examples": "",
+  "starter_code": "# See the description for what each item covers and where.\n",
+  "hints": [
+    "This entry documents what's covered elsewhere and what genuinely can't be reproduced, rather than asking you to write code.",
+    "Follow the cross-references above for the parts of this day that already have real, gradable exercises.",
+    "For item 4, exploring archive.ics.uci.edu/ml/datasets.php directly (outside this platform) is the closest match to what the source is actually asking for."
+  ],
+  "expected_behavior": "Not auto-gradable - a reference entry, not a coding exercise.",
+  "hidden_tests": [],
+  "solution": "# See the description for what each item covers and where.\n",
+  "explanation": "Some source exercises genuinely can't be reproduced faithfully in a sandboxed, auto-graded platform without either network access or fabricating data that only looks real - this entry says so explicitly instead of silently dropping the content.",
+  "concepts": [
+    "web APIs",
+    "web scraping"
+  ],
+  "skills": [
+    "using_standard_library_modules"
+  ]
+}

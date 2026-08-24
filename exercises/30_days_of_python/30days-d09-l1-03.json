@@ -1,0 +1,40 @@
+{
+  "id": "30days-d09-l1-03",
+  "module": "conditionals",
+  "day": 9,
+  "level": 1,
+  "difficulty": 1,
+  "title": "Compare two numbers",
+  "description": "Get two numbers from the user using input prompt. If a is greater than b return a is greater than b, if a is less b return a is smaller than b, else a is equal to b. Output:\n\n```sh\nEnter number one: 4\nEnter number two: 3\n4 is greater than 3\n```\n\nPython-Gym adaptation: implement as `compare_numbers(a, b)`, returning the exact message `\"{a} is greater than {b}\"`, `\"{a} is smaller than {b}\"`, or `\"{a} is equal to {b}\"`.",
+  "examples": "compare_numbers(4, 3) -> '4 is greater than 3'\ncompare_numbers(3, 4) -> '3 is smaller than 4'\ncompare_numbers(3, 3) -> '3 is equal to 3'",
+  "starter_code": "def compare_numbers(a, b):\n    # write your code here\n    pass\n",
+  "hints": [
+    "Use an if / elif / else chain to cover the three possible outcomes.",
+    "Compare a and b with > and < before falling back to the equal case.",
+    "Build each returned message with an f-string like f\"{a} is greater than {b}\"."
+  ],
+  "expected_behavior": "Returns a string comparing a and b: greater than, smaller than, or equal to, using the exact values passed in.",
+  "hidden_tests": [
+    {
+      "call": "compare_numbers(4, 3)",
+      "expected": "'4 is greater than 3'",
+      "label": "a greater than b"
+    },
+    {
+      "call": "compare_numbers(3, 4)",
+      "expected": "'3 is smaller than 4'",
+      "label": "a smaller than b"
+    },
+    {
+      "call": "compare_numbers(3, 3)",
+      "expected": "'3 is equal to 3'",
+      "label": "a equal to b"
+    }
+  ],
+  "solution": "def compare_numbers(a, b):\n    if a > b:\n        return f\"{a} is greater than {b}\"\n    elif a < b:\n        return f\"{a} is smaller than {b}\"\n    else:\n        return f\"{a} is equal to {b}\"\n",
+  "explanation": "The three relational outcomes between two numbers - greater, smaller, or equal - are mutually exclusive, so an if / elif / else chain checks them in order and returns the matching formatted message.",
+  "concepts": ["if", "elif", "else", "comparison operators", "f-strings"],
+  "skills": ["basic_data_manipulation"],
+  "source": "30_days_of_python",
+  "exercise_type": "function"
+}

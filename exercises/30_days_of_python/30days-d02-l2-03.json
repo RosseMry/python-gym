@@ -1,0 +1,35 @@
+{
+  "source": "30_days_of_python",
+  "day": 2,
+  "module": "variables",
+  "exercise_type": "function",
+  "level": 2,
+  "id": "30days-d02-l2-03",
+  "difficulty": 1,
+  "title": "Arithmetic on two numbers",
+  "description": "Write a function `arithmetic_report(num_one, num_two)` that returns a dict with keys `total` (sum), `diff` (difference), `product`, `division`, `remainder` (modulus), `exp` (power), and `floor_division`.\n\nCovers source items 4-11 (declare num_one=5 and num_two=4, then add, subtract, multiply, divide, modulus, power, and floor-divide them) as one exercise - the source's own example values.",
+  "examples": "arithmetic_report(5, 4)\n-> {'total': 9, 'diff': 1, 'product': 20, 'division': 1.25,\n    'remainder': 1, 'exp': 625, 'floor_division': 1}",
+  "starter_code": "def arithmetic_report(num_one, num_two):\n    # your code here\n    pass\n",
+  "hints": [
+    "Operators to consider: + - * / % ** //",
+    "Each key in the result dict corresponds to exactly one arithmetic operator applied to num_one and num_two, in the order the source lists them.",
+    "Build the dict with one entry per operator: num_one + num_two, num_one - num_two, num_one * num_two, num_one / num_two, num_one % num_two, num_one ** num_two, num_one // num_two."
+  ],
+  "expected_behavior": "Returns a dict with all seven arithmetic results.",
+  "hidden_tests": [
+    {
+      "call": "arithmetic_report(5, 4)",
+      "expected": "{'total': 9, 'diff': 1, 'product': 20, 'division': 1.25, 'remainder': 1, 'exp': 625, 'floor_division': 1}",
+      "label": "source items 4-11"
+    }
+  ],
+  "solution": "def arithmetic_report(num_one, num_two):\n    return {\n        \"total\": num_one + num_two,\n        \"diff\": num_one - num_two,\n        \"product\": num_one * num_two,\n        \"division\": num_one / num_two,\n        \"remainder\": num_one % num_two,\n        \"exp\": num_one ** num_two,\n        \"floor_division\": num_one // num_two,\n    }\n",
+  "explanation": "Python has a dedicated operator for each of these seven operations - none of them need a function call or a manual loop, matching the arithmetic table exercise from Day 4's string formatting.",
+  "concepts": [
+    "arithmetic operators",
+    "dict"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

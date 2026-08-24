@@ -1,0 +1,45 @@
+{
+  "source": "30_days_of_python",
+  "day": 4,
+  "level": null,
+  "module": "strings",
+  "exercise_type": "function",
+  "id": "30days-d04-10",
+  "difficulty": 1,
+  "title": "Character at an index",
+  "description": "Write a function `char_at(text, index)` that returns the character of `text` at position `index`.\n\nCovers source items 15-17 (character at index 0, the last index, and index 10) as one exercise with three test cases.",
+  "examples": "char_at('Coding For All', 0)\n-> 'C'\nchar_at('Coding For All', -1)\n-> 'l'\nchar_at('Coding For All', 10)\n-> ' '",
+  "starter_code": "def char_at(text, index):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: strings support indexing, just like lists",
+    "text[index] gives the single character at that position - index 0 is the first character, and negative indices count from the end, so text[-1] is always the last character regardless of length.",
+    "Return text[index] directly."
+  ],
+  "expected_behavior": "Returns the single character at the given index.",
+  "hidden_tests": [
+    {
+      "call": "char_at('Coding For All', 0)",
+      "expected": "'C'",
+      "label": "source item 15, index 0"
+    },
+    {
+      "call": "char_at('Coding For All', -1)",
+      "expected": "'l'",
+      "label": "source item 16, last index"
+    },
+    {
+      "call": "char_at('Coding For All', 10)",
+      "expected": "' '",
+      "label": "source item 17, index 10"
+    }
+  ],
+  "solution": "def char_at(text, index):\n    return text[index]\n",
+  "explanation": "Strings support the same indexing syntax as lists, including negative indices - text[-1] always means \"the last character\" without needing len(text) - 1.",
+  "concepts": [
+    "strings",
+    "indexing"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

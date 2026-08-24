@@ -49,6 +49,7 @@ This module also now supports two independent test modes on the same
 
 from __future__ import annotations
 
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -58,7 +59,14 @@ from pathlib import Path
 from app.domain.models import Exercise, HiddenTest, SubmissionResult, TestOutcome
 
 _TIMEOUT_SECONDS = 5
-_MEMORY_LIMIT_BYTES = 256 * 1024 * 1024  # 256 MB
+# 768 MB rather than a tighter figure because numpy/pandas/matplotlib
+# (42 Piscine Module 1/2, Sprint 3 finalization) need real headroom just
+# to import - OpenBLAS alone fails to initialize under ~450 MB of
+# virtual address space, independent of how small the actual arrays are.
+_MEMORY_LIMIT_BYTES = 768 * 1024 * 1024
+# Repo-root resources/ directory, addressed the same way Exercise.resources
+# entries are stored (e.g. "python/42-piscine/countries.csv").
+_RESOURCES_ROOT = Path(__file__).resolve().parents[3] / "resources"
 
 # A sentinel a student's own print() output could not plausibly produce
 # by accident, used to tag the hidden-test protocol lines so they can be
@@ -109,6 +117,21 @@ def _run_subprocess(
         )
     except subprocess.TimeoutExpired:
         return None
+
+
+def _stage_resources(exercise: Exercise, tmp_dir: Path) -> None:
+    """Copy the exercise's resource files into the sandbox directory.
+
+    Copied under their plain basename, so student code can open them
+    with the relative filename the exercise description names (e.g.
+    ``open("countries.csv")``) regardless of where they live under
+    ``resources/``. Missing files are skipped rather than erroring -
+    most exercises have no resources to stage at all.
+    """
+    for resource_path in exercise.resources:
+        source = _RESOURCES_ROOT / resource_path
+        if source.is_file():
+            shutil.copy(source, tmp_dir / source.name)
 
 
 def _build_function_mode_script(
@@ -162,7 +185,9 @@ def _run_function_mode(exercise: Exercise, student_code: str) -> SubmissionResul
     tests_total = len(exercise.hidden_tests)
 
     with tempfile.TemporaryDirectory() as tmp_dir:
-        script_path = Path(tmp_dir) / "submission.py"
+        tmp_path = Path(tmp_dir)
+        _stage_resources(exercise, tmp_path)
+        script_path = tmp_path / "submission.py"
         script_path.write_text(script, encoding="utf-8")
 
         start = time.perf_counter()
@@ -198,7 +223,15 @@ def _run_function_mode(exercise: Exercise, student_code: str) -> SubmissionResul
     exit_ok = proc.returncode == 0
     all_passed = tests_total > 0 and tests_passed == tests_total and exit_ok
 
-    if not exit_ok and not protocol_lines:
+    if tests_total == 0:
+        # No hidden tests for this exercise (e.g. output that can't be
+        # asserted exactly, like piscine-00-loading's live progress bar,
+        # or a packaging exercise with nothing to call) - same
+        # manually-verified convention as script mode's tests_total == 0
+        # case, rather than reporting every submission as failed.
+        status = "passed"
+        all_passed = True
+    elif not exit_ok and not protocol_lines:
         status = "error"
     elif all_passed:
         status = "passed"
@@ -229,7 +262,9 @@ def _run_script_mode(exercise: Exercise, student_code: str) -> SubmissionResult:
     any_nonzero_without_test_data = False
 
     with tempfile.TemporaryDirectory() as tmp_dir:
-        script_path = Path(tmp_dir) / "submission.py"
+        tmp_path = Path(tmp_dir)
+        _stage_resources(exercise, tmp_path)
+        script_path = tmp_path / "submission.py"
         script_path.write_text(student_code, encoding="utf-8")
 
         cases = exercise.hidden_tests or [HiddenTest(args=[], expected_stdout=None)]

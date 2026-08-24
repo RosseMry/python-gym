@@ -1,0 +1,46 @@
+{
+  "source": "30_days_of_python",
+  "day": 19,
+  "module": "file_handling",
+  "exercise_type": "function",
+  "level": 2,
+  "id": "30days-d19-l2-04",
+  "difficulty": 3,
+  "title": "Check similarity between two texts",
+  "description": "Write a function `text_similarity(path1, path2, stop_words)` that reads the two text files, removes every word in `stop_words` from each (case-insensitive), and returns their Jaccard similarity: the number of words the two texts have in common, divided by the number of distinct words across both, rounded to 4 decimals.\n\nCompares real transcripts - Michelle Obama's and Melina Trump's speeches, both available in your working directory.",
+  "examples": "text_similarity(\n    'michelle_obama_speech.txt', 'melina_trump_speech.txt',\n    ['the', 'a', 'and', 'to', 'of'],\n)\n-> 0.21 (approximately)",
+  "starter_code": "import re\n\n\ndef text_similarity(path1, path2, stop_words):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: turn each text into a set of words (after removing stop words), then compare the sets",
+    "For two sets, `len(a & b) / len(a | b)` is their Jaccard similarity - identical sets score 1.0, completely disjoint sets score 0.0, and it naturally lands somewhere in between for two real speeches that share ordinary vocabulary but differ in subject.",
+    "Read and tokenize both files, drop any word in stop_words from each (case-insensitive), turn the results into sets, and return the intersection-over-union ratio, rounded to 4 decimals."
+  ],
+  "expected_behavior": "Returns the Jaccard similarity of the two texts' vocabularies, stop words excluded, rounded to 4 decimals.",
+  "hidden_tests": [
+    {
+      "call": "text_similarity('michelle_obama_speech.txt', 'melina_trump_speech.txt', ['the', 'a', 'an', 'and', 'or', 'but', 'if', 'of', 'to', 'in', 'on', 'for', 'with', 'is', 'are', 'was', 'were', 'be', 'been', 'being', 'i', 'you', 'he', 'she', 'it', 'we', 'they', 'this', 'that', 'as', 'at', 'by', 'from', 'not', 'so', 'do', 'does', 'did', 'have', 'has', 'had', 'will', 'would', 'can', 'could', 'my', 'your', 'his', 'her', 'its', 'our', 'their'])",
+      "expected": "0.2039",
+      "label": "source item 4"
+    },
+    {
+      "call": "text_similarity('michelle_obama_speech.txt', 'michelle_obama_speech.txt', ['the', 'a'])",
+      "expected": "1.0",
+      "label": "identical files score 1.0"
+    }
+  ],
+  "solution": "import re\n\n\ndef _clean_words(text, stop_words):\n    words = re.findall(r\"[A-Za-z']+\", text.lower())\n    stop = set(w.lower() for w in stop_words)\n    return {w for w in words if w not in stop}\n\n\ndef text_similarity(path1, path2, stop_words):\n    with open(path1, encoding=\"utf-8\") as f:\n        words1 = _clean_words(f.read(), stop_words)\n    with open(path2, encoding=\"utf-8\") as f:\n        words2 = _clean_words(f.read(), stop_words)\n    return round(len(words1 & words2) / len(words1 | words2), 4)\n",
+  "explanation": "Stop words are removed before comparing because otherwise two texts in the same language would look artificially similar just from sharing 'the', 'and', 'is' - the interesting overlap is in the topic-specific vocabulary that's left after common function words are stripped out.",
+  "concepts": [
+    "sets",
+    "regular expressions",
+    "file reading"
+  ],
+  "skills": [
+    "text_processing",
+    "using_standard_library_modules"
+  ],
+  "resources": [
+    "python/30-days/michelle_obama_speech.txt",
+    "python/30-days/melina_trump_speech.txt"
+  ]
+}

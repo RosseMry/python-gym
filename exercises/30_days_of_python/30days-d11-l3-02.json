@@ -1,0 +1,40 @@
+{
+  "source": "30_days_of_python",
+  "day": 11,
+  "module": "functions",
+  "exercise_type": "function",
+  "level": 3,
+  "id": "30days-d11-l3-02",
+  "difficulty": 1,
+  "title": "Check if all list items are unique",
+  "description": "Write a function `all_unique(items)` that returns whether every item in `items` appears exactly once.",
+  "examples": "all_unique([1, 2, 3])\n-> True\nall_unique([1, 2, 2])\n-> False",
+  "starter_code": "def all_unique(items):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: a set automatically drops duplicates",
+    "set(items) keeps only one copy of each distinct value - if that set ends up smaller than the original list, at least one value was repeated.",
+    "Return len(set(items)) == len(items)."
+  ],
+  "expected_behavior": "Returns True if no item repeats, False otherwise.",
+  "hidden_tests": [
+    {
+      "call": "all_unique([1, 2, 3])",
+      "expected": "True",
+      "label": "source item 2, all unique"
+    },
+    {
+      "call": "all_unique([1, 2, 2])",
+      "expected": "False",
+      "label": "duplicate present"
+    }
+  ],
+  "solution": "def all_unique(items):\n    return len(set(items)) == len(items)\n",
+  "explanation": "Comparing the length before and after removing duplicates (via a set) is a common idiom for 'were there any duplicates at all' without needing to identify which value repeated.",
+  "concepts": [
+    "sets",
+    "len"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

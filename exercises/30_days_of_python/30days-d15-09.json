@@ -1,0 +1,41 @@
+{
+  "id": "30days-d15-09",
+  "module": "type_errors",
+  "day": 15,
+  "difficulty": 2,
+  "title": "Catch a ValueError",
+  "description": "Source instruction (Exercises: Day 15, item 1): \"Open you python interactive shell and try all the examples covered in this section.\"\n\nValueError example: `int('12a')` raises `ValueError: invalid literal for int() with base 10: '12a'` (\"we cannot change the given string to a number, because of the 'a' letter in it\").\n\nPython-Gym adaptation: implement as `safe_int(s)`, returning `int(s)`, or a string \"ValueError: <message>\" if the string cannot be converted to an int.",
+  "examples": "safe_int('12a') -> \"ValueError: invalid literal for int() with base 10: '12a'\"\nsafe_int('12') -> 12",
+  "starter_code": "def safe_int(s):\n    # your code here\n    pass\n",
+  "hints": [
+    "int(s) raises ValueError when the string doesn't represent a whole number, such as '12a'.",
+    "You don't need to validate the string's characters yourself - let Python raise the error and catch it.",
+    "Wrap `return int(s)` in try/except ValueError, and in the except branch return an f-string starting with 'ValueError: ' followed by the caught exception object."
+  ],
+  "expected_behavior": "Returns int(s) when the string is a valid integer literal. If it isn't, catches the ValueError and returns a descriptive string in the form \"ValueError: <message>\" instead of letting the exception propagate.",
+  "hidden_tests": [
+    {
+      "call": "safe_int('12a')",
+      "expected": "\"ValueError: invalid literal for int() with base 10: '12a'\"",
+      "label": "non-numeric character, mirrors the source example"
+    },
+    {
+      "call": "safe_int('12')",
+      "expected": "12",
+      "label": "valid digit string converts normally"
+    }
+  ],
+  "solution": "def safe_int(s):\n    try:\n        return int(s)\n    except ValueError as e:\n        return f\"ValueError: {e}\"\n",
+  "explanation": "int() raises ValueError when its argument isn't a valid base-10 integer literal. The letter 'a' in '12a' makes it invalid, as in the source example; the except block catches that ValueError and returns a descriptive string instead of crashing.",
+  "concepts": [
+    "valueerror",
+    "exception handling",
+    "try/except",
+    "type conversion"
+  ],
+  "skills": [
+    "error_handling"
+  ],
+  "source": "30_days_of_python",
+  "exercise_type": "function"
+}

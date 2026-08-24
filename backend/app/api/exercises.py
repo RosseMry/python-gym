@@ -115,6 +115,7 @@ class SubmissionResponse(BaseModel):
 class HintResponse(BaseModel):
     hint: str
     hint_fr: str | None
+    hint_function: str | None
 
 
 class SolutionResponse(BaseModel):
@@ -254,10 +255,10 @@ def request_hint(
 ) -> HintResponse:
     """Reveal the next unseen hint for this exercise."""
     try:
-        hint, hint_fr = service.request_hint(exercise_id)
+        hint, hint_fr, hint_function = service.request_hint(exercise_id)
     except ExerciseNotFoundError as exc:
         raise HTTPException(status_code=404, detail="Exercise not found") from exc
-    return HintResponse(hint=hint, hint_fr=hint_fr)
+    return HintResponse(hint=hint, hint_fr=hint_fr, hint_function=hint_function)
 
 
 @router.post("/{exercise_id}/solution", response_model=SolutionResponse)

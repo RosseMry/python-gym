@@ -1,0 +1,42 @@
+{
+  "source": "30_days_of_python",
+  "day": 3,
+  "level": null,
+  "module": "operators",
+  "exercise_type": "script",
+  "id": "30days-d03-03",
+  "difficulty": 2,
+  "title": "Rectangle area and perimeter from user input",
+  "description": "Write a script that asks the user for a rectangle's length and width (prompts 'Enter length: ' and 'Enter width: ') and prints its area (`length * width`) and perimeter (`2 * (length + width)`), one per line.",
+  "examples": "Enter length: 5\nEnter width: 3\nThe area of the rectangle is 15.0\nThe perimeter of the rectangle is 16.0",
+  "starter_code": "# your code here\n",
+  "hints": [
+    "💡 Function to consider: float()",
+    "What does it do? float() converts a value - such as the text input() gives you - into a number that can have a decimal part.\n\nExample:\nvalue = float(\"3.5\")\n\nResult:\n3.5",
+    "Apply it: convert both prompted values with float(), then compute and print the two formulas on separate lines, in the order area then perimeter."
+  ],
+  "hint_functions": [
+    "float",
+    null,
+    null
+  ],
+  "expected_behavior": "Prints the rectangle's area then its perimeter, each on its own line.",
+  "hidden_tests": [
+    {
+      "args": [],
+      "stdin": "5\n3\n",
+      "expected_stdout": "Enter length: Enter width: The area of the rectangle is 15.0\nThe perimeter of the rectangle is 16.0",
+      "label": "source item 6"
+    }
+  ],
+  "solution": "def main():\n    length = float(input('Enter length: '))\n    width = float(input('Enter width: '))\n    print(f'The area of the rectangle is {length * width}')\n    print(f'The perimeter of the rectangle is {2 * (length + width)}')\n\n\nif __name__ == '__main__':\n    main()\n",
+  "explanation": "Both formulas reuse the same two converted inputs - area multiplies them, perimeter adds them and doubles the result.",
+  "concepts": [
+    "input",
+    "float",
+    "formulas"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

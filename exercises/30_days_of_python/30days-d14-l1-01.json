@@ -1,0 +1,47 @@
+{
+  "id": "30days-d14-l1-01",
+  "module": "higher_order_functions",
+  "day": 14,
+  "level": 1,
+  "difficulty": 2,
+  "title": "Map, filter, and reduce differences",
+  "description": "Explain the difference between map, filter, and reduce.\n\nPython-Gym adaptation: implement as hof_role(name), where name is one of the strings 'map', 'filter', or 'reduce'. Return a tuple (transforms_each_item, filters_by_predicate, produces_single_value) of booleans describing what that higher order function does to an iterable.",
+  "examples": ">>> hof_role('map')\n(True, False, False)\n>>> hof_role('reduce')\n(False, False, True)",
+  "starter_code": "def hof_role(name):\n    # your code here\n    pass\n",
+  "hints": [
+    "map, filter, and reduce all take a function and an iterable, but they use the function's result differently.",
+    "map applies the function to every item and keeps every result; filter applies a function that returns True/False and keeps only the items that pass; reduce applies the function cumulatively to collapse the iterable into one value.",
+    "A dict keyed by the three names, each value the matching 3-tuple, lets you look the answer up by name instead of writing an if/elif chain."
+  ],
+  "expected_behavior": "Returns a 3-tuple of booleans describing whether the named higher order function transforms every item, filters items by a predicate, or reduces the iterable to a single value.",
+  "solution": "def hof_role(name):\n    roles = {\n        'map': (True, False, False),\n        'filter': (False, True, False),\n        'reduce': (False, False, True),\n    }\n    return roles[name]\n",
+  "hidden_tests": [
+    {
+      "call": "hof_role('map')",
+      "expected": "(True, False, False)",
+      "label": "map transforms every item"
+    },
+    {
+      "call": "hof_role('filter')",
+      "expected": "(False, True, False)",
+      "label": "filter selects items with a predicate"
+    },
+    {
+      "call": "hof_role('reduce')",
+      "expected": "(False, False, True)",
+      "label": "reduce produces a single accumulated value"
+    }
+  ],
+  "explanation": "map transforms every item in the iterable and returns a same-length result. filter keeps only the items for which the given function returns a truthy value, so the result may be shorter. reduce repeatedly combines items with an accumulator until only a single value remains.",
+  "concepts": [
+    "map",
+    "filter",
+    "reduce",
+    "higher order functions"
+  ],
+  "skills": [
+    "functional_python"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

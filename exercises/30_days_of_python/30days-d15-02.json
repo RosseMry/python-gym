@@ -1,0 +1,41 @@
+{
+  "id": "30days-d15-02",
+  "module": "type_errors",
+  "day": 15,
+  "difficulty": 2,
+  "title": "Catch a NameError",
+  "description": "Source instruction (Exercises: Day 15, item 1): \"Open you python interactive shell and try all the examples covered in this section.\"\n\nNameError example: `print(age)` raises `NameError: name 'age' is not defined` because age was never declared (\"we did not define an age variable but we were trying to print it out as if we had had declared it\"); it is fixed by first assigning `age = 25`.\n\nPython-Gym adaptation: implement as `safe_lookup(expr)`, evaluating the given expression string with `eval()` and returning its value, or a string \"NameError: <message>\" if evaluating it raises a NameError because a name used in the expression is not defined.",
+  "examples": "safe_lookup(\"age\") -> \"NameError: name 'age' is not defined\"\nsafe_lookup(\"1 + 1\") -> 2",
+  "starter_code": "def safe_lookup(expr):\n    # your code here\n    pass\n",
+  "hints": [
+    "Like SyntaxError, NameError is only raised when the given text is actually evaluated as code, so use eval() on the expression string.",
+    "eval() raises NameError when the expression references a variable name that doesn't exist in scope, e.g. eval('age') when age was never assigned.",
+    "Wrap eval(expr) in try/except NameError, and in the except branch return an f-string starting with 'NameError: ' followed by the caught exception object."
+  ],
+  "expected_behavior": "Evaluates the given expression string with eval(). If evaluation succeeds, returns the resulting value. If it raises a NameError (an undefined name was referenced), catches it and returns a descriptive string in the form \"NameError: <message>\" instead of letting the exception propagate.",
+  "hidden_tests": [
+    {
+      "call": "safe_lookup(\"age\")",
+      "expected": "\"NameError: name 'age' is not defined\"",
+      "label": "undefined name 'age', mirrors the source example"
+    },
+    {
+      "call": "safe_lookup(\"1 + 1\")",
+      "expected": "2",
+      "label": "valid expression evaluates normally"
+    }
+  ],
+  "solution": "def safe_lookup(expr):\n    try:\n        return eval(expr)\n    except NameError as e:\n        return f\"NameError: {e}\"\n",
+  "explanation": "eval() evaluates the given string as a Python expression. Referencing a name that was never assigned, like `age` in the source example, raises NameError; the except block catches it and returns a descriptive string instead of the error propagating.",
+  "concepts": [
+    "nameerror",
+    "exception handling",
+    "try/except",
+    "eval"
+  ],
+  "skills": [
+    "error_handling"
+  ],
+  "source": "30_days_of_python",
+  "exercise_type": "function"
+}

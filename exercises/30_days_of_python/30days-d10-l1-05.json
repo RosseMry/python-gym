@@ -1,0 +1,35 @@
+{
+  "source": "30_days_of_python",
+  "day": 10,
+  "module": "loops",
+  "exercise_type": "function",
+  "level": 1,
+  "id": "30days-d10-l1-05",
+  "difficulty": 1,
+  "title": "Format a list, one item per line",
+  "description": "Write a function `format_items(items)` that returns every item of `items` on its own line.",
+  "examples": "print(format_items(['Python', 'Numpy', 'Pandas', 'Django', 'Flask']))\n# Python\n# Numpy\n# Pandas\n# Django\n# Flask",
+  "starter_code": "def format_items(items):\n    # your code here\n    pass\n",
+  "hints": [
+    "Method to consider: str.join(), the same tool used to build the earlier grid and triangle",
+    "Iterating with a for loop and print()-ing each item one at a time produces the same visual result as joining the items with '\\n' in a single expression.",
+    "Return '\\n'.join(items) directly - items is already a list of strings."
+  ],
+  "expected_behavior": "Returns the items joined with newlines, one per line.",
+  "hidden_tests": [
+    {
+      "call": "format_items(['Python', 'Numpy', 'Pandas', 'Django', 'Flask'])",
+      "expected": "'Python\\nNumpy\\nPandas\\nDjango\\nFlask'",
+      "label": "source item 6"
+    }
+  ],
+  "solution": "def format_items(items):\n    return \"\\n\".join(items)\n",
+  "explanation": "for item in items: print(item) and '\\n'.join(items) produce identical output - join() is the loop, just expressed as a single method call instead of a print per iteration.",
+  "concepts": [
+    "loops",
+    "join"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

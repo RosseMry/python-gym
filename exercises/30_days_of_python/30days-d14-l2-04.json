@@ -1,0 +1,36 @@
+{
+  "source": "30_days_of_python",
+  "day": 14,
+  "module": "higher_order_functions",
+  "exercise_type": "function",
+  "level": 2,
+  "id": "30days-d14-l2-04",
+  "difficulty": 1,
+  "title": "Filter countries by exact name length",
+  "description": "Write a function `filter_exact_length(countries, n)` that returns the countries whose name is exactly `n` characters long, using `filter()`.",
+  "examples": "filter_exact_length(['Estonia', 'Finland', 'Sweden', 'Denmark', 'Norway', 'Iceland'], 6)\n-> ['Sweden', 'Norway']",
+  "starter_code": "def filter_exact_length(countries, n):\n    # your code here\n    pass\n",
+  "hints": [
+    "Function to consider: filter(), combined with len()",
+    "len(c) == n is the per-item condition - filter() keeps every country where that comparison is True.",
+    "Return list(filter(lambda c: len(c) == n, countries))."
+  ],
+  "expected_behavior": "Returns the countries whose name has exactly n characters.",
+  "hidden_tests": [
+    {
+      "call": "filter_exact_length(['Estonia', 'Finland', 'Sweden', 'Denmark', 'Norway', 'Iceland'], 6)",
+      "expected": "['Sweden', 'Norway']",
+      "label": "source item 5"
+    }
+  ],
+  "solution": "def filter_exact_length(countries, n):\n    return list(filter(lambda c: len(c) == n, countries))\n",
+  "explanation": "Swapping the lambda's condition is all that separates this from filter_containing - filter() itself doesn't change, only what question its callback asks.",
+  "concepts": [
+    "filter",
+    "lambda",
+    "len"
+  ],
+  "skills": [
+    "functional_python"
+  ]
+}

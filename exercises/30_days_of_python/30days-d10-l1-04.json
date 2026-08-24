@@ -1,0 +1,36 @@
+{
+  "source": "30_days_of_python",
+  "day": 10,
+  "module": "loops",
+  "exercise_type": "function",
+  "level": 1,
+  "id": "30days-d10-l1-04",
+  "difficulty": 1,
+  "title": "Build a squares table",
+  "description": "Write a function `square_table(n)` that returns a multi-line string listing `i x i = i*i` for every `i` from 0 to `n`, inclusive.",
+  "examples": "print(square_table(3))\n# 0 x 0 = 0\n# 1 x 1 = 1\n# 2 x 2 = 4\n# 3 x 3 = 9",
+  "starter_code": "def square_table(n):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: one formatted line per number, then join",
+    "For each i, the line is f'{i} x {i} = {i * i}' - the same f-string shape repeated for every i from 0 to n.",
+    "Build a list of these f-string lines for i in range(n + 1), then join them with '\\n'."
+  ],
+  "expected_behavior": "Returns n+1 lines, each showing i x i = i squared.",
+  "hidden_tests": [
+    {
+      "call": "square_table(10)",
+      "expected": "'0 x 0 = 0\\n1 x 1 = 1\\n2 x 2 = 4\\n3 x 3 = 9\\n4 x 4 = 16\\n5 x 5 = 25\\n6 x 6 = 36\\n7 x 7 = 49\\n8 x 8 = 64\\n9 x 9 = 81\\n10 x 10 = 100'",
+      "label": "source item 5"
+    }
+  ],
+  "solution": "def square_table(n):\n    return \"\\n\".join(f\"{i} x {i} = {i * i}\" for i in range(n + 1))\n",
+  "explanation": "A generator expression inside join() avoids building an intermediate list just to throw it away - the pattern from build_triangle repeats here with a more elaborate per-line format.",
+  "concepts": [
+    "loops",
+    "f-strings",
+    "join"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

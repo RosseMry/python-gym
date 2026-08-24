@@ -1,0 +1,37 @@
+{
+  "source": "30_days_of_python",
+  "day": 2,
+  "module": "variables",
+  "exercise_type": "function",
+  "level": 1,
+  "id": "30days-d02-l1-02",
+  "difficulty": 1,
+  "title": "Declare variables of different types",
+  "description": "Write a function `build_profile(first_name, last_name, country, city, age, year, is_married)` that returns a dict with keys `first_name`, `last_name`, `full_name` (first + last, space-separated), `country`, `city`, `age`, `year`, and `is_married`.\n\nCovers source items 3-12: declaring a first_name, last_name, full_name, country, city, age, year, and is_married variable are each their own numbered item in the source, but none has a fixed value to check - what's actually being tested is declaring variables of the right types (str, int, bool) and combining two of them (full_name), which this single function does for all of them at once.",
+  "examples": "build_profile('Ada', 'Lovelace', 'England', 'London', 28, 1843, False)\n-> {'first_name': 'Ada', 'last_name': 'Lovelace', 'full_name': 'Ada Lovelace',\n    'country': 'England', 'city': 'London', 'age': 28, 'year': 1843, 'is_married': False}",
+  "starter_code": "def build_profile(first_name, last_name, country, city, age, year, is_married):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: build the dict directly from the parameters, plus one computed value",
+    "full_name isn't one of the parameters - it's built from two of them with an f-string or string concatenation, the same as any other derived value.",
+    "Return a dict literal with the seven parameters as keys, plus 'full_name' computed as f'{first_name} {last_name}'."
+  ],
+  "expected_behavior": "Returns a dict with all eight keys, full_name derived from first_name and last_name.",
+  "hidden_tests": [
+    {
+      "call": "build_profile('Ada', 'Lovelace', 'England', 'London', 28, 1843, False)",
+      "expected": "{'first_name': 'Ada', 'last_name': 'Lovelace', 'full_name': 'Ada Lovelace', 'country': 'England', 'city': 'London', 'age': 28, 'year': 1843, 'is_married': False}",
+      "label": "source items 3-12"
+    }
+  ],
+  "solution": "def build_profile(first_name, last_name, country, city, age, year, is_married):\n    return {\n        \"first_name\": first_name,\n        \"last_name\": last_name,\n        \"full_name\": f\"{first_name} {last_name}\",\n        \"country\": country,\n        \"city\": city,\n        \"age\": age,\n        \"year\": year,\n        \"is_married\": is_married,\n    }\n",
+  "explanation": "A dict literal declares several named values at once, the same idea as ten separate variable declarations - full_name shows that a variable doesn't have to come from a parameter directly, it can be computed from others.",
+  "concepts": [
+    "variables",
+    "dict",
+    "data types",
+    "f-strings"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

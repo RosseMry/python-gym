@@ -1,0 +1,48 @@
+{
+  "id": "30days-d11-l1-03",
+  "module": "functions",
+  "day": 11,
+  "level": 1,
+  "difficulty": 2,
+  "title": "Sum an arbitrary number of numeric arguments",
+  "description": "Write a function called add_all_nums which takes arbitrary number of arguments and sums all the arguments. Check if all the list items are number types. If not do give a reasonable feedback.",
+  "examples": ">>> add_all_nums(1, 2, 3)\n6\n>>> add_all_nums(1, 2, 'three')\n'All arguments must be numbers.'",
+  "starter_code": "def add_all_nums(*args):\n    # your code here\n    pass\n",
+  "hints": [
+    "*args collects any number of positional arguments into a tuple.",
+    "Use isinstance(x, (int, float)) together with all() to check every argument is a number.",
+    "If not all(...) is True, return a feedback string like 'All arguments must be numbers.' instead of summing."
+  ],
+  "expected_behavior": "Returns the sum of all arguments if every argument is an int or float; otherwise returns a feedback string explaining the problem.",
+  "explanation": "*args gathers the arguments into a tuple. all(isinstance(x, (int, float)) for x in args) verifies every item is numeric before summing; if any item fails that check, a feedback string is returned instead of attempting the sum.",
+  "concepts": [
+    "functions",
+    "*args",
+    "isinstance",
+    "all",
+    "sum"
+  ],
+  "skills": [
+    "functional_python"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python",
+  "hidden_tests": [
+    {
+      "call": "add_all_nums(1, 2, 3)",
+      "expected": "6",
+      "label": "three integers"
+    },
+    {
+      "call": "add_all_nums(1, 2, 'three')",
+      "expected": "'All arguments must be numbers.'",
+      "label": "non-numeric argument gives feedback"
+    },
+    {
+      "call": "add_all_nums(1.5, 2.5)",
+      "expected": "4.0",
+      "label": "floats"
+    }
+  ],
+  "solution": "def add_all_nums(*args):\n    if not all(isinstance(x, (int, float)) and not isinstance(x, bool) for x in args):\n        return 'All arguments must be numbers.'\n    return sum(args)\n"
+}

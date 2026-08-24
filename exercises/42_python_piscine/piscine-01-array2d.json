@@ -1,0 +1,45 @@
+{
+  "id": "piscine-01-array2d",
+  "module": "piscine_01_array",
+  "difficulty": 2,
+  "title": "Array 2D",
+  "title_fr": "Tableau 2D",
+  "description": "Write a function `ft_array2d(matrix)` that takes a 2D NumPy array and returns a tuple `(shape, sub_array)`, where `shape` is `matrix.shape` and `sub_array` is the 2x2 block formed by rows 1-2 and columns 1-2 (using NumPy slicing, not a Python loop).\n\nThis practices 2D indexing/slicing, which behaves differently from indexing a plain Python list of lists: `matrix[1:3, 1:3]` slices both axes in one step.",
+  "description_fr": "Ecris une fonction `ft_array2d(matrix)` qui prend un tableau NumPy 2D et retourne un tuple `(shape, sub_array)`, ou `shape` est `matrix.shape` et `sub_array` est le bloc 2x2 forme par les lignes 1-2 et les colonnes 1-2 (avec le slicing NumPy, pas une boucle Python).\n\nCela pratique l'indexation/le slicing 2D, qui se comporte differemment de l'indexation d'une liste de listes Python : `matrix[1:3, 1:3]` decoupe les deux axes en une seule etape.",
+  "examples": "matrix = np.array([\n    [1, 2, 3, 4],\n    [5, 6, 7, 8],\n    [9, 10, 11, 12],\n    [13, 14, 15, 16],\n])\nft_array2d(matrix)\n-> ((4, 4), array([[ 6,  7], [10, 11]]))",
+  "examples_fr": "matrix = np.array([\n    [1, 2, 3, 4],\n    [5, 6, 7, 8],\n    [9, 10, 11, 12],\n    [13, 14, 15, 16],\n])\nft_array2d(matrix)\n-> ((4, 4), array([[ 6,  7], [10, 11]]))",
+  "starter_code": "import numpy as np\n\n\ndef ft_array2d(matrix):\n    # your code here\n    pass\n",
+  "hints": [
+    "NumPy array to consider: .shape and 2D slicing (matrix[rows, cols])",
+    "matrix.shape is a tuple with the number of rows and columns. A 2D NumPy array also accepts one slice per axis, separated by a comma - matrix[a:b, c:d] takes rows a..b-1 and, within those rows, columns c..d-1, all at once (no loop needed).",
+    "You need the block that starts at row index 1 and column index 1, and is 2 rows by 2 columns. Combine matrix.shape with a two-axis slice built from those indices."
+  ],
+  "hints_fr": [
+    "Element NumPy a considerer : .shape et le slicing 2D (matrix[lignes, colonnes])",
+    "matrix.shape est un tuple avec le nombre de lignes et de colonnes. Un tableau NumPy 2D accepte aussi un slice par axe, separes par une virgule - matrix[a:b, c:d] prend les lignes a..b-1 et, parmi ces lignes, les colonnes c..d-1, en une seule fois (pas besoin de boucle).",
+    "Il te faut le bloc qui commence a la ligne d'indice 1 et la colonne d'indice 1, sur 2 lignes et 2 colonnes. Combine matrix.shape avec un slice a deux axes construit a partir de ces indices."
+  ],
+  "expected_behavior": "Returns (matrix.shape, the 2x2 sub-array at rows 1-2 / columns 1-2).",
+  "hidden_tests": [
+    {
+      "call": "ft_array2d(np.array([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]]))",
+      "expected": "((4, 4), array([[ 6,  7],\n       [10, 11]]))",
+      "label": "4x4 matrix"
+    },
+    {
+      "call": "ft_array2d(np.array([[0, 1, 2], [3, 4, 5], [6, 7, 8]]))",
+      "expected": "((3, 3), array([[4, 5],\n       [7, 8]]))",
+      "label": "3x3 matrix"
+    }
+  ],
+  "solution": "import numpy as np\n\n\ndef ft_array2d(matrix):\n    return matrix.shape, matrix[1:3, 1:3]\n",
+  "explanation": "matrix.shape reads the array's dimensions without any computation. matrix[1:3, 1:3] slices rows and columns in the same expression - the comma separates independent slices per axis, which is what makes NumPy indexing more powerful than nested Python lists for this kind of block extraction.",
+  "explanation_fr": "matrix.shape lit les dimensions du tableau sans calcul. matrix[1:3, 1:3] decoupe lignes et colonnes dans la meme expression - la virgule separe des slices independants par axe, ce qui rend l'indexation NumPy plus puissante que des listes Python imbriquees pour ce type d'extraction de bloc.",
+  "concepts": ["numpy", "2d arrays", "slicing", "shape"],
+  "skills": ["numerical_computation"],
+  "source": "42_python_piscine",
+  "track": "python",
+  "validation_profile": "42_piscine",
+  "exercise_type": "function",
+  "exercise_status": "active"
+}

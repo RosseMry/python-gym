@@ -1,0 +1,40 @@
+{
+  "id": "30days-d09-l1-02",
+  "module": "conditionals",
+  "day": 9,
+  "level": 1,
+  "difficulty": 2,
+  "title": "Who is older, me or you?",
+  "description": "Compare the values of my_age and your_age using if … else. Who is older (me or you)? Use input(“Enter your age: ”) to get the age as input. You can use a nested condition to print 'year' for 1 year difference in age, 'years' for bigger differences, and a custom text if my_age = your_age. Output:\n\n```sh\nEnter your age: 30\nYou are 5 years older than me.\n```\n\nPython-Gym adaptation: implement as `compare_ages(my_age, your_age)`, returning a message stating who is older and by how many year(s) (correctly pluralized), or a message that both are the same age when my_age equals your_age.",
+  "examples": "compare_ages(25, 30) -> 'You are 5 years older than me.'\ncompare_ages(26, 25) -> 'I am 1 year older than you.'\ncompare_ages(25, 25) -> 'We are the same age.'",
+  "starter_code": "def compare_ages(my_age, your_age):\n    # write your code here\n    pass\n",
+  "hints": [
+    "Start by computing the difference: diff = my_age - your_age.",
+    "Use if/elif/else to handle diff == 0, diff > 0, and diff < 0 separately.",
+    "Pick 'year' when the absolute difference equals 1, otherwise use 'years', with a conditional expression like 'year' if diff == 1 else 'years'."
+  ],
+  "expected_behavior": "Returns a string describing who is older (using 'I am' or 'You are') and by how many years, with correct singular/plural wording, or a message that both ages are equal.",
+  "hidden_tests": [
+    {
+      "call": "compare_ages(25, 30)",
+      "expected": "'You are 5 years older than me.'",
+      "label": "your_age bigger, plural years"
+    },
+    {
+      "call": "compare_ages(26, 25)",
+      "expected": "'I am 1 year older than you.'",
+      "label": "my_age bigger by 1, singular year"
+    },
+    {
+      "call": "compare_ages(25, 25)",
+      "expected": "'We are the same age.'",
+      "label": "equal ages"
+    }
+  ],
+  "solution": "def compare_ages(my_age, your_age):\n    diff = my_age - your_age\n    if diff == 0:\n        return \"We are the same age.\"\n    elif diff > 0:\n        unit = \"year\" if diff == 1 else \"years\"\n        return f\"I am {diff} {unit} older than you.\"\n    else:\n        diff = abs(diff)\n        unit = \"year\" if diff == 1 else \"years\"\n        return f\"You are {diff} {unit} older than me.\"\n",
+  "explanation": "Subtracting your_age from my_age gives a signed difference: zero means equal ages, positive means I am older, negative means you are older. abs() normalizes the negative case, and a conditional expression chooses 'year' or 'years' based on whether the difference is exactly 1.",
+  "concepts": ["if", "elif", "else", "nested condition", "conditional expression", "abs"],
+  "skills": ["basic_data_manipulation"],
+  "source": "30_days_of_python",
+  "exercise_type": "function"
+}

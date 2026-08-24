@@ -1,0 +1,58 @@
+{
+  "source": "30_days_of_python",
+  "day": 19,
+  "module": "file_handling",
+  "exercise_type": "function",
+  "level": 1,
+  "id": "30days-d19-l1-01",
+  "difficulty": 1,
+  "title": "Count lines and words in a text file",
+  "description": "Write a function `count_lines_and_words(path)` that reads the text file at `path` and returns `(line_count, word_count)`.\n\nCovers all 4 sub-parts of source item 1 (Obama's, Michelle Obama's, Donald Trump's, and Melina Trump's speeches, all real transcripts) as one exercise with 4 test cases - each file is available in your working directory.",
+  "examples": "count_lines_and_words('obama_speech.txt')\n-> (66, 2400)",
+  "starter_code": "def count_lines_and_words(path):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: read the whole file, then use splitlines() and split()",
+    "text.splitlines() breaks the text into a list of lines without keeping the newline characters; text.split() breaks it into a list of words on any whitespace. Their lengths give you the two counts directly.",
+    "Open the file, read its full contents, and return (len(text.splitlines()), len(text.split()))."
+  ],
+  "expected_behavior": "Returns the number of lines and the number of words in the file.",
+  "hidden_tests": [
+    {
+      "call": "count_lines_and_words('obama_speech.txt')",
+      "expected": "(66, 2400)",
+      "label": "source item 1, part 1"
+    },
+    {
+      "call": "count_lines_and_words('michelle_obama_speech.txt')",
+      "expected": "(83, 2204)",
+      "label": "source item 1, part 2"
+    },
+    {
+      "call": "count_lines_and_words('donald_speech.txt')",
+      "expected": "(48, 1259)",
+      "label": "source item 1, part 3"
+    },
+    {
+      "call": "count_lines_and_words('melina_trump_speech.txt')",
+      "expected": "(33, 1375)",
+      "label": "source item 1, part 4"
+    }
+  ],
+  "solution": "def count_lines_and_words(path):\n    with open(path, encoding=\"utf-8\") as f:\n        text = f.read()\n    return len(text.splitlines()), len(text.split())\n",
+  "explanation": "splitlines() and split() both do their own counting internally - reading the file once and calling each of them is simpler and faster than looping over the file object twice.",
+  "concepts": [
+    "file reading",
+    "splitlines",
+    "split"
+  ],
+  "skills": [
+    "using_standard_library_modules",
+    "text_processing"
+  ],
+  "resources": [
+    "python/30-days/obama_speech.txt",
+    "python/30-days/michelle_obama_speech.txt",
+    "python/30-days/donald_speech.txt",
+    "python/30-days/melina_trump_speech.txt"
+  ]
+}

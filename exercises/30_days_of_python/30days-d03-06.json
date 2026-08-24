@@ -1,0 +1,35 @@
+{
+  "source": "30_days_of_python",
+  "day": 3,
+  "level": null,
+  "module": "operators",
+  "exercise_type": "function",
+  "id": "30days-d03-06",
+  "difficulty": 2,
+  "title": "Slope and distance between two points",
+  "description": "Write a function `slope_and_distance(x1, y1, x2, y2)` that returns `(slope, distance)` between two points: `slope = (y2 - y1) / (x2 - x1)`, `distance = ((x2 - x1) ** 2 + (y2 - y1) ** 2) ** 0.5` (the Euclidean distance).",
+  "examples": "slope_and_distance(2, 2, 6, 10)\n-> (2.0, 8.94427190999916)",
+  "starter_code": "def slope_and_distance(x1, y1, x2, y2):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: both formulas start from the same two differences",
+    "dx = x2 - x1 and dy = y2 - y1 show up in both formulas - slope is dy / dx, and distance is the square root of dx squared plus dy squared (the Pythagorean theorem).",
+    "Compute dx and dy once, then return (dy / dx, (dx ** 2 + dy ** 2) ** 0.5) as the tuple (slope, distance)."
+  ],
+  "expected_behavior": "Returns the slope and Euclidean distance between the two points.",
+  "hidden_tests": [
+    {
+      "call": "slope_and_distance(2, 2, 6, 10)",
+      "expected": "(2.0, 8.94427190999916)",
+      "label": "source item 9"
+    }
+  ],
+  "solution": "def slope_and_distance(x1, y1, x2, y2):\n    dx, dy = x2 - x1, y2 - y1\n    return dy / dx, (dx ** 2 + dy ** 2) ** 0.5\n",
+  "explanation": "Raising a number to the power 0.5 is the same as taking its square root - ** 0.5 avoids a separate import of math.sqrt for this one calculation.",
+  "concepts": [
+    "arithmetic operators",
+    "formulas"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

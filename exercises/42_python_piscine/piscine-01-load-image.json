@@ -1,0 +1,41 @@
+{
+  "id": "piscine-01-load-image",
+  "module": "piscine_01_array",
+  "difficulty": 1,
+  "title": "Load Image",
+  "title_fr": "Charger une image",
+  "description": "Write a function `load_image(path)` that opens the image at `path` with Pillow and returns its shape as a NumPy array would report it: `(height, width, channels)`.\n\nA sample image `sample.png` is available in your working directory - it's a small 40x20 RGB test image.",
+  "description_fr": "Ecris une fonction `load_image(path)` qui ouvre l'image situee a `path` avec Pillow et retourne sa forme telle que la rapporterait un tableau NumPy : `(hauteur, largeur, canaux)`.\n\nUne image d'exemple `sample.png` est disponible dans ton dossier de travail - c'est une petite image RGB de test en 40x20.",
+  "examples": "load_image('sample.png')\n-> (20, 40, 3)",
+  "examples_fr": "load_image('sample.png')\n-> (20, 40, 3)",
+  "starter_code": "import numpy as np\nfrom PIL import Image\n\n\ndef load_image(path):\n    # your code here\n    pass\n",
+  "hints": [
+    "Functions to consider: Image.open() and np.array()",
+    "PIL's Image.open(path) loads an image file into an Image object. Converting it with np.array(image) gives you a NumPy array whose .shape is (height, width, channels) for a color image - note that's height first, then width, which is the opposite order from Image.size.",
+    "Open the image, convert it to a NumPy array, and return that array's .shape - no need to store the intermediate array in a variable if you don't want to."
+  ],
+  "hints_fr": [
+    "Fonctions a considerer : Image.open() et np.array()",
+    "Image.open(path) de PIL charge un fichier image dans un objet Image. Le convertir avec np.array(image) donne un tableau NumPy dont .shape est (hauteur, largeur, canaux) pour une image couleur - remarque que c'est la hauteur d'abord, puis la largeur, l'ordre inverse de Image.size.",
+    "Ouvre l'image, convertis-la en tableau NumPy, et retourne le .shape de ce tableau - pas besoin de garder le tableau intermediaire dans une variable si tu ne veux pas."
+  ],
+  "expected_behavior": "Returns a 3-tuple (height, width, channels) describing the loaded image.",
+  "hidden_tests": [
+    {
+      "call": "load_image('sample.png')",
+      "expected": "(20, 40, 3)",
+      "label": "sample.png shape"
+    }
+  ],
+  "solution": "import numpy as np\nfrom PIL import Image\n\n\ndef load_image(path):\n    return np.array(Image.open(path)).shape\n",
+  "explanation": "Image.open never decodes pixel data into an array by itself - np.array(image) is what turns it into NumPy's (height, width, channels) layout, which is the standard shape every other Module 1 image exercise builds on.",
+  "explanation_fr": "Image.open ne decode jamais les pixels en tableau par lui-meme - np.array(image) est ce qui le transforme dans la disposition NumPy (hauteur, largeur, canaux), qui est la forme standard sur laquelle s'appuient tous les autres exercices d'image du Module 1.",
+  "concepts": ["pillow", "numpy", "images", "shape"],
+  "skills": ["numerical_computation"],
+  "source": "42_python_piscine",
+  "track": "python",
+  "validation_profile": "42_piscine",
+  "exercise_type": "function",
+  "exercise_status": "active",
+  "resources": ["python/42-piscine/sample.png"]
+}

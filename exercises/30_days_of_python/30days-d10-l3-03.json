@@ -1,0 +1,41 @@
+{
+  "source": "30_days_of_python",
+  "day": 10,
+  "module": "loops",
+  "exercise_type": "function",
+  "level": 3,
+  "id": "30days-d10-l3-03",
+  "difficulty": 2,
+  "title": "Count the total number of languages",
+  "description": "Write a function `total_languages(path)` that reads the country data JSON file at `path` and returns the number of distinct languages spoken across every country.\n\n`countries_data.json` is available in your working directory - 250 real countries, each with a `languages` list.",
+  "examples": "total_languages('countries_data.json')\n-> 112",
+  "starter_code": "import json\n\n\ndef total_languages(path):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: collect every language into a set to drop duplicates",
+    "Each country's 'languages' list can repeat languages other countries also speak - a set automatically keeps only one copy of each distinct value as you add to it.",
+    "Load the JSON file, loop through every country's languages adding each to a set (or build the set directly with a comprehension), then return len(that set)."
+  ],
+  "expected_behavior": "Returns the count of distinct languages across all countries in the file.",
+  "hidden_tests": [
+    {
+      "call": "total_languages('countries_data.json')",
+      "expected": "112",
+      "label": "source item 3, part 1"
+    }
+  ],
+  "solution": "import json\n\n\ndef total_languages(path):\n    with open(path, encoding=\"utf-8\") as f:\n        countries = json.load(f)\n    languages = {lang for c in countries for lang in c[\"languages\"]}\n    return len(languages)\n",
+  "explanation": "A set comprehension over every (country, language) pair collapses all the duplicates in one pass - counting distinct values is exactly what a set is for.",
+  "concepts": [
+    "loops",
+    "sets",
+    "file reading",
+    "json"
+  ],
+  "skills": [
+    "basic_data_manipulation",
+    "using_standard_library_modules"
+  ],
+  "resources": [
+    "python/30-days/countries_data.json"
+  ]
+}

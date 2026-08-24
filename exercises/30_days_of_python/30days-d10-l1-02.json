@@ -1,0 +1,36 @@
+{
+  "source": "30_days_of_python",
+  "day": 10,
+  "module": "loops",
+  "exercise_type": "function",
+  "level": 1,
+  "id": "30days-d10-l1-02",
+  "difficulty": 1,
+  "title": "Build a triangle of hashes",
+  "description": "Write a function `build_triangle(rows)` that returns a multi-line string: row `i` (1-indexed) contains `i` `#` characters.",
+  "examples": "print(build_triangle(3))\n# #\n# ##\n# ###",
+  "starter_code": "def build_triangle(rows):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: build one line per row, then join them",
+    "'#' * i repeats the character i times - for row i that's exactly the line you need, no character-by-character loop required.",
+    "Build a list of '#' * i for i from 1 to rows, then join the lines with '\\n'."
+  ],
+  "expected_behavior": "Returns rows lines, line i (1-indexed) holding i '#' characters.",
+  "hidden_tests": [
+    {
+      "call": "build_triangle(7)",
+      "expected": "'#\\n##\\n###\\n####\\n#####\\n######\\n#######'",
+      "label": "source item 3"
+    }
+  ],
+  "solution": "def build_triangle(rows):\n    return \"\\n\".join(\"#\" * i for i in range(1, rows + 1))\n",
+  "explanation": "String repetition ('#' * i) replaces an inner loop that would otherwise print one '#' at a time - the outer loop only needs to vary i.",
+  "concepts": [
+    "loops",
+    "string repetition",
+    "join"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

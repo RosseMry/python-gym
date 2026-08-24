@@ -1,0 +1,41 @@
+{
+  "source": "30_days_of_python",
+  "day": 10,
+  "module": "loops",
+  "exercise_type": "function",
+  "level": 3,
+  "id": "30days-d10-l3-05",
+  "difficulty": 2,
+  "title": "Find the ten most populated countries",
+  "description": "Write a function `most_populated_countries(path)` that reads the country data JSON file at `path` and returns the 10 countries with the largest population, as a list of `{'country': name, 'population': count}` dicts, largest first.",
+  "examples": "most_populated_countries('countries_data.json')\n-> [{'country': 'China', 'population': 1377422166}, ...]",
+  "starter_code": "import json\n\n\ndef most_populated_countries(path):\n    # your code here\n    pass\n",
+  "hints": [
+    "Function to consider: sorted(), with a key and reverse=True",
+    "sorted(countries, key=lambda c: c['population'], reverse=True) orders every country by population, largest first, in one call - the same countries list, just re-ordered.",
+    "Sort the loaded countries by population descending, take the first 10, and rebuild each as a {'country': ..., 'population': ...} dict."
+  ],
+  "expected_behavior": "Returns the 10 most populated countries as {'country', 'population'} dicts, descending by population.",
+  "hidden_tests": [
+    {
+      "call": "most_populated_countries('countries_data.json')",
+      "expected": "[{'country': 'China', 'population': 1377422166}, {'country': 'India', 'population': 1295210000}, {'country': 'United States of America', 'population': 323947000}, {'country': 'Indonesia', 'population': 258705000}, {'country': 'Brazil', 'population': 206135893}, {'country': 'Pakistan', 'population': 194125062}, {'country': 'Nigeria', 'population': 186988000}, {'country': 'Bangladesh', 'population': 161006790}, {'country': 'Russian Federation', 'population': 146599183}, {'country': 'Japan', 'population': 126960000}]",
+      "label": "source item 3, part 3"
+    }
+  ],
+  "solution": "import json\n\n\ndef most_populated_countries(path):\n    with open(path, encoding=\"utf-8\") as f:\n        countries = json.load(f)\n    ranked = sorted(countries, key=lambda c: c[\"population\"], reverse=True)\n    return [\n        {\"country\": c[\"name\"], \"population\": c[\"population\"]}\n        for c in ranked[:10]\n    ]\n",
+  "explanation": "sorted()'s key function picks what to compare by without changing the data itself - reverse=True flips it to descending, and slicing [:10] after sorting takes exactly the top 10.",
+  "concepts": [
+    "loops",
+    "sorted",
+    "file reading",
+    "json"
+  ],
+  "skills": [
+    "basic_data_manipulation",
+    "using_standard_library_modules"
+  ],
+  "resources": [
+    "python/30-days/countries_data.json"
+  ]
+}

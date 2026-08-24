@@ -1,16 +1,19 @@
 {
   "id": "30days-triangle-area",
-  "module": "input_and_formulas",
+  "module": "operators",
+  "day": 3,
+  "level": null,
   "difficulty": 2,
   "title": "Triangle area from user input",
   "description": "Write a script that asks the user for a triangle's base and height (as two separate prompts) and prints its area, using the formula area = 0.5 * base * height.",
   "examples": "Enter base: 20\nEnter height: 10\nThe area of the triangle is 100.0",
   "starter_code": "# your code here\n",
   "hints": [
-    "input() always returns a string - you'll need to convert it to a number before doing arithmetic with it.",
-    "Two separate input() calls, one for each prompt, in the order the example shows.",
-    "Wrap each input() in float(), multiply base * height * 0.5, and print the result inside an f-string matching the example's wording exactly."
+    "💡 Function to consider: float()",
+    "What does it do? float() converts a value - such as the text input() gives you - into a number that can have a decimal part.\n\nExample:\nvalue = float(\"3.5\")\n\nResult:\n3.5",
+    "Apply it: input() always hands back a string, even when the person types a number, and this formula's result can come out with a decimal part - so int() would be the wrong tool here (it would either crash on a value like \"3.5\", or throw away the decimal part). Think about what needs to wrap each of your two input() calls before you multiply them together."
   ],
+  "hint_functions": ["float", null, null],
   "expected_behavior": "Prints the triangle's area after reading base and height.",
   "hidden_tests": [
     {

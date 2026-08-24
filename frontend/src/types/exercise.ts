@@ -74,6 +74,7 @@ export interface SubmissionResult {
 export interface HintResponse {
   hint: string;
   hint_fr: string | null;
+  hint_function: string | null;
 }
 
 export interface SolutionResponse {
@@ -104,6 +105,32 @@ export interface LearningNoteDetail {
   common_mistakes_fr: string | null;
   mini_exercise: string;
   mini_exercise_fr: string | null;
+  related_exercise_ids: string[];
+}
+
+export interface FunctionReferenceSummary {
+  id: string;
+  name: string;
+  name_fr: string | null;
+}
+
+export interface FunctionReferenceDetail {
+  id: string;
+  name: string;
+  name_fr: string | null;
+  what_it_does: string;
+  what_it_does_fr: string | null;
+  syntax: string;
+  parameters: string;
+  parameters_fr: string | null;
+  return_value: string;
+  return_value_fr: string | null;
+  example: string;
+  example_output: string;
+  common_mistakes: string;
+  common_mistakes_fr: string | null;
+  when_to_use: string;
+  when_to_use_fr: string | null;
   related_exercise_ids: string[];
 }
 

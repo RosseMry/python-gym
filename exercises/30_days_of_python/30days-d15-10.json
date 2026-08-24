@@ -1,0 +1,41 @@
+{
+  "id": "30days-d15-10",
+  "module": "type_errors",
+  "day": 15,
+  "difficulty": 1,
+  "title": "Catch a ZeroDivisionError",
+  "description": "Source instruction (Exercises: Day 15, item 1): \"Open you python interactive shell and try all the examples covered in this section.\"\n\nZeroDivisionError example: `1/0` raises `ZeroDivisionError: division by zero` (\"We cannot divide a number by zero.\").\n\nPython-Gym adaptation: implement as `safe_divide(a, b)`, returning `a / b`, or a string \"ZeroDivisionError: <message>\" if b is zero.",
+  "examples": "safe_divide(1, 0) -> 'ZeroDivisionError: division by zero'\nsafe_divide(1, 2) -> 0.5",
+  "starter_code": "def safe_divide(a, b):\n    # your code here\n    pass\n",
+  "hints": [
+    "The / operator raises ZeroDivisionError when the divisor is 0.",
+    "You don't need to check `if b == 0` yourself - let Python raise the error and catch it.",
+    "Wrap `return a / b` in try/except ZeroDivisionError, and in the except branch return an f-string starting with 'ZeroDivisionError: ' followed by the caught exception object."
+  ],
+  "expected_behavior": "Returns a / b when b is not zero. If b is zero, catches the ZeroDivisionError and returns a descriptive string in the form \"ZeroDivisionError: <message>\" instead of letting the exception propagate.",
+  "hidden_tests": [
+    {
+      "call": "safe_divide(1, 0)",
+      "expected": "'ZeroDivisionError: division by zero'",
+      "label": "division by zero, mirrors the source example"
+    },
+    {
+      "call": "safe_divide(1, 2)",
+      "expected": "0.5",
+      "label": "valid division returns a float"
+    }
+  ],
+  "solution": "def safe_divide(a, b):\n    try:\n        return a / b\n    except ZeroDivisionError as e:\n        return f\"ZeroDivisionError: {e}\"\n",
+  "explanation": "Dividing by zero with the / operator raises ZeroDivisionError, as with `1/0` in the source example. The except block catches it and returns a descriptive string instead of the program crashing.",
+  "concepts": [
+    "zerodivisionerror",
+    "exception handling",
+    "try/except",
+    "division"
+  ],
+  "skills": [
+    "error_handling"
+  ],
+  "source": "30_days_of_python",
+  "exercise_type": "function"
+}

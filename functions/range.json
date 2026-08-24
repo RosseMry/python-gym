@@ -1,0 +1,13 @@
+{
+  "id": "range",
+  "name": "range()",
+  "what_it_does": "Generates a sequence of numbers, most often used to control how many times a for loop runs.",
+  "syntax": "range(stop) or range(start, stop) or range(start, stop, step)",
+  "parameters": "start (optional) - first number, defaults to 0. stop - one past the last number generated (stop itself is never included). step (optional) - how much to increase each time, defaults to 1 (can be negative to count down).",
+  "return_value": "A range object - a memory-efficient sequence of numbers, most often looped over directly rather than converted to a list.",
+  "example": "for i in range(3):\n    print(i)",
+  "example_output": "0\n1\n2",
+  "common_mistakes": "The classic off-by-one error: range(5) produces 0,1,2,3,4 (5 numbers), NOT including 5 - forgetting this leads to loops that run one time too few or too many. range(5, 0) with no negative step produces nothing (empty), since it can't count upward from 5 to 0.",
+  "when_to_use": "Repeating an action a specific number of times, or generating index numbers to loop over (though enumerate() is usually cleaner when you also need the actual items, not just the index).",
+  "related_exercise_ids": []
+}

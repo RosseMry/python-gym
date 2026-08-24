@@ -1,0 +1,45 @@
+{
+  "source": "30_days_of_python",
+  "day": 19,
+  "module": "file_handling",
+  "exercise_type": "function",
+  "level": 1,
+  "id": "30days-d19-l1-02",
+  "difficulty": 2,
+  "title": "Find the most spoken languages",
+  "description": "Write a function `most_spoken_languages(path, n)` that reads the country data JSON file at `path` and returns the `n` languages spoken by the most countries, as `(count, language)` tuples, most spoken first, ties broken alphabetically.",
+  "examples": "most_spoken_languages('countries_data.json', 3)\n-> [(91, 'English'), (45, 'French'), (25, 'Arabic')]",
+  "starter_code": "import json\nfrom collections import Counter\n\n\ndef most_spoken_languages(path, n):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: collections.Counter over every country's language list",
+    "Flatten every country's 'languages' list into one big list first (a list comprehension with two `for` clauses does this in one line), then Counter can tally it directly.",
+    "Load the JSON, flatten the languages, count with Counter, and return the top n sorted by (-count, language) as (count, language) tuples."
+  ],
+  "expected_behavior": "Returns the n most-spoken languages as (count, language) tuples.",
+  "hidden_tests": [
+    {
+      "call": "most_spoken_languages('countries_data.json', 10)",
+      "expected": "[(91, 'English'), (45, 'French'), (25, 'Arabic'), (24, 'Spanish'), (9, 'Portuguese'), (9, 'Russian'), (8, 'Dutch'), (7, 'German'), (5, 'Chinese'), (4, 'Italian')]",
+      "label": "source item 2, n=10"
+    },
+    {
+      "call": "most_spoken_languages('countries_data.json', 3)",
+      "expected": "[(91, 'English'), (45, 'French'), (25, 'Arabic')]",
+      "label": "source item 2, n=3"
+    }
+  ],
+  "solution": "import json\nfrom collections import Counter\n\n\ndef most_spoken_languages(path, n):\n    with open(path, encoding=\"utf-8\") as f:\n        countries = json.load(f)\n    all_languages = [lang for c in countries for lang in c[\"languages\"]]\n    counts = Counter(all_languages)\n    ranked = sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))\n    return [(count, lang) for lang, count in ranked[:n]]\n",
+  "explanation": "A two-clause comprehension ([x for c in countries for x in c['languages']]) is the flattening step - it turns 250 separate lists into one, which Counter can then tally in a single pass.",
+  "concepts": [
+    "file reading",
+    "json",
+    "collections.Counter"
+  ],
+  "skills": [
+    "using_standard_library_modules",
+    "text_processing"
+  ],
+  "resources": [
+    "python/30-days/countries_data.json"
+  ]
+}

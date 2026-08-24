@@ -1,0 +1,13 @@
+{
+  "id": "zip",
+  "name": "zip()",
+  "what_it_does": "Pairs up items from two or more iterables position by position, so you can loop over them together instead of by index.",
+  "syntax": "zip(iterable1, iterable2, ...)",
+  "parameters": "Two or more iterables of the same or different lengths.",
+  "return_value": "A zip object yielding tuples, one per position, each combining the items from every input iterable at that position - usually unpacked directly in a for loop or converted with list().",
+  "example": "names = [\"Ana\", \"Bob\"]\nages = [25, 30]\n\nfor name, age in zip(names, ages):\n    print(name, age)",
+  "example_output": "Ana 25\nBob 30",
+  "common_mistakes": "zip() stops at the SHORTEST input - if the lists are different lengths, extra items in the longer one are silently dropped, not an error. zip() itself is a one-time iterator in Python 3 - wrap it in list() if you need to loop over the pairs more than once.",
+  "when_to_use": "Looping over two or more related lists in lockstep, e.g. combining a list of names with a list of scores.",
+  "related_exercise_ids": []
+}

@@ -1,0 +1,41 @@
+{
+  "id": "30days-d15-01",
+  "module": "type_errors",
+  "day": 15,
+  "difficulty": 3,
+  "title": "Catch a SyntaxError",
+  "description": "Source instruction (Exercises: Day 15, item 1): \"Open you python interactive shell and try all the examples covered in this section.\"\n\nSyntaxError example from the section: `print 'hello world'` raises a SyntaxError (\"As you can see we made a syntax error because we forgot to enclose the string with parenthesis and Python already suggests the solution.\"). Fixing it to `print('hello world')` runs without error.\n\nPython-Gym adaptation: implement as `check_syntax(code)`, executing the given code string with `exec()` and returning \"OK: no SyntaxError\" if it runs cleanly, or a string \"SyntaxError: <message>\" describing the caught SyntaxError if it doesn't, instead of letting the exception crash the program.",
+  "examples": "check_syntax(\"print 'hello world'\") -> \"SyntaxError: Missing parentheses in call to 'print'. Did you mean print(...)? (<string>, line 1)\"\ncheck_syntax(\"print('hello world')\") -> 'OK: no SyntaxError'",
+  "starter_code": "def check_syntax(code):\n    # your code here\n    pass\n",
+  "hints": [
+    "A SyntaxError is raised while Python parses code, so to catch one at runtime you need to actually run the given string as code, not just inspect it.",
+    "The built-in exec() function compiles and runs a string as Python code, and raises SyntaxError immediately if the string isn't valid Python.",
+    "Wrap exec(code) in try/except SyntaxError, and in the except branch build the return string as an f-string starting with 'SyntaxError: ' followed by the caught exception object."
+  ],
+  "expected_behavior": "Executes the given code string with exec(). If it runs without error, returns \"OK: no SyntaxError\". If exec() raises a SyntaxError, catches it and returns a descriptive string in the form \"SyntaxError: <message>\" instead of letting the exception propagate.",
+  "hidden_tests": [
+    {
+      "call": "check_syntax(\"print 'hello world'\")",
+      "expected": "\"SyntaxError: Missing parentheses in call to 'print'. Did you mean print(...)? (<string>, line 1)\"",
+      "label": "bad syntax: unparenthesized print statement"
+    },
+    {
+      "call": "check_syntax(\"print('hello world')\")",
+      "expected": "'OK: no SyntaxError'",
+      "label": "valid syntax runs cleanly"
+    }
+  ],
+  "solution": "def check_syntax(code):\n    try:\n        exec(code)\n        return \"OK: no SyntaxError\"\n    except SyntaxError as e:\n        return f\"SyntaxError: {e}\"\n",
+  "explanation": "exec() parses and runs the given string as Python code. An unparenthesized print statement like `print 'hello world'` is not valid Python 3 syntax, so exec() raises a SyntaxError before any code runs; the except block catches it and turns it into a descriptive return value instead of crashing.",
+  "concepts": [
+    "syntax error",
+    "exception handling",
+    "try/except",
+    "exec"
+  ],
+  "skills": [
+    "error_handling"
+  ],
+  "source": "30_days_of_python",
+  "exercise_type": "function"
+}

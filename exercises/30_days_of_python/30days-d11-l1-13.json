@@ -1,0 +1,47 @@
+{
+  "id": "30days-d11-l1-13",
+  "module": "functions",
+  "day": 11,
+  "level": 1,
+  "difficulty": 1,
+  "title": "Sum of numbers in a range",
+  "description": "Declare a function named sum_of_numbers. It takes a number parameter and it adds all the numbers in that range.\n\nprint(sum_of_numbers(5))  # 15\nprint(sum_of_numbers(10)) # 55\nprint(sum_of_numbers(100)) # 5050",
+  "examples": ">>> sum_of_numbers(5)\n15\n>>> sum_of_numbers(10)\n55",
+  "starter_code": "def sum_of_numbers(n):\n    # your code here\n    pass\n",
+  "hints": [
+    "range(1, n + 1) produces every whole number from 1 up to and including n.",
+    "The built-in sum() function adds up all the items of an iterable.",
+    "Return sum(range(1, n + 1))."
+  ],
+  "expected_behavior": "Returns the sum of all whole numbers from 1 to n inclusive.",
+  "explanation": "range(1, n + 1) generates the numbers 1 through n, and sum() adds them all together in one call.",
+  "concepts": [
+    "functions",
+    "range",
+    "sum",
+    "return"
+  ],
+  "skills": [
+    "functional_python"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python",
+  "hidden_tests": [
+    {
+      "call": "sum_of_numbers(5)",
+      "expected": "15",
+      "label": "sum from 1 to 5"
+    },
+    {
+      "call": "sum_of_numbers(10)",
+      "expected": "55",
+      "label": "sum from 1 to 10"
+    },
+    {
+      "call": "sum_of_numbers(100)",
+      "expected": "5050",
+      "label": "sum from 1 to 100"
+    }
+  ],
+  "solution": "def sum_of_numbers(n):\n    return sum(range(1, n + 1))\n"
+}

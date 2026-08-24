@@ -1,0 +1,41 @@
+{
+  "id": "30days-d16-01",
+  "module": "datetime",
+  "day": 16,
+  "difficulty": 1,
+  "title": "Get day, month, year, hour, minute and timestamp from a datetime",
+  "description": "Get the current day, month, year, hour, minute and timestamp from datetime module.\n\nPython-Gym adaptation: reading the live clock would make the expected result non-deterministic, so implement as get_datetime_parts(dt), taking a fixed datetime.datetime object dt instead of the real current time, and returning a dict with keys 'day', 'month', 'year', 'hour', 'minute' and 'timestamp' (the timestamp is computed by treating dt as UTC, so the result does not depend on the host machine's local timezone).",
+  "examples": ">>> import datetime\n>>> get_datetime_parts(datetime.datetime(2023, 6, 15, 14, 30, 0))\n{'day': 15, 'month': 6, 'year': 2023, 'hour': 14, 'minute': 30, 'timestamp': 1686839400.0}",
+  "starter_code": "import datetime\n\ndef get_datetime_parts(dt):\n    # your code here\n    pass\n",
+  "hints": [
+    "A datetime object already stores day, month, year, hour and minute as attributes - you don't need to parse anything, just read them off dt.",
+    "For a timestamp that does not depend on the machine's local timezone, attach UTC to dt before converting it, e.g. dt.replace(tzinfo=...).",
+    "Use dt.replace(tzinfo=datetime.timezone.utc).timestamp() to get a reproducible Unix timestamp regardless of the host's local timezone."
+  ],
+  "expected_behavior": "Given a fixed datetime.datetime object, returns a dict with its day, month, year, hour, minute and a UTC-based Unix timestamp.",
+  "solution": "import datetime\n\ndef get_datetime_parts(dt):\n    return {\n        \"day\": dt.day,\n        \"month\": dt.month,\n        \"year\": dt.year,\n        \"hour\": dt.hour,\n        \"minute\": dt.minute,\n        \"timestamp\": dt.replace(tzinfo=datetime.timezone.utc).timestamp(),\n    }\n",
+  "hidden_tests": [
+    {
+      "call": "get_datetime_parts(datetime.datetime(2023, 6, 15, 14, 30, 0))",
+      "expected": "{'day': 15, 'month': 6, 'year': 2023, 'hour': 14, 'minute': 30, 'timestamp': 1686839400.0}",
+      "label": "extracts parts and UTC timestamp for 2023-06-15 14:30:00"
+    },
+    {
+      "call": "get_datetime_parts(datetime.datetime(1999, 1, 1, 0, 0, 0))",
+      "expected": "{'day': 1, 'month': 1, 'year': 1999, 'hour': 0, 'minute': 0, 'timestamp': 915148800.0}",
+      "label": "extracts parts and UTC timestamp for 1999-01-01 00:00:00"
+    }
+  ],
+  "explanation": "datetime.datetime objects expose their components directly as the .day, .month, .year, .hour and .minute attributes. .timestamp() converts an object to a Unix timestamp, but for a naive datetime it normally uses the machine's local timezone; attaching datetime.timezone.utc with .replace(tzinfo=...) first makes the conversion treat the given values as UTC, so the result is the same on every machine.",
+  "concepts": [
+    "datetime module",
+    "datetime attributes",
+    "timestamp",
+    "timezone"
+  ],
+  "skills": [
+    "date_time_handling"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

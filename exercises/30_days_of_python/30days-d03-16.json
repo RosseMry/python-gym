@@ -1,0 +1,42 @@
+{
+  "source": "30_days_of_python",
+  "day": 3,
+  "level": null,
+  "module": "operators",
+  "exercise_type": "function",
+  "id": "30days-d03-16",
+  "difficulty": 2,
+  "title": "Convert a decimal string to int safely",
+  "description": "Write a function `string_to_int_matches(text, target)` that tries `int(text)` and returns whether it equals `target` - and returns `False` (instead of crashing) if `text` can't be converted directly, e.g. `'9.8'`.",
+  "examples": "string_to_int_matches('9.8', 10)\n-> False\nstring_to_int_matches('10', 10)\n-> True",
+  "starter_code": "def string_to_int_matches(text, target):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: int() can't parse a string that contains a decimal point",
+    "int('9.8') raises a ValueError - int() only accepts strings that look like whole numbers, unlike float() which accepts a decimal point.",
+    "Wrap int(text) in a try/except ValueError - on success compare it to target, on failure return False."
+  ],
+  "expected_behavior": "Returns whether int(text) equals target, or False if text can't be parsed as an int.",
+  "hidden_tests": [
+    {
+      "call": "string_to_int_matches('9.8', 10)",
+      "expected": "False",
+      "label": "source item 20, int('9.8') can't parse"
+    },
+    {
+      "call": "string_to_int_matches('10', 10)",
+      "expected": "True",
+      "label": "parses and matches"
+    }
+  ],
+  "solution": "def string_to_int_matches(text, target):\n    try:\n        return int(text) == target\n    except ValueError:\n        return False\n",
+  "explanation": "int('9.8') doesn't round or truncate - it refuses to parse a decimal point at all, which is different from float(), and worth catching explicitly rather than assuming int() always succeeds on a numeric-looking string.",
+  "concepts": [
+    "int",
+    "exceptions",
+    "try/except"
+  ],
+  "skills": [
+    "basic_data_manipulation",
+    "error_handling"
+  ]
+}

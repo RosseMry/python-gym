@@ -1,0 +1,41 @@
+{
+  "source": "30_days_of_python",
+  "day": 3,
+  "level": null,
+  "module": "operators",
+  "exercise_type": "function",
+  "id": "30days-d03-14",
+  "difficulty": 1,
+  "title": "Compare floor division to a cast integer",
+  "description": "Write a function `floor_div_equals_int_cast(a, b, c)` that returns whether `a // b` equals `int(c)`.",
+  "examples": "floor_div_equals_int_cast(7, 3, 2.7)\n-> True",
+  "starter_code": "def floor_div_equals_int_cast(a, b, c):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: // rounds down to a whole number, and so does int() on a positive float",
+    "7 // 3 discards the remainder and gives 2. int(2.7) discards everything after the decimal point and also gives 2 - two different operations landing on the same value.",
+    "Return (a // b) == int(c)."
+  ],
+  "expected_behavior": "Returns True if the floor division equals the int-cast value.",
+  "hidden_tests": [
+    {
+      "call": "floor_div_equals_int_cast(7, 3, 2.7)",
+      "expected": "True",
+      "label": "source item 18"
+    },
+    {
+      "call": "floor_div_equals_int_cast(7, 3, 3.5)",
+      "expected": "False",
+      "label": "not equal"
+    }
+  ],
+  "solution": "def floor_div_equals_int_cast(a, b, c):\n    return (a // b) == int(c)\n",
+  "explanation": "// and int() both truncate toward a whole number, but they operate on different things - // works on the division itself, int() works on an already-computed float - so it's worth checking they actually agree rather than assuming it.",
+  "concepts": [
+    "floor division",
+    "int",
+    "comparison operators"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

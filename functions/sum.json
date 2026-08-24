@@ -1,0 +1,13 @@
+{
+  "id": "sum",
+  "name": "sum()",
+  "what_it_does": "Calculates the total of the items in an iterable (a list, tuple, or similar) by adding them all together.",
+  "syntax": "sum(iterable, start=0)",
+  "parameters": "iterable - the numbers to add up. start (optional) - a value added to the total before summing, defaults to 0.",
+  "return_value": "The sum of every item in iterable, plus start.",
+  "example": "numbers = [1, 2, 3]\ntotal = sum(numbers)\nprint(total)",
+  "example_output": "6",
+  "common_mistakes": "sum() only works on numbers by default - sum(['a', 'b']) raises TypeError since strings aren't summed this way (use ''.join(...) instead). Forgetting that an empty list sums to 0, not an error.",
+  "when_to_use": "Whenever you need a running total of a list of numbers, instead of writing a manual for loop with an accumulator variable.",
+  "related_exercise_ids": []
+}

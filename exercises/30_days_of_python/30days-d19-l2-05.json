@@ -1,0 +1,50 @@
+{
+  "source": "30_days_of_python",
+  "day": 19,
+  "module": "file_handling",
+  "exercise_type": "function",
+  "level": 2,
+  "id": "30days-d19-l2-05",
+  "difficulty": 2,
+  "title": "Count matching lines in a CSV file",
+  "description": "Write a function `count_lines_containing(path, keyword, exclude=None)` that reads the `hacker_news.csv` file at `path` and counts how many rows have `keyword` (case-insensitive) in their `title` column. If `exclude` is given, skip rows whose title also contains it.\n\nCovers all 3 sub-parts of source item 6 (Python mentions, JavaScript mentions, Java-but-not-JavaScript mentions) as one exercise. `hacker_news.csv` (2000 real Hacker News posts) is available in your working directory.",
+  "examples": "count_lines_containing('hacker_news.csv', 'python')\n-> 13",
+  "starter_code": "import csv\n\n\ndef count_lines_containing(path, keyword, exclude=None):\n    # your code here\n    pass\n",
+  "hints": [
+    "Module to consider: csv.DictReader",
+    "csv.DictReader(file) reads each row as a dict keyed by the header row's column names, so row['title'] gets you the title text directly, without tracking column positions by hand.",
+    "Open the file with csv.DictReader, count rows where keyword.lower() is in row['title'].lower(), and additionally skip a row when exclude is given and also found in that same title."
+  ],
+  "expected_behavior": "Returns the count of rows whose title contains keyword, minus any that also contain exclude.",
+  "hidden_tests": [
+    {
+      "call": "count_lines_containing('hacker_news.csv', 'python')",
+      "expected": "13",
+      "label": "source item 6, part 1: python mentions"
+    },
+    {
+      "call": "count_lines_containing('hacker_news.csv', 'javascript')",
+      "expected": "12",
+      "label": "source item 6, part 2: javascript mentions"
+    },
+    {
+      "call": "count_lines_containing('hacker_news.csv', 'java', exclude='javascript')",
+      "expected": "4",
+      "label": "source item 6, part 3: java but not javascript"
+    }
+  ],
+  "solution": "import csv\n\n\ndef count_lines_containing(path, keyword, exclude=None):\n    with open(path, encoding=\"utf-8\") as f:\n        reader = csv.DictReader(f)\n        count = 0\n        for row in reader:\n            title = row[\"title\"].lower()\n            if keyword.lower() not in title:\n                continue\n            if exclude and exclude.lower() in title:\n                continue\n            count += 1\n    return count\n",
+  "explanation": "csv.DictReader turns the header row into dict keys automatically, so the code reads 'the title column' as row['title'] instead of a numeric index that would break if the CSV's column order ever changed.",
+  "concepts": [
+    "csv",
+    "file reading",
+    "dictionaries"
+  ],
+  "skills": [
+    "using_standard_library_modules",
+    "text_processing"
+  ],
+  "resources": [
+    "python/30-days/hacker_news.csv"
+  ]
+}

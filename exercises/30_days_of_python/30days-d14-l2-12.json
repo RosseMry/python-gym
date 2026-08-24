@@ -1,0 +1,40 @@
+{
+  "source": "30_days_of_python",
+  "day": 14,
+  "module": "higher_order_functions",
+  "exercise_type": "function",
+  "level": 2,
+  "id": "30days-d14-l2-12",
+  "difficulty": 1,
+  "title": "Count countries by starting letter",
+  "description": "Write a function `starting_letter_counts(countries)` that returns a dict mapping each starting letter of the names in `countries` to how many names start with it.",
+  "examples": "starting_letter_counts(['Estonia', 'Finland', 'Sweden', 'Denmark', 'Norway', 'Iceland'])\n-> {'E': 1, 'F': 1, 'S': 1, 'D': 1, 'N': 1, 'I': 1}",
+  "starter_code": "from collections import Counter\n\n\ndef starting_letter_counts(countries):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: collections.Counter over each name's first character",
+    "c[0] for c in countries gives just the starting letters; Counter over that sequence tallies how many times each one occurs, the same way it tallies whole words elsewhere.",
+    "Return dict(Counter(c[0] for c in countries))."
+  ],
+  "expected_behavior": "Returns a dict of starting letter to count.",
+  "hidden_tests": [
+    {
+      "call": "starting_letter_counts(['Estonia', 'Finland', 'Sweden', 'Denmark', 'Norway', 'Iceland'])",
+      "expected": "{'E': 1, 'F': 1, 'S': 1, 'D': 1, 'N': 1, 'I': 1}",
+      "label": "source item 13"
+    },
+    {
+      "call": "starting_letter_counts(['Angola', 'Algeria', 'Andorra', 'Benin'])",
+      "expected": "{'A': 3, 'B': 1}",
+      "label": "repeated starting letters"
+    }
+  ],
+  "solution": "from collections import Counter\n\n\ndef starting_letter_counts(countries):\n    return dict(Counter(c[0] for c in countries))\n",
+  "explanation": "Counter doesn't care what it's counting - here it's the first character of each name rather than a whole word, but the tallying mechanism is identical to the word-frequency exercises from Days 18-19.",
+  "concepts": [
+    "collections.Counter",
+    "dict"
+  ],
+  "skills": [
+    "functional_python"
+  ]
+}

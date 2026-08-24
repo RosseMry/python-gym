@@ -1,0 +1,46 @@
+{
+  "id": "piscine-01-rotate-image",
+  "module": "piscine_01_array",
+  "difficulty": 2,
+  "title": "Rotate Image",
+  "title_fr": "Faire pivoter une image",
+  "description": "Write a function `rotate_image(path, angle)` that opens the image at `path`, rotates it by `angle` degrees counter-clockwise, and returns the resulting image's `.size` (width, height).\n\nUse `expand=True` so the canvas grows to fit the whole rotated image instead of cropping it - that's what makes rotating a non-square image actually change its reported size. `sample.png` (40x20) is available in your working directory.",
+  "description_fr": "Ecris une fonction `rotate_image(path, angle)` qui ouvre l'image situee a `path`, la fait pivoter de `angle` degres dans le sens anti-horaire, et retourne le `.size` (largeur, hauteur) de l'image resultante.\n\nUtilise `expand=True` pour que le cadre s'agrandisse et contienne toute l'image pivotee au lieu de la recadrer - c'est ce qui fait que pivoter une image non carree change reellement sa taille rapportee. `sample.png` (40x20) est disponible dans ton dossier de travail.",
+  "examples": "rotate_image('sample.png', 90)\n-> (20, 40)",
+  "examples_fr": "rotate_image('sample.png', 90)\n-> (20, 40)",
+  "starter_code": "from PIL import Image\n\n\ndef rotate_image(path, angle):\n    # your code here\n    pass\n",
+  "hints": [
+    "Method to consider: Image.rotate()",
+    "Image.rotate(angle) rotates counter-clockwise by that many degrees. By default it keeps the original canvas size (cropping the corners); passing expand=True instead resizes the canvas so nothing is cut off - for a 90-degree turn that swaps width and height.",
+    "Open the image, call .rotate(angle, expand=True) on it, and return the .size of that result - .size is already the (width, height) tuple the exercise asks for."
+  ],
+  "hints_fr": [
+    "Methode a considerer : Image.rotate()",
+    "Image.rotate(angle) pivote dans le sens anti-horaire de ce nombre de degres. Par defaut, la taille du cadre d'origine est conservee (les coins sont recadres) ; passer expand=True redimensionne au contraire le cadre pour que rien ne soit coupe - pour une rotation de 90 degres, cela inverse largeur et hauteur.",
+    "Ouvre l'image, appelle .rotate(angle, expand=True) dessus, et retourne le .size de ce resultat - .size est deja le tuple (largeur, hauteur) demande par l'exercice."
+  ],
+  "expected_behavior": "Returns the (width, height) of the image after rotating by angle degrees with the canvas expanded.",
+  "hidden_tests": [
+    {
+      "call": "rotate_image('sample.png', 90)",
+      "expected": "(20, 40)",
+      "label": "90 degree rotation swaps size"
+    },
+    {
+      "call": "rotate_image('sample.png', 0)",
+      "expected": "(40, 20)",
+      "label": "0 degree rotation keeps size"
+    }
+  ],
+  "solution": "from PIL import Image\n\n\ndef rotate_image(path, angle):\n    return Image.open(path).rotate(angle, expand=True).size\n",
+  "explanation": "expand=True is the detail that makes this exercise meaningful: without it, .rotate() always reports the original size back, because it rotates content within a fixed canvas and crops whatever no longer fits.",
+  "explanation_fr": "expand=True est le detail qui rend cet exercice pertinent : sans lui, .rotate() rapporte toujours la taille d'origine, car elle fait pivoter le contenu dans un cadre fixe et recadre ce qui ne rentre plus.",
+  "concepts": ["pillow", "images", "rotation"],
+  "skills": ["numerical_computation"],
+  "source": "42_python_piscine",
+  "track": "python",
+  "validation_profile": "42_piscine",
+  "exercise_type": "function",
+  "exercise_status": "active",
+  "resources": ["python/42-piscine/sample.png"]
+}

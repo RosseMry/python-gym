@@ -1,0 +1,40 @@
+{
+  "source": "30_days_of_python",
+  "day": 4,
+  "level": null,
+  "module": "strings",
+  "exercise_type": "function",
+  "id": "30days-d04-01",
+  "difficulty": 1,
+  "title": "Join words with a space",
+  "description": "Write a function `join_words(words)` that concatenates a list of words into a single string, separated by spaces.\n\nSource items 1-2 (`'Thirty', 'Days', 'Of', 'Python'` and `'Coding', 'For', 'All'`) are the same operation on two different word lists - combined here as one exercise with both as test cases.",
+  "examples": "join_words(['Thirty', 'Days', 'Of', 'Python'])\n-> 'Thirty Days Of Python'",
+  "starter_code": "def join_words(words):\n    # your code here\n    pass\n",
+  "hints": [
+    "Method to consider: str.join()",
+    "' '.join(words) glues every string in the list together with a single space between each pair - it's a method on the separator string, called with the list as its argument.",
+    "Call ' '.join(...) directly on the words list and return the result - no loop needed."
+  ],
+  "expected_behavior": "Returns the words joined into one string, single spaces between them.",
+  "hidden_tests": [
+    {
+      "call": "join_words(['Thirty', 'Days', 'Of', 'Python'])",
+      "expected": "'Thirty Days Of Python'",
+      "label": "source item 1"
+    },
+    {
+      "call": "join_words(['Coding', 'For', 'All'])",
+      "expected": "'Coding For All'",
+      "label": "source item 2"
+    }
+  ],
+  "solution": "def join_words(words):\n    return ' '.join(words)\n",
+  "explanation": "' '.join(words) is the idiomatic way to combine a list of strings with a fixed separator between them, avoiding a manual loop with string concatenation.",
+  "concepts": [
+    "strings",
+    "join"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

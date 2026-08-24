@@ -1,0 +1,13 @@
+{
+  "id": "min",
+  "name": "min()",
+  "what_it_does": "Returns the smallest item in an iterable, or the smallest of several arguments passed directly.",
+  "syntax": "min(iterable) or min(a, b, c, ...) or min(iterable, key=func)",
+  "parameters": "Either one iterable of comparable values, or two or more individual values. Optional key= - a function applied to each item before comparing, useful for finding the 'smallest' by a custom rule.",
+  "return_value": "The smallest item found.",
+  "example": "scores = [42, 7, 19]\nprint(min(scores))",
+  "example_output": "7",
+  "common_mistakes": "min() on an empty list raises ValueError - always check len() first if the list might be empty. Mixing incompatible types (like a string and an int) raises TypeError.",
+  "when_to_use": "Finding the lowest value in a dataset, or (with key=) finding the item that scores lowest by some custom measure, e.g. min(words, key=len) for the shortest word.",
+  "related_exercise_ids": []
+}

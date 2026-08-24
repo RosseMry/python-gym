@@ -1,0 +1,45 @@
+{
+  "source": "30_days_of_python",
+  "day": 3,
+  "level": null,
+  "module": "operators",
+  "exercise_type": "function",
+  "id": "30days-d03-13",
+  "difficulty": 1,
+  "title": "Check if a number is even",
+  "description": "Write a function `is_even(n)` that returns whether `n` is even, using the modulus operator.",
+  "examples": "is_even(4)\n-> True\nis_even(7)\n-> False",
+  "starter_code": "def is_even(n):\n    # your code here\n    pass\n",
+  "hints": [
+    "Operator to consider: %",
+    "n % 2 gives the remainder of dividing n by 2 - a number is even exactly when that remainder is 0.",
+    "Return n % 2 == 0."
+  ],
+  "expected_behavior": "Returns True if n is even, False otherwise.",
+  "hidden_tests": [
+    {
+      "call": "is_even(4)",
+      "expected": "True",
+      "label": "source item 17, even"
+    },
+    {
+      "call": "is_even(7)",
+      "expected": "False",
+      "label": "odd"
+    },
+    {
+      "call": "is_even(0)",
+      "expected": "True",
+      "label": "zero is even"
+    }
+  ],
+  "solution": "def is_even(n):\n    return n % 2 == 0\n",
+  "explanation": "The modulus operator is the direct translation of 'divisible by 2, remainder zero' - no need to check n / 2 for a whole number instead.",
+  "concepts": [
+    "modulo",
+    "comparison operators"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

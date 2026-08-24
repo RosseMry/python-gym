@@ -1,0 +1,38 @@
+{
+  "source": "30_days_of_python",
+  "day": 11,
+  "module": "functions",
+  "exercise_type": "function",
+  "level": 2,
+  "id": "30days-d11-l2-04",
+  "difficulty": 2,
+  "title": "Basic statistics on a list of numbers",
+  "description": "Write a function `stats_summary(numbers)` that returns a dict with keys `mean`, `median`, `mode`, `range` (max - min), `variance`, and `std` (population variance and standard deviation), using the `statistics` module.",
+  "examples": "stats_summary([2, 4, 4, 4, 5, 5, 7, 9])\n-> {'mean': 5, 'median': 4.5, 'mode': 4, 'range': 7, 'variance': 4, 'std': 2.0}",
+  "starter_code": "import statistics\n\n\ndef stats_summary(numbers):\n    # your code here\n    pass\n",
+  "hints": [
+    "Module to consider: statistics, specifically mean(), median(), mode(), pvariance(), pstdev()",
+    "Each of these is a one-function answer to one question - statistics.mean(numbers), statistics.median(numbers), and so on, rather than a formula written out by hand for each.",
+    "Build the dict from statistics.mean, statistics.median, statistics.mode, max(numbers) - min(numbers), statistics.pvariance, and statistics.pstdev, one call per key."
+  ],
+  "expected_behavior": "Returns a dict with mean, median, mode, range, variance, and std.",
+  "hidden_tests": [
+    {
+      "call": "stats_summary([2, 4, 4, 4, 5, 5, 7, 9])",
+      "expected": "{'mean': 5, 'median': 4.5, 'mode': 4, 'range': 7, 'variance': 4, 'std': 2.0}",
+      "label": "source item 4"
+    }
+  ],
+  "solution": "import statistics\n\n\ndef stats_summary(numbers):\n    return {\n        \"mean\": statistics.mean(numbers),\n        \"median\": statistics.median(numbers),\n        \"mode\": statistics.mode(numbers),\n        \"range\": max(numbers) - min(numbers),\n        \"variance\": statistics.pvariance(numbers),\n        \"std\": statistics.pstdev(numbers),\n    }\n",
+  "explanation": "The statistics module already implements each of these measures correctly (including edge cases like even-length medians) - reimplementing mean/median/mode/variance by hand would just be re-deriving what the standard library already provides.",
+  "concepts": [
+    "statistics module",
+    "mean",
+    "median",
+    "mode",
+    "variance"
+  ],
+  "skills": [
+    "using_standard_library_modules"
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "source": "30_days_of_python",
+  "day": 2,
+  "module": "variables",
+  "exercise_type": "function",
+  "level": 2,
+  "id": "30days-d02-l2-02",
+  "difficulty": 1,
+  "title": "Compare the length of two strings",
+  "description": "Write a function `compare_name_lengths(first_name, last_name)` that returns a tuple `(len(first_name), len(last_name), longer)`, where `longer` is `'first_name'`, `'last_name'`, or `'equal'`.\n\nCovers source items 2-3 (find the length of your first name with `len()`, then compare it to your last name's length) as one exercise.",
+  "examples": "compare_name_lengths('Ada', 'Lovelace')\n-> (3, 8, 'last_name')",
+  "starter_code": "def compare_name_lengths(first_name, last_name):\n    # your code here\n    pass\n",
+  "hints": [
+    "Function to consider: len()",
+    "len(first_name) and len(last_name) give the two lengths directly; comparing them with < and > tells you which is longer.",
+    "Compute both lengths, decide 'first_name', 'last_name', or 'equal' based on comparing them, and return all three as a tuple."
+  ],
+  "expected_behavior": "Returns (first_name length, last_name length, which one is longer).",
+  "hidden_tests": [
+    {
+      "call": "compare_name_lengths('Ada', 'Lovelace')",
+      "expected": "(3, 8, 'last_name')",
+      "label": "source items 2-3, last name longer"
+    },
+    {
+      "call": "compare_name_lengths('Alexandria', 'Wu')",
+      "expected": "(10, 2, 'first_name')",
+      "label": "first name longer"
+    },
+    {
+      "call": "compare_name_lengths('Kim', 'Cho')",
+      "expected": "(3, 3, 'equal')",
+      "label": "equal length"
+    }
+  ],
+  "solution": "def compare_name_lengths(first_name, last_name):\n    len_first, len_last = len(first_name), len(last_name)\n    if len_first > len_last:\n        longer = \"first_name\"\n    elif len_last > len_first:\n        longer = \"last_name\"\n    else:\n        longer = \"equal\"\n    return len_first, len_last, longer\n",
+  "explanation": "len() measures characters, not visual width or anything language-specific - the comparison after it is a plain if/elif/else on two integers.",
+  "concepts": [
+    "len",
+    "comparison operators",
+    "if/elif/else"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

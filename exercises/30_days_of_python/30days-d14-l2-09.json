@@ -1,0 +1,35 @@
+{
+  "source": "30_days_of_python",
+  "day": 14,
+  "module": "higher_order_functions",
+  "exercise_type": "function",
+  "level": 2,
+  "id": "30days-d14-l2-09",
+  "difficulty": 1,
+  "title": "Sum numbers with reduce",
+  "description": "Write a function `reduce_sum(numbers)` that returns the sum of `numbers`, using `functools.reduce()` (not the built-in `sum()`).",
+  "examples": "reduce_sum([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])\n-> 55",
+  "starter_code": "from functools import reduce\n\n\ndef reduce_sum(numbers):\n    # your code here\n    pass\n",
+  "hints": [
+    "Function to consider: functools.reduce()",
+    "reduce(lambda a, b: a + b, numbers) repeatedly combines pairs of values into a single running total, the same underlying idea sum() uses internally - reduce() just makes that mechanism explicit and reusable for other operations.",
+    "Return reduce(lambda a, b: a + b, numbers)."
+  ],
+  "expected_behavior": "Returns the sum of numbers, computed with reduce().",
+  "hidden_tests": [
+    {
+      "call": "reduce_sum([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])",
+      "expected": "55",
+      "label": "source item 10"
+    }
+  ],
+  "solution": "from functools import reduce\n\n\ndef reduce_sum(numbers):\n    return reduce(lambda a, b: a + b, numbers)\n",
+  "explanation": "reduce() collapses a whole iterable down to one value by repeatedly applying a two-argument function - sum() is really just reduce() with addition baked in as the combining operation.",
+  "concepts": [
+    "reduce",
+    "lambda"
+  ],
+  "skills": [
+    "functional_python"
+  ]
+}

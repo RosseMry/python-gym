@@ -1,0 +1,36 @@
+{
+  "source": "30_days_of_python",
+  "day": 4,
+  "level": null,
+  "module": "strings",
+  "exercise_type": "function",
+  "id": "30days-d04-06",
+  "difficulty": 1,
+  "title": "Slice out the first word",
+  "description": "Write a function `first_word(text)` that returns the first word of `text` (up to the first space), using slicing rather than `.split()`.",
+  "examples": "first_word('Coding For All')\n-> 'Coding'",
+  "starter_code": "def first_word(text):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: find the space, then slice up to it",
+    "text.find(' ') (or text.index(' ')) gives you the position of the first space. A slice text[:position] then takes everything before that position.",
+    "Find the index of the first space, then return text sliced from the start up to (not including) that index."
+  ],
+  "expected_behavior": "Returns the substring before the first space.",
+  "hidden_tests": [
+    {
+      "call": "first_word('Coding For All')",
+      "expected": "'Coding'",
+      "label": "source item 9"
+    }
+  ],
+  "solution": "def first_word(text):\n    return text[:text.find(' ')]\n",
+  "explanation": "find() locates the separator without raising an error if it's missing (unlike index()), and slicing up to that position extracts everything before it in one expression.",
+  "concepts": [
+    "strings",
+    "slicing",
+    "find"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

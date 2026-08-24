@@ -1,0 +1,45 @@
+{
+  "source": "30_days_of_python",
+  "day": 14,
+  "module": "higher_order_functions",
+  "exercise_type": "function",
+  "level": 2,
+  "id": "30days-d14-l2-11",
+  "difficulty": 2,
+  "title": "Categorize countries by a name pattern",
+  "description": "Write a function `categorize_countries(path, pattern)` that reads the country data JSON file at `path` and returns the names of every country containing `pattern` (case-insensitive), alphabetically sorted.\n\nUses the real 250-country dataset, unlike the day's own 6-country example list - 'land' alone matches 29 real country names.",
+  "examples": "categorize_countries('countries_data.json', 'stan')\n-> ['Afghanistan', 'Kazakhstan', 'Kyrgyzstan', 'Pakistan', ...] (8 matches - substring matching also catches 'Tristan')",
+  "starter_code": "import json\n\n\ndef categorize_countries(path, pattern):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: this is the same substring-filter idea as filter_containing, applied to real loaded data",
+    "Once the JSON is loaded into a list of country dicts, filtering by whether pattern appears in c['name'].lower() works exactly the same as it did on the small in-memory countries list earlier in this day.",
+    "Load the file, keep the names where pattern.lower() is in name.lower(), and return them sorted."
+  ],
+  "expected_behavior": "Returns the alphabetically sorted country names containing pattern.",
+  "hidden_tests": [
+    {
+      "call": "len(categorize_countries('countries_data.json', 'land'))",
+      "expected": "29",
+      "label": "source item 12, 'land' pattern"
+    },
+    {
+      "call": "categorize_countries('countries_data.json', 'stan')",
+      "expected": "['Afghanistan', 'Kazakhstan', 'Kyrgyzstan', 'Pakistan', 'Saint Helena, Ascension and Tristan da Cunha', 'Tajikistan', 'Turkmenistan', 'Uzbekistan']",
+      "label": "'stan' pattern - also catches 'Tristan' as a substring"
+    }
+  ],
+  "solution": "import json\n\n\ndef categorize_countries(path, pattern):\n    with open(path, encoding=\"utf-8\") as f:\n        countries = json.load(f)\n    matches = [\n        c[\"name\"] for c in countries if pattern.lower() in c[\"name\"].lower()\n    ]\n    return sorted(matches)\n",
+  "explanation": "The pattern-matching logic doesn't change between a 6-item list and a 250-item one - only the data source does, which is what reading from a real file rather than a hardcoded list demonstrates.",
+  "concepts": [
+    "file reading",
+    "json",
+    "list comprehension"
+  ],
+  "skills": [
+    "functional_python",
+    "using_standard_library_modules"
+  ],
+  "resources": [
+    "python/30-days/countries_data.json"
+  ]
+}

@@ -3,7 +3,9 @@
   "module": "piscine_00_starting",
   "difficulty": 1,
   "title": "First use of package (format the date)",
+  "title_fr": "Premier usage d'un package (formater la date)",
   "description": "Write a script that formats the current date two ways: the number of seconds since January 1, 1970 (with thousands separators, and again in scientific notation), and the current date as 'Mon DD YYYY'.\n\nAllowed: time, datetime, or any other library that gives you the current date.",
+  "description_fr": "Écris un script qui formate la date actuelle de deux façons : le nombre de secondes depuis le 1er janvier 1970 (avec séparateurs de milliers, puis en notation scientifique), et la date actuelle sous la forme 'Mon DD YYYY'.\n\nAutorisé : time, datetime, ou toute autre bibliothèque qui te donne la date actuelle.",
   "examples": "$> python format_ft_time.py | cat -e\nSeconds since January 1, 1970: 1,666,355,857.3622 or 1.67e+09 in scientific notation$\nOct 21 2022$\n$>",
   "starter_code": "# your code here\n",
   "hints": [
@@ -11,10 +13,16 @@
     "Format numbers with f-strings: f'{value:,}' adds thousands separators, f'{value:.2e}' gives scientific notation.",
     "datetime.now().strftime('%b %d %Y') gives 'Oct 21 2022'-style output."
   ],
+  "hints_fr": [
+    "time.time() te donne le nombre de secondes depuis l'epoch, sous forme de float.",
+    "Formate les nombres avec des f-strings : f'{value:,}' ajoute les séparateurs de milliers, f'{value:.2e}' donne la notation scientifique.",
+    "datetime.now().strftime('%b %d %Y') donne un résultat du style 'Oct 21 2022'."
+  ],
   "expected_behavior": "Prints the seconds-since-epoch line, then the formatted date. The exact numbers will differ every run - see the note below.",
   "hidden_tests": [],
   "solution": "import time\nfrom datetime import datetime\n\nnow = time.time()\nprint(\n    f'Seconds since January 1, 1970: {now:,.4f} or '\n    f'{now:.2e} in scientific notation'\n)\nprint(datetime.now().strftime('%b %d %Y'))\n",
   "explanation": "time.time() returns the current Unix timestamp. f-string format specs handle both the thousands separator and scientific notation without manual string building.",
+  "explanation_fr": "time.time() retourne le timestamp Unix actuel. Les spécifications de format des f-strings gèrent aussi bien le séparateur de milliers que la notation scientifique, sans construction manuelle de chaîne.",
   "concepts": [
     "time",
     "datetime",

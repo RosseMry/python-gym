@@ -1,0 +1,51 @@
+{
+  "source": "30_days_of_python",
+  "day": 18,
+  "module": "regular_expressions",
+  "exercise_type": "function",
+  "id": "30days-d18-l2-01",
+  "level": 2,
+  "difficulty": 2,
+  "title": "Check if a string is a valid variable name",
+  "description": "Write a function `is_valid_variable(text)` that returns whether `text` would be a valid Python variable name, using a regular expression rather than `str.isidentifier()`: starts with a letter or underscore, followed by any number of letters, digits, or underscores.",
+  "examples": "is_valid_variable('first_name')\n-> True\nis_valid_variable('first-name')\n-> False\nis_valid_variable('1first_name')\n-> False\nis_valid_variable('firstname')\n-> True",
+  "starter_code": "import re\n\n\ndef is_valid_variable(text):\n    # your code here\n    pass\n",
+  "hints": [
+    "Pattern to consider: ^[A-Za-z_][A-Za-z0-9_]*$",
+    "The first character class ([A-Za-z_]) is deliberately different from the rest ([A-Za-z0-9_]*) - a variable name can't start with a digit, but can contain one later. The ^ and $ anchor the match to the whole string, not just part of it.",
+    "Use re.match() (or re.fullmatch()) with that pattern against text, and return whether it matched - re.match returns None on no match, which is falsy."
+  ],
+  "expected_behavior": "Returns True if text matches Python's identifier rule, False otherwise.",
+  "hidden_tests": [
+    {
+      "call": "is_valid_variable('first_name')",
+      "expected": "True",
+      "label": "valid"
+    },
+    {
+      "call": "is_valid_variable('first-name')",
+      "expected": "False",
+      "label": "hyphen not allowed"
+    },
+    {
+      "call": "is_valid_variable('1first_name')",
+      "expected": "False",
+      "label": "leading digit"
+    },
+    {
+      "call": "is_valid_variable('firstname')",
+      "expected": "True",
+      "label": "valid, no underscore"
+    }
+  ],
+  "solution": "import re\n\n\ndef is_valid_variable(text):\n    return bool(re.fullmatch(r\"[A-Za-z_][A-Za-z0-9_]*\", text))\n",
+  "explanation": "re.fullmatch() requires the pattern to account for the entire string, which is what makes 'first-name' fail correctly - re.match() alone would still match the 'first' prefix and report success.",
+  "concepts": [
+    "regular expressions",
+    "re.fullmatch",
+    "character classes"
+  ],
+  "skills": [
+    "text_processing"
+  ]
+}

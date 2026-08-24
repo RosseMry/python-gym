@@ -1,0 +1,64 @@
+{
+  "source": "30_days_of_python",
+  "day": 19,
+  "module": "file_handling",
+  "exercise_type": "function",
+  "level": 2,
+  "id": "30days-d19-l2-03",
+  "difficulty": 2,
+  "title": "Find the most frequent words in real speeches",
+  "description": "Write a function `most_frequent_words_in_file(path, n)` that reads the text file at `path` and returns the `n` most frequent words (case-insensitive) as `(count, word)` tuples.\n\nCovers source items 3 (ten most frequent words in each of 4 real speeches) and 5 (ten most repeated words in Romeo and Juliet) as one exercise with 5 test cases - both ask for the same operation on a different file.",
+  "examples": "most_frequent_words_in_file('obama_speech.txt', 3)\n-> [(129, 'the'), (113, 'and'), (81, 'of')]",
+  "starter_code": "import re\nfrom collections import Counter\n\n\ndef most_frequent_words_in_file(path, n):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: read the file, then reuse the same tokenize-and-count approach as find_most_common_words",
+    "The only difference from counting words in a string directly is one extra step at the start - reading the file's contents into a string first.",
+    "Open and read the file, tokenize with re.findall(r\"[A-Za-z']+\", text.lower()), count with Counter, and return the top n sorted by (-count, word)."
+  ],
+  "expected_behavior": "Returns the n most frequent words in the file, most frequent first.",
+  "hidden_tests": [
+    {
+      "call": "most_frequent_words_in_file('obama_speech.txt', 10)",
+      "expected": "[(129, 'the'), (113, 'and'), (81, 'of'), (70, 'to'), (67, 'our'), (62, 'we'), (50, 'that'), (48, 'a'), (36, 'is'), (25, 'in')]",
+      "label": "source item 3, Obama's speech"
+    },
+    {
+      "call": "most_frequent_words_in_file('michelle_obama_speech.txt', 10)",
+      "expected": "[(96, 'and'), (85, 'the'), (84, 'to'), (46, 'of'), (43, 'that'), (41, 'a'), (36, 'in'), (28, 'he'), (28, 'my'), (27, 'for')]",
+      "label": "source item 3, Michelle's speech"
+    },
+    {
+      "call": "most_frequent_words_in_file('donald_speech.txt', 10)",
+      "expected": "[(65, 'the'), (59, 'and'), (43, 'we'), (40, 'will'), (38, 'of'), (32, 'to'), (30, 'our'), (20, 'is'), (17, 'america'), (13, 'for')]",
+      "label": "source item 3, Donald Trump's speech"
+    },
+    {
+      "call": "most_frequent_words_in_file('melina_trump_speech.txt', 10)",
+      "expected": "[(77, 'and'), (55, 'to'), (52, 'the'), (29, 'is'), (28, 'i'), (27, 'for'), (25, 'of'), (24, 'that'), (22, 'a'), (21, 'you')]",
+      "label": "source item 3, Melina Trump's speech"
+    },
+    {
+      "call": "most_frequent_words_in_file('romeo_and_juliet.txt', 10)",
+      "expected": "[(867, 'the'), (800, 'and'), (657, 'to'), (576, 'i'), (535, 'of'), (523, 'a'), (378, 'in'), (375, 'is'), (363, 'that'), (362, 'you')]",
+      "label": "source item 5, Romeo and Juliet"
+    }
+  ],
+  "solution": "import re\nfrom collections import Counter\n\n\ndef most_frequent_words_in_file(path, n):\n    with open(path, encoding=\"utf-8\") as f:\n        text = f.read()\n    words = re.findall(r\"[A-Za-z']+\", text.lower())\n    counts = Counter(words)\n    ranked = sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))\n    return [(count, word) for word, count in ranked[:n]]\n",
+  "explanation": "The most common words in ordinary English text are overwhelmingly function words ('the', 'and', 'to') regardless of speaker or subject - the same top few dominate every one of these five very different texts.",
+  "concepts": [
+    "regular expressions",
+    "collections.Counter",
+    "file reading"
+  ],
+  "skills": [
+    "text_processing",
+    "using_standard_library_modules"
+  ],
+  "resources": [
+    "python/30-days/obama_speech.txt",
+    "python/30-days/michelle_obama_speech.txt",
+    "python/30-days/donald_speech.txt",
+    "python/30-days/melina_trump_speech.txt",
+    "python/30-days/romeo_and_juliet.txt"
+  ]
+}

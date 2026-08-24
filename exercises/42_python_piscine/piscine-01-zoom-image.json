@@ -1,0 +1,46 @@
+{
+  "id": "piscine-01-zoom-image",
+  "module": "piscine_01_array",
+  "difficulty": 1,
+  "title": "Zoom Image",
+  "title_fr": "Zoomer une image",
+  "description": "Write a function `zoom_image(path, factor)` that opens the image at `path`, resizes it by multiplying both width and height by `factor`, and returns the resized image's `.size`.\n\n`sample.png` (40x20) is available in your working directory.",
+  "description_fr": "Ecris une fonction `zoom_image(path, factor)` qui ouvre l'image situee a `path`, la redimensionne en multipliant largeur et hauteur par `factor`, et retourne le `.size` de l'image redimensionnee.\n\n`sample.png` (40x20) est disponible dans ton dossier de travail.",
+  "examples": "zoom_image('sample.png', 2)\n-> (80, 40)\nzoom_image('sample.png', 0.5)\n-> (20, 10)",
+  "examples_fr": "zoom_image('sample.png', 2)\n-> (80, 40)\nzoom_image('sample.png', 0.5)\n-> (20, 10)",
+  "starter_code": "from PIL import Image\n\n\ndef zoom_image(path, factor):\n    # your code here\n    pass\n",
+  "hints": [
+    "Method to consider: Image.resize()",
+    "img.size gives you the current (width, height). Image.resize() takes the new size as a tuple of integers - it doesn't accept a scale factor directly, so you compute the new width and height yourself before calling it.",
+    "Multiply the original width and height by factor, convert both to int (resize needs whole pixels), and pass that pair as the new size to .resize()."
+  ],
+  "hints_fr": [
+    "Methode a considerer : Image.resize()",
+    "img.size donne le (largeur, hauteur) actuel. Image.resize() prend la nouvelle taille sous forme d'un tuple d'entiers - elle n'accepte pas un facteur d'echelle directement, donc tu dois calculer toi-meme la nouvelle largeur et hauteur avant de l'appeler.",
+    "Multiplie la largeur et la hauteur d'origine par factor, convertis les deux en int (resize a besoin de pixels entiers), et passe cette paire comme nouvelle taille a .resize()."
+  ],
+  "expected_behavior": "Returns the (width, height) of the image after resizing by factor.",
+  "hidden_tests": [
+    {
+      "call": "zoom_image('sample.png', 2)",
+      "expected": "(80, 40)",
+      "label": "zoom in x2"
+    },
+    {
+      "call": "zoom_image('sample.png', 0.5)",
+      "expected": "(20, 10)",
+      "label": "zoom out x0.5"
+    }
+  ],
+  "solution": "from PIL import Image\n\n\ndef zoom_image(path, factor):\n    img = Image.open(path)\n    width, height = img.size\n    return img.resize((int(width * factor), int(height * factor))).size\n",
+  "explanation": "Image.resize() always wants an explicit (width, height) target, so 'zooming by a factor' means computing that target from the current size first - there's no shortcut that takes a scale factor directly.",
+  "explanation_fr": "Image.resize() attend toujours une cible explicite (largeur, hauteur), donc « zoomer d'un facteur » signifie calculer d'abord cette cible a partir de la taille actuelle - il n'y a pas de raccourci qui prendrait directement un facteur d'echelle.",
+  "concepts": ["pillow", "images", "resizing"],
+  "skills": ["numerical_computation"],
+  "source": "42_python_piscine",
+  "track": "python",
+  "validation_profile": "42_piscine",
+  "exercise_type": "function",
+  "exercise_status": "active",
+  "resources": ["python/42-piscine/sample.png"]
+}

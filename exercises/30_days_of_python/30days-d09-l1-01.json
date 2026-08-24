@@ -1,0 +1,40 @@
+{
+  "id": "30days-d09-l1-01",
+  "module": "conditionals",
+  "day": 9,
+  "level": 1,
+  "difficulty": 1,
+  "title": "Old enough to drive?",
+  "description": "Get user input using input(“Enter your age: ”). If user is 18 or older, give feedback: You are old enough to drive. If below 18 give feedback to wait for the missing amount of years. Output:\n\n```sh\nEnter your age: 30\nYou are old enough to learn to drive.\nOutput:\nEnter your age: 15\nYou need 3 more years to learn to drive.\n```\n\nPython-Gym adaptation: implement as `check_driving_age(age)`, returning the exact feedback string, either `\"You are old enough to learn to drive.\"` or `\"You need {n} more years to learn to drive.\"` with `n` being the number of years left until 18.",
+  "examples": "check_driving_age(30) -> 'You are old enough to learn to drive.'\ncheck_driving_age(15) -> 'You need 3 more years to learn to drive.'",
+  "starter_code": "def check_driving_age(age):\n    # write your code here\n    pass\n",
+  "hints": [
+    "Compare age to 18 with a simple if / else.",
+    "When age is 18 or older, return the fixed 'old enough' message.",
+    "When age is below 18, compute the difference with 18 - age and insert it into an f-string."
+  ],
+  "expected_behavior": "Returns a string telling the user whether they are old enough to drive (age >= 18), or how many more years they need to wait otherwise.",
+  "hidden_tests": [
+    {
+      "call": "check_driving_age(30)",
+      "expected": "'You are old enough to learn to drive.'",
+      "label": "well above 18"
+    },
+    {
+      "call": "check_driving_age(15)",
+      "expected": "'You need 3 more years to learn to drive.'",
+      "label": "below 18"
+    },
+    {
+      "call": "check_driving_age(18)",
+      "expected": "'You are old enough to learn to drive.'",
+      "label": "exactly 18 (boundary)"
+    }
+  ],
+  "solution": "def check_driving_age(age):\n    if age >= 18:\n        return \"You are old enough to learn to drive.\"\n    else:\n        return f\"You need {18 - age} more years to learn to drive.\"\n",
+  "explanation": "A single if / else checks whether age meets the 18-year threshold. When it does not, 18 - age gives exactly how many years remain, which is inserted into the feedback message with an f-string.",
+  "concepts": ["if", "else", "comparison operators", "f-strings"],
+  "skills": ["basic_data_manipulation"],
+  "source": "30_days_of_python",
+  "exercise_type": "function"
+}

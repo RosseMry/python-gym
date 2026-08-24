@@ -1,0 +1,46 @@
+{
+  "id": "piscine-02-life-expectancy-plot",
+  "module": "piscine_02_datatable",
+  "difficulty": 2,
+  "title": "Life Expectancy Plot",
+  "title_fr": "Graphique d'esperance de vie",
+  "description": "Write a function `countries_above_life_expectancy(path, threshold)` that reads `countries.csv` (columns `country, population, life_expectancy, income`) and returns, alphabetically sorted, the names of every country whose `life_expectancy` is strictly greater than `threshold`.\n\nThis is the filtering step behind a life-expectancy chart: `df[df['life_expectancy'] > threshold].plot(kind='bar', x='country', y='life_expectancy')` draws it once you have the filtered rows - plotting itself isn't graded here, but try it to see the real chart.",
+  "description_fr": "Ecris une fonction `countries_above_life_expectancy(path, threshold)` qui lit `countries.csv` (colonnes `country, population, life_expectancy, income`) et retourne, triee par ordre alphabetique, la liste des pays dont l'`life_expectancy` est strictement superieure a `threshold`.\n\nC'est l'etape de filtrage derriere un graphique d'esperance de vie : `df[df['life_expectancy'] > threshold].plot(kind='bar', x='country', y='life_expectancy')` le dessine une fois les lignes filtrees obtenues - le graphique lui-meme n'est pas evalue ici, mais essaie-le pour voir le vrai graphique.",
+  "examples": "countries_above_life_expectancy('countries.csv', 78)\n-> ['Canada', 'Finland', 'Japan']",
+  "examples_fr": "countries_above_life_expectancy('countries.csv', 78)\n-> ['Canada', 'Finland', 'Japan']",
+  "starter_code": "import pandas as pd\n\n\ndef countries_above_life_expectancy(path, threshold):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: boolean filtering with df[condition]",
+    "Writing a condition on a column, like df['life_expectancy'] > threshold, produces a boolean Series (one True/False per row). Passing that boolean Series back into df[...] keeps only the rows where it's True - this is the pandas equivalent of a filter().",
+    "Filter the DataFrame with that boolean condition, pull out the 'country' column of the filtered rows, convert it to a list, and sort it alphabetically before returning."
+  ],
+  "hints_fr": [
+    "Idee a considerer : filtrage booleen avec df[condition]",
+    "Ecrire une condition sur une colonne, comme df['life_expectancy'] > threshold, produit une Series booleenne (un True/False par ligne). Repasser cette Series booleenne dans df[...] ne garde que les lignes ou elle vaut True - c'est l'equivalent pandas d'un filter().",
+    "Filtre le DataFrame avec cette condition booleenne, extrais la colonne 'country' des lignes filtrees, convertis-la en liste, et trie-la par ordre alphabetique avant de retourner."
+  ],
+  "expected_behavior": "Returns an alphabetically sorted list of country names above the given life expectancy threshold.",
+  "hidden_tests": [
+    {
+      "call": "countries_above_life_expectancy('countries.csv', 78)",
+      "expected": "['Canada', 'Finland', 'Japan']",
+      "label": "threshold 78"
+    },
+    {
+      "call": "countries_above_life_expectancy('countries.csv', 90)",
+      "expected": "[]",
+      "label": "threshold above every country"
+    }
+  ],
+  "solution": "import pandas as pd\n\n\ndef countries_above_life_expectancy(path, threshold):\n    df = pd.read_csv(path)\n    matches = df[df[\"life_expectancy\"] > threshold][\"country\"]\n    return sorted(matches.tolist())\n",
+  "explanation": "df['life_expectancy'] > threshold builds a boolean mask over every row in one comparison; df[mask] then keeps only the matching rows. Sorting happens last and separately, since the filtered rows come back in their original CSV order, not alphabetical order.",
+  "explanation_fr": "df['life_expectancy'] > threshold construit un masque booleen sur chaque ligne en une seule comparaison ; df[mask] ne garde ensuite que les lignes correspondantes. Le tri se fait a la fin et separement, car les lignes filtrees reviennent dans leur ordre d'origine du CSV, pas dans l'ordre alphabetique.",
+  "concepts": ["pandas", "dataframe", "boolean filtering"],
+  "skills": ["data_analysis"],
+  "source": "42_python_piscine",
+  "track": "python",
+  "validation_profile": "42_piscine",
+  "exercise_type": "function",
+  "exercise_status": "active",
+  "resources": ["python/42-piscine/countries.csv"]
+}

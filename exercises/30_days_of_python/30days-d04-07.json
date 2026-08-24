@@ -1,0 +1,40 @@
+{
+  "source": "30_days_of_python",
+  "day": 4,
+  "level": null,
+  "module": "strings",
+  "exercise_type": "function",
+  "id": "30days-d04-07",
+  "difficulty": 1,
+  "title": "Check if a word is contained",
+  "description": "Write a function `contains_word(text, word)` that returns `True` if `word` appears anywhere in `text`, `False` otherwise.",
+  "examples": "contains_word('Coding For All', 'Coding')\n-> True",
+  "starter_code": "def contains_word(text, word):\n    # your code here\n    pass\n",
+  "hints": [
+    "Operator to consider: the `in` operator",
+    "`word in text` checks membership directly for strings, the same way it checks whether an item is in a list - no need for .find() or .index() when you only care about True/False.",
+    "Return the result of the `in` check directly - it's already a boolean."
+  ],
+  "expected_behavior": "Returns True if word is a substring of text, False otherwise.",
+  "hidden_tests": [
+    {
+      "call": "contains_word('Coding For All', 'Coding')",
+      "expected": "True",
+      "label": "source item 10, present"
+    },
+    {
+      "call": "contains_word('Coding For All', 'Python')",
+      "expected": "False",
+      "label": "absent"
+    }
+  ],
+  "solution": "def contains_word(text, word):\n    return word in text\n",
+  "explanation": "Python's `in` operator works on strings the same way it works on lists and other containers - it's the most direct way to answer a yes/no membership question.",
+  "concepts": [
+    "strings",
+    "in operator"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

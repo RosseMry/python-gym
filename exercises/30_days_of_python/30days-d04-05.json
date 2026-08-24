@@ -1,0 +1,37 @@
+{
+  "source": "30_days_of_python",
+  "day": 4,
+  "level": null,
+  "module": "strings",
+  "exercise_type": "function",
+  "id": "30days-d04-05",
+  "difficulty": 1,
+  "title": "Capitalize, title-case, and swap case",
+  "description": "Write a function `format_variants(text)` that returns a tuple `(capitalized, titled, swapped)`: `text.capitalize()`, `text.title()`, and `text.swapcase()`.",
+  "examples": "format_variants('Coding For All')\n-> ('Coding for all', 'Coding For All', 'cODING fOR aLL')",
+  "starter_code": "def format_variants(text):\n    # your code here\n    pass\n",
+  "hints": [
+    "Methods to consider: str.capitalize(), str.title(), str.swapcase()",
+    ".capitalize() uppercases only the first character of the whole string, .title() uppercases the first character of every word, and .swapcase() flips upper to lower and lower to upper everywhere.",
+    "Call all three methods on text and return them as a 3-item tuple, in that order."
+  ],
+  "expected_behavior": "Returns (text.capitalize(), text.title(), text.swapcase()).",
+  "hidden_tests": [
+    {
+      "call": "format_variants('Coding For All')",
+      "expected": "('Coding for all', 'Coding For All', 'cODING fOR aLL')",
+      "label": "source item 8"
+    }
+  ],
+  "solution": "def format_variants(text):\n    return text.capitalize(), text.title(), text.swapcase()\n",
+  "explanation": "Each method targets a different notion of \"case\": capitalize() cares about the whole string, title() about word boundaries, and swapcase() inverts every letter independently of position.",
+  "concepts": [
+    "strings",
+    "capitalize",
+    "title",
+    "swapcase"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

@@ -3,13 +3,20 @@
   "module": "piscine_00_starting",
   "difficulty": 1,
   "title": "First function python (find the type)",
+  "title_fr": "Première fonction python (trouve le type)",
   "description": "Write a function `all_thing_is_obj(object)` that prints the type of the object it receives, then returns 42.\n\nFor a list, print 'List : <class ...>'. For a tuple, print 'Tuple : <class ...>'. For a set, print 'Set : <class ...>'. For a dict, print 'Dict : <class ...>'. For any other string, print '<the string> is in the kitchen : <class ...>'. For any other type, print 'Type not found'.\n\nCalling the function directly (without going through a tester) does nothing by itself - there is no code at the top level of this file.",
+  "description_fr": "Écris une fonction `all_thing_is_obj(object)` qui affiche le type de l'objet reçu, puis retourne 42.\n\nPour une liste, affiche 'List : <class ...>'. Pour un tuple, affiche 'Tuple : <class ...>'. Pour un ensemble, affiche 'Set : <class ...>'. Pour un dictionnaire, affiche 'Dict : <class ...>'. Pour toute autre chaîne, affiche '<la chaîne> is in the kitchen : <class ...>'. Pour tout autre type, affiche 'Type not found'.\n\nAppeler la fonction directement (sans passer par un testeur) ne fait rien par elle-même - il n'y a pas de code au niveau supérieur de ce fichier.",
   "examples": "all_thing_is_obj(['Hello', 'tata!'])\n-> prints \"List : <class 'list'>\"\n\nall_thing_is_obj('Brian')\n-> prints \"Brian is in the kitchen : <class 'str'>\"\n\nprint(all_thing_is_obj(10))\n-> prints \"Type not found\", then 42",
   "starter_code": "def all_thing_is_obj(object):\n    # your code here\n    pass\n",
   "hints": [
     "Check the object's exact type with type(object) is list, type(object) is tuple, etc. - order matters since bool is a subclass of int and str needs its own case.",
     "For the string case, the printed message includes the string's own value, not a fixed word.",
-    "if type(object) is list:\n    print(f\"List : {type(object)}\")\nelif type(object) is str:\n    print(f\"{object} is in the kitchen : {type(object)}\")\n...\nelse:\n    print(\"Type not found\")\nreturn 42"
+    "Chain an if/elif per container type (list, tuple, set, dict), with str handled the same way but printing the value itself, and a final else for 'Type not found' - the return 42 sits outside that whole chain, since it happens no matter which branch ran."
+  ],
+  "hints_fr": [
+    "Vérifie le type exact de l'objet avec type(object) is list, type(object) is tuple, etc. - l'ordre compte, car bool est une sous-classe de int et str a besoin de son propre cas.",
+    "Pour le cas des chaînes, le message affiché inclut la valeur de la chaîne elle-même, pas un mot fixe.",
+    "Enchaîne un if/elif par type de conteneur (list, tuple, set, dict), avec str traité de la même façon mais en affichant la valeur elle-même, et un else final pour 'Type not found' - le return 42 se place en dehors de toute cette chaîne, puisqu'il s'exécute quelle que soit la branche parcourue."
   ],
   "expected_behavior": "Always returns 42, and prints one line describing the type.",
   "hidden_tests": [
@@ -40,6 +47,7 @@
   ],
   "solution": "def all_thing_is_obj(object):\n    if type(object) is list:\n        print(f\"List : {type(object)}\")\n    elif type(object) is tuple:\n        print(f\"Tuple : {type(object)}\")\n    elif type(object) is set:\n        print(f\"Set : {type(object)}\")\n    elif type(object) is dict:\n        print(f\"Dict : {type(object)}\")\n    elif type(object) is str:\n        print(f\"{object} is in the kitchen : {type(object)}\")\n    else:\n        print(\"Type not found\")\n    return 42\n",
   "explanation": "type(x) is list (rather than isinstance) matches the exact type only, which matters here since the subject wants a specific branch per container type.",
+  "explanation_fr": "type(x) is list (plutôt que isinstance) ne correspond qu'au type exact, ce qui compte ici puisque le sujet veut une branche spécifique par type de conteneur.",
   "concepts": [
     "type",
     "if/elif",

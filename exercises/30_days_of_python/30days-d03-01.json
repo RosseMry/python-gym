@@ -1,0 +1,37 @@
+{
+  "source": "30_days_of_python",
+  "day": 3,
+  "level": null,
+  "module": "operators",
+  "exercise_type": "function",
+  "id": "30days-d03-01",
+  "difficulty": 1,
+  "title": "Declare int, float, and complex variables",
+  "description": "Write a function `numeric_type_names(age, height, comp_value)` that returns the type name of each argument as a tuple.\n\nCovers source items 1-3 (declare an age as int, a height as float, and a variable holding a complex number) as one exercise - none has a fixed value to check, so declaring one of each numeric type and reporting its type is what's actually being tested.",
+  "examples": "numeric_type_names(28, 1.75, 3 + 4j)\n-> ('int', 'float', 'complex')",
+  "starter_code": "def numeric_type_names(age, height, comp_value):\n    # your code here\n    pass\n",
+  "hints": [
+    "Function to consider: type()",
+    "type(value).__name__ gives the plain-text name of a value's type - 'int', 'float', or 'complex' here.",
+    "Return a tuple of type(age).__name__, type(height).__name__, and type(comp_value).__name__, in that order."
+  ],
+  "expected_behavior": "Returns the type name of each of the three arguments.",
+  "hidden_tests": [
+    {
+      "call": "numeric_type_names(28, 1.75, 3 + 4j)",
+      "expected": "('int', 'float', 'complex')",
+      "label": "source items 1-3"
+    }
+  ],
+  "solution": "def numeric_type_names(age, height, comp_value):\n    return type(age).__name__, type(height).__name__, type(comp_value).__name__\n",
+  "explanation": "Python has a dedicated literal syntax for complex numbers (3 + 4j) - it's a numeric type just like int and float, with its own arithmetic rules.",
+  "concepts": [
+    "type",
+    "int",
+    "float",
+    "complex"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

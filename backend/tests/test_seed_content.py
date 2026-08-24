@@ -100,12 +100,16 @@ def test_catalog_was_substantially_expanded_in_sprint_3(
     # exercises to python_gym, so the floor here rises accordingly.
     assert by_source.get("python_gym", 0) >= 32
     assert by_source.get("progressive_python", 0) >= 28
-    # 2 pre-existing (Day 3) + 69 real imports from Days 5-8 (Lists 31
-    # incl. the real 4-item Level 2, Tuples 12, Sets 15, Dicts 11).
-    assert by_source.get("30_days_of_python", 0) >= 71
-    # 19 active + 10 locked (Module 1: Array, Module 2: DataTable) =
-    # the full real 29-exercise Piscine catalog (Sprint 3 correction -
-    # reconciled against github.com/zstenger93/python_piscine).
+    # Every day 1-23 has real content now; days 24-30 are legitimately
+    # absent (need a NumPy/Pandas track, a running web server/database,
+    # or don't exist in the source at all - see gen_day*.py docstrings
+    # and the test_days_*_are_imported tests for the per-day breakdown).
+    assert by_source.get("30_days_of_python", 0) >= 244
+    # Full 29-exercise Piscine catalog (19 Module 0/3/4 + 10 Module 1/2,
+    # Sprint 3 finalization: Module 1 (Array/NumPy) and Module 2
+    # (DataTable/pandas) are no longer locked placeholders - they now
+    # ship real, gradable content, see
+    # test_piscine_module1_and_module2_are_active_and_gradable.
     assert by_source.get("42_python_piscine", 0) == 29
 
 
@@ -126,18 +130,67 @@ def test_days_5_to_8_are_completely_imported(seeded_repo: ExerciseRepository) ->
     assert by_day.get(8) == 11
 
 
-def test_piscine_catalog_has_ten_locked_exercises(
+def test_days_2_4_10_18_19_are_imported(seeded_repo: ExerciseRepository) -> None:
+    """Regression guard for the 5 days added in the second Sprint 3
+    finalization correction (spec section 2). Counts are produced
+    exercises, not raw source-item counts - several source items were
+    consolidated or split with disclosure (see gen_day02.py's docstring
+    for the heaviest case, Day 2's non-gradable "declare a variable
+    with your own name" items).
+    """
+    thirty_days = seeded_repo.list_by_source("30_days_of_python")
+    by_day: dict[int, int] = {}
+    for exercise in thirty_days:
+        if exercise.day is not None:
+            by_day[exercise.day] = by_day.get(exercise.day, 0) + 1
+    assert by_day.get(2) == 8
+    assert by_day.get(4) == 25
+    assert by_day.get(10) == 14
+    assert by_day.get(18) == 4
+    assert by_day.get(19) == 8
+
+
+def test_days_3_11_14_20_21_are_imported(seeded_repo: ExerciseRepository) -> None:
+    """Regression guard for the 5 days added in the third Sprint 3
+    finalization correction (spec section 2). Day 3's 2 pre-existing
+    exercises are now tagged day=3 (they used to have no day/level at
+    all, making them invisible on the one-page view). Days 11 and 14
+    already had Level 1 imported; this added their remaining levels.
+    Day 20's remaining items need live network access to third-party
+    APIs that are now dead or auth-gated (checked directly, not
+    assumed) and are mostly represented as cross-references to
+    existing exercises rather than duplicated - see gen_day20.py's
+    docstring.
+    """
+    thirty_days = seeded_repo.list_by_source("30_days_of_python")
+    by_day: dict[int, int] = {}
+    for exercise in thirty_days:
+        if exercise.day is not None:
+            by_day[exercise.day] = by_day.get(exercise.day, 0) + 1
+    assert by_day.get(3) == 20
+    assert by_day.get(11) == 25
+    assert by_day.get(14) == 20
+    assert by_day.get(20) == 3
+    assert by_day.get(21) == 2
+
+
+def test_piscine_module1_and_module2_are_active_and_gradable(
     seeded_repo: ExerciseRepository,
 ) -> None:
-    """Module 1 (Array) + Module 2 (DataTable) are real but not gradable
-    yet (no NumPy/Pandas) - represented as locked, not fabricated or
-    silently dropped.
+    """Module 1 (Array/NumPy) + Module 2 (DataTable/pandas) shipped real
+    content in the Sprint 3 finalization correction - no longer locked
+    placeholders, each has real starter code and at least one hidden
+    test that can actually grade a submission.
     """
     piscine = seeded_repo.list_all(module=None, include_excluded=True)
-    locked = [
+    module1_2 = [
         e
         for e in piscine
-        if e.source == "42_python_piscine" and e.exercise_status == "locked"
+        if e.source == "42_python_piscine"
+        and e.module in {"piscine_01_array", "piscine_02_datatable"}
     ]
-    assert len(locked) == 10
-    assert {e.module for e in locked} == {"piscine_01_array", "piscine_02_datatable"}
+    assert len(module1_2) == 10
+    for exercise in module1_2:
+        assert exercise.exercise_status == "active", exercise.id
+        assert exercise.starter_code.strip(), exercise.id
+        assert exercise.hidden_tests, exercise.id

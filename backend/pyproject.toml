@@ -8,6 +8,11 @@ dependencies = [
     "uvicorn[standard]>=0.30.0",
     "pydantic>=2.8.0",
     "flake8>=7.0.0",
+    "numpy>=2.4.6",
+    "pandas>=3.0.5",
+    "pillow>=12.3.0",
+    "matplotlib>=3.11.1",
+    "beautifulsoup4>=4.15.0",
 ]
 
 [dependency-groups]

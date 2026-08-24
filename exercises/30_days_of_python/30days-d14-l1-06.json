@@ -1,0 +1,41 @@
+{
+  "id": "30days-d14-l1-06",
+  "module": "higher_order_functions",
+  "day": 14,
+  "level": 1,
+  "difficulty": 1,
+  "title": "Print each number with a for loop",
+  "description": "Use for to print each number in the numbers list.\n\nPython-Gym adaptation: implement as printed_numbers(numbers), returning the exact multi-line string that a for loop printing each number on its own line would write to the screen (lines joined with '\\n').",
+  "examples": ">>> printed_numbers([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])\n'1\\n2\\n3\\n4\\n5\\n6\\n7\\n8\\n9\\n10'",
+  "starter_code": "def printed_numbers(numbers):\n    # your code here\n    pass\n",
+  "hints": [
+    "A for loop like `for number in numbers: print(number)` writes one line per number, each ending in a newline.",
+    "'\\n'.join(...) builds exactly that text - one item per line - but join() needs strings, so convert each number first.",
+    "Return '\\n'.join(str(n) for n in numbers)."
+  ],
+  "expected_behavior": "Returns the string that a for loop printing each number on its own line would produce, with lines separated by newline characters.",
+  "solution": "def printed_numbers(numbers):\n    return '\\n'.join(str(n) for n in numbers)\n",
+  "hidden_tests": [
+    {
+      "call": "printed_numbers([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])",
+      "expected": "'1\\n2\\n3\\n4\\n5\\n6\\n7\\n8\\n9\\n10'",
+      "label": "ten numbers printed one per line"
+    },
+    {
+      "call": "printed_numbers([])",
+      "expected": "''",
+      "label": "empty list produces an empty string"
+    }
+  ],
+  "explanation": "'\\n'.join() places a newline between each number's string form, which is exactly the text a for loop calling print(number) on each item would send to the screen.",
+  "concepts": [
+    "for loop",
+    "print",
+    "join"
+  ],
+  "skills": [
+    "functional_python"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python"
+}

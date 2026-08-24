@@ -1,0 +1,40 @@
+{
+  "source": "30_days_of_python",
+  "day": 14,
+  "module": "higher_order_functions",
+  "exercise_type": "function",
+  "level": 2,
+  "id": "30days-d14-l2-01",
+  "difficulty": 1,
+  "title": "Map a list to uppercase",
+  "description": "Write a function `map_upper(strings)` that returns a new list with every string in `strings` uppercased, using `map()`.\n\nCovers source items 1 and 3 (uppercase the countries list, then the names list) as one exercise - map() applied to either list works the same way.",
+  "examples": "map_upper(['Estonia', 'Finland'])\n-> ['ESTONIA', 'FINLAND']",
+  "starter_code": "def map_upper(strings):\n    # your code here\n    pass\n",
+  "hints": [
+    "Function to consider: map(), with str.upper as the callback",
+    "map(str.upper, strings) applies .upper() to every item in strings without a for loop - str.upper used this way (not called as name.upper()) is the function itself, ready to be applied to each item map() hands it.",
+    "Return list(map(str.upper, strings)) - map() alone produces a lazy iterator, so wrap it in list() to get a real list back."
+  ],
+  "expected_behavior": "Returns every string uppercased, in the original order.",
+  "hidden_tests": [
+    {
+      "call": "map_upper(['Estonia', 'Finland', 'Sweden', 'Denmark', 'Norway', 'Iceland'])",
+      "expected": "['ESTONIA', 'FINLAND', 'SWEDEN', 'DENMARK', 'NORWAY', 'ICELAND']",
+      "label": "source item 1, countries"
+    },
+    {
+      "call": "map_upper(['Asabeneh', 'Lidiya', 'Ermias', 'Abraham'])",
+      "expected": "['ASABENEH', 'LIDIYA', 'ERMIAS', 'ABRAHAM']",
+      "label": "source item 3, names"
+    }
+  ],
+  "solution": "def map_upper(strings):\n    return list(map(str.upper, strings))\n",
+  "explanation": "str.upper passed by name (not called) is a function that map() can apply to every item - it's the same underlying method as text.upper(), just referenced rather than invoked directly.",
+  "concepts": [
+    "map",
+    "str.upper"
+  ],
+  "skills": [
+    "functional_python"
+  ]
+}

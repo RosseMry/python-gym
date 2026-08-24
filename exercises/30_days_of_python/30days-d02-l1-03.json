@@ -1,0 +1,41 @@
+{
+  "source": "30_days_of_python",
+  "day": 2,
+  "module": "variables",
+  "exercise_type": "function",
+  "level": 1,
+  "id": "30days-d02-l1-03",
+  "difficulty": 1,
+  "title": "Declare multiple variables on one line",
+  "description": "Write a function `assign_three(values)` that takes a 3-item sequence and returns it unpacked into a tuple `(a, b, c)`, using multiple assignment on one line (`a, b, c = values`) rather than indexing.",
+  "examples": "assign_three([1, 2, 3])\n-> (1, 2, 3)",
+  "starter_code": "def assign_three(values):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: multiple assignment - several names on the left of one =",
+    "Python lets you put several names on the left of a single = sign, one per element of whatever's on the right - a shortcut for assigning to each name one at a time with values[0], values[1], values[2].",
+    "Unpack values into three names with one assignment statement, then return those three names as a tuple."
+  ],
+  "expected_behavior": "Returns the three values unpacked into a tuple.",
+  "hidden_tests": [
+    {
+      "call": "assign_three([1, 2, 3])",
+      "expected": "(1, 2, 3)",
+      "label": "source item 13"
+    },
+    {
+      "call": "assign_three(['Django', 'Flask', 'Bottle'])",
+      "expected": "('Django', 'Flask', 'Bottle')",
+      "label": "string values"
+    }
+  ],
+  "solution": "def assign_three(values):\n    a, b, c = values\n    return a, b, c\n",
+  "explanation": "Multiple assignment works with any sequence of the matching length on the right-hand side - it's not specific to literal tuples like a, b, c = 1, 2, 3.",
+  "concepts": [
+    "variables",
+    "multiple assignment",
+    "unpacking"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

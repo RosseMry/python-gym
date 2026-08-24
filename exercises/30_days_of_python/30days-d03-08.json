@@ -1,0 +1,45 @@
+{
+  "source": "30_days_of_python",
+  "day": 3,
+  "level": null,
+  "module": "operators",
+  "exercise_type": "function",
+  "id": "30days-d03-08",
+  "difficulty": 1,
+  "title": "Evaluate a parabola",
+  "description": "Write a function `parabola_value(x)` that returns `y = x**2 + 6*x + 9` for the given `x`.",
+  "examples": "parabola_value(-3)\n-> 0\nparabola_value(0)\n-> 9",
+  "starter_code": "def parabola_value(x):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: this is a direct formula translation",
+    "x**2 + 6*x + 9 is exactly what the formula says, term by term - no special technique beyond the arithmetic operators themselves.",
+    "Return x ** 2 + 6 * x + 9."
+  ],
+  "expected_behavior": "Returns x squared, plus 6 times x, plus 9.",
+  "hidden_tests": [
+    {
+      "call": "parabola_value(-3)",
+      "expected": "0",
+      "label": "source item 11, the value where y = 0"
+    },
+    {
+      "call": "parabola_value(0)",
+      "expected": "9",
+      "label": "x = 0"
+    },
+    {
+      "call": "parabola_value(1)",
+      "expected": "16",
+      "label": "x = 1"
+    }
+  ],
+  "solution": "def parabola_value(x):\n    return x ** 2 + 6 * x + 9\n",
+  "explanation": "x**2 + 6x + 9 factors as (x + 3)**2 - it's a perfect square, which is why x = -3 is the single point where the parabola touches y = 0 rather than crossing it.",
+  "concepts": [
+    "arithmetic operators",
+    "formulas"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

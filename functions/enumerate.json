@@ -1,0 +1,13 @@
+{
+  "id": "enumerate",
+  "name": "enumerate()",
+  "what_it_does": "Pairs each item of an iterable with its index, so a for loop can access both the position and the value at the same time.",
+  "syntax": "enumerate(iterable, start=0)",
+  "parameters": "iterable - what to loop over. start (optional) - the number to begin counting from, defaults to 0.",
+  "return_value": "An enumerate object that yields (index, value) tuples - usually unpacked directly in a for loop.",
+  "example": "names = [\"Ana\", \"Bob\"]\n\nfor index, name in enumerate(names):\n    print(index, name)",
+  "example_output": "0 Ana\n1 Bob",
+  "common_mistakes": "Manually tracking an index with a separate counter variable (`i = 0; for x in items: ...; i += 1`) when enumerate() does it directly and can't get out of sync. Forgetting you can pass start=1 instead of adding 1 to the index yourself.",
+  "when_to_use": "Any time a loop needs to know the position of the current item, e.g. printing a numbered list or building index-value pairs.",
+  "related_exercise_ids": ["loop-009"]
+}

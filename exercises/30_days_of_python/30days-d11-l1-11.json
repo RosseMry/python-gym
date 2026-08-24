@@ -1,0 +1,47 @@
+{
+  "id": "30days-d11-l1-11",
+  "module": "functions",
+  "day": 11,
+  "level": 1,
+  "difficulty": 1,
+  "title": "Add an item to a list",
+  "description": "Declare a function named add_item. It takes a list and an item parameters. It returns a list with the item added at the end.\n\nfood_stuff = ['Potato', 'Tomato', 'Mango', 'Milk']\nprint(add_item(food_stuff, 'Meat'))     # ['Potato', 'Tomato', 'Mango', 'Milk','Meat']\nnumbers = [2, 3, 7, 9]\nprint(add_item(numbers, 5))      # [2, 3, 7, 9, 5]",
+  "examples": ">>> add_item(['Potato', 'Tomato', 'Mango', 'Milk'], 'Meat')\n['Potato', 'Tomato', 'Mango', 'Milk', 'Meat']\n>>> add_item([2, 3, 7, 9], 5)\n[2, 3, 7, 9, 5]",
+  "starter_code": "def add_item(lst, item):\n    # your code here\n    pass\n",
+  "hints": [
+    "Lists have an .append() method that adds one value at the end.",
+    "Work on a copy of the list so the caller's original list is not mutated as a side effect.",
+    "Copy lst with .copy() first, call .append(item) on that copy, then return the copy - three small steps rather than modifying lst directly."
+  ],
+  "expected_behavior": "Returns a new list equal to lst with item appended at the end.",
+  "explanation": "A copy of lst is made so the caller's list is untouched, then .append(item) adds the new value at the end of that copy, which is returned.",
+  "concepts": [
+    "functions",
+    "lists",
+    "append",
+    "copy"
+  ],
+  "skills": [
+    "functional_python"
+  ],
+  "exercise_type": "function",
+  "source": "30_days_of_python",
+  "hidden_tests": [
+    {
+      "call": "add_item(['Potato', 'Tomato', 'Mango', 'Milk'], 'Meat')",
+      "expected": "['Potato', 'Tomato', 'Mango', 'Milk', 'Meat']",
+      "label": "add a food item"
+    },
+    {
+      "call": "add_item([2, 3, 7, 9], 5)",
+      "expected": "[2, 3, 7, 9, 5]",
+      "label": "add a number"
+    },
+    {
+      "call": "add_item([], 'first')",
+      "expected": "['first']",
+      "label": "add to an empty list"
+    }
+  ],
+  "solution": "def add_item(lst, item):\n    new_lst = lst.copy()\n    new_lst.append(item)\n    return new_lst\n"
+}

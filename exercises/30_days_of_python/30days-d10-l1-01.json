@@ -1,0 +1,41 @@
+{
+  "source": "30_days_of_python",
+  "day": 10,
+  "module": "loops",
+  "exercise_type": "function",
+  "level": 1,
+  "id": "30days-d10-l1-01",
+  "difficulty": 1,
+  "title": "Collect a range of numbers",
+  "description": "Write a function `range_values(start, end)` that returns a list of every integer from `start` to `end`, inclusive, in ascending order if `start <= end`, descending order otherwise.\n\nCovers source items 1-2 ('iterate 0 to 10 with a for loop, then do the same with a while loop' and '10 to 0') as one exercise - a for loop and a while loop that visit the same values produce the same observable result, so this exercise checks that result rather than which loop keyword was used.",
+  "examples": "range_values(0, 5)\n-> [0, 1, 2, 3, 4, 5]\nrange_values(5, 0)\n-> [5, 4, 3, 2, 1, 0]",
+  "starter_code": "def range_values(start, end):\n    # your code here\n    pass\n",
+  "hints": [
+    "Function to consider: range(), with a step argument",
+    "range(start, end, step) can count either up or down depending on the sign of step - a positive step counts up, a negative one counts down, and the stop value needs an extra +1 or -1 to be included.",
+    "Compare start and end to decide the step (1 or -1), then build a list from a range() call using that step and an inclusive-adjusted stop value."
+  ],
+  "expected_behavior": "Returns the inclusive range from start to end, ascending or descending as needed.",
+  "hidden_tests": [
+    {
+      "call": "range_values(0, 5)",
+      "expected": "[0, 1, 2, 3, 4, 5]",
+      "label": "source item 1, ascending"
+    },
+    {
+      "call": "range_values(5, 0)",
+      "expected": "[5, 4, 3, 2, 1, 0]",
+      "label": "source item 2, descending"
+    }
+  ],
+  "solution": "def range_values(start, end):\n    step = 1 if start <= end else -1\n    return list(range(start, end + step, step))\n",
+  "explanation": "range()'s third argument controls direction as well as size of the step - a for loop over range(start, end, -1) counts down exactly as naturally as range(start, end, 1) counts up.",
+  "concepts": [
+    "loops",
+    "range",
+    "for"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

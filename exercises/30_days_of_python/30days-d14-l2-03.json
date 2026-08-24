@@ -1,0 +1,36 @@
+{
+  "source": "30_days_of_python",
+  "day": 14,
+  "module": "higher_order_functions",
+  "exercise_type": "function",
+  "level": 2,
+  "id": "30days-d14-l2-03",
+  "difficulty": 1,
+  "title": "Filter countries by substring",
+  "description": "Write a function `filter_containing(countries, substring)` that returns the countries whose name contains `substring`, using `filter()`.",
+  "examples": "filter_containing(['Estonia', 'Finland', 'Sweden', 'Denmark', 'Norway', 'Iceland'], 'land')\n-> ['Finland', 'Iceland']",
+  "starter_code": "def filter_containing(countries, substring):\n    # your code here\n    pass\n",
+  "hints": [
+    "Function to consider: filter(), with a lambda checking membership",
+    "filter(lambda c: substring in c, countries) keeps only the items where the lambda returns True - filter(), unlike map(), drops items rather than transforming them.",
+    "Return list(filter(lambda c: substring in c, countries))."
+  ],
+  "expected_behavior": "Returns the countries containing substring, in the original order.",
+  "hidden_tests": [
+    {
+      "call": "filter_containing(['Estonia', 'Finland', 'Sweden', 'Denmark', 'Norway', 'Iceland'], 'land')",
+      "expected": "['Finland', 'Iceland']",
+      "label": "source item 4"
+    }
+  ],
+  "solution": "def filter_containing(countries, substring):\n    return list(filter(lambda c: substring in c, countries))\n",
+  "explanation": "filter()'s callback answers a yes/no question per item - items where it's True are kept, items where it's False are dropped, which is the opposite of map()'s 'transform every item.'",
+  "concepts": [
+    "filter",
+    "lambda",
+    "in operator"
+  ],
+  "skills": [
+    "functional_python"
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "id": "piscine-02-population-plot",
+  "module": "piscine_02_datatable",
+  "difficulty": 2,
+  "title": "Population Plot",
+  "title_fr": "Graphique de population",
+  "description": "Write a function `top_n_population(path, n)` that reads `countries.csv` (columns `country, population, life_expectancy, income`) and returns the `n` countries with the largest population, as a list of country names ordered from largest to smallest.\n\nThis is the data-preparation step behind a population bar chart: once you have this ranked list, `df.nlargest(n, 'population').plot(kind='bar', x='country', y='population')` draws it - plotting itself isn't graded here (there's no way to check a rendered image automatically), but try it to see the real chart.",
+  "description_fr": "Ecris une fonction `top_n_population(path, n)` qui lit `countries.csv` (colonnes `country, population, life_expectancy, income`) et retourne les `n` pays ayant la plus grande population, sous forme de liste de noms de pays ordonnee du plus grand au plus petit.\n\nC'est l'etape de preparation des donnees derriere un graphique en barres de population : une fois cette liste classee obtenue, `df.nlargest(n, 'population').plot(kind='bar', x='country', y='population')` la dessine - le graphique lui-meme n'est pas evalue ici (impossible de verifier automatiquement une image rendue), mais essaie-le pour voir le vrai graphique.",
+  "examples": "top_n_population('countries.csv', 3)\n-> ['India', 'Nigeria', 'Brazil']",
+  "examples_fr": "top_n_population('countries.csv', 3)\n-> ['India', 'Nigeria', 'Brazil']",
+  "starter_code": "import pandas as pd\n\n\ndef top_n_population(path, n):\n    # your code here\n    pass\n",
+  "hints": [
+    "Method to consider: DataFrame.nlargest()",
+    "df.nlargest(n, 'population') returns the n rows with the largest values in the 'population' column, already sorted from largest to smallest - no manual sort() call needed.",
+    "Load the CSV, call .nlargest(n, 'population') on it, pick out the 'country' column from that result, and convert it to a plain Python list."
+  ],
+  "hints_fr": [
+    "Methode a considerer : DataFrame.nlargest()",
+    "df.nlargest(n, 'population') retourne les n lignes avec les plus grandes valeurs dans la colonne 'population', deja triees du plus grand au plus petit - pas besoin d'appeler sort() manuellement.",
+    "Charge le CSV, appelle .nlargest(n, 'population') dessus, extrais la colonne 'country' de ce resultat, et convertis-la en liste Python simple."
+  ],
+  "expected_behavior": "Returns a list of the n country names with the largest population, largest first.",
+  "hidden_tests": [
+    {
+      "call": "top_n_population('countries.csv', 3)",
+      "expected": "['India', 'Nigeria', 'Brazil']",
+      "label": "top 3 by population"
+    },
+    {
+      "call": "top_n_population('countries.csv', 1)",
+      "expected": "['India']",
+      "label": "top 1 by population"
+    }
+  ],
+  "solution": "import pandas as pd\n\n\ndef top_n_population(path, n):\n    df = pd.read_csv(path)\n    return df.nlargest(n, \"population\")[\"country\"].tolist()\n",
+  "explanation": "nlargest combines sorting and slicing into one call tuned for exactly this 'top N by a column' shape of question, instead of a manual sort_values().head(n). .tolist() turns the resulting pandas Series into a plain list for the return value.",
+  "explanation_fr": "nlargest combine tri et decoupage en un seul appel adapte exactement a ce type de question « top N selon une colonne », plutot qu'un sort_values().head(n) manuel. .tolist() transforme la Series pandas resultante en liste simple pour la valeur de retour.",
+  "concepts": ["pandas", "dataframe", "sorting", "ranking"],
+  "skills": ["data_analysis"],
+  "source": "42_python_piscine",
+  "track": "python",
+  "validation_profile": "42_piscine",
+  "exercise_type": "function",
+  "exercise_status": "active",
+  "resources": ["python/42-piscine/countries.csv"]
+}

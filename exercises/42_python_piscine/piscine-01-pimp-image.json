@@ -1,0 +1,41 @@
+{
+  "id": "piscine-01-pimp-image",
+  "module": "piscine_01_array",
+  "difficulty": 2,
+  "title": "Pimp Image",
+  "title_fr": "Transformer une image",
+  "description": "Write a function `pimp_image(path)` that opens the image at `path`, inverts its colors (each channel value `v` becomes `255 - v`), and returns the sum of every value in the inverted array as a plain `int`.\n\nThis practices whole-array arithmetic on image data: the inversion itself must be done with one NumPy expression on the array, not a per-pixel loop. `sample.png` is available in your working directory.",
+  "description_fr": "Ecris une fonction `pimp_image(path)` qui ouvre l'image situee a `path`, inverse ses couleurs (chaque valeur de canal `v` devient `255 - v`), et retourne la somme de toutes les valeurs du tableau inverse sous forme d'`int`.\n\nCela pratique l'arithmetique sur un tableau entier de donnees image : l'inversion elle-meme doit se faire avec une seule expression NumPy sur le tableau, pas une boucle pixel par pixel. `sample.png` est disponible dans ton dossier de travail.",
+  "examples": "pimp_image('sample.png')\n-> 349488",
+  "examples_fr": "pimp_image('sample.png')\n-> 349488",
+  "starter_code": "import numpy as np\nfrom PIL import Image\n\n\ndef pimp_image(path):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: 255 - array inverts every channel value at once",
+    "Once the image is a NumPy array of pixel values (0-255 per channel), subtracting the whole array from 255 (255 - arr) inverts every value in one expression - NumPy broadcasts the scalar 255 across every element automatically.",
+    "Load the image into an array with np.array(Image.open(path).convert('RGB')), invert it with 255 minus that array, then sum every value in the inverted array and convert the result to a plain int."
+  ],
+  "hints_fr": [
+    "Idee a considerer : 255 - array inverse chaque valeur de canal d'un coup",
+    "Une fois l'image transformee en tableau NumPy de valeurs de pixels (0-255 par canal), soustraire tout le tableau de 255 (255 - arr) inverse chaque valeur en une seule expression - NumPy diffuse (broadcast) le scalaire 255 sur chaque element automatiquement.",
+    "Charge l'image dans un tableau avec np.array(Image.open(path).convert('RGB')), inverse-le avec 255 moins ce tableau, puis fais la somme de toutes les valeurs du tableau inverse et convertis le resultat en int simple."
+  ],
+  "expected_behavior": "Returns a single int: the sum of every channel value in the color-inverted image.",
+  "hidden_tests": [
+    {
+      "call": "pimp_image('sample.png')",
+      "expected": "349488",
+      "label": "sample.png inverted sum"
+    }
+  ],
+  "solution": "import numpy as np\nfrom PIL import Image\n\n\ndef pimp_image(path):\n    arr = np.array(Image.open(path).convert(\"RGB\"))\n    inverted = 255 - arr\n    return int(inverted.sum())\n",
+  "explanation": ".convert('RGB') guarantees exactly 3 channels regardless of the source file's mode. 255 - arr relies on NumPy broadcasting to subtract every element from 255 in one vectorized operation, and .sum() reduces the whole 3D array to a single total in one call.",
+  "explanation_fr": ".convert('RGB') garantit exactement 3 canaux quel que soit le mode du fichier source. 255 - arr s'appuie sur le broadcasting NumPy pour soustraire chaque element de 255 en une seule operation vectorisee, et .sum() reduit tout le tableau 3D a un seul total en un appel.",
+  "concepts": ["pillow", "numpy", "images", "broadcasting"],
+  "skills": ["numerical_computation"],
+  "source": "42_python_piscine",
+  "track": "python",
+  "validation_profile": "42_piscine",
+  "exercise_type": "function",
+  "exercise_status": "active",
+  "resources": ["python/42-piscine/sample.png"]
+}

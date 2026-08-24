@@ -1,0 +1,40 @@
+{
+  "source": "30_days_of_python",
+  "day": 2,
+  "module": "variables",
+  "exercise_type": "function",
+  "level": 2,
+  "id": "30days-d02-l2-04",
+  "difficulty": 2,
+  "title": "Compute a circle's area and circumference",
+  "description": "Write a function `circle_metrics(radius)` that returns a tuple `(area, circumference)`, using `3.14` for pi, both rounded to 2 decimals.\n\nCovers all 3 sub-parts of source item 12 (radius is 30 meters; find the area; find the circumference; take radius as input) - taking radius as a function parameter covers the 'as user input' sub-part as well.",
+  "examples": "circle_metrics(30)\n-> (2826.0, 188.4)",
+  "starter_code": "def circle_metrics(radius):\n    # your code here\n    pass\n",
+  "hints": [
+    "Formulas to consider: area = pi * r ** 2, circumference = 2 * pi * r",
+    "Both formulas use the same two ingredients (pi and the radius) - area squares the radius, circumference doesn't.",
+    "Compute both formulas using the given value of pi, round each result to 2 decimals, and return them as a tuple in the order (area, circumference)."
+  ],
+  "expected_behavior": "Returns (area, circumference) for the given radius, using pi = 3.14.",
+  "hidden_tests": [
+    {
+      "call": "circle_metrics(30)",
+      "expected": "(2826.0, 188.4)",
+      "label": "source item 12, radius 30"
+    },
+    {
+      "call": "circle_metrics(10)",
+      "expected": "(314.0, 62.8)",
+      "label": "radius 10"
+    }
+  ],
+  "solution": "def circle_metrics(radius):\n    pi = 3.14\n    area = round(pi * radius ** 2, 2)\n    circumference = round(2 * pi * radius, 2)\n    return area, circumference\n",
+  "explanation": "The two formulas share pi and radius but combine them differently - area grows with the square of the radius, circumference grows linearly with it.",
+  "concepts": [
+    "arithmetic operators",
+    "variables"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

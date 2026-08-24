@@ -1,0 +1,40 @@
+{
+  "source": "30_days_of_python",
+  "day": 4,
+  "level": null,
+  "module": "strings",
+  "exercise_type": "function",
+  "id": "30days-d04-18",
+  "difficulty": 1,
+  "title": "Check the ending substring",
+  "description": "Write a function `ends_with_check(text, suffix)` that returns whether `text` ends with `suffix`. Remember `str` methods are case-sensitive.",
+  "examples": "ends_with_check('Coding For All', 'All')\n-> True\nends_with_check('Coding For All', 'coding')\n-> False",
+  "starter_code": "def ends_with_check(text, suffix):\n    # your code here\n    pass\n",
+  "hints": [
+    "Method to consider: str.endswith()",
+    "text.endswith(suffix) is the mirror of startswith() - it checks the tail of the string. Like every other string method here, it's case-sensitive: 'coding' and 'Coding' don't match.",
+    "Return the result of .endswith() directly."
+  ],
+  "expected_behavior": "Returns True if text ends with suffix (case-sensitive), False otherwise.",
+  "hidden_tests": [
+    {
+      "call": "ends_with_check('Coding For All', 'All')",
+      "expected": "True",
+      "label": "source item 29, matches"
+    },
+    {
+      "call": "ends_with_check('Coding For All', 'coding')",
+      "expected": "False",
+      "label": "source item 29, case mismatch"
+    }
+  ],
+  "solution": "def ends_with_check(text, suffix):\n    return text.endswith(suffix)\n",
+  "explanation": "The source question asks whether 'Coding For All' ends with 'coding' (lowercase) - since string comparisons are case-sensitive, that's False even though the letters match.",
+  "concepts": [
+    "strings",
+    "endswith"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "id": "30days-d20-01",
+  "module": "package_manager",
+  "day": 20,
+  "difficulty": 2,
+  "title": "10 most frequent words in a text",
+  "description": "Read this url and find the 10 most frequent words. romeo_and_juliet = 'http://www.gutenberg.org/files/1112/1112.txt'\n\nPython-Gym adaptation: this exercise is about downloading a live text file with `requests` and analysing it, which the grading sandbox cannot do (no network access, and the remote file may move or disappear). Implement as `top_10_words(text)`, taking the already-downloaded text as a string parameter instead of fetching the URL, and return the 10 most frequent words as a list of `(word, count)` tuples ordered from most to least frequent, exactly as `collections.Counter(...).most_common(10)` would produce.",
+  "examples": ">>> top_10_words(\"one two two three three three\")\n[('three', 3), ('two', 2), ('one', 1)]",
+  "starter_code": "def top_10_words(text):\n    # write your code here\n    # tokenize text into lowercase words (letters and apostrophes only)\n    # and return the 10 most common (word, count) pairs\n    pass\n",
+  "hints": [
+    "Lowercase the text first so 'The' and 'the' count as the same word.",
+    "Use a regular expression like re.findall(r\"[A-Za-z']+\", text.lower()) to pull out words while ignoring punctuation and digits.",
+    "collections.Counter has a .most_common(n) method that returns exactly the (word, count) tuples you need, already sorted by frequency."
+  ],
+  "expected_behavior": "Returns a list of up to 10 (word, count) tuples, the most frequent words in text first, where words are compared case-insensitively and punctuation is ignored. On empty or whitespace-only text, returns an empty list.",
+  "hidden_tests": [
+    {
+      "call": "top_10_words(\"Two households, both alike in dignity,\\nIn fair Verona, where we lay our scene,\\nFrom ancient grudge break to new mutiny,\\nWhere civil blood makes civil hands unclean.\\nFrom forth the fatal loins of these two foes\\nA pair of star-cross'd lovers take their life;\\nWhose misadventured piteous overthrows\\nDo with their death bury their parents' strife.\\nThe fearful passage of their death-mark'd love,\\nAnd the continuance of their parents' rage,\\nWhich, but their children's end, nought could remove,\\nIs now the two hours' traffic of our stage;\\nThe which if you with patient ears attend,\\nWhat here shall miss, our toil shall strive to mend.\")",
+      "expected": "[('their', 6), ('the', 5), ('of', 5), ('two', 3), ('our', 3), ('in', 2), ('where', 2), ('from', 2), ('to', 2), ('civil', 2)]",
+      "label": "opening lines of Romeo and Juliet's prologue"
+    },
+    {
+      "call": "top_10_words(\"The cat sat on the mat. The cat was happy. A dog saw the cat and the dog barked at the cat.\")",
+      "expected": "[('the', 6), ('cat', 4), ('dog', 2), ('sat', 1), ('on', 1), ('mat', 1), ('was', 1), ('happy', 1), ('a', 1), ('saw', 1)]",
+      "label": "fewer than 10 distinct words returns all of them"
+    },
+    {
+      "call": "top_10_words(\"one two two three three three\")",
+      "expected": "[('three', 3), ('two', 2), ('one', 1)]",
+      "label": "example from the description"
+    },
+    {
+      "call": "top_10_words(\"\")",
+      "expected": "[]",
+      "label": "empty text returns an empty list"
+    }
+  ],
+  "solution": "import re\nfrom collections import Counter\n\n\ndef top_10_words(text):\n    words = re.findall(r\"[A-Za-z']+\", text.lower())\n    return Counter(words).most_common(10)\n",
+  "explanation": "re.findall(r\"[A-Za-z']+\", text.lower()) tokenizes the lowercased text into runs of letters and apostrophes, stripping out punctuation and digits as separators. Counter then tallies how many times each word occurs, and .most_common(10) returns the ten highest counts as (word, count) tuples, sorted from most to least frequent (ties keep the order in which the word was first seen).",
+  "concepts": ["regular expressions", "collections.counter", "word frequency", "tokenization"],
+  "skills": ["text_processing"],
+  "source": "30_days_of_python",
+  "exercise_type": "function"
+}

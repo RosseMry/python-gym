@@ -1,0 +1,40 @@
+{
+  "source": "30_days_of_python",
+  "day": 3,
+  "level": null,
+  "module": "operators",
+  "exercise_type": "function",
+  "id": "30days-d03-15",
+  "difficulty": 1,
+  "title": "Compare the type of a string and a number",
+  "description": "Write a function `same_type(a, b)` that returns whether `a` and `b` have the same type, using `type()`.",
+  "examples": "same_type('10', 10)\n-> False\nsame_type(10, 10)\n-> True",
+  "starter_code": "def same_type(a, b):\n    # your code here\n    pass\n",
+  "hints": [
+    "Function to consider: type()",
+    "type(a) == type(b) compares the type objects themselves - '10' (a string) and 10 (an int) look similar when printed but are never the same type.",
+    "Return type(a) == type(b)."
+  ],
+  "expected_behavior": "Returns True if a and b have the same type.",
+  "hidden_tests": [
+    {
+      "call": "same_type('10', 10)",
+      "expected": "False",
+      "label": "source item 19, string vs int"
+    },
+    {
+      "call": "same_type(10, 10)",
+      "expected": "True",
+      "label": "both int"
+    }
+  ],
+  "solution": "def same_type(a, b):\n    return type(a) == type(b)\n",
+  "explanation": "A digit-looking string like '10' is never automatically treated as a number by Python - type() makes that distinction explicit rather than relying on == to also compare types (which it doesn't).",
+  "concepts": [
+    "type",
+    "comparison operators"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

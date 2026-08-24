@@ -1,0 +1,49 @@
+{
+  "source": "30_days_of_python",
+  "day": 14,
+  "module": "higher_order_functions",
+  "exercise_type": "function",
+  "level": 3,
+  "id": "30days-d14-l3-01",
+  "difficulty": 2,
+  "title": "Sort countries by name, capital, or population",
+  "description": "Write a function `sort_countries(path, by)` that reads the country data JSON file at `path` and returns every country name, sorted by the `by` field (`'name'`, `'capital'`, or `'population'`).\n\nCovers the sorting sub-part of source item 1 (the 10-most-spoken-languages and 10-most-populated-countries sub-parts are the same task already covered with real data by 30days-d19-l1-02 and 30days-d19-l1-03, and aren't repeated here).",
+  "examples": "sort_countries('countries_data.json', 'name')[:3]\n-> ['Afghanistan', 'Albania', 'Algeria']",
+  "starter_code": "import json\n\n\ndef sort_countries(path, by):\n    # your code here\n    pass\n",
+  "hints": [
+    "Function to consider: sorted(), with a key selecting which field to compare",
+    "sorted(countries, key=lambda c: c[by]) sorts the whole list of dicts by whichever field name is passed in - the key function doesn't need to know in advance whether that's 'name', 'capital', or 'population'.",
+    "Sort the loaded countries by c[by], then return just the names, in that sorted order."
+  ],
+  "expected_behavior": "Returns country names sorted ascending by the given field.",
+  "hidden_tests": [
+    {
+      "call": "sort_countries('countries_data.json', 'name')[:5]",
+      "expected": "['Afghanistan', 'Albania', 'Algeria', 'American Samoa', 'Andorra']",
+      "label": "sorted by name"
+    },
+    {
+      "call": "sort_countries('countries_data.json', 'capital')[:5]",
+      "expected": "['Antarctica', 'Bouvet Island', 'United States Minor Outlying Islands', 'Heard Island and McDonald Islands', 'Macao']",
+      "label": "sorted by capital (uninhabited territories with no capital sort first)"
+    },
+    {
+      "call": "sort_countries('countries_data.json', 'population')[:5]",
+      "expected": "['Bouvet Island', 'Heard Island and McDonald Islands', 'South Georgia and the South Sandwich Islands', 'Pitcairn', 'French Southern Territories']",
+      "label": "sorted by population"
+    }
+  ],
+  "solution": "import json\n\n\ndef sort_countries(path, by):\n    with open(path, encoding=\"utf-8\") as f:\n        countries = json.load(f)\n    ranked = sorted(countries, key=lambda c: c[by])\n    return [c[\"name\"] for c in ranked]\n",
+  "explanation": "Passing by as a parameter into the key function is what makes one implementation handle all three sort orders - key=lambda c: c[by] looks up whichever field name the caller asked for, rather than hardcoding c['name'].",
+  "concepts": [
+    "sorted",
+    "file reading",
+    "json"
+  ],
+  "skills": [
+    "using_standard_library_modules"
+  ],
+  "resources": [
+    "python/30-days/countries_data.json"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "source": "30_days_of_python",
+  "day": 3,
+  "level": null,
+  "module": "operators",
+  "exercise_type": "function",
+  "id": "30days-d03-05",
+  "difficulty": 2,
+  "title": "Slope and intercepts of a line",
+  "description": "Write a function `line_properties(m, b)` that returns `(slope, x_intercept, y_intercept)` for the line `y = m*x + b`: the slope is `m` itself, the y-intercept is `b` (the value of y when x=0), and the x-intercept is `-b / m` (the value of x when y=0).",
+  "examples": "line_properties(2, -2)\n-> (2, 1.0, -2)",
+  "starter_code": "def line_properties(m, b):\n    # your code here\n    pass\n",
+  "hints": [
+    "Idea to consider: solve y = m*x + b for x when y is 0",
+    "Setting y to 0 gives 0 = m*x + b, which rearranges to x = -b / m - that's the x-intercept. The y-intercept doesn't need solving at all: when x is 0, y = m*0 + b = b.",
+    "Return (m, -b / m, b) as the tuple (slope, x_intercept, y_intercept)."
+  ],
+  "expected_behavior": "Returns the slope, x-intercept, and y-intercept of y = m*x + b.",
+  "hidden_tests": [
+    {
+      "call": "line_properties(2, -2)",
+      "expected": "(2, 1.0, -2)",
+      "label": "source item 8, y = 2x - 2"
+    }
+  ],
+  "solution": "def line_properties(m, b):\n    return m, -b / m, b\n",
+  "explanation": "The slope-intercept form y = mx + b already names both m (the slope) and b (the y-intercept) directly - only the x-intercept takes a small algebra step, setting y to 0 and solving for x.",
+  "concepts": [
+    "arithmetic operators",
+    "formulas"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

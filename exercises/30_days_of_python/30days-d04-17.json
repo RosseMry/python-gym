@@ -1,0 +1,35 @@
+{
+  "source": "30_days_of_python",
+  "day": 4,
+  "level": null,
+  "module": "strings",
+  "exercise_type": "function",
+  "id": "30days-d04-17",
+  "difficulty": 1,
+  "title": "Check the starting substring",
+  "description": "Write a function `starts_with_check(text, prefix)` that returns whether `text` starts with `prefix`.",
+  "examples": "starts_with_check('Coding For All', 'Coding')\n-> True",
+  "starter_code": "def starts_with_check(text, prefix):\n    # your code here\n    pass\n",
+  "hints": [
+    "Method to consider: str.startswith()",
+    "text.startswith(prefix) checks the beginning of the string directly - it's clearer and safer than slicing text[:len(prefix)] and comparing it to prefix by hand.",
+    "Return the result of .startswith() directly."
+  ],
+  "expected_behavior": "Returns True if text starts with prefix, False otherwise.",
+  "hidden_tests": [
+    {
+      "call": "starts_with_check('Coding For All', 'Coding')",
+      "expected": "True",
+      "label": "source item 28"
+    }
+  ],
+  "solution": "def starts_with_check(text, prefix):\n    return text.startswith(prefix)\n",
+  "explanation": "startswith() is both clearer and safer than manual slicing - it doesn't need a separate length check for a prefix longer than the string itself.",
+  "concepts": [
+    "strings",
+    "startswith"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "source": "30_days_of_python",
+  "day": 4,
+  "level": null,
+  "module": "strings",
+  "exercise_type": "function",
+  "id": "30days-d04-02",
+  "difficulty": 1,
+  "title": "Declare, print, and measure a string",
+  "description": "Write a function `string_summary(text)` that returns a tuple `(text, len(text))` - the string itself and its length.\n\nCovers source items 3-5 (declare a `company` variable, print it, print its length with `len()`) as one exercise, since declaring and printing a variable isn't independently gradable without a fixed check.",
+  "examples": "string_summary('Coding For All')\n-> ('Coding For All', 14)",
+  "starter_code": "def string_summary(text):\n    # your code here\n    pass\n",
+  "hints": [
+    "Function to consider: len()",
+    "len(text) returns the number of characters in a string, including spaces.",
+    "Return a tuple with text itself as the first item and len(text) as the second."
+  ],
+  "expected_behavior": "Returns (text, character_count).",
+  "hidden_tests": [
+    {
+      "call": "string_summary('Coding For All')",
+      "expected": "('Coding For All', 14)",
+      "label": "company string"
+    }
+  ],
+  "solution": "def string_summary(text):\n    return text, len(text)\n",
+  "explanation": "len() works the same way on a string as on a list - it counts elements, and a string's elements are its characters.",
+  "concepts": [
+    "strings",
+    "len"
+  ],
+  "skills": [
+    "basic_data_manipulation"
+  ]
+}
