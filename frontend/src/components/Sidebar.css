@@ -90,10 +90,50 @@
   margin: 0 0 6px;
 }
 
+.sidebar__section-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  border: none;
+  background: none;
+  padding: 0 8px;
+  margin: 0 0 6px;
+  font: inherit;
+}
+
+.sidebar__section-toggle:hover .sidebar__section-title {
+  color: var(--ink);
+}
+
+.sidebar__section-toggle .sidebar__section-title {
+  margin: 0;
+}
+
+.sidebar__chevron {
+  font-size: 10px;
+  color: var(--ink-muted);
+  transition: transform 0.15s ease;
+}
+
+.sidebar__chevron--open {
+  transform: rotate(90deg);
+}
+
+.sidebar__link--standalone {
+  font-weight: 500;
+}
+
 .sidebar__list {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+.sidebar__list--nested {
+  border-left: 1px solid var(--border);
+  margin-left: 8px;
+  padding-left: 6px;
 }
 
 .sidebar__link {

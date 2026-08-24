@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { useLocale } from "../i18n/LocaleContext";
 import "./Sidebar.css";
@@ -18,16 +19,23 @@ const FOUNDATIONS_SOURCES = "foundations,progressive_python,python_gym";
 const COMING_SOON = ["SQL", "Data Science", "Mathematics", "Machine Learning", "ML Piscine"];
 
 /**
- * The learning-track sidebar (Sprint 2 spec section 35, extended in
- * Sprint 3 with Foundations/Python-Gym/Learning Notes and a language
- * toggle). Only the Python track and repeat queue are wired to real
- * data - Interviews and Coming Soon are shown, disabled, to set
- * expectations for what's next without pretending they're implemented.
+ * The learning-track sidebar. Foundations / 30 Days / 42 Piscine live
+ * inside a single collapsible "Python" group, since they're all the
+ * same language track - Learning Notes sits outside that group as its
+ * own top-level link, since it's meant to grow beyond Python (SQL,
+ * Data Science, ...) once those tracks exist, not be scoped under one
+ * language. Only the Python track, Learning Notes, and the repeat
+ * queue are wired to real data - Interviews and Coming Soon are shown,
+ * disabled, to set expectations for what's next without pretending
+ * they're implemented.
  */
 export function Sidebar({ repeatCount }: SidebarProps) {
   const location = useLocation();
   const [searchParams] = useSearchParams();
   const { locale, setLocale, t } = useLocale();
+  const [pythonOpen, setPythonOpen] = useState(true);
+
+  const isNotesActive = location.pathname.startsWith("/notes");
 
   return (
     <nav className="sidebar">
@@ -62,55 +70,62 @@ export function Sidebar({ repeatCount }: SidebarProps) {
       )}
 
       <div className="sidebar__section">
-        <p className="sidebar__section-title">{t("nav.progressive")}</p>
-        <ul className="sidebar__list">
-          <li>
-            <Link
-              to={`/?source=${FOUNDATIONS_SOURCES}`}
-              className={`sidebar__link ${
-                (searchParams.get("source") ?? "") === FOUNDATIONS_SOURCES
-                  ? "sidebar__link--active"
-                  : ""
-              }`}
-            >
-              {t("nav.foundations")}
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/thirty-days"
-              className={`sidebar__link ${location.pathname === "/thirty-days" ? "sidebar__link--active" : ""}`}
-            >
-              {t("nav.thirtyDays")}
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/notes"
-              className={`sidebar__link ${location.pathname.startsWith("/notes") ? "sidebar__link--active" : ""}`}
-            >
-              📖 {t("nav.learningNotes")}
-            </Link>
-          </li>
-        </ul>
+        <Link
+          to="/notes"
+          className={`sidebar__link sidebar__link--standalone ${isNotesActive ? "sidebar__link--active" : ""}`}
+        >
+          📖 {t("nav.learningNotes")}
+        </Link>
       </div>
 
       <div className="sidebar__section">
-        <p className="sidebar__section-title">{t("nav.piscine")}</p>
-        <ul className="sidebar__list">
-          <li>
-            <Link
-              to="/?source=42_python_piscine"
-              className={`sidebar__link ${
-                (searchParams.get("source") ?? "") === "42_python_piscine"
-                  ? "sidebar__link--active"
-                  : ""
-              }`}
-            >
-              {t("nav.piscine")}
-            </Link>
-          </li>
-        </ul>
+        <button
+          type="button"
+          className="sidebar__section-toggle"
+          onClick={() => setPythonOpen((open) => !open)}
+          aria-expanded={pythonOpen}
+        >
+          <span className="sidebar__section-title">{t("nav.python")}</span>
+          <span className={`sidebar__chevron ${pythonOpen ? "sidebar__chevron--open" : ""}`}>
+            ▸
+          </span>
+        </button>
+        {pythonOpen && (
+          <ul className="sidebar__list sidebar__list--nested">
+            <li>
+              <Link
+                to={`/?source=${FOUNDATIONS_SOURCES}`}
+                className={`sidebar__link ${
+                  (searchParams.get("source") ?? "") === FOUNDATIONS_SOURCES
+                    ? "sidebar__link--active"
+                    : ""
+                }`}
+              >
+                {t("nav.foundations")}
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/thirty-days"
+                className={`sidebar__link ${location.pathname === "/thirty-days" ? "sidebar__link--active" : ""}`}
+              >
+                {t("nav.thirtyDays")}
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/?source=42_python_piscine"
+                className={`sidebar__link ${
+                  (searchParams.get("source") ?? "") === "42_python_piscine"
+                    ? "sidebar__link--active"
+                    : ""
+                }`}
+              >
+                {t("nav.piscine")}
+              </Link>
+            </li>
+          </ul>
+        )}
       </div>
 
       <div className="sidebar__section">
