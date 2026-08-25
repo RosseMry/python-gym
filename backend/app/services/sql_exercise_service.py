@@ -36,8 +36,13 @@ class SqlExerciseService:
     def __init__(self, repository: SqlExerciseRepository) -> None:
         self._repo = repository
 
-    def list_exercises(self, module: str | None = None) -> list[SqlExercise]:
-        return self._repo.list_all(module)
+    def list_exercises(
+        self, module: str | None = None, project: str | None = None
+    ) -> list[SqlExercise]:
+        return self._repo.list_all(module, project)
+
+    def list_projects(self) -> list[str]:
+        return self._repo.list_projects()
 
     def get_exercise_for_student(self, exercise_id: str) -> SqlExercise:
         """Return an exercise with the answer stripped out.
@@ -69,6 +74,8 @@ class SqlExerciseService:
             exercise_status=exercise.exercise_status,
             title_fr=exercise.title_fr,
             description_fr=exercise.description_fr,
+            project=exercise.project,
+            part=exercise.part,
         )
 
     def request_hint(self, exercise_id: str) -> tuple[str, str | None]:

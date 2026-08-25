@@ -1,0 +1,38 @@
+{
+  "module": "mini_project",
+  "project": "ecommerce_sales_analysis",
+  "part": 2,
+  "source": "linear_con31",
+  "id": "sql-ecommerce-part2-04",
+  "difficulty": 4,
+  "title": "Calculate Monthly Revenue",
+  "description": "Write a query that returns revenue grouped by calendar month, as `month` and `revenue`, ordered chronologically (earliest month first). Use `DATE_TRUNC('month', order_date)` to collapse every order_date onto the first day of its month.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: DATE_TRUNC, GROUP BY on a date expression",
+    "DATE_TRUNC('month', order_date) turns e.g. 2025-03-15 into 2025-03-01 - group by that EXPRESSION (not the raw order_date) so every day in the same month collapses into one row.",
+    "SELECT DATE_TRUNC('month', o.order_date) AS month, SUM(oi.quantity * oi.unit_price) AS revenue FROM orders o JOIN order_items oi ON o.order_id = oi.order_id, grouped by DATE_TRUNC('month', o.order_date), ordered by month."
+  ],
+  "expected_behavior": "Returns one row per calendar month that had any orders, with total revenue for that month, oldest month first.",
+  "solution": "SELECT DATE_TRUNC('month', o.order_date) AS month, SUM(oi.quantity * oi.unit_price) AS revenue FROM orders o JOIN order_items oi ON o.order_id = oi.order_id GROUP BY DATE_TRUNC('month', o.order_date) ORDER BY month;",
+  "explanation": "DATE_TRUNC is the standard PostgreSQL way to bucket timestamps/dates into coarser periods (month, week, year, ...) - grouping by the raw order_date would give one row per DAY instead of per month, which isn't what a monthly trend report needs.",
+  "concepts": [
+    "DATE_TRUNC",
+    "GROUP BY",
+    "date functions",
+    "business KPIs"
+  ],
+  "skills": [
+    "sql_mini_project"
+  ],
+  "postgres_note": "DATE_TRUNC is PostgreSQL-specific syntax - other databases spell this differently (MySQL has no direct equivalent and typically uses DATE_FORMAT instead).",
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['2025-03-01 00:00:00+00:00', '145600.00']]",
+      "label": "main check",
+      "ordered": true
+    }
+  ],
+  "schema": "ecommerce_sales_analysis"
+}

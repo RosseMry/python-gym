@@ -356,3 +356,50 @@ def test_plpgsql_function_body_end_is_not_blocked() -> None:
     result = run_sql_submission(exercise, exercise.solution)
     assert result.status == "passed"
     assert result.passed is True
+
+
+def test_exercise_schema_field_targets_a_different_postgres_schema() -> None:
+    """Regression: SqlExercise.schema (Mini Project prep) must actually
+    drive which Postgres schema a submission runs against, not just be
+    inert metadata - a query that only makes sense against the
+    ecommerce_sales_analysis schema must fail against "fixtures", and
+    succeed once schema is set correctly.
+    """
+    ecommerce_query = SqlExercise(
+        id="x-ecommerce-schema",
+        module="mini_project",
+        difficulty=1,
+        title="x",
+        description="x",
+        starter_query="-- your query here\n",
+        hints=[],
+        expected_behavior="x",
+        hidden_tests=[SqlHiddenTest(expected=repr([["5"]]))],
+        solution="SELECT COUNT(*) FROM customers;",
+        explanation="x",
+        concepts=[],
+        schema="ecommerce_sales_analysis",
+        project="ecommerce_sales_analysis",
+        part=1,
+    )
+    result = run_sql_submission(ecommerce_query, ecommerce_query.solution)
+    assert result.passed is True
+
+    wrong_schema = SqlExercise(
+        id="x-wrong-schema",
+        module="mini_project",
+        difficulty=1,
+        title="x",
+        description="x",
+        starter_query="-- your query here\n",
+        hints=[],
+        expected_behavior="x",
+        hidden_tests=[SqlHiddenTest(expected=repr([["5"]]))],
+        solution="SELECT COUNT(*) FROM customers;",
+        explanation="x",
+        concepts=[],
+        schema="fixtures",
+    )
+    fixtures_result = run_sql_submission(wrong_schema, wrong_schema.solution)
+    # fixtures.customers has 10 rows, not 5 - the schema switch is real.
+    assert fixtures_result.passed is False

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { useLocale } from "../i18n/LocaleContext";
-import { SQL_MODULES } from "../types/exercise";
 import "./Sidebar.css";
 
 interface SidebarProps {
@@ -27,12 +26,21 @@ const COMING_SOON = ["Data Science", "Mathematics", "Machine Learning", "ML Pisc
  * same language track - Notes and the Exam are Python-only content
  * right now, so they live inside that same group too (not as their
  * own top-level sections) rather than implying they cover more than
- * they do. SQL (Sprint 4) gets its own collapsible group one level
- * down, one link per topic area, plus its own Notes link - SQL's
- * theory pages are a separate content type (SqlLearningNote, with a
- * postgres_note field Python's LearningNote doesn't need). The moment
- * either Notes or the Exam grows to cover more than one language,
- * this is the place to pull it back out to a shared top-level link.
+ * they do.
+ *
+ * SQL (Sprint 4) gets its own collapsible group, deliberately flat:
+ * Notes / Foundations / Mini Projects / Exam, NOT one link per topic
+ * area (JOINs, Window Functions, Transactions, ...) - those stay
+ * internal module/concept tags a learner sees once inside Foundations,
+ * not separate navigation items (SQL content reorganization spec,
+ * section 1/7). Mini Projects is its own destination since a project
+ * (e.g. E-Commerce Sales Analysis) is one coherent dataset a learner
+ * works through across parts, not a "topic" like Foundations' modules
+ * are - see SqlExercise.schema/project/part in app/domain/models.py.
+ * Exam links to the SAME shared /exam route Python's group links to
+ * (one compact Timed Exam, not a separate SQL exam) - it appears in
+ * both groups since the exam already mixes Python content and is
+ * meant to grow to include SQL questions too (CON-28).
  */
 export function Sidebar({ repeatCount }: SidebarProps) {
   const location = useLocation();
@@ -44,6 +52,9 @@ export function Sidebar({ repeatCount }: SidebarProps) {
   const isNotesActive = location.pathname.startsWith("/notes");
   const isSqlNotesActive = location.pathname.startsWith("/sql/notes");
   const isExamActive = location.pathname.startsWith("/exam");
+  const isSqlMiniProjectsActive =
+    location.pathname.startsWith("/sql/mini-projects") ||
+    (location.pathname === "/sql" && Boolean(searchParams.get("project")));
 
   return (
     <nav className="sidebar">
@@ -165,20 +176,34 @@ export function Sidebar({ repeatCount }: SidebarProps) {
                 📖 {t("nav.sqlNotes")}
               </Link>
             </li>
-            {SQL_MODULES.map((mod) => (
-              <li key={mod.id}>
-                <Link
-                  to={`/sql?module=${mod.id}`}
-                  className={`sidebar__link ${
-                    location.pathname === "/sql" && searchParams.get("module") === mod.id
-                      ? "sidebar__link--active"
-                      : ""
-                  }`}
-                >
-                  {mod.label}
-                </Link>
-              </li>
-            ))}
+            <li>
+              <Link
+                to="/sql"
+                className={`sidebar__link ${
+                  location.pathname === "/sql" && !searchParams.get("project")
+                    ? "sidebar__link--active"
+                    : ""
+                }`}
+              >
+                {t("nav.sqlFoundations")}
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/sql/mini-projects"
+                className={`sidebar__link ${isSqlMiniProjectsActive ? "sidebar__link--active" : ""}`}
+              >
+                📦 {t("nav.miniProjects")}
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/exam"
+                className={`sidebar__link ${isExamActive ? "sidebar__link--active" : ""}`}
+              >
+                🎓 {t("nav.timedExam")}
+              </Link>
+            </li>
           </ul>
         )}
       </div>

@@ -183,12 +183,23 @@ export const SQL_MODULES: { id: string; label: string }[] = [
   { id: "triggers", label: "Triggers" },
 ];
 
+// Mini Project id -> display label. New projects just need an entry
+// here (and their own resources/sql/<project>_fixtures.sql + JSON
+// exercise files) - no other frontend change needed to appear in the
+// Mini Projects list, since project ids themselves come from the API
+// (GET /api/sql/exercises/projects/list).
+export const MINI_PROJECT_LABELS: Record<string, string> = {
+  ecommerce_sales_analysis: "E-Commerce Sales Analysis",
+};
+
 export interface SqlExerciseSummary {
   id: string;
   module: string;
   difficulty: number;
   title: string;
   source: string;
+  project: string | null;
+  part: number | null;
 }
 
 export interface SqlExerciseDetail {
@@ -206,6 +217,8 @@ export interface SqlExerciseDetail {
   source: string;
   postgres_note: string | null;
   prerequisites: string[];
+  project: string | null;
+  part: number | null;
 }
 
 export interface SqlHintResponse {

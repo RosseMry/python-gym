@@ -1,0 +1,38 @@
+{
+  "module": "mini_project",
+  "project": "ecommerce_sales_analysis",
+  "part": 1,
+  "source": "linear_con30",
+  "id": "sql-ecommerce-part1-05",
+  "difficulty": 3,
+  "title": "Calculate Average Order Value (AOV)",
+  "description": "Average Order Value is total revenue divided by the number of DISTINCT orders (not the number of line items - one order usually has several). Write a query that returns the AOV, rounded to 2 decimal places, as `average_order_value`.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: COUNT(DISTINCT ...), ROUND",
+    "order_items has one row PER PRODUCT in an order, so COUNT(*) would overcount orders that bought multiple products - COUNT(DISTINCT order_id) counts each order exactly once no matter how many line items it has.",
+    "ROUND(SUM(quantity * unit_price) / COUNT(DISTINCT order_id), 2), aliased as average_order_value, from order_items."
+  ],
+  "expected_behavior": "Returns one row, one column (average_order_value): total revenue divided by the number of distinct orders, rounded to 2 decimals.",
+  "solution": "SELECT ROUND(SUM(quantity * unit_price) / COUNT(DISTINCT order_id), 2) AS average_order_value FROM order_items;",
+  "explanation": "COUNT(DISTINCT column) is the key idea here - without DISTINCT, an order with 3 line items would be counted 3 times, silently deflating the average.",
+  "concepts": [
+    "COUNT DISTINCT",
+    "ROUND",
+    "aggregate functions",
+    "business KPIs"
+  ],
+  "skills": [
+    "sql_mini_project"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['29120.00']]",
+      "label": "main check",
+      "ordered": false
+    }
+  ],
+  "schema": "ecommerce_sales_analysis"
+}

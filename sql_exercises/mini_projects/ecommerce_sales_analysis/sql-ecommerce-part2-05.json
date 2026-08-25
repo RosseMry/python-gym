@@ -1,0 +1,38 @@
+{
+  "module": "mini_project",
+  "project": "ecommerce_sales_analysis",
+  "part": 2,
+  "source": "linear_con31",
+  "id": "sql-ecommerce-part2-05",
+  "difficulty": 4,
+  "title": "Find Revenue by City",
+  "description": "Write a query that returns each customer `city` alongside its total `revenue`, ordered from highest revenue city to lowest - the same three-table join as the top-customers question, just grouped by city instead of by customer.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: same three-table JOIN, different GROUP BY column",
+    "The join path is identical to the top-customers-by-revenue query - customers to orders to order_items - only the GROUP BY column changes, from customer_name to city.",
+    "SELECT c.city, SUM(oi.quantity * oi.unit_price) AS revenue FROM customers c JOIN orders o ON c.customer_id = o.customer_id JOIN order_items oi ON o.order_id = oi.order_id, grouped by city, ordered by revenue descending."
+  ],
+  "expected_behavior": "Returns city and revenue for every city with at least one order, highest revenue first.",
+  "solution": "SELECT c.city, SUM(oi.quantity * oi.unit_price) AS revenue FROM customers c JOIN orders o ON c.customer_id = o.customer_id JOIN order_items oi ON o.order_id = oi.order_id GROUP BY c.city ORDER BY revenue DESC;",
+  "explanation": "Once you can join customers to order_items through orders, answering \"by city\" instead of \"by customer\" is just a one-word change to GROUP BY - the same join, a different lens on the same data.",
+  "concepts": [
+    "JOIN",
+    "GROUP BY",
+    "ORDER BY",
+    "business KPIs"
+  ],
+  "skills": [
+    "sql_mini_project"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['Mumbai', '71800.00'], ['Bangalore', '65000.00'], ['Delhi', '7000.00'], ['Pune', '1800.00']]",
+      "label": "main check",
+      "ordered": true
+    }
+  ],
+  "schema": "ecommerce_sales_analysis"
+}

@@ -1,0 +1,37 @@
+{
+  "module": "mini_project",
+  "project": "ecommerce_sales_analysis",
+  "part": 1,
+  "source": "linear_con30",
+  "id": "sql-ecommerce-part1-01",
+  "difficulty": 2,
+  "title": "Calculate Total Revenue",
+  "description": "You're analyzing an e-commerce store's sales data. Every line item in `order_items` records a `quantity` and a `unit_price` at the time of purchase. Write a query that returns the store's total revenue as `total_revenue` - the sum of quantity times unit_price across every order item.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: SUM, computed expressions",
+    "Revenue per line item is quantity * unit_price - SUM() adds that expression up across every row in order_items, not just one column.",
+    "Select SUM of (quantity times unit_price), aliased as total_revenue, from order_items."
+  ],
+  "expected_behavior": "Returns one row, one column (total_revenue), the sum of quantity * unit_price across all order_items.",
+  "solution": "SELECT SUM(quantity * unit_price) AS total_revenue FROM order_items;",
+  "explanation": "This is the same SUM-of-a-computed-expression pattern from Foundations, applied to a real business question - revenue isn't a stored column anywhere, it's derived from quantity and unit_price at query time.",
+  "concepts": [
+    "SUM",
+    "aggregate functions",
+    "business KPIs"
+  ],
+  "skills": [
+    "sql_mini_project"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['145600.00']]",
+      "label": "main check",
+      "ordered": false
+    }
+  ],
+  "schema": "ecommerce_sales_analysis"
+}

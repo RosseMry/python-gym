@@ -1,0 +1,37 @@
+{
+  "module": "mini_project",
+  "project": "ecommerce_sales_analysis",
+  "part": 1,
+  "source": "linear_con30",
+  "id": "sql-ecommerce-part1-02",
+  "difficulty": 1,
+  "title": "Count Total Orders",
+  "description": "Write a query that returns the total number of orders ever placed, as `total_orders` - including cancelled ones, this is a raw count of every row in `orders`.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: COUNT(*)",
+    "COUNT(*) counts every row in the table regardless of what's in it - no column needs to be specified, and no WHERE filter is needed here since every order counts.",
+    "Select COUNT(*) aliased as total_orders, from orders."
+  ],
+  "expected_behavior": "Returns one row, one column (total_orders), the number of rows in orders.",
+  "solution": "SELECT COUNT(*) AS total_orders FROM orders;",
+  "explanation": "COUNT(*) is the simplest aggregate there is - it doesn't care about NULLs or specific column values, it just counts rows.",
+  "concepts": [
+    "COUNT",
+    "aggregate functions",
+    "business KPIs"
+  ],
+  "skills": [
+    "sql_mini_project"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['5']]",
+      "label": "main check",
+      "ordered": false
+    }
+  ],
+  "schema": "ecommerce_sales_analysis"
+}

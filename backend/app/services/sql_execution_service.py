@@ -6,11 +6,14 @@ Every submission - including its hidden-test check queries - runs
 inside one transaction that is ALWAYS rolled back, never committed.
 PostgreSQL supports transactional DDL (unlike MySQL), so this holds
 even for a submission that runs CREATE TABLE, DROP TABLE, or DELETE:
-none of it survives past the transaction, so the shared fixture data
-(resources/sql/fixtures.sql) never needs re-provisioning between
-submissions and can never be corrupted by one. A statement_timeout
-bounds runaway queries the same way execution_service bounds Python
-subprocesses.
+none of it survives past the transaction, so fixture data never needs
+re-provisioning between submissions and can never be corrupted by one.
+Each exercise names its own Postgres schema (``SqlExercise.schema``,
+default "fixtures") to run against - the shared Foundations/JOINs/...
+dataset (resources/sql/fixtures.sql) or a Mini Project's own dedicated
+dataset (e.g. resources/sql/ecommerce_fixtures.sql), never mixed. A
+statement_timeout bounds runaway queries the same way execution_service
+bounds Python subprocesses.
 
 This targets a disposable, developer-controlled Postgres instance (see
 SQL_DATABASE_URL below) - never a shared/production database - the
@@ -182,7 +185,11 @@ def run_sql_submission(
                         pg_sql.Literal(_STATEMENT_TIMEOUT_MS)
                     )
                 )
-                cur.execute("SET LOCAL search_path TO fixtures")
+                cur.execute(
+                    pg_sql.SQL("SET LOCAL search_path TO {}").format(
+                        pg_sql.Identifier(exercise.schema)
+                    )
+                )
                 # A savepoint lets a student query that raises (e.g. a
                 # constraint violation an ``expect_error`` test wants)
                 # be undone without aborting the whole transaction, so

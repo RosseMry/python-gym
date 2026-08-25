@@ -32,6 +32,8 @@ class SqlExerciseSummary(BaseModel):
     difficulty: int
     title: str
     source: str
+    project: str | None
+    part: int | None
 
 
 class SqlExerciseDetail(BaseModel):
@@ -49,6 +51,8 @@ class SqlExerciseDetail(BaseModel):
     source: str
     postgres_note: str | None
     prerequisites: list[str]
+    project: str | None
+    part: int | None
 
 
 class HintResponse(BaseModel):
@@ -90,6 +94,8 @@ def _to_summary(exercise) -> SqlExerciseSummary:
         difficulty=exercise.difficulty,
         title=exercise.title,
         source=exercise.source,
+        project=exercise.project,
+        part=exercise.part,
     )
 
 
@@ -109,16 +115,29 @@ def _to_detail(exercise) -> SqlExerciseDetail:
         source=exercise.source,
         postgres_note=exercise.postgres_note,
         prerequisites=exercise.prerequisites,
+        project=exercise.project,
+        part=exercise.part,
     )
 
 
 @router.get("", response_model=list[SqlExerciseSummary])
 def list_sql_exercises(
     module: str | None = None,
+    project: str | None = None,
     service: SqlExerciseService = Depends(get_service),
 ) -> list[SqlExerciseSummary]:
-    """List all SQL exercises, optionally filtered by module (topic)."""
-    return [_to_summary(e) for e in service.list_exercises(module)]
+    """List all SQL exercises, optionally filtered by module or by Mini
+    Project id (module="mini_project" exercises grouped by project).
+    """
+    return [_to_summary(e) for e in service.list_exercises(module, project)]
+
+
+@router.get("/projects/list", response_model=list[str])
+def list_sql_mini_projects(
+    service: SqlExerciseService = Depends(get_service),
+) -> list[str]:
+    """Distinct Mini Project ids that have at least one exercise."""
+    return service.list_projects()
 
 
 @router.get("/{exercise_id}", response_model=SqlExerciseDetail)

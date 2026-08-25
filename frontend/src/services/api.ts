@@ -88,8 +88,15 @@ export const api = {
 
   // --- SQL (Sprint 4) ---
 
-  listSqlExercises: (module?: string) =>
-    request<SqlExerciseSummary[]>(`/sql/exercises${module ? `?module=${module}` : ""}`),
+  listSqlExercises: (params?: { module?: string; project?: string }) => {
+    const query = new URLSearchParams();
+    if (params?.module) query.set("module", params.module);
+    if (params?.project) query.set("project", params.project);
+    const qs = query.toString();
+    return request<SqlExerciseSummary[]>(`/sql/exercises${qs ? `?${qs}` : ""}`);
+  },
+
+  listSqlMiniProjects: () => request<string[]>("/sql/exercises/projects/list"),
 
   getSqlExercise: (id: string) => request<SqlExerciseDetail>(`/sql/exercises/${id}`),
 

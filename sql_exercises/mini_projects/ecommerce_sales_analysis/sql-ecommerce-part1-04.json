@@ -1,0 +1,37 @@
+{
+  "module": "mini_project",
+  "project": "ecommerce_sales_analysis",
+  "part": 1,
+  "source": "linear_con30",
+  "id": "sql-ecommerce-part1-04",
+  "difficulty": 1,
+  "title": "Count Total Products",
+  "description": "Write a query that returns the total number of products in the catalog, as `total_products`.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: COUNT(*)",
+    "Same COUNT(*) pattern again, on products this time.",
+    "Select COUNT(*) aliased as total_products, from products."
+  ],
+  "expected_behavior": "Returns one row, one column (total_products), the number of rows in products.",
+  "solution": "SELECT COUNT(*) AS total_products FROM products;",
+  "explanation": "Three questions in a row (orders, customers, products) all reduce to the exact same COUNT(*) pattern on a different table - recognizing that repetition is itself a useful skill.",
+  "concepts": [
+    "COUNT",
+    "aggregate functions",
+    "business KPIs"
+  ],
+  "skills": [
+    "sql_mini_project"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['5']]",
+      "label": "main check",
+      "ordered": false
+    }
+  ],
+  "schema": "ecommerce_sales_analysis"
+}

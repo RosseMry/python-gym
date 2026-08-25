@@ -1,0 +1,38 @@
+{
+  "module": "mini_project",
+  "project": "ecommerce_sales_analysis",
+  "part": 2,
+  "source": "linear_con31",
+  "id": "sql-ecommerce-part2-02",
+  "difficulty": 3,
+  "title": "Find Revenue by Product Category",
+  "description": "Write a query that returns each product `category` alongside its total `revenue` (SUM of quantity times unit_price), ordered from highest revenue category to lowest.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: JOIN + GROUP BY on a different column",
+    "Same shape as the top-selling-products query, but GROUP BY category instead of product_name, and sum quantity * unit_price instead of just quantity.",
+    "SELECT p.category, SUM(oi.quantity * oi.unit_price) AS revenue FROM order_items oi JOIN products p ON oi.product_id = p.product_id, grouped by category, ordered by revenue descending."
+  ],
+  "expected_behavior": "Returns category and revenue for every category that has sales, highest revenue first.",
+  "solution": "SELECT p.category, SUM(oi.quantity * oi.unit_price) AS revenue FROM order_items oi JOIN products p ON oi.product_id = p.product_id GROUP BY p.category ORDER BY revenue DESC;",
+  "explanation": "Grouping by category instead of individual product answers a coarser, more strategic question - which whole category of the business is actually driving revenue, not just which single item.",
+  "concepts": [
+    "JOIN",
+    "GROUP BY",
+    "ORDER BY",
+    "business KPIs"
+  ],
+  "skills": [
+    "sql_mini_project"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['Electronics', '136800.00'], ['Furniture', '7000.00'], ['Home', '1800.00']]",
+      "label": "main check",
+      "ordered": true
+    }
+  ],
+  "schema": "ecommerce_sales_analysis"
+}

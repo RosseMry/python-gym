@@ -9,6 +9,7 @@ import { LearningNotePage } from "./pages/LearningNotePage";
 import { ThirtyDaysPage } from "./pages/ThirtyDaysPage";
 import { SqlExerciseListPage } from "./pages/SqlExerciseListPage";
 import { SqlExercisePage } from "./pages/SqlExercisePage";
+import { SqlMiniProjectsPage } from "./pages/SqlMiniProjectsPage";
 import { SqlNotesListPage } from "./pages/SqlNotesListPage";
 import { SqlNotePage } from "./pages/SqlNotePage";
 import { ExamStartPage } from "./pages/ExamStartPage";
@@ -41,6 +42,7 @@ export default function App() {
           <Route path="/notes/:id" element={<LearningNotePage />} />
           <Route path="/thirty-days" element={<ThirtyDaysPage />} />
           <Route path="/sql" element={<SqlExerciseListPage />} />
+          <Route path="/sql/mini-projects" element={<SqlMiniProjectsPage />} />
           <Route path="/sql/exercises/:id" element={<SqlExercisePage />} />
           <Route path="/sql/notes" element={<SqlNotesListPage />} />
           <Route path="/sql/notes/:id" element={<SqlNotePage />} />

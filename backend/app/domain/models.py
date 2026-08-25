@@ -288,6 +288,19 @@ class SqlExercise:
     explanation) but for SQL: ``starter_query`` replaces starter_code,
     and grading runs against a real PostgreSQL fixture database instead
     of a Python subprocess (see sql_execution_service).
+
+    ``schema`` names the Postgres schema this exercise's queries run
+    against (``SET LOCAL search_path`` in sql_execution_service) -
+    ``"fixtures"`` for the shared Foundations/JOINs/... dataset, or a
+    dedicated schema (e.g. ``"ecommerce_sales_analysis"``) for a Mini
+    Project, which uses its own coherent dataset rather than sharing
+    the Foundations one. ``project``/``part`` group a Mini Project's
+    exercises (module="mini_project") into the project and the part
+    within it they belong to - the minimum needed to render
+    "Mini Projects -> E-Commerce Sales Analysis -> Part 1" without a
+    separate "project" table: a Mini Project IS just the set of
+    exercises sharing a ``project`` value, ordered by ``part`` then
+    ``difficulty``/``id`` like any other module.
     """
 
     id: str
@@ -311,6 +324,9 @@ class SqlExercise:
     description_fr: str | None = None
     explanation_fr: str | None = None
     hints_fr: list[str] | None = None
+    schema: str = "fixtures"
+    project: str | None = None
+    part: int | None = None
 
 
 @dataclass(frozen=True)

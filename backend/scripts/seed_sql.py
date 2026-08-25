@@ -45,6 +45,9 @@ def load_exercise(path: Path) -> SqlExercise:
         description_fr=data.get("description_fr"),
         explanation_fr=data.get("explanation_fr"),
         hints_fr=data.get("hints_fr"),
+        schema=data.get("schema", "fixtures"),
+        project=data.get("project"),
+        part=data.get("part"),
     )
 
 

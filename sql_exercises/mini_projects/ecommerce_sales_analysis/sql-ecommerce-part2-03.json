@@ -1,0 +1,39 @@
+{
+  "module": "mini_project",
+  "project": "ecommerce_sales_analysis",
+  "part": 2,
+  "source": "linear_con31",
+  "id": "sql-ecommerce-part2-03",
+  "difficulty": 4,
+  "title": "Find Top 5 Customers by Revenue",
+  "description": "This time you need THREE tables: customers, orders, and order_items - a customer's name isn't on the orders table, and revenue isn't on the customers table. Write a query that returns each customer's `customer_name` and their total `revenue`, for the 5 highest-spending customers, highest first.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: joining three tables in a chain",
+    "customers -> orders on customer_id, then orders -> order_items on order_id - two JOINs chained together, since customer_name and unit_price/quantity live on opposite ends of that chain.",
+    "SELECT c.customer_name, SUM(oi.quantity * oi.unit_price) AS revenue FROM customers c JOIN orders o ON c.customer_id = o.customer_id JOIN order_items oi ON o.order_id = oi.order_id, grouped by customer_name, ordered by revenue descending, limited to 5."
+  ],
+  "expected_behavior": "Returns customer_name and revenue for the 5 customers with the highest total revenue, highest first.",
+  "solution": "SELECT c.customer_name, SUM(oi.quantity * oi.unit_price) AS revenue FROM customers c JOIN orders o ON c.customer_id = o.customer_id JOIN order_items oi ON o.order_id = oi.order_id GROUP BY c.customer_name ORDER BY revenue DESC LIMIT 5;",
+  "explanation": "Chaining two JOINs is nothing more than the same two-table JOIN twice in a row - the key is figuring out the PATH connecting the two tables you actually care about (customers and order_items), which runs through orders in between.",
+  "concepts": [
+    "JOIN",
+    "GROUP BY",
+    "ORDER BY",
+    "LIMIT",
+    "business KPIs"
+  ],
+  "skills": [
+    "sql_mini_project"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['Rahul', '71800.00'], ['Sneha', '65000.00'], ['Priya', '7000.00'], ['Amit', '1800.00']]",
+      "label": "main check",
+      "ordered": true
+    }
+  ],
+  "schema": "ecommerce_sales_analysis"
+}

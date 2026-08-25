@@ -113,5 +113,14 @@
   "exam.timedOut": "Time ran out — auto-submitted",
   "exam.submitted": "Submitted",
   "exam.breakdown": "Question breakdown",
-  "exam.takeAnother": "← Back to Exam"
+  "exam.takeAnother": "← Back to Exam",
+
+  "nav.sqlFoundations": "Foundations",
+  "nav.miniProjects": "Mini Projects",
+
+  "sql.miniProjectsSubtitle": "One coherent dataset, several parts, increasingly real business questions.",
+  "sql.noMiniProjectsYet": "No Mini Projects yet.",
+  "sql.miniProjectSubtitle": "The same dataset all the way through — pick up where you left off.",
+  "sql.backToMiniProjects": "← Back to Mini Projects",
+  "sql.part": "Part"
 }

@@ -1,0 +1,39 @@
+{
+  "module": "mini_project",
+  "project": "ecommerce_sales_analysis",
+  "part": 2,
+  "source": "linear_con31",
+  "id": "sql-ecommerce-part2-01",
+  "difficulty": 3,
+  "title": "Find Top 5 Selling Products",
+  "description": "Product names live in `products`, quantities sold live in `order_items` - you need both. Write a query that returns each product's `product_name` and its `total_quantity` sold (SUM of quantity), for the 5 best-selling products, most sold first.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: JOIN + GROUP BY + ORDER BY + LIMIT together",
+    "Join order_items to products on product_id, GROUP BY product_name to get one row per product, SUM(quantity) for the total sold, then ORDER BY that sum descending and LIMIT 5.",
+    "SELECT p.product_name, SUM(oi.quantity) AS total_quantity FROM order_items oi JOIN products p ON oi.product_id = p.product_id, grouped by product_name, ordered by the sum descending, limited to 5."
+  ],
+  "expected_behavior": "Returns product_name and total_quantity for the 5 products with the highest total quantity sold, ranked highest first.",
+  "solution": "SELECT p.product_name, SUM(oi.quantity) AS total_quantity FROM order_items oi JOIN products p ON oi.product_id = p.product_id GROUP BY p.product_name ORDER BY total_quantity DESC LIMIT 5;",
+  "explanation": "This combines four things you already know - JOIN, GROUP BY, ORDER BY, LIMIT - into one real business question, which is exactly what \"top N by some measure\" always looks like in practice.",
+  "concepts": [
+    "JOIN",
+    "GROUP BY",
+    "ORDER BY",
+    "LIMIT",
+    "business KPIs"
+  ],
+  "skills": [
+    "sql_mini_project"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['Water Bottle', '3'], ['Laptop', '2'], ['Headphones', '2'], ['Office Chair', '1'], ['Keyboard', '1']]",
+      "label": "main check",
+      "ordered": true
+    }
+  ],
+  "schema": "ecommerce_sales_analysis"
+}

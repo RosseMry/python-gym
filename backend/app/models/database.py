@@ -124,7 +124,10 @@ CREATE TABLE IF NOT EXISTS sql_exercises (
     title_fr TEXT,
     description_fr TEXT,
     explanation_fr TEXT,
-    hints_fr TEXT
+    hints_fr TEXT,
+    schema TEXT NOT NULL DEFAULT 'fixtures',
+    project TEXT,
+    part INTEGER
 );
 
 CREATE TABLE IF NOT EXISTS sql_progress (
@@ -249,6 +252,14 @@ _EXERCISE_MIGRATION_COLUMNS = {
     "hint_functions": "TEXT",
 }
 
+_SQL_EXERCISE_MIGRATION_COLUMNS = {
+    # SQL content reorganization (Sprint 4 Mini Project prep) - see
+    # app.domain.models.SqlExercise's docstring.
+    "schema": "TEXT NOT NULL DEFAULT 'fixtures'",
+    "project": "TEXT",
+    "part": "INTEGER",
+}
+
 _SUBMISSION_MIGRATION_COLUMNS = {
     "status": "TEXT NOT NULL DEFAULT 'failed'",
     "hints_used_snapshot": "INTEGER NOT NULL DEFAULT 0",
@@ -290,5 +301,6 @@ def init_db() -> None:
         conn.commit()
         _migrate_columns(conn, "exercises", _EXERCISE_MIGRATION_COLUMNS)
         _migrate_columns(conn, "submissions", _SUBMISSION_MIGRATION_COLUMNS)
+        _migrate_columns(conn, "sql_exercises", _SQL_EXERCISE_MIGRATION_COLUMNS)
     finally:
         conn.close()

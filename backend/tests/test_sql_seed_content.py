@@ -31,6 +31,13 @@ EXPECTED_MODULE_COUNTS = {
     "functions": 3,
     "procedures": 2,
     "triggers": 2,
+    "mini_project": 10,
+}
+
+# Mini Project exercises (module="mini_project") are id-prefixed and
+# grouped by `project`, not by `module` - see SqlExercise's docstring.
+EXPECTED_PROJECT_COUNTS = {
+    "ecommerce_sales_analysis": 10,
 }
 
 
@@ -56,7 +63,33 @@ def test_module_counts_match_expectations(exercises: list[SqlExercise]) -> None:
 
 def test_id_prefix_matches_module(exercises: list[SqlExercise]) -> None:
     for e in exercises:
+        if e.module == "mini_project":
+            continue  # checked separately below, prefixed by project
         assert e.id.startswith(f"sql-{e.module}-"), e.id
+
+
+def test_mini_project_exercises_have_project_and_part(
+    exercises: list[SqlExercise],
+) -> None:
+    for e in exercises:
+        if e.module != "mini_project":
+            continue
+        assert e.project, e.id
+        assert e.part is not None and e.part >= 1, e.id
+        assert e.schema != "fixtures", (
+            e.id,
+            "a Mini Project must use its own dedicated schema, not the "
+            "shared Foundations one",
+        )
+
+
+def test_project_counts_match_expectations(exercises: list[SqlExercise]) -> None:
+    by_project: dict[str, int] = {}
+    for e in exercises:
+        if e.project:
+            by_project[e.project] = by_project.get(e.project, 0) + 1
+    for project, expected_count in EXPECTED_PROJECT_COUNTS.items():
+        assert by_project.get(project) == expected_count, project
 
 
 def test_every_exercise_has_three_hints(exercises: list[SqlExercise]) -> None:
