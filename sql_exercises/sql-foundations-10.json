@@ -1,0 +1,31 @@
+{
+  "module": "foundations",
+  "source": "sqlbolt",
+  "id": "sql-foundations-10",
+  "difficulty": 3,
+  "title": "Branch per row with CASE",
+  "description": "Write a query that returns each product's `name` and a `price_tier` column: 'budget' for price under 20, 'mid' for 20 to 50, and 'premium' for anything above 50.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: CASE",
+    "CASE WHEN condition THEN value ... ELSE value END works like an if/elif/else chain, evaluated once per row - the conditions are checked in order, and the first one that matches wins.",
+    "Use CASE WHEN price < 20 THEN 'budget' WHEN price <= 50 THEN 'mid' ELSE 'premium' END AS price_tier, alongside name."
+  ],
+  "expected_behavior": "Returns name and a computed price_tier per the three price bands.",
+  "solution": "SELECT name,\n    CASE\n        WHEN price < 20 THEN 'budget'\n        WHEN price <= 50 THEN 'mid'\n        ELSE 'premium'\n    END AS price_tier\nFROM products;",
+  "explanation": "CASE evaluates its WHEN clauses top to bottom and stops at the first match, exactly like if/elif - ELSE is the catch-all for everything that didn't match an earlier condition.",
+  "concepts": [
+    "CASE"
+  ],
+  "skills": [
+    "sql_basics"
+  ],
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['Desk Lamp', 'mid'], ['Fountain Pen', 'budget'], ['Mechanical Keyboard', 'premium'], ['Notebook A5', 'budget'], ['Standing Mat', 'mid'], ['USB-C Hub', 'mid'], ['Water Bottle', 'budget'], ['Wireless Mouse', 'budget']]",
+      "label": "main check",
+      "ordered": false
+    }
+  ]
+}

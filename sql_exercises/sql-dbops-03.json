@@ -1,0 +1,31 @@
+{
+  "module": "dbops",
+  "source": "sqlbolt",
+  "id": "sql-dbops-03",
+  "difficulty": 2,
+  "title": "DROP TABLE",
+  "description": "DROP TABLE removes a table and every row in it, permanently - there's no undo outside of a backup. Drop the `appointments` table.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: DROP TABLE",
+    "DROP TABLE takes just the table name - no WHERE clause, because it's removing the whole table, not filtering rows out of it.",
+    "Use DROP TABLE followed by the exact table name, appointments."
+  ],
+  "expected_behavior": "The appointments table no longer exists.",
+  "solution": "DROP TABLE appointments;",
+  "explanation": "This exercise runs inside a rolled-back transaction like every other one here, so it's completely safe to practice - in a real database, DROP TABLE is one of the few commands worth pausing before you run.",
+  "concepts": [
+    "DROP TABLE"
+  ],
+  "skills": [
+    "sql_db_operations"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = 'fixtures' AND table_name = 'appointments'",
+      "expected": "[['0']]",
+      "label": "appointments table is gone"
+    }
+  ]
+}

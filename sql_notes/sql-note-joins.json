@@ -1,0 +1,16 @@
+{
+  "id": "sql-note-joins",
+  "module": "joins",
+  "title": "JOINs: Combining Rows From Multiple Tables",
+  "display_order": 3,
+  "what_is_it": "A JOIN combines rows from two tables based on a matching condition (usually a foreign key equaling a primary key). INNER JOIN keeps only matched pairs; LEFT/RIGHT JOIN also keep unmatched rows from one side, padded with NULLs; FULL OUTER JOIN keeps unmatched rows from BOTH sides; CROSS JOIN pairs every row with every row; a self join joins a table to itself.",
+  "why_it_matters": "Real questions almost always span more than one table - 'which customers placed orders,' 'which departments have no staff,' 'who reports to whom.' JOIN is the tool that answers all of these, and picking the right JOIN type is the difference between a correct answer and one that's silently missing rows.",
+  "syntax": "SELECT a.col, b.col\nFROM table_a a\nJOIN table_b b ON a.id = b.a_id;\n\n-- LEFT JOIN keeps every row from table_a even with no match:\nSELECT a.col, b.col\nFROM table_a a\nLEFT JOIN table_b b ON a.id = b.a_id;",
+  "example": "SELECT customers.first_name, orders.id\nFROM customers\nLEFT JOIN orders ON customers.id = orders.customer_id;",
+  "output": " first_name | id\n------------+----\n Ana        | 1\n Ana        | 3\n Ivo        |  \n Julia      |  ",
+  "common_mistakes": "Using INNER JOIN (or just JOIN) when you actually need LEFT JOIN, and silently losing rows that had no match - a customer who never ordered anything just vanishes from an INNER JOIN result instead of showing up with NULLs. Also forgetting table aliases in a self join, which makes column names ambiguous (\"first_name\" could mean either copy of the table).",
+  "mini_exercise": "Before running it, predict how many rows 'SELECT * FROM departments FULL OUTER JOIN employees ON departments.id = employees.department_id' returns, given that one department has no employees and one employee has no department.",
+  "postgres_note": "Postgres supports every standard JOIN type (INNER, LEFT, RIGHT, FULL OUTER, CROSS) - some databases (older MySQL versions, for one) don't support FULL OUTER JOIN directly and need a UNION of a LEFT and RIGHT JOIN to fake it.",
+  "source": "freecodecamp",
+  "related_exercise_ids": ["sql-joins-01", "sql-joins-02", "sql-joins-04", "sql-joins-06"]
+}

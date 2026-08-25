@@ -1,0 +1,30 @@
+{
+  "module": "foundations",
+  "source": "sqlbolt",
+  "id": "sql-foundations-13",
+  "difficulty": 2,
+  "title": "Remove rows with DELETE",
+  "description": "Write a statement that deletes every order with status `'cancelled'` from the `orders` table.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: DELETE FROM ... WHERE",
+    "DELETE FROM table WHERE condition removes only the matching rows - just like UPDATE, leaving out WHERE deletes the entire table's contents.",
+    "Scope the DELETE with WHERE status = 'cancelled' so only cancelled orders are affected."
+  ],
+  "expected_behavior": "Removes every cancelled order.",
+  "solution": "DELETE FROM orders WHERE status = 'cancelled';",
+  "explanation": "DELETE removes whole rows, never individual column values - WHERE narrows down which rows qualify, the same role it plays in SELECT and UPDATE.",
+  "concepts": [
+    "DELETE"
+  ],
+  "skills": [
+    "sql_basics"
+  ],
+  "hidden_tests": [
+    {
+      "check_query": "SELECT id FROM orders WHERE status = 'cancelled'",
+      "expected": "[]",
+      "label": "main check"
+    }
+  ]
+}

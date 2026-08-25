@@ -1,0 +1,31 @@
+{
+  "module": "views",
+  "source": "sqlbolt",
+  "id": "sql-views-01",
+  "difficulty": 3,
+  "title": "CREATE VIEW",
+  "description": "A VIEW saves a query under a name, so you can SELECT from it later like a table - the underlying query runs fresh every time, it doesn't store a copy of the data. Create a view named `pricey_products` that returns the `name` and `price` of every product priced above 30.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: CREATE VIEW",
+    "CREATE VIEW <name> AS <query> - everything after AS is a completely ordinary SELECT, it just gets saved under a name instead of run once and discarded.",
+    "Name the view pricey_products, and have its underlying SELECT return name and price from products where price is greater than 30."
+  ],
+  "expected_behavior": "Creates a view that, when queried, returns name and price for products priced above 30.",
+  "solution": "CREATE VIEW pricey_products AS SELECT name, price FROM products WHERE price > 30;",
+  "explanation": "A view is not a copy of the data - querying it just runs the saved SELECT again, so it always reflects the current state of the underlying tables.",
+  "concepts": [
+    "CREATE VIEW"
+  ],
+  "skills": [
+    "sql_views"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "SELECT name, price FROM pricey_products ORDER BY price DESC",
+      "expected": "[['Mechanical Keyboard', '79.99'], ['Standing Mat', '45.00'], ['USB-C Hub', '34.50']]",
+      "label": "pricey_products view returns the right rows"
+    }
+  ]
+}

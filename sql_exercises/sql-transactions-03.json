@@ -1,0 +1,38 @@
+{
+  "module": "transactions",
+  "source": "sqlbolt",
+  "id": "sql-transactions-03",
+  "difficulty": 4,
+  "title": "Multiple savepoints",
+  "description": "You can set more than one savepoint in the same transaction and roll back to any of them - rolling back to an earlier one undoes everything after it, including any later savepoints. Set savepoint `sp1`, then (by mistake) raise every product's price by 10%. Set savepoint `sp2`, then (also by mistake) delete every row from `order_items`. Roll back all the way to `sp1` (undoing BOTH mistakes). Then correctly apply a 10% DISCOUNT to just the `'Fountain Pen'` product.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: multiple SAVEPOINTs",
+    "Six statements in order: SAVEPOINT sp1, the mistaken price increase, SAVEPOINT sp2, the mistaken DELETE, ROLLBACK TO SAVEPOINT sp1 (discarding both mistakes, sp2 included), then the correct, filtered price update.",
+    "After rolling back to sp1, write a fresh UPDATE that multiplies price by 0.9, filtered to WHERE name = 'Fountain Pen'."
+  ],
+  "expected_behavior": "order_items is completely untouched, every product's price is unchanged EXCEPT Fountain Pen, which is now 10% cheaper than before.",
+  "solution": "SAVEPOINT sp1; UPDATE products SET price = price * 1.1; SAVEPOINT sp2; DELETE FROM order_items; ROLLBACK TO SAVEPOINT sp1; UPDATE products SET price = price * 0.9 WHERE name = 'Fountain Pen';",
+  "explanation": "Savepoints nest naturally in the order you create them - rolling back to an earlier one always discards every later one along with whatever they protected, because none of that work exists anymore once you're back before it.",
+  "concepts": [
+    "SAVEPOINT",
+    "ROLLBACK TO SAVEPOINT",
+    "transactions"
+  ],
+  "skills": [
+    "sql_transactions"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "SELECT COUNT(*) FROM order_items",
+      "expected": "[['13']]",
+      "label": "order_items still has all its rows"
+    },
+    {
+      "check_query": "SELECT name, price FROM products ORDER BY name",
+      "expected": "[['Desk Lamp', '27.75'], ['Fountain Pen', '13.50'], ['Mechanical Keyboard', '79.99'], ['Notebook A5', '4.25'], ['Standing Mat', '45.00'], ['USB-C Hub', '34.50'], ['Water Bottle', '12.90'], ['Wireless Mouse', '19.99']]",
+      "label": "only Fountain Pen's price changed"
+    }
+  ]
+}

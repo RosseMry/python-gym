@@ -1,0 +1,16 @@
+{
+  "id": "sql-note-dbops",
+  "module": "dbops",
+  "title": "Database Operations: DDL and Constraints",
+  "display_order": 6,
+  "what_is_it": "DDL (Data Definition Language) changes the SHAPE of the database, not its data: CREATE TABLE defines a new table, ALTER TABLE changes an existing one (ADD COLUMN, ALTER COLUMN ... SET NOT NULL/DEFAULT), DROP TABLE removes one entirely. Constraints - PRIMARY KEY, FOREIGN KEY, UNIQUE, NOT NULL, CHECK - are rules the table itself enforces on every write, either declared at CREATE TABLE time or added later with ADD CONSTRAINT.",
+  "why_it_matters": "This is how a schema evolves once real data is already in it - you rarely get a table 100% right on the first CREATE TABLE, and ALTER TABLE (plus constraints) is how you tighten the rules and add new columns without losing what's already there.",
+  "syntax": "ALTER TABLE customers ADD COLUMN loyalty_tier TEXT DEFAULT 'standard';\nALTER TABLE customers ALTER COLUMN loyalty_tier SET NOT NULL;\n\nALTER TABLE products ADD CONSTRAINT products_price_positive CHECK (price > 0);",
+  "example": "ALTER TABLE products\n    ADD CONSTRAINT products_price_positive CHECK (price > 0);",
+  "output": "ALTER TABLE\n(no rows returned - this changes the schema, not the data)",
+  "common_mistakes": "Trying ALTER COLUMN ... SET NOT NULL on a column that ALREADY has a NULL value in some existing row - Postgres checks every current row first and rejects the whole ALTER if even one violates it. That's exactly why adding a nullable column WITH a DEFAULT first (so every row gets a real value immediately) is the standard way to safely tighten to NOT NULL afterward.",
+  "mini_exercise": "Why would ALTER TABLE ADD CONSTRAINT ... UNIQUE (name) on products FAIL if two existing products already happened to share the same name?",
+  "postgres_note": "Postgres DDL is transactional - CREATE TABLE, ALTER TABLE, and DROP TABLE can all be rolled back like any other statement, which most other databases (MySQL notably) don't support for DDL.",
+  "source": "freecodecamp",
+  "related_exercise_ids": ["sql-dbops-01", "sql-dbops-05", "sql-dbops-06", "sql-dbops-07"]
+}

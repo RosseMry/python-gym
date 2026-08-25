@@ -1,0 +1,32 @@
+{
+  "module": "foundations",
+  "source": "sqlbolt",
+  "id": "sql-foundations-02",
+  "difficulty": 1,
+  "title": "Filter rows with WHERE",
+  "description": "Write a query that returns the `name` and `price` of every product in the `products` table with a `price` greater than 30.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: WHERE",
+    "WHERE condition filters rows before they're returned - only rows where the condition is true make it into the result, the same idea as an `if` check applied to every row.",
+    "Add WHERE price > 30 after FROM products, and select name and price."
+  ],
+  "expected_behavior": "Returns name and price for products priced above 30.",
+  "solution": "SELECT name, price FROM products WHERE price > 30;",
+  "explanation": "WHERE runs before the columns are selected, conceptually - it decides which rows survive, and comparison operators like > work on numeric columns exactly as you'd expect.",
+  "concepts": [
+    "WHERE",
+    "comparison operators"
+  ],
+  "skills": [
+    "sql_basics"
+  ],
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['Mechanical Keyboard', '79.99'], ['Standing Mat', '45.00'], ['USB-C Hub', '34.50']]",
+      "label": "main check",
+      "ordered": false
+    }
+  ]
+}

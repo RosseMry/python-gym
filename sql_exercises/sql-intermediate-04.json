@@ -1,0 +1,32 @@
+{
+  "module": "intermediate",
+  "source": "sqlbolt",
+  "id": "sql-intermediate-04",
+  "difficulty": 3,
+  "title": "UNION",
+  "description": "UNION stacks the results of two SELECTs into one result set, automatically removing any exact duplicate rows. Write a query that returns a single combined list of full names (`first_name || ' ' || last_name`) covering both customers and employees.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: UNION",
+    "Both SELECTs must return the same number of columns, in compatible types - here, one text column each, built from first_name || ' ' || last_name in both customers and employees.",
+    "Select the concatenated full name from customers, put UNION on its own between the two queries, then select the same concatenated expression from employees."
+  ],
+  "expected_behavior": "Returns one column of full names, combining customers and employees, with exact duplicates collapsed.",
+  "solution": "SELECT first_name || ' ' || last_name FROM customers UNION SELECT first_name || ' ' || last_name FROM employees;",
+  "explanation": "UNION is the SQL analog of combining two lists and calling set() on the result - if the exact same row appeared in both halves, you'd only see it once.",
+  "concepts": [
+    "UNION"
+  ],
+  "skills": [
+    "sql_intermediate"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['Ada Lovelace'], ['Alan Turing'], ['Ana Silva'], ['Barbara Liskov'], ['Bo Chen'], ['Cid Rocha'], ['Dara Ola'], ['Eero Salo'], ['Fatima Haidari'], ['Grace Hopper'], ['Gustav Berg'], ['Hana Kobayashi'], ['Hedy Lamarr'], ['Ivo Novak'], ['Julia Kowalski'], ['Katherine Johnson'], ['Margaret Hamilton'], ['Radia Perlman']]",
+      "label": "main check",
+      "ordered": false
+    }
+  ]
+}

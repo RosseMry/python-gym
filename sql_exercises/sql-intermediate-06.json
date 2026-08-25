@@ -1,0 +1,32 @@
+{
+  "module": "intermediate",
+  "source": "sqlbolt",
+  "id": "sql-intermediate-06",
+  "difficulty": 3,
+  "title": "INTERSECT",
+  "description": "INTERSECT returns only the rows that appear in BOTH result sets. Write a query that returns the `customer_id` of every customer who has BOTH placed at least one order AND had at least one appointment.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: INTERSECT",
+    "SELECT customer_id FROM orders is one set of ids, SELECT customer_id FROM appointments is another - INTERSECT keeps only the ids present in both, the same idea as Python's set.intersection().",
+    "Select customer_id from orders, put INTERSECT between the two queries, then select customer_id from appointments."
+  ],
+  "expected_behavior": "Returns the distinct customer_id values present in both orders and appointments.",
+  "solution": "SELECT customer_id FROM orders INTERSECT SELECT customer_id FROM appointments;",
+  "explanation": "INTERSECT is less commonly needed than UNION but is exactly the right tool for \"which rows exist in both of these result sets\" questions - the alternative (an INNER JOIN or a WHERE ... IN subquery) works too, but INTERSECT states the intent most directly.",
+  "concepts": [
+    "INTERSECT"
+  ],
+  "skills": [
+    "sql_intermediate"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['1'], ['2'], ['3'], ['4'], ['5'], ['6']]",
+      "label": "main check",
+      "ordered": false
+    }
+  ]
+}

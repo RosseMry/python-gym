@@ -1,0 +1,28 @@
+{
+  "module": "triggers",
+  "source": "sqlbolt",
+  "id": "sql-triggers-01",
+  "difficulty": 5,
+  "title": "CREATE TRIGGER",
+  "description": "A trigger runs a function automatically whenever a table changes - here, to enforce a business rule no application code should be able to bypass. First create a trigger function `reject_negative_price()` that raises an exception if `NEW.price` is negative. Then create a BEFORE UPDATE trigger `trg_reject_negative_price` on `products` that calls it FOR EACH ROW. Finally, try to set a product's price to -5, to prove the trigger actually blocks it.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: CREATE TRIGGER, trigger function",
+    "A trigger function RETURNS TRIGGER (not a normal type), and inside its BEGIN...END it can inspect NEW (the row being written) - RAISE EXCEPTION '...' inside an IF stops the write entirely, the same way a CHECK constraint would.",
+    "CREATE FUNCTION reject_negative_price() RETURNS TRIGGER AS $$ BEGIN IF NEW.price < 0 THEN RAISE EXCEPTION '...'; END IF; RETURN NEW; END; $$ LANGUAGE plpgsql; then CREATE TRIGGER trg_reject_negative_price BEFORE UPDATE ON products FOR EACH ROW EXECUTE FUNCTION reject_negative_price(); then a normal UPDATE setting price to -5 for one product, to prove it's rejected."
+  ],
+  "expected_behavior": "The trigger function and trigger are created, and the final UPDATE setting a negative price is rejected by the trigger you just wrote.",
+  "solution": "CREATE FUNCTION reject_negative_price() RETURNS TRIGGER AS $$ BEGIN IF NEW.price < 0 THEN RAISE EXCEPTION 'price cannot be negative'; END IF; RETURN NEW; END; $$ LANGUAGE plpgsql; CREATE TRIGGER trg_reject_negative_price BEFORE UPDATE ON products FOR EACH ROW EXECUTE FUNCTION reject_negative_price(); UPDATE products SET price = -5 WHERE name = 'Fountain Pen';",
+  "explanation": "A BEFORE trigger runs before the write is applied and can inspect (and even modify) NEW before Postgres commits it - raising an exception here stops the UPDATE from ever taking effect, exactly like a failed CHECK constraint would, except the rule can be arbitrarily complex procedural logic instead of one boolean expression.",
+  "concepts": ["CREATE TRIGGER", "trigger function", "RAISE EXCEPTION"],
+  "skills": ["sql_triggers"],
+  "postgres_note": "A trigger function is a normal PL/pgSQL function except its return type must be TRIGGER, and it's never called directly - only Postgres invokes it, automatically, when the trigger fires.",
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "",
+      "expect_error": true,
+      "label": "the negative-price UPDATE is rejected by the trigger"
+    }
+  ]
+}

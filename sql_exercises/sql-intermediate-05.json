@@ -1,0 +1,32 @@
+{
+  "module": "intermediate",
+  "source": "sqlbolt",
+  "id": "sql-intermediate-05",
+  "difficulty": 3,
+  "title": "UNION ALL",
+  "description": "UNION ALL is UNION without the deduplication step - every row from both sides is kept, even exact duplicates, which also makes it cheaper to run. Write a query that combines the `country` column of `customers` with itself using UNION ALL, so you get every country listed twice as often as a plain UNION would.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: UNION ALL",
+    "SELECT country FROM customers UNION SELECT country FROM customers would collapse right back down to the distinct countries, exactly as if you'd written DISTINCT once - UNION ALL keeps every row from both halves instead.",
+    "Select country from customers, put UNION ALL between the two queries, then select country from customers again."
+  ],
+  "expected_behavior": "Returns the country column from customers twice over - twenty rows total, no deduplication.",
+  "solution": "SELECT country FROM customers UNION ALL SELECT country FROM customers;",
+  "explanation": "Reach for UNION ALL whenever you already know the two sides can't overlap, or duplicates are fine (or even expected) - skipping the dedup pass is real, measurable savings on large result sets.",
+  "concepts": [
+    "UNION ALL"
+  ],
+  "skills": [
+    "sql_intermediate"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['Afghanistan'], ['Afghanistan'], ['China'], ['China'], ['Czechia'], ['Czechia'], ['Finland'], ['Finland'], ['Japan'], ['Japan'], ['Nigeria'], ['Nigeria'], ['Poland'], ['Poland'], ['Portugal'], ['Portugal'], ['Portugal'], ['Portugal'], ['Sweden'], ['Sweden']]",
+      "label": "main check",
+      "ordered": false
+    }
+  ]
+}

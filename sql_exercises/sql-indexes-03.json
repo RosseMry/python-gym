@@ -1,0 +1,31 @@
+{
+  "module": "indexes",
+  "source": "sqlbolt",
+  "id": "sql-indexes-03",
+  "difficulty": 2,
+  "title": "DROP INDEX",
+  "description": "DROP INDEX removes an index without touching the table's data at all - queries still work afterward, they just go back to scanning the table instead of using the index. The fixtures already include an index named `idx_products_category` - drop it.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: DROP INDEX",
+    "DROP INDEX <index_name> - just the index's own name, not the table it was built on.",
+    "Use DROP INDEX followed by the exact index name, idx_products_category."
+  ],
+  "expected_behavior": "idx_products_category no longer exists; products itself and every row in it are completely untouched.",
+  "solution": "DROP INDEX idx_products_category;",
+  "explanation": "Dropping an index is always safe for correctness (queries fall back to a sequential scan) - the only risk is a performance regression if that index was actually being relied on, which is why removing an index in production is usually checked against real query plans first.",
+  "concepts": [
+    "DROP INDEX"
+  ],
+  "skills": [
+    "sql_indexes"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "SELECT COUNT(*) FROM pg_indexes WHERE schemaname = 'fixtures' AND tablename = 'products' AND indexname = 'idx_products_category'",
+      "expected": "[['0']]",
+      "label": "idx_products_category is gone"
+    }
+  ]
+}

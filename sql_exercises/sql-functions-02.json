@@ -1,0 +1,33 @@
+{
+  "module": "functions",
+  "source": "sqlbolt",
+  "id": "sql-functions-02",
+  "difficulty": 4,
+  "title": "Conditional logic in a function",
+  "description": "PL/pgSQL functions can use IF/ELSIF/ELSE, just like the CASE expression you've already used, but as full procedural control flow. Create a function `price_tier(price NUMERIC) RETURNS TEXT` that returns `'budget'` if price is under 20, `'mid'` if price is 20 to 50 inclusive, and `'premium'` otherwise.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: IF / ELSIF / ELSE, PL/pgSQL",
+    "IF price < 20 THEN RETURN 'budget'; ELSIF price <= 50 THEN RETURN 'mid'; ELSE RETURN 'premium'; END IF; - each branch RETURNs directly instead of building up a value to return at the end.",
+    "CREATE FUNCTION price_tier(price NUMERIC) RETURNS TEXT AS $$ BEGIN IF ... THEN RETURN ...; ELSIF ... THEN RETURN ...; ELSE RETURN ...; END IF; END; $$ LANGUAGE plpgsql - fill in each condition and return value yourself."
+  ],
+  "expected_behavior": "price_tier(15) returns 'budget', price_tier(35) returns 'mid', price_tier(80) returns 'premium'.",
+  "solution": "CREATE FUNCTION price_tier(price NUMERIC) RETURNS TEXT AS $$ BEGIN IF price < 20 THEN RETURN 'budget'; ELSIF price <= 50 THEN RETURN 'mid'; ELSE RETURN 'premium'; END IF; END; $$ LANGUAGE plpgsql;",
+  "explanation": "Notice this needs its own END IF; to close the IF block, separate from the END; that closes the whole function body - PL/pgSQL's block-ending keywords always come in matching pairs like that.",
+  "concepts": [
+    "IF",
+    "ELSIF",
+    "PL/pgSQL"
+  ],
+  "skills": [
+    "sql_functions"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "SELECT price_tier(15), price_tier(35), price_tier(80)",
+      "expected": "[['budget', 'mid', 'premium']]",
+      "label": "price_tier handles all three ranges"
+    }
+  ]
+}

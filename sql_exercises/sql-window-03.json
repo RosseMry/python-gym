@@ -1,0 +1,34 @@
+{
+  "module": "window",
+  "source": "sqlbolt",
+  "id": "sql-window-03",
+  "difficulty": 4,
+  "title": "RANK",
+  "description": "RANK() OVER (...) numbers rows like ROW_NUMBER, but rows that tie get the SAME rank - and the rank after a tie jumps ahead by however many rows tied. Using the CTE below, write a query that returns each department's `department_id`, `emp_count`, and its RANK by emp_count (most staffed first, empty departments included).\n\nWITH dept_counts AS (\n    SELECT departments.id AS department_id, COUNT(employees.id) AS emp_count\n    FROM departments\n    LEFT JOIN employees ON departments.id = employees.department_id\n    GROUP BY departments.id\n)",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: RANK, ties",
+    "Two departments tied at 2 employees each both get the same RANK - and two OTHER departments tied at 0 employees share a lower rank too. Whatever number of rows tie for a rank, the next distinct value skips ahead by that many.",
+    "WITH dept_counts AS (...) SELECT department_id, emp_count, RANK() OVER (ORDER BY emp_count DESC) AS emp_rank FROM dept_counts."
+  ],
+  "expected_behavior": "Returns department_id, emp_count, and a RANK where tied emp_count values share a rank and the following rank skips ahead by the tie size.",
+  "solution": "WITH dept_counts AS (SELECT departments.id AS department_id, COUNT(employees.id) AS emp_count FROM departments LEFT JOIN employees ON departments.id = employees.department_id GROUP BY departments.id) SELECT department_id, emp_count, RANK() OVER (ORDER BY emp_count DESC) AS emp_rank FROM dept_counts;",
+  "explanation": "RANK's \"gap after a tie\" behavior mirrors how sports standings usually work: if two people tie for 2nd place, the next person is in 4th, not 3rd - nobody is skipped, but nobody gets 3rd either.",
+  "concepts": [
+    "RANK",
+    "window function",
+    "ties"
+  ],
+  "skills": [
+    "sql_window_functions"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['1', '3', '1'], ['2', '2', '2'], ['3', '2', '2'], ['4', '0', '4'], ['5', '0', '4']]",
+      "label": "main check",
+      "ordered": false
+    }
+  ]
+}

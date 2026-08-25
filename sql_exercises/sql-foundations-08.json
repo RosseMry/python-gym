@@ -1,0 +1,32 @@
+{
+  "module": "foundations",
+  "source": "sqlbolt",
+  "id": "sql-foundations-08",
+  "difficulty": 2,
+  "title": "Rename output columns with an alias",
+  "description": "Write a query that returns every customer's `first_name` and `last_name`, with the columns renamed to `given_name` and `family_name` in the output.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: AS (column alias)",
+    "column AS alias renames a column just in the query's result - it doesn't rename anything in the actual table.",
+    "Select first_name AS given_name and last_name AS family_name from customers."
+  ],
+  "expected_behavior": "Returns first_name and last_name, labeled given_name and family_name.",
+  "solution": "SELECT first_name AS given_name, last_name AS family_name FROM customers;",
+  "explanation": "AS only affects how a column is labeled in the result set the client receives - the underlying table and its real column names are completely untouched.",
+  "concepts": [
+    "Aliases",
+    "AS"
+  ],
+  "skills": [
+    "sql_basics"
+  ],
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['Ana', 'Silva'], ['Bo', 'Chen'], ['Cid', 'Rocha'], ['Dara', 'Ola'], ['Eero', 'Salo'], ['Fatima', 'Haidari'], ['Gustav', 'Berg'], ['Hana', 'Kobayashi'], ['Ivo', 'Novak'], ['Julia', 'Kowalski']]",
+      "label": "main check",
+      "ordered": false
+    }
+  ]
+}

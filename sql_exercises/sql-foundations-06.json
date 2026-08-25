@@ -1,0 +1,32 @@
+{
+  "module": "foundations",
+  "source": "sqlbolt",
+  "id": "sql-foundations-06",
+  "difficulty": 2,
+  "title": "Skip rows with OFFSET",
+  "description": "Write a query that returns the `name` and `price` of products 4 through 6 when sorted by price descending (skip the top 3, then take the next 3).",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: OFFSET",
+    "OFFSET n skips the first n rows of the sorted result before LIMIT starts counting - the two combine for pagination: OFFSET 3 LIMIT 3 means 'skip 3, then take 3'.",
+    "Sort products by price descending, OFFSET 3, then LIMIT 3."
+  ],
+  "expected_behavior": "Returns the 4th, 5th, and 6th most expensive products.",
+  "solution": "SELECT name, price FROM products ORDER BY price DESC OFFSET 3 LIMIT 3;",
+  "explanation": "OFFSET and LIMIT both act on the already-sorted result - OFFSET decides where to start counting, LIMIT decides how many rows to take from that point, which together is exactly how page 2 of a paginated list is built.",
+  "concepts": [
+    "OFFSET",
+    "LIMIT"
+  ],
+  "skills": [
+    "sql_basics"
+  ],
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['Desk Lamp', '27.75'], ['Wireless Mouse', '19.99'], ['Fountain Pen', '15.00']]",
+      "label": "main check",
+      "ordered": true
+    }
+  ]
+}

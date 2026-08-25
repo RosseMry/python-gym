@@ -1,0 +1,32 @@
+{
+  "module": "joins",
+  "source": "sqlbolt",
+  "id": "sql-joins-05",
+  "difficulty": 3,
+  "title": "CROSS JOIN",
+  "description": "A CROSS JOIN pairs every row of one table with every row of another - no ON condition, no matching required, just every possible combination. Write a query that returns every possible pairing of a department's `name` with a distinct product `category` (useful for a budget-planning report template that needs one row per department/category combination, even before any real spending data exists).",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: CROSS JOIN",
+    "CROSS JOIN has no ON clause because there's nothing to match - if the left side has 5 rows and the right side has 3, the result is all 15 combinations, every left row paired with every right row.",
+    "CROSS JOIN departments with a subquery that selects DISTINCT category FROM products, aliasing that subquery as a table so you can name its column."
+  ],
+  "expected_behavior": "Returns one row for every (department, category) combination - department count times distinct category count.",
+  "solution": "SELECT departments.name, categories.category FROM departments CROSS JOIN (SELECT DISTINCT category FROM products) AS categories;",
+  "explanation": "CROSS JOIN is rare in everyday querying (most joins need an ON condition, or you'd get a combinatorial explosion) but it's exactly right when you deliberately want every combination - like generating a full grid template before any real data fills it in.",
+  "concepts": [
+    "CROSS JOIN"
+  ],
+  "skills": [
+    "sql_joins"
+  ],
+  "postgres_note": "Writing two tables separated by a comma in FROM (FROM a, b) is old-style implicit CROSS JOIN syntax - Postgres still accepts it, but explicit CROSS JOIN reads much more clearly.",
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['Engineering', 'Electronics'], ['Engineering', 'Home'], ['Engineering', 'Stationery'], ['Facilities', 'Electronics'], ['Facilities', 'Home'], ['Facilities', 'Stationery'], ['Marketing', 'Electronics'], ['Marketing', 'Home'], ['Marketing', 'Stationery'], ['Sales', 'Electronics'], ['Sales', 'Home'], ['Sales', 'Stationery'], ['Support', 'Electronics'], ['Support', 'Home'], ['Support', 'Stationery']]",
+      "label": "main check",
+      "ordered": false
+    }
+  ]
+}

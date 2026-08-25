@@ -1,0 +1,34 @@
+{
+  "module": "window",
+  "source": "sqlbolt",
+  "id": "sql-window-02",
+  "difficulty": 3,
+  "title": "PARTITION BY",
+  "description": "PARTITION BY splits the rows into groups for the window function, restarting the calculation within each group - unlike ORDER BY alone, which treats every row as one big sequence. Write a query that returns each employee's `first_name`, `department_id`, `salary`, and their salary rank WITHIN their own department (1 = highest paid in that department), using ROW_NUMBER.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: PARTITION BY",
+    "ROW_NUMBER() OVER (ORDER BY salary DESC) alone would rank every employee against the whole company - adding PARTITION BY department_id resets the numbering back to 1 at the start of each department.",
+    "Select first_name, department_id, salary, and a ROW_NUMBER() partitioned by department_id and ordered by salary descending, from employees whose department_id isn't NULL."
+  ],
+  "expected_behavior": "Returns one row per employee that has a department, with a salary rank that restarts at 1 in each department.",
+  "solution": "SELECT first_name, department_id, salary, ROW_NUMBER() OVER (PARTITION BY department_id ORDER BY salary DESC) AS dept_rank FROM employees WHERE department_id IS NOT NULL;",
+  "explanation": "PARTITION BY is to window functions what GROUP BY is to aggregates - except the rows stay ungrouped, so you still get one output row per employee, each carrying its own rank.",
+  "concepts": [
+    "PARTITION BY",
+    "ROW_NUMBER",
+    "window function"
+  ],
+  "skills": [
+    "sql_window_functions"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['Ada', '1', '9500.00', '1'], ['Alan', '1', '8800.00', '2'], ['Barbara', '3', '5400.00', '2'], ['Grace', '1', '8600.00', '3'], ['Katherine', '2', '6100.00', '2'], ['Margaret', '2', '7200.00', '1'], ['Radia', '3', '5900.00', '1']]",
+      "label": "main check",
+      "ordered": false
+    }
+  ]
+}

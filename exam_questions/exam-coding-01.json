@@ -1,0 +1,17 @@
+{
+  "id": "exam-coding-01",
+  "kind": "coding",
+  "category": "algorithms",
+  "prompt": "Write a function two_sum(nums, target) that returns a list [i, j] of the indices of the two numbers in nums that add up to target (there is exactly one valid answer, and you may not use the same element twice). For example, two_sum([2, 7, 11, 15], 9) should return [0, 1].",
+  "difficulty": 3,
+  "points": 3,
+  "starter_code": "def two_sum(nums, target):\n    pass\n",
+  "solution": "def two_sum(nums, target):\n    seen = {}\n    for i, n in enumerate(nums):\n        complement = target - n\n        if complement in seen:\n            return [seen[complement], i]\n        seen[n] = i\n    return []\n",
+  "explanation": "A hash map lets you check 'have I already seen the number that would complete this pair' in O(1), turning what would be an O(n^2) nested-loop search into a single O(n) pass.",
+  "hidden_tests": [
+    {"call": "two_sum([2, 7, 11, 15], 9)", "expected": "[0, 1]"},
+    {"call": "two_sum([3, 2, 4], 6)", "expected": "[1, 2]"},
+    {"call": "two_sum([3, 3], 6)", "expected": "[0, 1]"}
+  ],
+  "source": "adapted"
+}

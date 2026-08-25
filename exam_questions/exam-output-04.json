@@ -1,0 +1,11 @@
+{
+  "id": "exam-output-04",
+  "kind": "output_prediction",
+  "category": "python_fundamentals",
+  "prompt": "name = 'Ada'\nscore = 3.14159\nprint(f'{name}: {score:.2f}')\n\nWhat does this print, exactly?",
+  "difficulty": 2,
+  "points": 1,
+  "expected_output": "Ada: 3.14",
+  "explanation": "The :.2f format spec inside an f-string rounds a float to exactly 2 decimal places - 3.14159 rounds to 3.14, and the rest of the f-string (name and the literal text) is inserted as-is.",
+  "source": "adapted"
+}

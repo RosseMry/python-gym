@@ -1,0 +1,16 @@
+{
+  "id": "sql-note-relational",
+  "module": "relational",
+  "title": "Relational Concepts: Primary and Foreign Keys",
+  "display_order": 2,
+  "what_is_it": "A relational database splits data into separate tables and links them with keys, instead of repeating everything in one giant table. A PRIMARY KEY uniquely identifies each row in a table; a FOREIGN KEY is a column in one table that stores another table's primary key value, creating a link between the two.",
+  "why_it_matters": "This is the whole reason it's called a 'relational' database - the relationships between tables, enforced by the database itself, are what let you ask questions that span multiple tables (via JOIN, covered next) without ever storing the same fact twice or letting it drift out of sync.",
+  "syntax": "CREATE TABLE departments (\n    id SERIAL PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\nCREATE TABLE employees (\n    id SERIAL PRIMARY KEY,\n    department_id INTEGER REFERENCES departments (id)\n);",
+  "example": "SELECT first_name, department_id FROM employees WHERE department_id IS NOT NULL;",
+  "output": " first_name | department_id\n------------+----------------\n Ada        | 1\n Alan       | 1\n Margaret   | 2",
+  "common_mistakes": "Assuming a foreign key column holds the OTHER table's data (like a department's name) instead of just its id - you always need a JOIN (or a subquery) to actually see the related row's other columns. Also, trying to DELETE a row that's still referenced by a foreign key elsewhere fails with a constraint violation - that's the database protecting you from leaving orphaned references behind.",
+  "mini_exercise": "Look at employees.manager_id - it references employees.id, the SAME table it lives in. What real-world relationship do you think that models?",
+  "postgres_note": "Postgres enforces foreign keys by default and refuses to break them - deleting a referenced row raises a foreign_key_violation error unless the constraint was declared with ON DELETE CASCADE or similar.",
+  "source": "freecodecamp",
+  "related_exercise_ids": ["sql-relational-01", "sql-relational-02", "sql-relational-03", "sql-relational-04"]
+}

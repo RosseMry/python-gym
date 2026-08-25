@@ -1,4 +1,6 @@
 import type {
+  ExamResult,
+  ExamSessionResponse,
   ExerciseDetail,
   ExerciseSummary,
   FunctionReferenceDetail,
@@ -8,6 +10,13 @@ import type {
   LearningNoteSummary,
   ProgressItem,
   SolutionResponse,
+  SqlExerciseDetail,
+  SqlExerciseSummary,
+  SqlHintResponse,
+  SqlLearningNoteDetail,
+  SqlLearningNoteSummary,
+  SqlSolutionResponse,
+  SqlSubmissionResult,
   SubmissionResult,
 } from "../types/exercise";
 
@@ -76,4 +85,42 @@ export const api = {
   listFunctions: () => request<FunctionReferenceSummary[]>("/functions"),
 
   getFunction: (id: string) => request<FunctionReferenceDetail>(`/functions/${id}`),
+
+  // --- SQL (Sprint 4) ---
+
+  listSqlExercises: (module?: string) =>
+    request<SqlExerciseSummary[]>(`/sql/exercises${module ? `?module=${module}` : ""}`),
+
+  getSqlExercise: (id: string) => request<SqlExerciseDetail>(`/sql/exercises/${id}`),
+
+  requestSqlHint: (id: string) =>
+    request<SqlHintResponse>(`/sql/exercises/${id}/hint`, { method: "POST" }),
+
+  revealSqlSolution: (id: string) =>
+    request<SqlSolutionResponse>(`/sql/exercises/${id}/solution`, { method: "POST" }),
+
+  submitSql: (id: string, query: string) =>
+    request<SqlSubmissionResult>(`/sql/exercises/${id}/submit`, {
+      method: "POST",
+      body: JSON.stringify({ query }),
+    }),
+
+  listSqlProgress: () => request<ProgressItem[]>("/sql/progress"),
+
+  listSqlNotes: () => request<SqlLearningNoteSummary[]>("/sql/notes"),
+
+  getSqlNote: (id: string) => request<SqlLearningNoteDetail>(`/sql/notes/${id}`),
+
+  // --- Timed Exam (Sprint 4) ---
+
+  startExam: () => request<ExamSessionResponse>("/exam/start", { method: "POST" }),
+
+  getExamSession: (sessionId: string) =>
+    request<ExamSessionResponse>(`/exam/${sessionId}`),
+
+  submitExam: (sessionId: string, answers: Record<string, string>) =>
+    request<ExamResult>(`/exam/${sessionId}/submit`, {
+      method: "POST",
+      body: JSON.stringify({ answers }),
+    }),
 };

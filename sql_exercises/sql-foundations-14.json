@@ -1,0 +1,34 @@
+{
+  "module": "foundations",
+  "source": "sqlbolt",
+  "id": "sql-foundations-14",
+  "difficulty": 3,
+  "title": "Aggregate and group with GROUP BY / HAVING",
+  "description": "Write a query that returns each `department_id` and the average salary in that department (as `avg_salary`, rounded to 2 decimals), but only for departments with more than 1 employee.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: GROUP BY, combined with an aggregate function and HAVING",
+    "GROUP BY column collapses rows sharing the same value into one group per value, which aggregate functions like AVG() and COUNT() then summarize - HAVING filters on those aggregated results, the way WHERE filters individual rows.",
+    "GROUP BY department_id, select AVG(salary) and COUNT(*), and add HAVING COUNT(*) > 1 to keep only departments with more than one employee."
+  ],
+  "expected_behavior": "Returns department_id and avg_salary for departments with 2+ employees.",
+  "solution": "SELECT department_id, ROUND(AVG(salary), 2) AS avg_salary\nFROM employees\nGROUP BY department_id\nHAVING COUNT(*) > 1;",
+  "explanation": "WHERE can't filter on an aggregate like COUNT(*) because it runs before grouping happens - HAVING exists specifically to filter groups after GROUP BY and the aggregate functions have already run.",
+  "concepts": [
+    "GROUP BY",
+    "HAVING",
+    "aggregate functions"
+  ],
+  "skills": [
+    "sql_basics",
+    "data_analysis"
+  ],
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['1', '8966.67'], ['2', '6650.00'], ['3', '5650.00']]",
+      "label": "main check",
+      "ordered": false
+    }
+  ]
+}

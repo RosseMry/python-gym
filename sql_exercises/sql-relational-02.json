@@ -1,0 +1,32 @@
+{
+  "module": "relational",
+  "source": "sqlbolt",
+  "id": "sql-relational-02",
+  "difficulty": 1,
+  "title": "Foreign keys",
+  "description": "A foreign key is a column that stores another table's primary key value, linking the two tables together. Write a query that returns the `first_name` and `department_id` of every employee.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: FOREIGN KEY",
+    "employees.department_id doesn't hold a department's name or any other data of its own - it just holds a departments.id value, and that's enough to look up the full department row whenever you need it.",
+    "Select first_name and department_id from employees - no JOIN needed yet, department_id is a plain column on the employees table."
+  ],
+  "expected_behavior": "Returns first_name and department_id for every employee, in any order.",
+  "solution": "SELECT first_name, department_id FROM employees;",
+  "explanation": "employees.department_id is declared REFERENCES departments (id): Postgres refuses to store a department_id that doesn't exist in departments.id, and refuses to delete a department that any employee still points to - the foreign key constraint keeps the two tables consistent with each other.",
+  "concepts": [
+    "FOREIGN KEY"
+  ],
+  "skills": [
+    "sql_basics"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['Ada', '1'], ['Alan', '1'], ['Barbara', '3'], ['Grace', '1'], ['Hedy', ''], ['Katherine', '2'], ['Margaret', '2'], ['Radia', '3']]",
+      "label": "main check",
+      "ordered": false
+    }
+  ]
+}

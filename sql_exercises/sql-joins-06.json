@@ -1,0 +1,34 @@
+{
+  "module": "joins",
+  "source": "sqlbolt",
+  "id": "sql-joins-06",
+  "difficulty": 3,
+  "title": "Self joins",
+  "description": "A self join joins a table to itself, using two different aliases so the query can refer to \"this row\" and \"a related row\" separately - the standard way to query a hierarchy like `employees.manager_id`. Write a query that returns each employee's `first_name` alongside their manager's `first_name`, for employees who have a manager.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: self join",
+    "employees needs two aliases here - one standing for \"the employee row\" and one for \"that employee's manager, who is ALSO just a row in employees\" - join them where the first alias's manager_id equals the second alias's id.",
+    "FROM employees AS e JOIN employees AS m ON e.manager_id = m.id, then select e.first_name and m.first_name."
+  ],
+  "expected_behavior": "Returns one row per employee that has a manager, pairing their name with their manager's name.",
+  "solution": "SELECT e.first_name AS employee_name, m.first_name AS manager_name FROM employees AS e JOIN employees AS m ON e.manager_id = m.id;",
+  "explanation": "There's nothing structurally special about a self join - it's just a regular JOIN where both sides happen to be the same table, which is exactly why the aliases are mandatory: without them, e.g. \"first_name\" would be ambiguous between the two copies.",
+  "concepts": [
+    "JOIN",
+    "self join",
+    "table aliases"
+  ],
+  "skills": [
+    "sql_joins"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['Alan', 'Ada'], ['Barbara', 'Radia'], ['Grace', 'Ada'], ['Katherine', 'Margaret']]",
+      "label": "main check",
+      "ordered": false
+    }
+  ]
+}

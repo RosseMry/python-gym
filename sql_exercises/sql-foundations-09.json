@@ -1,0 +1,33 @@
+{
+  "module": "foundations",
+  "source": "sqlbolt",
+  "id": "sql-foundations-09",
+  "difficulty": 2,
+  "title": "Compute a value with an expression",
+  "description": "Write a query that returns each product's `name` and its price after a 10% discount, labeled `discounted_price`, rounded to 2 decimal places.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: expressions in SELECT",
+    "A SELECT list can contain computed expressions, not just column names - price * 0.9 computes a new value per row, the same way a column reference does.",
+    "Select name and ROUND(price * 0.9, 2) AS discounted_price from products."
+  ],
+  "expected_behavior": "Returns each product's name and its price reduced by 10%, rounded to 2 decimals.",
+  "solution": "SELECT name, ROUND(price * 0.9, 2) AS discounted_price FROM products;",
+  "explanation": "SELECT doesn't require every item to be an existing column - price * 0.9 is evaluated per row exactly like a column would be, and ROUND() then formats that computed value.",
+  "concepts": [
+    "expressions",
+    "ROUND"
+  ],
+  "skills": [
+    "sql_basics"
+  ],
+  "postgres_note": "ROUND(numeric, int) works directly on NUMERIC columns like price here; rounding a double precision value needs an explicit cast in PostgreSQL (ROUND(value::numeric, 2)).",
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['Desk Lamp', '24.98'], ['Fountain Pen', '13.50'], ['Mechanical Keyboard', '71.99'], ['Notebook A5', '3.83'], ['Standing Mat', '40.50'], ['USB-C Hub', '31.05'], ['Water Bottle', '11.61'], ['Wireless Mouse', '17.99']]",
+      "label": "main check",
+      "ordered": false
+    }
+  ]
+}

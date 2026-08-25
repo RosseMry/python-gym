@@ -1,0 +1,34 @@
+{
+  "module": "window",
+  "source": "sqlbolt",
+  "id": "sql-window-01",
+  "difficulty": 3,
+  "title": "ROW_NUMBER",
+  "description": "ROW_NUMBER() OVER (...) assigns a unique, sequential integer to each row based on an ordering, without collapsing rows the way GROUP BY would. Write a query that returns every product's `name`, `price`, and a sequential rank starting at 1 for the most expensive product.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: ROW_NUMBER, window function",
+    "ROW_NUMBER() OVER (ORDER BY price DESC) computes a running row count in price order WITHOUT grouping the other columns away - every product still gets its own row, just with a number attached.",
+    "Select name, price, and a ROW_NUMBER() window function ordered by price descending, from products."
+  ],
+  "expected_behavior": "Returns name, price, and a 1-based rank per product, most expensive first.",
+  "solution": "SELECT name, price, ROW_NUMBER() OVER (ORDER BY price DESC) AS price_rank FROM products;",
+  "explanation": "A window function runs \"over\" a set of rows related to the current one (here, ALL rows, ordered by price) without merging them into fewer rows - that's the key difference from GROUP BY, which does merge rows.",
+  "concepts": [
+    "ROW_NUMBER",
+    "window function",
+    "OVER"
+  ],
+  "skills": [
+    "sql_window_functions"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['Mechanical Keyboard', '79.99', '1'], ['Standing Mat', '45.00', '2'], ['USB-C Hub', '34.50', '3'], ['Desk Lamp', '27.75', '4'], ['Wireless Mouse', '19.99', '5'], ['Fountain Pen', '15.00', '6'], ['Water Bottle', '12.90', '7'], ['Notebook A5', '4.25', '8']]",
+      "label": "main check",
+      "ordered": true
+    }
+  ]
+}

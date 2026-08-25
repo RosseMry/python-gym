@@ -1,0 +1,31 @@
+{
+  "module": "views",
+  "source": "sqlbolt",
+  "id": "sql-views-03",
+  "difficulty": 2,
+  "title": "DROP VIEW",
+  "description": "DROP VIEW removes a saved view definition - it never touches the underlying tables' data, since a view was never storing a copy of it. The fixtures already include a view named `department_headcounts` - drop it.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: DROP VIEW",
+    "Same idea as DROP TABLE, just the VIEW keyword instead - DROP VIEW <name> takes just the view's name, no WHERE clause.",
+    "Use DROP VIEW followed by the exact view name, department_headcounts."
+  ],
+  "expected_behavior": "department_headcounts no longer exists as a view; employees itself is completely untouched.",
+  "solution": "DROP VIEW department_headcounts;",
+  "explanation": "Because a view is just a saved query, dropping it is instant and never risks losing data - the real table it queried is exactly as it was.",
+  "concepts": [
+    "DROP VIEW"
+  ],
+  "skills": [
+    "sql_views"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "SELECT COUNT(*) FROM information_schema.views WHERE table_schema = 'fixtures' AND table_name = 'department_headcounts'",
+      "expected": "[['0']]",
+      "label": "department_headcounts view is gone"
+    }
+  ]
+}

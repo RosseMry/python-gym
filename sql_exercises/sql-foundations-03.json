@@ -1,0 +1,31 @@
+{
+  "module": "foundations",
+  "source": "sqlbolt",
+  "id": "sql-foundations-03",
+  "difficulty": 1,
+  "title": "Remove duplicates with DISTINCT",
+  "description": "Write a query that returns every distinct `country` value from the `customers` table, with no repeats.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: DISTINCT",
+    "SELECT DISTINCT column collapses duplicate values in the result down to one copy each - it applies after the column is picked, before the rows are returned.",
+    "Select DISTINCT country from customers."
+  ],
+  "expected_behavior": "Returns each distinct country value once.",
+  "solution": "SELECT DISTINCT country FROM customers;",
+  "explanation": "DISTINCT removes duplicate rows from the final result set - with a single column selected, that means each value appears at most once.",
+  "concepts": [
+    "DISTINCT"
+  ],
+  "skills": [
+    "sql_basics"
+  ],
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['Afghanistan'], ['China'], ['Czechia'], ['Finland'], ['Japan'], ['Nigeria'], ['Poland'], ['Portugal'], ['Sweden']]",
+      "label": "main check",
+      "ordered": false
+    }
+  ]
+}

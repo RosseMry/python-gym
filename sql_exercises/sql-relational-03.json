@@ -1,0 +1,33 @@
+{
+  "module": "relational",
+  "source": "sqlbolt",
+  "id": "sql-relational-03",
+  "difficulty": 2,
+  "title": "Self-referencing foreign keys",
+  "description": "A foreign key can reference its own table, modeling a hierarchy - here, `employees.manager_id` points at another row in `employees` itself. Write a query that returns the `first_name` and `manager_id` of every employee who has a manager.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: self-referencing FOREIGN KEY",
+    "manager_id REFERENCES employees (id) - the same table it lives in - so an employee row can point at another employee row to represent \"reports to.\" A NULL manager_id means that person has no manager (they're at the top).",
+    "Select first_name and manager_id from employees, filtering to rows where manager_id IS NOT NULL."
+  ],
+  "expected_behavior": "Returns first_name and manager_id only for employees that have a manager, in any order.",
+  "solution": "SELECT first_name, manager_id FROM employees WHERE manager_id IS NOT NULL;",
+  "explanation": "Self-referencing foreign keys are how SQL represents tree/hierarchy data with a plain table - no special syntax needed, just a column that references its own table's primary key.",
+  "concepts": [
+    "FOREIGN KEY",
+    "IS NOT NULL"
+  ],
+  "skills": [
+    "sql_basics"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['Alan', '1'], ['Barbara', '6'], ['Grace', '1'], ['Katherine', '4']]",
+      "label": "main check",
+      "ordered": false
+    }
+  ]
+}

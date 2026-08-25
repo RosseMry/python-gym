@@ -1,0 +1,38 @@
+{
+  "module": "transactions",
+  "source": "sqlbolt",
+  "id": "sql-transactions-02",
+  "difficulty": 3,
+  "title": "ROLLBACK TO SAVEPOINT",
+  "description": "ROLLBACK TO SAVEPOINT undoes everything done since that savepoint was created, WITHOUT ending the transaction - unlike a plain ROLLBACK, which would undo everything. Set a savepoint named `before_mistake`, then (by mistake) delete EVERY row from `appointments`. Roll back to `before_mistake` to undo that. Then correctly delete only the appointments with status `'cancelled'`.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: ROLLBACK TO SAVEPOINT",
+    "Four statements in order: the SAVEPOINT, the mistaken unconditional DELETE, ROLLBACK TO SAVEPOINT (undoing only that mistaken DELETE), then a second, correctly-filtered DELETE.",
+    "Create the savepoint, delete every row, roll back to that exact savepoint name, then delete again with a WHERE status = 'cancelled' filter this time."
+  ],
+  "expected_behavior": "appointments ends up with every row EXCEPT the cancelled one or ones - the mistaken full delete never actually took effect, but the correct, filtered delete did.",
+  "solution": "SAVEPOINT before_mistake; DELETE FROM appointments; ROLLBACK TO SAVEPOINT before_mistake; DELETE FROM appointments WHERE status = 'cancelled';",
+  "explanation": "This is exactly the real-world use case for ROLLBACK TO SAVEPOINT: you tried something, realized it was wrong, undid just that part, and kept working in the same transaction instead of starting over.",
+  "concepts": [
+    "SAVEPOINT",
+    "ROLLBACK TO SAVEPOINT",
+    "transactions"
+  ],
+  "skills": [
+    "sql_transactions"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "SELECT COUNT(*) FROM appointments",
+      "expected": "[['6']]",
+      "label": "only the cancelled appointment is gone"
+    },
+    {
+      "check_query": "SELECT COUNT(*) FROM appointments WHERE status = 'cancelled'",
+      "expected": "[['0']]",
+      "label": "no cancelled appointments remain"
+    }
+  ]
+}

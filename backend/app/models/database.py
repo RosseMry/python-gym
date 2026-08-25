@@ -103,6 +103,106 @@ CREATE TABLE IF NOT EXISTS learning_notes (
     mini_exercise_fr TEXT
 );
 
+CREATE TABLE IF NOT EXISTS sql_exercises (
+    id TEXT PRIMARY KEY,
+    module TEXT NOT NULL,
+    difficulty INTEGER NOT NULL,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    starter_query TEXT NOT NULL,
+    hints TEXT NOT NULL,           -- JSON list[str]
+    expected_behavior TEXT NOT NULL,
+    hidden_tests TEXT NOT NULL,    -- JSON list[{check_query, expected, ...}]
+    solution TEXT NOT NULL,
+    explanation TEXT NOT NULL,
+    concepts TEXT NOT NULL DEFAULT '[]',
+    skills TEXT NOT NULL DEFAULT '[]',
+    source TEXT NOT NULL DEFAULT 'python_gym_sql',
+    postgres_note TEXT,
+    prerequisites TEXT NOT NULL DEFAULT '[]',
+    exercise_status TEXT NOT NULL DEFAULT 'active',
+    title_fr TEXT,
+    description_fr TEXT,
+    explanation_fr TEXT,
+    hints_fr TEXT
+);
+
+CREATE TABLE IF NOT EXISTS sql_progress (
+    exercise_id TEXT PRIMARY KEY,
+    status TEXT NOT NULL DEFAULT 'NEW',
+    attempts INTEGER NOT NULL DEFAULT 0,
+    hints_used INTEGER NOT NULL DEFAULT 0,
+    solution_revealed INTEGER NOT NULL DEFAULT 0,
+    last_submitted_at TEXT,
+    FOREIGN KEY (exercise_id) REFERENCES sql_exercises (id)
+);
+
+CREATE TABLE IF NOT EXISTS sql_submissions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    exercise_id TEXT NOT NULL,
+    query TEXT NOT NULL,
+    passed INTEGER NOT NULL,
+    tests_total INTEGER NOT NULL,
+    tests_passed INTEGER NOT NULL,
+    status TEXT NOT NULL DEFAULT 'failed',
+    submitted_at TEXT NOT NULL DEFAULT (datetime('now')),
+    FOREIGN KEY (exercise_id) REFERENCES sql_exercises (id)
+);
+
+CREATE TABLE IF NOT EXISTS sql_learning_notes (
+    id TEXT PRIMARY KEY,
+    module TEXT NOT NULL,
+    title TEXT NOT NULL,
+    display_order INTEGER NOT NULL DEFAULT 0,
+    what_is_it TEXT NOT NULL,
+    why_it_matters TEXT NOT NULL,
+    syntax TEXT NOT NULL,
+    example TEXT NOT NULL,
+    output TEXT NOT NULL,
+    common_mistakes TEXT NOT NULL,
+    mini_exercise TEXT NOT NULL,
+    postgres_note TEXT,
+    source TEXT NOT NULL DEFAULT 'freecodecamp',
+    related_exercise_ids TEXT NOT NULL DEFAULT '[]',
+    title_fr TEXT,
+    what_is_it_fr TEXT,
+    why_it_matters_fr TEXT,
+    syntax_fr TEXT,
+    common_mistakes_fr TEXT,
+    mini_exercise_fr TEXT
+);
+
+CREATE TABLE IF NOT EXISTS exam_questions (
+    id TEXT PRIMARY KEY,
+    kind TEXT NOT NULL,
+    category TEXT NOT NULL,
+    prompt TEXT NOT NULL,
+    difficulty INTEGER NOT NULL DEFAULT 1,
+    points INTEGER NOT NULL DEFAULT 1,
+    code_snippet TEXT,
+    starter_code TEXT,
+    choices TEXT,                  -- JSON list[str]
+    correct_choice INTEGER,
+    expected_output TEXT,
+    hidden_tests TEXT,             -- JSON list[{call, expected, args, ...}]
+    solution TEXT,
+    explanation TEXT NOT NULL DEFAULT '',
+    source TEXT NOT NULL DEFAULT 'adapted'
+);
+
+CREATE TABLE IF NOT EXISTS exam_sessions (
+    id TEXT PRIMARY KEY,
+    question_ids TEXT NOT NULL,    -- JSON list[str]
+    started_at TEXT NOT NULL,
+    duration_seconds INTEGER NOT NULL,
+    deadline_at TEXT NOT NULL,
+    status TEXT NOT NULL DEFAULT 'in_progress',
+    answers TEXT NOT NULL DEFAULT '{}',  -- JSON dict[str, str]
+    submitted_at TEXT,
+    score REAL,
+    max_score REAL
+);
+
 CREATE TABLE IF NOT EXISTS function_references (
     id TEXT PRIMARY KEY,
     name TEXT NOT NULL,

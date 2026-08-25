@@ -1,0 +1,31 @@
+{
+  "module": "indexes",
+  "source": "sqlbolt",
+  "id": "sql-indexes-02",
+  "difficulty": 3,
+  "title": "CREATE UNIQUE INDEX",
+  "description": "A UNIQUE INDEX both speeds up lookups AND enforces that no two rows can share the same value - it's actually what a UNIQUE constraint uses behind the scenes. Create a unique index named `idx_products_name_unique` on `products.name`.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: CREATE UNIQUE INDEX",
+    "Same shape as a normal CREATE INDEX, with UNIQUE inserted right before INDEX - Postgres then rejects any INSERT or UPDATE that would create a duplicate value in that column, exactly like a UNIQUE constraint would.",
+    "Name the index idx_products_name_unique, make it UNIQUE, on the products table, over the name column."
+  ],
+  "expected_behavior": "Creates a unique index on products.name - fast lookups by name, and duplicates are now rejected.",
+  "solution": "CREATE UNIQUE INDEX idx_products_name_unique ON products (name);",
+  "explanation": "A UNIQUE constraint (like the one added with ADD CONSTRAINT ... UNIQUE earlier) and a UNIQUE INDEX end up doing the same enforcement - in fact, adding a UNIQUE constraint automatically creates a unique index for it under the hood.",
+  "concepts": [
+    "CREATE UNIQUE INDEX"
+  ],
+  "skills": [
+    "sql_indexes"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "SELECT COUNT(*) FROM pg_indexes WHERE schemaname = 'fixtures' AND tablename = 'products' AND indexname = 'idx_products_name_unique'",
+      "expected": "[['1']]",
+      "label": "idx_products_name_unique exists"
+    }
+  ]
+}

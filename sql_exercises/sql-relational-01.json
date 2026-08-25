@@ -1,0 +1,32 @@
+{
+  "module": "relational",
+  "source": "sqlbolt",
+  "id": "sql-relational-01",
+  "difficulty": 1,
+  "title": "Primary keys",
+  "description": "Every table has a primary key: a column (or set of columns) that uniquely identifies each row and can never repeat or be NULL. Write a query that returns the `id` and `name` of every department, ordered by `id`.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: PRIMARY KEY",
+    "A primary key is a promise the database enforces for you: no two rows in the table can ever share the same value in that column, and it can never be NULL - so it's always safe to use to point at one specific row from anywhere else in the schema.",
+    "Select id and name from departments, and order the result by id."
+  ],
+  "expected_behavior": "Returns id and name for every department, ordered by id.",
+  "solution": "SELECT id, name FROM departments ORDER BY id;",
+  "explanation": "departments.id is declared SERIAL PRIMARY KEY: Postgres auto-generates a unique integer for it and rejects any INSERT or UPDATE that would duplicate an existing value - that guarantee is what makes it safe for other tables (like employees.department_id) to reference it.",
+  "concepts": [
+    "PRIMARY KEY"
+  ],
+  "skills": [
+    "sql_basics"
+  ],
+  "postgres_note": "SERIAL is Postgres shorthand for \"INTEGER + an auto-incrementing sequence\" - the newer, standard-SQL way to spell the same thing is GENERATED ALWAYS AS IDENTITY.",
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['1', 'Engineering'], ['2', 'Sales'], ['3', 'Support'], ['4', 'Marketing'], ['5', 'Facilities']]",
+      "label": "main check",
+      "ordered": true
+    }
+  ]
+}

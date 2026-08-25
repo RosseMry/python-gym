@@ -1,0 +1,12 @@
+{
+  "id": "exam-debug-02",
+  "kind": "debugging",
+  "category": "python_fundamentals",
+  "prompt": "def average(total, count):\n    return total / count\n\nprint(average(7, 2))\n\nThis was meant to compute a whole-number average using integer division. What does it ACTUALLY print, exactly, as written?",
+  "difficulty": 1,
+  "points": 1,
+  "code_snippet": "def average(total, count):\n    return total / count\n\nprint(average(7, 2))",
+  "expected_output": "3.5",
+  "explanation": "In Python 3, / is always TRUE (float) division, even for two integers - // is the integer (floor) division operator. total // count would give 3, but as written with /, the result is the float 3.5.",
+  "source": "adapted"
+}

@@ -1,0 +1,32 @@
+{
+  "module": "intermediate",
+  "source": "sqlbolt",
+  "id": "sql-intermediate-07",
+  "difficulty": 3,
+  "title": "EXCEPT",
+  "description": "EXCEPT returns the rows in the first result set that do NOT appear in the second. Write a query that returns the `customer_id` of every customer who has placed at least one order but has NEVER had an appointment.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: EXCEPT",
+    "Putting EXCEPT between \"customer_id from orders\" and \"customer_id from appointments\" keeps only the ids from the FIRST query that are missing from the second - order matters here, unlike UNION or INTERSECT.",
+    "Select customer_id from orders, put EXCEPT between the two queries, then select customer_id from appointments - orders has to come first."
+  ],
+  "expected_behavior": "Returns the distinct customer_id values that appear in orders but not in appointments.",
+  "solution": "SELECT customer_id FROM orders EXCEPT SELECT customer_id FROM appointments;",
+  "explanation": "EXCEPT is set subtraction - \"everything in A that isn't also in B.\" Swapping the two sides gives a completely different (and usually different-sized) result, so the order you write them in matters.",
+  "concepts": [
+    "EXCEPT"
+  ],
+  "skills": [
+    "sql_intermediate"
+  ],
+  "postgres_note": "Some other databases (MySQL historically, for one) spell this MINUS instead of EXCEPT - Postgres follows the SQL standard name, EXCEPT.",
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['7'], ['8']]",
+      "label": "main check",
+      "ordered": false
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "id": "exam-mcq-01",
+  "kind": "mcq",
+  "category": "python_fundamentals",
+  "prompt": "def f(x, lst=[]):\n    lst.append(x)\n    return lst\n\nprint(f(1))\nprint(f(2))\n\nWhat does this print?",
+  "difficulty": 3,
+  "points": 1,
+  "choices": [
+    "[1] then [2]",
+    "[1] then [1, 2]",
+    "[1, 2] then [1, 2]",
+    "TypeError: mutable default argument"
+  ],
+  "correct_choice": 1,
+  "explanation": "Default argument values are evaluated ONCE, when the function is defined - not on every call. Since lst=[] creates one list object at definition time, every call that omits lst shares and mutates that SAME list, so it accumulates across calls instead of resetting.",
+  "source": "adapted"
+}

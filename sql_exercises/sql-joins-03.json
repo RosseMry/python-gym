@@ -1,0 +1,32 @@
+{
+  "module": "joins",
+  "source": "sqlbolt",
+  "id": "sql-joins-03",
+  "difficulty": 2,
+  "title": "RIGHT JOIN",
+  "description": "A RIGHT JOIN is a LEFT JOIN with the tables flipped: every row from the right table is kept, even without a match on the left. Write a query that returns every department's `name` alongside any employee's `first_name` in it, including departments with no employees (the employee name should be NULL).",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: RIGHT JOIN",
+    "employees RIGHT JOIN departments keeps every departments row, even a department with zero employees - that row just gets a NULL where the employee's name would be.",
+    "Select departments.name and employees.first_name, using employees RIGHT JOIN departments ON employees.department_id = departments.id (departments on the right)."
+  ],
+  "expected_behavior": "Returns one row per employee-department pairing, plus a row for any department with zero employees (employee name NULL).",
+  "solution": "SELECT departments.name, employees.first_name FROM employees RIGHT JOIN departments ON employees.department_id = departments.id;",
+  "explanation": "RIGHT JOIN is used far less often than LEFT JOIN in practice - most people just swap the table order and write a LEFT JOIN instead - but it's the same idea, mirrored: X RIGHT JOIN Y means \"keep every row of Y.\"",
+  "concepts": [
+    "RIGHT JOIN"
+  ],
+  "skills": [
+    "sql_joins"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['Engineering', 'Ada'], ['Engineering', 'Alan'], ['Engineering', 'Grace'], ['Facilities', ''], ['Marketing', ''], ['Sales', 'Katherine'], ['Sales', 'Margaret'], ['Support', 'Barbara'], ['Support', 'Radia']]",
+      "label": "main check",
+      "ordered": false
+    }
+  ]
+}

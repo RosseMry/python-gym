@@ -240,3 +240,203 @@ class ProgressEntry:
     hints_used: int
     solution_revealed: bool
     last_submitted_at: str | None = None
+
+
+# ---------------------------------------------------------------------
+# Sprint 4: SQL (spec sections 3-10)
+# ---------------------------------------------------------------------
+
+
+@dataclass(frozen=True)
+class SqlHiddenTest:
+    """One hidden test for a SQL exercise.
+
+    Two modes, chosen by whether ``check_query`` is set:
+
+    - Empty ``check_query`` (the common case, for read-only/SELECT
+      exercises): the student's OWN submitted query's result rows are
+      compared against ``expected``. Rows are compared as an unordered
+      multiset unless ``ordered=True`` (set for exercises that are
+      specifically about row order, e.g. ORDER BY/LIMIT/OFFSET), since
+      a student is not expected to add an ORDER BY they weren't asked
+      for and SQL row order is otherwise unspecified.
+    - Non-empty ``check_query`` (for mutating exercises - INSERT/
+      UPDATE/DELETE): after the student's SQL executes, this separate,
+      deterministic query re-reads the resulting table state and its
+      rows are compared against ``expected`` - the only way to verify a
+      mutation, since it returns no comparable result set of its own.
+
+    ``expected`` is a ``repr()`` of a list of row tuples (the same
+    "compare a repr string" convention as Python's HiddenTest).
+    ``expect_error=True`` flips the check: the student's own submission
+    is expected to raise (e.g. a CHECK/NOT NULL constraint correctly
+    rejecting bad data).
+    """
+
+    check_query: str = ""
+    expected: str = ""
+    expect_error: bool = False
+    label: str = ""
+    ordered: bool = False
+
+
+@dataclass(frozen=True)
+class SqlExercise:
+    """A single SQL practice exercise (spec section 4).
+
+    Mirrors Exercise's shape (starter/hints/hidden_tests/solution/
+    explanation) but for SQL: ``starter_query`` replaces starter_code,
+    and grading runs against a real PostgreSQL fixture database instead
+    of a Python subprocess (see sql_execution_service).
+    """
+
+    id: str
+    module: str
+    difficulty: int  # Level 1-5, spec section 10
+    title: str
+    description: str
+    starter_query: str
+    hints: list[str]
+    expected_behavior: str
+    hidden_tests: list[SqlHiddenTest]
+    solution: str
+    explanation: str
+    concepts: list[str] = field(default_factory=list)
+    skills: list[str] = field(default_factory=list)
+    source: str = "python_gym_sql"
+    postgres_note: str | None = None
+    prerequisites: list[str] = field(default_factory=list)
+    exercise_status: str = "active"
+    title_fr: str | None = None
+    description_fr: str | None = None
+    explanation_fr: str | None = None
+    hints_fr: list[str] | None = None
+
+
+@dataclass(frozen=True)
+class SqlSubmissionResult:
+    """Outcome of running a student's SQL against an exercise's tests."""
+
+    status: str  # "passed", "failed", "error"
+    passed: bool
+    tests_total: int
+    tests_passed: int
+    tests: list[TestOutcome]
+    result_columns: list[str]
+    result_rows: list[list[str]]
+    error: str | None
+    execution_time: float
+
+
+@dataclass(frozen=True)
+class SqlLearningNote:
+    """A theory page for one SQL topic (spec section 3).
+
+    Structured after freeCodeCamp's relational-database course (used as
+    the primary source for explanations/terminology/progression, not
+    copied verbatim - see each note's ``source``), with a
+    ``postgres_note`` field the equivalent Python LearningNote doesn't
+    need, since SQL syntax genuinely varies by database engine and this
+    project teaches PostgreSQL specifically (spec section 5).
+    """
+
+    id: str
+    module: str
+    title: str
+    display_order: int
+    what_is_it: str
+    why_it_matters: str
+    syntax: str
+    example: str
+    output: str
+    common_mistakes: str
+    mini_exercise: str
+    postgres_note: str | None = None
+    source: str = "freecodecamp"
+    related_exercise_ids: list[str] = field(default_factory=list)
+    title_fr: str | None = None
+    what_is_it_fr: str | None = None
+    why_it_matters_fr: str | None = None
+    syntax_fr: str | None = None
+    common_mistakes_fr: str | None = None
+    mini_exercise_fr: str | None = None
+
+
+# ---------------------------------------------------------------------
+# Sprint 4: Timed Exam (spec section 2)
+# ---------------------------------------------------------------------
+
+
+@dataclass(frozen=True)
+class ExamQuestion:
+    """One question in the exam question bank.
+
+    ``kind`` is one of "mcq", "output_prediction", "debugging", or
+    "coding" - these are internal categories, never separate sidebar
+    entries or exercise types (spec: "Those categories must NOT become
+    navigation items"). Coding questions reuse the existing Python
+    ``HiddenTest``/``run_submission`` machinery directly rather than a
+    parallel grading path.
+    """
+
+    id: str
+    kind: str
+    category: str
+    prompt: str
+    difficulty: int
+    points: int = 1
+    code_snippet: str | None = None
+    starter_code: str | None = None
+    choices: list[str] | None = None
+    correct_choice: int | None = None
+    expected_output: str | None = None
+    hidden_tests: list[HiddenTest] | None = None
+    solution: str | None = None
+    explanation: str = ""
+    source: str = "adapted"
+
+
+@dataclass(frozen=True)
+class ExamSession:
+    """One timed attempt: a fixed question set and a server-side deadline.
+
+    The deadline is computed and stored server-side at creation time
+    (``deadline_at``) - the client only ever displays a countdown to
+    it, never supplies or extends it, so a manipulated client clock
+    can't grant extra time (spec section 2's timed behavior).
+    """
+
+    id: str
+    question_ids: list[str]
+    started_at: str
+    duration_seconds: int
+    deadline_at: str
+    status: str = "in_progress"  # "in_progress", "submitted", "timed_out"
+    answers: dict[str, str] = field(default_factory=dict)
+    submitted_at: str | None = None
+    score: float | None = None
+    max_score: float | None = None
+
+
+@dataclass(frozen=True)
+class ExamAnswerResult:
+    """Per-question grading detail shown on the results screen."""
+
+    question_id: str
+    correct: bool
+    points_earned: int
+    points_possible: int
+
+
+@dataclass(frozen=True)
+class ExamResult:
+    """The evaluation shown after submit/timeout (spec section 2)."""
+
+    session_id: str
+    status: str
+    score: float
+    max_score: float
+    questions_total: int
+    questions_correct: int
+    time_used_seconds: int
+    answers: list[ExamAnswerResult]

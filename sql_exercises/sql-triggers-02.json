@@ -1,0 +1,31 @@
+{
+  "module": "triggers",
+  "source": "sqlbolt",
+  "id": "sql-triggers-02",
+  "difficulty": 2,
+  "title": "DROP TRIGGER",
+  "description": "DROP TRIGGER removes a trigger from a table - it names the trigger AND the table it's attached to, since a trigger doesn't exist independently of a table the way a function does. The fixtures already include a trigger `trg_touch_orders` on `orders` - drop it.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: DROP TRIGGER",
+    "DROP TRIGGER <trigger_name> ON <table_name> - both parts are required, since Postgres needs to know which table's trigger you mean.",
+    "Use DROP TRIGGER followed by trg_touch_orders, then ON orders."
+  ],
+  "expected_behavior": "trg_touch_orders no longer fires on orders; the orders table and its data are completely untouched.",
+  "solution": "DROP TRIGGER trg_touch_orders ON orders;",
+  "explanation": "Unlike DROP FUNCTION or DROP PROCEDURE (which need parameter types because of overloading), DROP TRIGGER needs the table name because the SAME trigger name is allowed to exist on different tables at once - each is a separate trigger.",
+  "concepts": [
+    "DROP TRIGGER"
+  ],
+  "skills": [
+    "sql_triggers"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "SELECT COUNT(*) FROM pg_trigger WHERE tgname = 'trg_touch_orders'",
+      "expected": "[['0']]",
+      "label": "trg_touch_orders is gone"
+    }
+  ]
+}

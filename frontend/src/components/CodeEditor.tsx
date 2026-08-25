@@ -5,14 +5,16 @@ interface CodeEditorProps {
   value: string;
   onChange: (value: string) => void;
   disabled?: boolean;
+  ariaLabel?: string;
 }
 
 /**
  * A deliberately simple code editor for the MVP: a monospace textarea
  * with Tab-to-indent support. No syntax highlighting yet - the goal
- * is writing Python from scratch, not a full IDE experience.
+ * is writing code from scratch, not a full IDE experience. Reused
+ * as-is for SQL (Sprint 4) since it's language-agnostic.
  */
-export function CodeEditor({ value, onChange, disabled }: CodeEditorProps) {
+export function CodeEditor({ value, onChange, disabled, ariaLabel }: CodeEditorProps) {
   const ref = useRef<HTMLTextAreaElement>(null);
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
@@ -48,7 +50,7 @@ export function CodeEditor({ value, onChange, disabled }: CodeEditorProps) {
         spellCheck={false}
         autoCapitalize="off"
         autoCorrect="off"
-        aria-label="Python code editor"
+        aria-label={ariaLabel ?? "Python code editor"}
       />
     </div>
   );

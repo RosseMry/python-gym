@@ -1,0 +1,16 @@
+{
+  "id": "sql-note-procedures",
+  "module": "procedures",
+  "title": "Procedures: CREATE PROCEDURE and CALL",
+  "display_order": 11,
+  "what_is_it": "A PROCEDURE is written almost exactly like a FUNCTION, but it's meant to perform actions (INSERT/UPDATE/DELETE) rather than compute and return a value - it has no RETURNS clause, and you invoke it with CALL as its own statement instead of using it inside a SELECT.",
+  "why_it_matters": "Once a piece of business logic is really 'do these writes' rather than 'compute this value,' a procedure is the more honest fit than a function - CALL makes it clear at the call site that you're running an action, not evaluating an expression.",
+  "syntax": "CREATE PROCEDURE procedure_name(param1 TYPE, param2 TYPE)\n    LANGUAGE plpgsql AS $$\nBEGIN\n    UPDATE some_table SET column = value WHERE condition;\nEND;\n$$;\n\nCALL procedure_name(arg1, arg2);",
+  "example": "CREATE PROCEDURE give_department_raise(dept_id INTEGER, amount NUMERIC)\n    LANGUAGE plpgsql AS $$\nBEGIN\n    UPDATE employees SET salary = salary + amount\n        WHERE department_id = dept_id;\nEND;\n$$;\n\nCALL give_department_raise(1, 500);",
+  "output": "CREATE PROCEDURE\nCALL\n(every Engineering employee's salary is now 500 higher)",
+  "common_mistakes": "Trying to SELECT a procedure the way you would a function - that's a syntax error, since a procedure has no return value to select. Also forgetting that DROP PROCEDURE, like DROP FUNCTION, needs the full parameter-type signature, since Postgres allows the same name to exist more than once with different parameter types.",
+  "mini_exercise": "Why does CREATE PROCEDURE have no RETURNS clause at all, while CREATE FUNCTION always does?",
+  "postgres_note": "PROCEDURE and CALL were only added in Postgres 11 - before that version, everything (including pure side-effect logic) had to be written as a FUNCTION, even when it never returned a meaningful value.",
+  "source": "freecodecamp",
+  "related_exercise_ids": ["sql-procedures-01", "sql-procedures-02"]
+}

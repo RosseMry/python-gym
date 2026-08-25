@@ -1,0 +1,16 @@
+{
+  "id": "sql-note-transactions",
+  "module": "transactions",
+  "title": "Transactions: BEGIN, COMMIT, ROLLBACK, SAVEPOINT",
+  "display_order": 8,
+  "what_is_it": "A transaction groups multiple statements so they succeed or fail together - BEGIN starts one, COMMIT makes every change in it permanent, ROLLBACK discards every change since BEGIN. A SAVEPOINT marks a point inside a transaction you can partially undo to with ROLLBACK TO SAVEPOINT, without discarding everything before it.",
+  "why_it_matters": "Some real-world actions need multiple statements to ALL succeed or ALL fail - transferring money between two accounts, for instance, needs both the debit and the credit to happen together, or neither should. Transactions are the mechanism that guarantees that, and SAVEPOINT lets you recover from a mistake partway through without starting completely over.",
+  "syntax": "BEGIN;\nUPDATE accounts SET balance = balance - 100 WHERE id = 1;\nUPDATE accounts SET balance = balance + 100 WHERE id = 2;\nCOMMIT;  -- or ROLLBACK; to undo both",
+  "example": "SAVEPOINT before_mistake;\nDELETE FROM appointments;\nROLLBACK TO SAVEPOINT before_mistake;\nDELETE FROM appointments WHERE status = 'cancelled';",
+  "output": "SAVEPOINT\nDELETE 7\nROLLBACK\nDELETE 1\n(the unconditional DELETE never took effect - only the filtered one did)",
+  "common_mistakes": "Forgetting that a plain ROLLBACK undoes the WHOLE transaction, not just your last statement - if you only want to undo part of it, you need a SAVEPOINT to roll back TO. In this practice sandbox specifically, every exercise already runs inside its own transaction that's rolled back for you automatically on submit - you never write BEGIN/COMMIT/ROLLBACK yourself here (only SAVEPOINT / ROLLBACK TO SAVEPOINT), which is why sql-transactions-02 and sql-transactions-03 focus on those two.",
+  "mini_exercise": "If you set sp1, then sp2, then roll back to sp1, what happens to sp2 - does it still exist afterward?",
+  "postgres_note": "Postgres transactions are fully ACID and support the SQL-standard isolation levels (READ COMMITTED is the default) - a deep topic beyond this module's scope, but worth knowing exists once you're building anything with concurrent writers.",
+  "source": "freecodecamp",
+  "related_exercise_ids": ["sql-transactions-01", "sql-transactions-02", "sql-transactions-03"]
+}

@@ -1,0 +1,34 @@
+{
+  "module": "window",
+  "source": "sqlbolt",
+  "id": "sql-window-05",
+  "difficulty": 4,
+  "title": "LAG",
+  "description": "LAG(column) OVER (...) reaches back to a previous row (per the ordering, and per partition if given) and pulls its value into the current row - useful for comparing a row to \"the one before it.\" Write a query that returns each order's `customer_id`, `order_date`, and that SAME customer's PREVIOUS order_date (NULL if it's their first order), using LAG.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: LAG, window function",
+    "PARTITION BY customer_id keeps each customer's orders separate, and ORDER BY order_date puts them in time order within that partition - LAG(order_date) OVER (that same PARTITION BY/ORDER BY) then reads the previous row's order_date for you.",
+    "Select customer_id, order_date, and a LAG(order_date) window function partitioned by customer_id and ordered by order_date, from orders."
+  ],
+  "expected_behavior": "Returns customer_id, order_date, and previous_order_date (NULL for each customer's first order, chronologically).",
+  "solution": "SELECT customer_id, order_date, LAG(order_date) OVER (PARTITION BY customer_id ORDER BY order_date) AS previous_order_date FROM orders;",
+  "explanation": "LAG (and its mirror image, LEAD, which looks FORWARD instead of back) replace what would otherwise need a self-join against a \"previous row\" - the window function does the row-shifting for you.",
+  "concepts": [
+    "LAG",
+    "PARTITION BY",
+    "window function"
+  ],
+  "skills": [
+    "sql_window_functions"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['1', '2023-09-01', ''], ['1', '2023-09-10', '2023-09-01'], ['2', '2023-09-03', ''], ['2', '2023-09-22', '2023-09-03'], ['3', '2023-09-12', ''], ['4', '2023-09-15', ''], ['5', '2023-09-18', ''], ['6', '2023-09-20', ''], ['7', '2023-09-25', ''], ['8', '2023-09-27', '']]",
+      "label": "main check",
+      "ordered": false
+    }
+  ]
+}

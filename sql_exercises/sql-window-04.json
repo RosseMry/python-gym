@@ -1,0 +1,34 @@
+{
+  "module": "window",
+  "source": "sqlbolt",
+  "id": "sql-window-04",
+  "difficulty": 4,
+  "title": "DENSE_RANK",
+  "description": "DENSE_RANK() OVER (...) also gives tied rows the same rank, but unlike RANK it never leaves a gap afterward - the next distinct value always gets the very next integer. Using the same CTE as the previous exercise, write a query that returns each department's `department_id`, `emp_count`, and its DENSE_RANK by emp_count (most staffed first, empty departments included).\n\nWITH dept_counts AS (\n    SELECT departments.id AS department_id, COUNT(employees.id) AS emp_count\n    FROM departments\n    LEFT JOIN employees ON departments.id = employees.department_id\n    GROUP BY departments.id\n)",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: DENSE_RANK, ties",
+    "Compare this to the RANK exercise: the departments tied at 2 employees still share a rank, and so do the ones tied at 0 - but here each new distinct emp_count gets the very next integer, with no rank number ever skipped.",
+    "WITH dept_counts AS (...) SELECT department_id, emp_count, DENSE_RANK() OVER (ORDER BY emp_count DESC) AS emp_rank FROM dept_counts."
+  ],
+  "expected_behavior": "Returns department_id, emp_count, and a DENSE_RANK where tied emp_count values share a rank and no rank number is ever skipped.",
+  "solution": "WITH dept_counts AS (SELECT departments.id AS department_id, COUNT(employees.id) AS emp_count FROM departments LEFT JOIN employees ON departments.id = employees.department_id GROUP BY departments.id) SELECT department_id, emp_count, DENSE_RANK() OVER (ORDER BY emp_count DESC) AS emp_rank FROM dept_counts;",
+  "explanation": "RANK and DENSE_RANK agree completely when there are no ties - they only diverge the moment two rows share a value, which is exactly why this dataset was built with real ties in it (at 2 employees, and again at 0).",
+  "concepts": [
+    "DENSE_RANK",
+    "window function",
+    "ties"
+  ],
+  "skills": [
+    "sql_window_functions"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['1', '3', '1'], ['2', '2', '2'], ['3', '2', '2'], ['4', '0', '3'], ['5', '0', '3']]",
+      "label": "main check",
+      "ordered": false
+    }
+  ]
+}

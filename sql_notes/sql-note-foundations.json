@@ -1,0 +1,16 @@
+{
+  "id": "sql-note-foundations",
+  "module": "foundations",
+  "title": "SQL Foundations: SELECT, WHERE, ORDER BY",
+  "display_order": 1,
+  "what_is_it": "SQL (Structured Query Language) is how you ask a relational database for data. A SELECT statement names which columns you want, FROM names the table, WHERE filters which rows qualify, and ORDER BY controls what order they come back in.",
+  "why_it_matters": "Almost every other SQL feature you'll learn - JOINs, subqueries, window functions - is built on top of this basic shape. If you're comfortable with SELECT/FROM/WHERE/ORDER BY/LIMIT, you can already answer a huge range of real questions about real data.",
+  "syntax": "SELECT column1, column2\nFROM table_name\nWHERE condition\nORDER BY column1 [ASC | DESC]\nLIMIT n;",
+  "example": "SELECT name, price\nFROM products\nWHERE price > 30\nORDER BY price DESC;",
+  "output": "     name       | price\n-----------------+-------\n Mechanical Keyboard | 79.99\n Standing Mat        | 45.00\n USB-C Hub           | 34.50",
+  "common_mistakes": "Forgetting that SQL string comparisons ('Portugal' vs 'portugal') are case-sensitive by default in Postgres, unlike Python's often-forgiving == on already-normalized data. Also, ORDER BY DESC sorts largest-first - it's easy to accidentally write it when you meant ASC (the default), or vice versa.",
+  "mini_exercise": "Without running it yet, predict what 'SELECT first_name FROM customers WHERE country = \\'Portugal\\' ORDER BY signup_date;' returns, then check your answer against sql-foundations-01 through sql-foundations-08.",
+  "postgres_note": "Postgres string comparisons are case-sensitive and locale-aware by default - use ILIKE instead of LIKE, or LOWER(column) = LOWER('value'), for case-insensitive matching.",
+  "source": "freecodecamp",
+  "related_exercise_ids": ["sql-foundations-01", "sql-foundations-04", "sql-foundations-07"]
+}

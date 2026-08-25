@@ -1,0 +1,17 @@
+{
+  "id": "exam-mcq-02",
+  "kind": "mcq",
+  "category": "python_fundamentals",
+  "prompt": "a = [1, 2]\nb = [1, 2]\nprint(a is b, a == b)\n\nWhat does this print?",
+  "difficulty": 2,
+  "points": 1,
+  "choices": [
+    "True True",
+    "False False",
+    "False True",
+    "True False"
+  ],
+  "correct_choice": 2,
+  "explanation": "== compares VALUES (a and b hold equal elements, so a == b is True). is compares IDENTITY (are they the same object in memory?) - a and b are two separate list objects that happen to contain equal values, so a is b is False.",
+  "source": "adapted"
+}

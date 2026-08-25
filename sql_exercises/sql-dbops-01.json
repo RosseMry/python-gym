@@ -1,0 +1,33 @@
+{
+  "module": "dbops",
+  "source": "sqlbolt",
+  "id": "sql-dbops-01",
+  "difficulty": 2,
+  "title": "CREATE TABLE",
+  "description": "CREATE TABLE defines a brand-new table's columns and their types. Create a table named `reviews` with four columns: `id` (SERIAL, PRIMARY KEY), `product_id` (INTEGER, REFERENCES products (id)), `rating` (INTEGER), and `comment` (TEXT).",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: CREATE TABLE",
+    "Each column needs a name and a type, separated by commas inside the parentheses - PRIMARY KEY and REFERENCES are constraints you attach right after a column's type, the same way you'd see them in the existing fixture tables.",
+    "Name the table reviews, then list the four columns in order: id as SERIAL PRIMARY KEY, product_id as INTEGER REFERENCES products (id), rating as INTEGER, and comment as TEXT."
+  ],
+  "expected_behavior": "Creates a reviews table with exactly these four columns, in this order.",
+  "solution": "CREATE TABLE reviews (id SERIAL PRIMARY KEY, product_id INTEGER REFERENCES products (id), rating INTEGER, comment TEXT);",
+  "explanation": "SERIAL PRIMARY KEY is the same auto-incrementing pattern every other fixture table uses for its id column - keeping new tables consistent with that pattern makes the whole schema easier to reason about.",
+  "concepts": [
+    "CREATE TABLE",
+    "PRIMARY KEY",
+    "FOREIGN KEY"
+  ],
+  "skills": [
+    "sql_db_operations"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "SELECT column_name, data_type FROM information_schema.columns WHERE table_schema = 'fixtures' AND table_name = 'reviews' ORDER BY ordinal_position",
+      "expected": "[['id', 'integer'], ['product_id', 'integer'], ['rating', 'integer'], ['comment', 'text']]",
+      "label": "reviews table has the right columns"
+    }
+  ]
+}

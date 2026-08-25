@@ -1,0 +1,31 @@
+{
+  "module": "procedures",
+  "source": "sqlbolt",
+  "id": "sql-procedures-02",
+  "difficulty": 2,
+  "title": "DROP PROCEDURE",
+  "description": "DROP PROCEDURE removes a procedure definition - like DROP FUNCTION, you need the parameter types since procedures can be overloaded too. The fixtures already include a procedure `mark_appointment_completed(appointment_id INTEGER)` - drop it.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: DROP PROCEDURE",
+    "DROP PROCEDURE <name>(<param_type>) - same idea as DROP FUNCTION, just the PROCEDURE keyword and this procedure's own single-parameter signature.",
+    "Use DROP PROCEDURE followed by mark_appointment_completed and the exact parameter type (INTEGER) in parentheses."
+  ],
+  "expected_behavior": "mark_appointment_completed(INTEGER) no longer exists as a procedure.",
+  "solution": "DROP PROCEDURE mark_appointment_completed(INTEGER);",
+  "explanation": "Just like DROP FUNCTION, this needs the full parameter signature because Postgres allows more than one procedure to share the same name as long as their parameter types differ.",
+  "concepts": [
+    "DROP PROCEDURE"
+  ],
+  "skills": [
+    "sql_procedures"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "SELECT COUNT(*) FROM pg_proc WHERE proname = 'mark_appointment_completed' AND pronamespace = 'fixtures'::regnamespace",
+      "expected": "[['0']]",
+      "label": "mark_appointment_completed procedure is gone"
+    }
+  ]
+}

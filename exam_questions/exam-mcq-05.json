@@ -1,0 +1,17 @@
+{
+  "id": "exam-mcq-05",
+  "kind": "mcq",
+  "category": "python_fundamentals",
+  "prompt": "import copy\noriginal = [[1, 2], [3, 4]]\nshallow = copy.copy(original)\nshallow[0].append(99)\n\nWhat happens to original after this?",
+  "difficulty": 3,
+  "points": 1,
+  "choices": [
+    "original is unchanged - shallow is completely independent",
+    "original[0] now also contains 99 - shallow only copied the outer list, so the inner lists are still shared",
+    "This raises a TypeError, since lists can't be shallow-copied",
+    "original becomes an empty list"
+  ],
+  "correct_choice": 1,
+  "explanation": "A shallow copy duplicates the OUTER container but keeps references to the SAME inner objects - shallow and original point to different outer lists, but shallow[0] and original[0] are still the exact same inner list, so mutating one shows up in the other. copy.deepcopy() would avoid this by recursively copying everything.",
+  "source": "adapted"
+}

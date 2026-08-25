@@ -1,0 +1,30 @@
+{
+  "module": "foundations",
+  "source": "sqlbolt",
+  "id": "sql-foundations-12",
+  "difficulty": 2,
+  "title": "Change existing rows with UPDATE",
+  "description": "Write a statement that gives every employee in the Support department (`department_id = 3`) a 500 raise.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: UPDATE ... SET ... WHERE",
+    "UPDATE table SET column = new_value WHERE condition changes only the rows matching the condition - leaving out WHERE would update every row in the table, which is rarely what you want.",
+    "Set salary to salary + 500 (the column can reference its own current value on the right-hand side), scoped with WHERE department_id = 3."
+  ],
+  "expected_behavior": "Raises the salary of every Support-department employee by 500.",
+  "solution": "UPDATE employees SET salary = salary + 500 WHERE department_id = 3;",
+  "explanation": "SET salary = salary + 500 reads the current value and writes a new one in the same statement, per row - and WHERE is what keeps the change scoped to Support employees instead of everyone.",
+  "concepts": [
+    "UPDATE"
+  ],
+  "skills": [
+    "sql_basics"
+  ],
+  "hidden_tests": [
+    {
+      "check_query": "SELECT first_name, salary FROM employees WHERE department_id = 3 ORDER BY id",
+      "expected": "[['Radia', '6400.00'], ['Barbara', '5900.00']]",
+      "label": "main check"
+    }
+  ]
+}

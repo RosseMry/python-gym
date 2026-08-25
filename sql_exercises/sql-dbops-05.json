@@ -1,0 +1,35 @@
+{
+  "module": "dbops",
+  "source": "sqlbolt",
+  "id": "sql-dbops-05",
+  "difficulty": 3,
+  "title": "NOT NULL constraint",
+  "description": "ALTER TABLE ... ALTER COLUMN ... SET NOT NULL adds a NOT NULL constraint to a column that already exists - Postgres checks every current row first, so this fails if any row already has NULL there. This is why a real migration usually adds a new column with a DEFAULT (so existing rows are never NULL to begin with) before tightening it to NOT NULL. Add a `loyalty_tier` (TEXT) column to `customers` with a DEFAULT of `'standard'`, then add a NOT NULL constraint to that same column.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: ALTER COLUMN, SET NOT NULL",
+    "Two statements: ADD COLUMN loyalty_tier TEXT DEFAULT 'standard' first (every existing row instantly gets 'standard', never NULL), then ALTER COLUMN loyalty_tier SET NOT NULL - which now succeeds because no row is NULL.",
+    "Write the ADD COLUMN statement with its DEFAULT, then a semicolon, then a second ALTER TABLE statement on the same table and column ending in SET NOT NULL."
+  ],
+  "expected_behavior": "customers gains a loyalty_tier column, defaulted to 'standard' for existing rows, and now required (NOT NULL) going forward.",
+  "solution": "ALTER TABLE customers ADD COLUMN loyalty_tier TEXT DEFAULT 'standard'; ALTER TABLE customers ALTER COLUMN loyalty_tier SET NOT NULL;",
+  "explanation": "SET NOT NULL is checked immediately against every existing row - adding the column WITH a DEFAULT first is what makes that check pass, since every row gets a real value the instant the column is added rather than NULL.",
+  "concepts": [
+    "ALTER TABLE",
+    "ADD COLUMN",
+    "ALTER COLUMN",
+    "NOT NULL",
+    "DEFAULT"
+  ],
+  "skills": [
+    "sql_db_operations"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "SELECT is_nullable FROM information_schema.columns WHERE table_schema = 'fixtures' AND table_name = 'customers' AND column_name = 'loyalty_tier'",
+      "expected": "[['NO']]",
+      "label": "loyalty_tier column is NOT NULL"
+    }
+  ]
+}

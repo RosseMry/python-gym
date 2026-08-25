@@ -1,0 +1,16 @@
+{
+  "id": "sql-note-functions",
+  "module": "functions",
+  "title": "PL/pgSQL Functions",
+  "display_order": 10,
+  "what_is_it": "A function packages a calculation under a name with real parameters and a return type, callable from inside a query (SELECT my_func(...)). Its body is written in PL/pgSQL, Postgres's own procedural language, wrapped between $$ markers with BEGIN ... END; and using real control flow (IF/ELSIF/ELSE) and a RETURN statement.",
+  "why_it_matters": "Some calculations are reused across many queries, or need real branching logic that a single SQL expression can't express cleanly - a function lets you write that logic once, name it, and call it anywhere a value is expected, the same way a Python function avoids repeating the same block of code.",
+  "syntax": "CREATE FUNCTION function_name(param1 TYPE, param2 TYPE)\n    RETURNS return_type AS $$\nBEGIN\n    IF condition THEN\n        RETURN value1;\n    ELSE\n        RETURN value2;\n    END IF;\nEND;\n$$ LANGUAGE plpgsql;",
+  "example": "CREATE FUNCTION discounted_price(price NUMERIC, discount_pct NUMERIC)\n    RETURNS NUMERIC AS $$\nBEGIN\n    RETURN price * (1 - discount_pct / 100);\nEND;\n$$ LANGUAGE plpgsql;\n\nSELECT discounted_price(100, 20);",
+  "output": " discounted_price\n-------------------\n 80.00000000000000000000",
+  "common_mistakes": "Forgetting that a function body needs its own END IF; to close an IF block, SEPARATE from the END; that closes the whole function - these are two different, independently-required closing keywords. Also writing RETURNS void (or forgetting RETURNS entirely) when the function is actually meant to hand back a computed value.",
+  "mini_exercise": "Why does discounted_price(100, 20) return a NUMERIC with lots of trailing zeros (80.00000000000000000000) instead of a plain 80?",
+  "postgres_note": "PL/pgSQL is one of several procedural languages Postgres supports for function bodies - PL/Python and PL/Perl also exist as optional extensions, but PL/pgSQL is the built-in default and by far the most common choice.",
+  "source": "freecodecamp",
+  "related_exercise_ids": ["sql-functions-01", "sql-functions-02", "sql-functions-03"]
+}

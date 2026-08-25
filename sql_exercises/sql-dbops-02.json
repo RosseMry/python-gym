@@ -1,0 +1,32 @@
+{
+  "module": "dbops",
+  "source": "sqlbolt",
+  "id": "sql-dbops-02",
+  "difficulty": 2,
+  "title": "ALTER TABLE ADD COLUMN",
+  "description": "ALTER TABLE ... ADD COLUMN adds a new column to an existing table, without touching the rows already in it. Add a column named `loyalty_points` (INTEGER) to the `customers` table.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: ALTER TABLE, ADD COLUMN",
+    "ALTER TABLE names the table you're changing, and ADD COLUMN names the new column and its type - existing rows automatically get NULL in the new column unless you specify a DEFAULT.",
+    "Target the customers table, and give the new column the exact name loyalty_points with type INTEGER."
+  ],
+  "expected_behavior": "customers gains a loyalty_points INTEGER column; existing rows get NULL in it.",
+  "solution": "ALTER TABLE customers ADD COLUMN loyalty_points INTEGER;",
+  "explanation": "ALTER TABLE is how a schema evolves after a table already has data in it - CREATE TABLE only runs once, but ALTER TABLE is what you reach for from then on.",
+  "concepts": [
+    "ALTER TABLE",
+    "ADD COLUMN"
+  ],
+  "skills": [
+    "sql_db_operations"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "SELECT column_name, data_type FROM information_schema.columns WHERE table_schema = 'fixtures' AND table_name = 'customers' AND column_name = 'loyalty_points'",
+      "expected": "[['loyalty_points', 'integer']]",
+      "label": "loyalty_points column exists"
+    }
+  ]
+}

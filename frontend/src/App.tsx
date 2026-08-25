@@ -7,6 +7,12 @@ import { RepeatQueuePage } from "./pages/RepeatQueuePage";
 import { LearningNotesListPage } from "./pages/LearningNotesListPage";
 import { LearningNotePage } from "./pages/LearningNotePage";
 import { ThirtyDaysPage } from "./pages/ThirtyDaysPage";
+import { SqlExerciseListPage } from "./pages/SqlExerciseListPage";
+import { SqlExercisePage } from "./pages/SqlExercisePage";
+import { SqlNotesListPage } from "./pages/SqlNotesListPage";
+import { SqlNotePage } from "./pages/SqlNotePage";
+import { ExamStartPage } from "./pages/ExamStartPage";
+import { ExamPage } from "./pages/ExamPage";
 import { api } from "./services/api";
 
 export default function App() {
@@ -34,6 +40,12 @@ export default function App() {
           <Route path="/notes" element={<LearningNotesListPage />} />
           <Route path="/notes/:id" element={<LearningNotePage />} />
           <Route path="/thirty-days" element={<ThirtyDaysPage />} />
+          <Route path="/sql" element={<SqlExerciseListPage />} />
+          <Route path="/sql/exercises/:id" element={<SqlExercisePage />} />
+          <Route path="/sql/notes" element={<SqlNotesListPage />} />
+          <Route path="/sql/notes/:id" element={<SqlNotePage />} />
+          <Route path="/exam" element={<ExamStartPage />} />
+          <Route path="/exam/:sessionId" element={<ExamPage />} />
         </Routes>
       </div>
     </div>

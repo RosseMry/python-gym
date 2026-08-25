@@ -1,0 +1,11 @@
+{
+  "id": "exam-output-03",
+  "kind": "output_prediction",
+  "category": "python_fundamentals",
+  "prompt": "x = [[]] * 3\nx[0].append(1)\nprint(x)\n\nWhat does this print, exactly?",
+  "difficulty": 3,
+  "points": 2,
+  "expected_output": "[[1], [1], [1]]",
+  "explanation": "[[]] * 3 does NOT create three independent empty lists - it creates a list containing three REFERENCES to the exact same inner list object. Appending to x[0] mutates that one shared object, which is why all three positions show the change, not just the first.",
+  "source": "adapted"
+}

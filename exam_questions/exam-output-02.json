@@ -1,0 +1,11 @@
+{
+  "id": "exam-output-02",
+  "kind": "output_prediction",
+  "category": "python_fundamentals",
+  "prompt": "d = {'b': 1, 'a': 2}\nprint(list(d.keys()))\n\nWhat does this print, exactly?",
+  "difficulty": 2,
+  "points": 1,
+  "expected_output": "['b', 'a']",
+  "explanation": "Since Python 3.7, dicts preserve INSERTION order, not sorted key order - 'b' was inserted first even though 'a' comes first alphabetically, so the keys come back in the order they were written, not alphabetically.",
+  "source": "adapted"
+}

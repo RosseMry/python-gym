@@ -1,0 +1,33 @@
+{
+  "module": "intermediate",
+  "source": "sqlbolt",
+  "id": "sql-intermediate-02",
+  "difficulty": 3,
+  "title": "Subqueries with IN",
+  "description": "A subquery can also produce a whole list of values to test membership against with IN, instead of a single number. Write a query that returns the `first_name` and `last_name` of every customer who has placed at least one order (without using a JOIN).",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: subquery with IN",
+    "(SELECT customer_id FROM orders) produces a list of every customer_id that has ordered - IN checks whether a column's value appears anywhere in that list, the same way it would against a hand-typed list of numbers.",
+    "SELECT first_name, last_name FROM customers WHERE id IN (a subquery selecting customer_id FROM orders)."
+  ],
+  "expected_behavior": "Returns first_name and last_name for customers whose id appears among orders.customer_id.",
+  "solution": "SELECT first_name, last_name FROM customers WHERE id IN (SELECT customer_id FROM orders);",
+  "explanation": "IN with a subquery is often interchangeable with a JOIN for this kind of \"does a match exist\" question, but it keeps the output shaped like the outer table alone - one row per customer, not one row per matching order.",
+  "concepts": [
+    "subquery",
+    "IN"
+  ],
+  "skills": [
+    "sql_intermediate"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['Ana', 'Silva'], ['Bo', 'Chen'], ['Cid', 'Rocha'], ['Dara', 'Ola'], ['Eero', 'Salo'], ['Fatima', 'Haidari'], ['Gustav', 'Berg'], ['Hana', 'Kobayashi']]",
+      "label": "main check",
+      "ordered": false
+    }
+  ]
+}

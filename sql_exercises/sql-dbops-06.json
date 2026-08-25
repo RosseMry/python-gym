@@ -1,0 +1,33 @@
+{
+  "module": "dbops",
+  "source": "sqlbolt",
+  "id": "sql-dbops-06",
+  "difficulty": 3,
+  "title": "CHECK constraint",
+  "description": "A CHECK constraint enforces a rule on every row's values, not just \"is it NULL\" or \"is it unique\" - any boolean expression you write. Add a CHECK constraint named `products_price_positive` that requires `products.price` to be greater than 0.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: CHECK constraint",
+    "ADD CONSTRAINT <name> CHECK (<boolean expression>) - the expression can reference any column on the table, and Postgres rejects any INSERT or UPDATE that would make it false.",
+    "Target the products table, give the constraint the exact name products_price_positive, and write its CHECK condition as price greater than 0."
+  ],
+  "expected_behavior": "products.price is now required to be greater than 0 on every row, present and future.",
+  "solution": "ALTER TABLE products ADD CONSTRAINT products_price_positive CHECK (price > 0);",
+  "explanation": "CHECK is the most general constraint type - PRIMARY KEY, UNIQUE, and NOT NULL each enforce one specific rule, but CHECK lets you state an arbitrary business rule (price > 0, age >= 0, status IN (...)) directly in the schema.",
+  "concepts": [
+    "ALTER TABLE",
+    "ADD CONSTRAINT",
+    "CHECK"
+  ],
+  "skills": [
+    "sql_db_operations"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "SELECT constraint_type FROM information_schema.table_constraints WHERE table_schema = 'fixtures' AND table_name = 'products' AND constraint_name = 'products_price_positive'",
+      "expected": "[['CHECK']]",
+      "label": "products_price_positive constraint exists"
+    }
+  ]
+}

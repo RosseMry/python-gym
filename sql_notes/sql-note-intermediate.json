@@ -1,0 +1,16 @@
+{
+  "id": "sql-note-intermediate",
+  "module": "intermediate",
+  "title": "Subqueries, Set Operations, and CTEs",
+  "display_order": 4,
+  "what_is_it": "A subquery is a SELECT nested inside another query - in WHERE (to compare against a computed value), or with IN (to test membership in a computed list). UNION/UNION ALL/INTERSECT/EXCEPT combine two queries' result sets like set operations. A CTE (WITH ... AS ...) names a query so you can reference it later, often more readably than an inline subquery.",
+  "why_it_matters": "These are the tools for questions a single flat SELECT can't answer on its own: 'above the average,' 'in both of these lists,' 'in this list but not that one.' A CTE in particular becomes essential once a query gets complex enough that nesting subqueries directly would be unreadable.",
+  "syntax": "SELECT name, price FROM products\nWHERE price > (SELECT AVG(price) FROM products);\n\nWITH avg_price AS (SELECT AVG(price) AS value FROM products)\nSELECT p.name, p.price FROM products p, avg_price\nWHERE p.price > avg_price.value;",
+  "example": "SELECT customer_id FROM orders\nINTERSECT\nSELECT customer_id FROM appointments;",
+  "output": " customer_id\n-------------\n 1\n 2\n 3\n 4\n 5\n 6",
+  "common_mistakes": "Mismatching the number or type of columns between the two sides of a UNION/INTERSECT/EXCEPT - both sides must return the same number of columns in compatible types, or Postgres rejects the query outright. Also reaching for a correlated subquery (which re-runs per outer row) when a plain JOIN or window function would compute the same answer faster.",
+  "mini_exercise": "Predict the difference between 'SELECT customer_id FROM orders EXCEPT SELECT customer_id FROM appointments' and the same query with the two sides swapped - are they the same set, or different?",
+  "postgres_note": "Postgres's EXCEPT is the SQL-standard name for what some other databases (MySQL historically) call MINUS - the behavior is identical.",
+  "source": "freecodecamp",
+  "related_exercise_ids": ["sql-intermediate-01", "sql-intermediate-03", "sql-intermediate-06", "sql-intermediate-08"]
+}

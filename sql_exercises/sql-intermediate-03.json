@@ -1,0 +1,33 @@
+{
+  "module": "intermediate",
+  "source": "sqlbolt",
+  "id": "sql-intermediate-03",
+  "difficulty": 4,
+  "title": "Correlated subqueries",
+  "description": "A correlated subquery references a column from the OUTER query, so it re-runs once per outer row instead of just once. Write a query that returns the `first_name` and `salary` of every employee who earns more than the average salary of their own department.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: correlated subquery",
+    "The inner AVG(salary) needs to look at only THAT employee's department - so the subquery must filter its own employees rows by comparing department_id to the outer query's current row, e.g. e2.department_id = e.department_id.",
+    "Alias employees twice (e and e2): outer WHERE salary > (SELECT AVG(salary) FROM employees e2 WHERE e2.department_id = e.department_id)."
+  ],
+  "expected_behavior": "Returns first_name and salary for employees earning above their own department's average salary.",
+  "solution": "SELECT e.first_name, e.salary FROM employees e WHERE e.salary > (SELECT AVG(e2.salary) FROM employees e2 WHERE e2.department_id = e.department_id);",
+  "explanation": "Unlike the plain subquery in the previous exercise (computed once, up front), a correlated subquery depends on the outer row and conceptually re-runs for each one - powerful, but worth knowing it can be slower on large tables than an equivalent JOIN/window function.",
+  "concepts": [
+    "correlated subquery",
+    "AVG"
+  ],
+  "skills": [
+    "sql_intermediate"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['Ada', '9500.00'], ['Margaret', '7200.00'], ['Radia', '5900.00']]",
+      "label": "main check",
+      "ordered": false
+    }
+  ]
+}

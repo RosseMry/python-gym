@@ -1,0 +1,11 @@
+{
+  "id": "exam-output-05",
+  "kind": "output_prediction",
+  "category": "python_fundamentals",
+  "prompt": "def gen():\n    for i in range(3):\n        yield i\n\ng = gen()\nprint(sum(g))\nprint(sum(g))\n\nWhat does this print, exactly (both lines)?",
+  "difficulty": 3,
+  "points": 2,
+  "expected_output": "3\n0",
+  "explanation": "A generator can only be iterated once - the first sum(g) consumes 0+1+2=3 and exhausts it completely. The second sum(g) iterates over an already-exhausted generator, which immediately raises StopIteration internally and sum treats that as \"no items,\" giving 0.",
+  "source": "adapted"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "exam-output-01",
+  "kind": "output_prediction",
+  "category": "python_fundamentals",
+  "prompt": "print('hello'[::-1])\n\nWhat does this print, exactly?",
+  "difficulty": 1,
+  "points": 1,
+  "expected_output": "olleh",
+  "explanation": "s[::-1] is slice notation with a step of -1, which walks the string backward from end to start - a common idiom for reversing a string (or any sequence) without a loop.",
+  "source": "adapted"
+}

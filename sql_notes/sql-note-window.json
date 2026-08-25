@@ -1,0 +1,16 @@
+{
+  "id": "sql-note-window",
+  "module": "window",
+  "title": "Window Functions: ROW_NUMBER, RANK, LAG, LEAD",
+  "display_order": 5,
+  "what_is_it": "A window function computes a value 'over' a set of related rows without collapsing them into fewer rows, the way GROUP BY does. PARTITION BY splits the rows into independent groups for the calculation. ROW_NUMBER gives each row a unique sequential number; RANK and DENSE_RANK handle ties (RANK leaves a gap after a tie, DENSE_RANK doesn't); LAG/LEAD read a previous/next row's value into the current row.",
+  "why_it_matters": "Window functions answer 'per-group ranking' and 'compared to the row before/after' questions - top N per category, running totals, month-over-month change - without a self-join or a slow correlated subquery, and without losing any of the original rows the way an aggregate GROUP BY would.",
+  "syntax": "SELECT col, ROW_NUMBER() OVER (\n    PARTITION BY group_col\n    ORDER BY sort_col DESC\n) AS rank_in_group\nFROM table_name;",
+  "example": "SELECT name, price,\n    ROW_NUMBER() OVER (ORDER BY price DESC) AS price_rank\nFROM products;",
+  "output": "     name       | price | price_rank\n-----------------+-------+------------\n Mechanical Keyboard | 79.99 | 1\n Standing Mat        | 45.00 | 2\n USB-C Hub           | 34.50 | 3",
+  "common_mistakes": "Forgetting PARTITION BY when you actually want per-group ranks - without it, ROW_NUMBER/RANK number every row against the WHOLE result set, not each group separately. Also confusing RANK and DENSE_RANK: after a two-way tie for 2nd place, RANK's next value is 4 (a gap), DENSE_RANK's is 3 (no gap) - they only ever differ when there's an actual tie.",
+  "mini_exercise": "Given department employee counts of 3, 2, 2, 0, 0 (most to least staffed), write out by hand what RANK() and DENSE_RANK() would assign to each, then check your answer against sql-window-03 and sql-window-04.",
+  "postgres_note": "Postgres also has NTILE(n) (splits rows into n roughly-equal buckets) and full support for a window's frame clause (ROWS BETWEEN ...) for rolling calculations like moving averages - both go beyond this module's scope but are worth knowing exist.",
+  "source": "freecodecamp",
+  "related_exercise_ids": ["sql-window-01", "sql-window-02", "sql-window-03", "sql-window-04"]
+}

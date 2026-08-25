@@ -1,0 +1,32 @@
+{
+  "module": "transactions",
+  "source": "sqlbolt",
+  "id": "sql-transactions-01",
+  "difficulty": 3,
+  "title": "SAVEPOINT",
+  "description": "A SAVEPOINT marks a point inside a transaction you can roll back to later, without undoing everything before it. Create a savepoint named `before_raise`, then give every employee a $1000 raise (UPDATE salary = salary + 1000).",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: SAVEPOINT",
+    "SAVEPOINT <name> just marks a point in time within the current transaction - it doesn't change any data by itself, it's only useful once you later ROLLBACK TO it.",
+    "SAVEPOINT before_raise, as its own statement, then a normal UPDATE employees SET salary = salary + 1000."
+  ],
+  "expected_behavior": "Every employee's salary increases by 1000; the savepoint itself changes nothing on its own.",
+  "solution": "SAVEPOINT before_raise; UPDATE employees SET salary = salary + 1000;",
+  "explanation": "A SAVEPOINT is cheap to create and doesn't commit anything - it's purely a bookmark inside the current transaction that ROLLBACK TO can later return to.",
+  "concepts": [
+    "SAVEPOINT",
+    "transactions"
+  ],
+  "skills": [
+    "sql_transactions"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "SELECT first_name, salary FROM employees ORDER BY id",
+      "expected": "[['Ada', '10500.00'], ['Alan', '9800.00'], ['Grace', '9600.00'], ['Margaret', '8200.00'], ['Katherine', '7100.00'], ['Radia', '6900.00'], ['Barbara', '6400.00'], ['Hedy', '7800.00']]",
+      "label": "every employee got the raise"
+    }
+  ]
+}

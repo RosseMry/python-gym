@@ -1,0 +1,33 @@
+{
+  "module": "joins",
+  "source": "sqlbolt",
+  "id": "sql-joins-01",
+  "difficulty": 2,
+  "title": "INNER JOIN",
+  "description": "An INNER JOIN combines rows from two tables, keeping only the pairs where the join condition matches - rows with no match on either side are dropped entirely. Write a query that returns the customer's `first_name` and the order's `id` and `order_date`, for every customer that has placed at least one order.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: INNER JOIN",
+    "customers JOIN orders ON customers.id = orders.customer_id lines up each order with its customer - but a customer who has never ordered simply has no matching row on the orders side, so they won't appear in the result at all.",
+    "Join customers to orders on customers.id = orders.customer_id, then select first_name, orders.id, order_date."
+  ],
+  "expected_behavior": "Returns one row per order, with the ordering customer's first_name alongside it - customers with zero orders are absent.",
+  "solution": "SELECT customers.first_name, orders.id, orders.order_date FROM customers JOIN orders ON customers.id = orders.customer_id;",
+  "explanation": "JOIN with no qualifier means INNER JOIN - it's the default and the most common join, used whenever you only care about rows that exist on both sides of the relationship.",
+  "concepts": [
+    "JOIN",
+    "INNER JOIN"
+  ],
+  "skills": [
+    "sql_joins"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['Ana', '1', '2023-09-01'], ['Ana', '3', '2023-09-10'], ['Bo', '2', '2023-09-03'], ['Bo', '8', '2023-09-22'], ['Cid', '4', '2023-09-12'], ['Dara', '5', '2023-09-15'], ['Eero', '6', '2023-09-18'], ['Fatima', '7', '2023-09-20'], ['Gustav', '9', '2023-09-25'], ['Hana', '10', '2023-09-27']]",
+      "label": "main check",
+      "ordered": false
+    }
+  ]
+}

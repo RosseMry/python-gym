@@ -1,0 +1,31 @@
+{
+  "module": "indexes",
+  "source": "sqlbolt",
+  "id": "sql-indexes-01",
+  "difficulty": 3,
+  "title": "CREATE INDEX",
+  "description": "An index lets Postgres find matching rows without scanning the whole table - the tradeoff is it costs disk space and slows down writes to that column a little. Create an index named `idx_orders_customer_id` on `orders.customer_id`, a column that's frequently filtered on.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: CREATE INDEX",
+    "CREATE INDEX <index_name> ON <table> (<column>) - the index name is yours to choose, but it needs to be unique across the whole database, which is why a idx_<table>_<column> naming convention is common.",
+    "Name the index idx_orders_customer_id, on the orders table, over the customer_id column."
+  ],
+  "expected_behavior": "Creates a B-tree index on orders.customer_id, speeding up queries that filter or join on it.",
+  "solution": "CREATE INDEX idx_orders_customer_id ON orders (customer_id);",
+  "explanation": "Without an index, Postgres has to scan every row in orders to find matches (a sequential scan) - with one, it can jump straight to the matching rows instead, which matters a lot once a table has real volume.",
+  "concepts": [
+    "CREATE INDEX"
+  ],
+  "skills": [
+    "sql_indexes"
+  ],
+  "postgres_note": "Postgres indexes default to the B-tree type, good for equality and range queries (=, <, >, BETWEEN) - other types (GIN, GiST, hash) exist for specialized cases like full-text search.",
+  "hidden_tests": [
+    {
+      "check_query": "SELECT COUNT(*) FROM pg_indexes WHERE schemaname = 'fixtures' AND tablename = 'orders' AND indexname = 'idx_orders_customer_id'",
+      "expected": "[['1']]",
+      "label": "idx_orders_customer_id exists"
+    }
+  ]
+}

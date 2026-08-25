@@ -1,0 +1,33 @@
+{
+  "module": "functions",
+  "source": "sqlbolt",
+  "id": "sql-functions-01",
+  "difficulty": 4,
+  "title": "CREATE FUNCTION (PL/pgSQL)",
+  "description": "A function packages a calculation under a name you can call from any query, with real parameters and a real return type. Create a function `discounted_price(price NUMERIC, discount_pct NUMERIC) RETURNS NUMERIC` that returns `price` reduced by `discount_pct` percent (e.g. discounted_price(100, 20) should return 80).",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: CREATE FUNCTION, PL/pgSQL",
+    "The body goes between two $$ markers and needs BEGIN ... END; inside them - a single RETURN statement computing price * (1 - discount_pct / 100) is enough, then LANGUAGE plpgsql after the closing $$.",
+    "CREATE FUNCTION discounted_price(price NUMERIC, discount_pct NUMERIC) RETURNS NUMERIC AS $$ BEGIN RETURN ...; END; $$ LANGUAGE plpgsql - fill in the RETURN expression yourself."
+  ],
+  "expected_behavior": "discounted_price(100, 20) returns 80; discounted_price(50, 10) returns 45.",
+  "solution": "CREATE FUNCTION discounted_price(price NUMERIC, discount_pct NUMERIC) RETURNS NUMERIC AS $$ BEGIN RETURN price * (1 - discount_pct / 100); END; $$ LANGUAGE plpgsql;",
+  "explanation": "PL/pgSQL is Postgres's own procedural language for function bodies - BEGIN/END wraps the executable statements, much like the BEGIN/END of any other procedural language, and RETURN sends a value back the same way it does in Python.",
+  "concepts": [
+    "CREATE FUNCTION",
+    "PL/pgSQL",
+    "RETURN"
+  ],
+  "skills": [
+    "sql_functions"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "SELECT discounted_price(100, 20), discounted_price(50, 10)",
+      "expected": "[['80.00000000000000000000', '45.00000000000000000000']]",
+      "label": "discounted_price computes correctly"
+    }
+  ]
+}

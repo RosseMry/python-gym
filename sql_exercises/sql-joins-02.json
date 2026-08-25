@@ -1,0 +1,32 @@
+{
+  "module": "joins",
+  "source": "sqlbolt",
+  "id": "sql-joins-02",
+  "difficulty": 2,
+  "title": "LEFT JOIN",
+  "description": "A LEFT JOIN keeps every row from the left table, even if nothing matches on the right - the unmatched columns just come back as NULL. Write a query that returns every customer's `first_name` alongside the `id` of any order they've placed, including customers who have never ordered (their order id should be NULL).",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: LEFT JOIN",
+    "LEFT JOIN customers TO orders keeps every customer row no matter what - if a customer has no matching order, orders.id just comes back NULL instead of the row disappearing the way it would with an INNER JOIN.",
+    "Select customers.first_name and orders.id, using LEFT JOIN orders ON customers.id = orders.customer_id (customers on the left)."
+  ],
+  "expected_behavior": "Returns one row per customer - customers with orders get one row per order, customers with none get a single row with a NULL order id.",
+  "solution": "SELECT customers.first_name, orders.id FROM customers LEFT JOIN orders ON customers.id = orders.customer_id;",
+  "explanation": "LEFT JOIN is INNER JOIN plus \"and keep unmatched left rows too, padded with NULLs\" - reach for it whenever the left table's rows all matter, whether or not they have a match.",
+  "concepts": [
+    "LEFT JOIN"
+  ],
+  "skills": [
+    "sql_joins"
+  ],
+  "postgres_note": "LEFT OUTER JOIN and LEFT JOIN are exactly the same thing in Postgres - OUTER is optional and rarely written.",
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['Ana', '1'], ['Ana', '3'], ['Bo', '2'], ['Bo', '8'], ['Cid', '4'], ['Dara', '5'], ['Eero', '6'], ['Fatima', '7'], ['Gustav', '9'], ['Hana', '10'], ['Ivo', ''], ['Julia', '']]",
+      "label": "main check",
+      "ordered": false
+    }
+  ]
+}

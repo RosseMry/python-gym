@@ -1,0 +1,12 @@
+{
+  "id": "exam-debug-03",
+  "kind": "debugging",
+  "category": "python_fundamentals",
+  "prompt": "fns = []\nfor i in range(3):\n    fns.append(lambda: i)\n\nprint([f() for f in fns])\n\nThis was meant to print [0, 1, 2] - each lambda 'remembering' its own i. What does it ACTUALLY print, exactly, as written?",
+  "difficulty": 4,
+  "points": 2,
+  "code_snippet": "fns = []\nfor i in range(3):\n    fns.append(lambda: i)\n\nprint([f() for f in fns])",
+  "expected_output": "[2, 2, 2]",
+  "explanation": "A lambda closes over the VARIABLE i, not its value at the time the lambda was created - by the time any lambda actually runs, the loop has finished and i's final value is 2, so every lambda sees the same, final i. The fix is to default-bind the current value: lambda i=i: i.",
+  "source": "adapted"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "exam-mcq-04",
+  "kind": "mcq",
+  "category": "python_fundamentals",
+  "prompt": "What does Python's Global Interpreter Lock (GIL) primarily prevent?",
+  "difficulty": 3,
+  "points": 1,
+  "choices": [
+    "Two Python processes from running at the same time",
+    "More than one thread from executing Python bytecode at the exact same instant, within one process",
+    "Two variables from referencing the same object",
+    "Recursive functions from exceeding the call stack"
+  ],
+  "correct_choice": 1,
+  "explanation": "The GIL is a per-process lock that lets only one thread run Python bytecode at a time, even on a multi-core machine - it's why CPU-bound Python threading rarely speeds things up (use multiprocessing for that instead), while I/O-bound threading still benefits since the GIL is released during I/O waits.",
+  "source": "adapted"
+}

@@ -1,0 +1,33 @@
+{
+  "module": "intermediate",
+  "source": "sqlbolt",
+  "id": "sql-intermediate-08",
+  "difficulty": 3,
+  "title": "Common table expressions (CTEs)",
+  "description": "A CTE, written with WITH, names a query so you can reference it later like a temporary table - it's often clearer than nesting a subquery inline. Using a CTE named `avg_price`, write a query that returns the `name` and `price` of every product priced above the average price of all products.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: CTE (WITH)",
+    "WITH avg_price AS (SELECT AVG(price) AS value FROM products) defines a one-row, one-column result you can then treat like a table in the main query that follows it.",
+    "WITH avg_price AS (...) SELECT p.name, p.price FROM products p, avg_price WHERE p.price > avg_price.value."
+  ],
+  "expected_behavior": "Returns name and price for products priced above the average - same result as the earlier subquery exercise, written as a CTE instead.",
+  "solution": "WITH avg_price AS (SELECT AVG(price) AS value FROM products) SELECT p.name, p.price FROM products p, avg_price WHERE p.price > avg_price.value;",
+  "explanation": "A CTE and an inline subquery can express exactly the same logic - the difference is readability (and, for a CTE referenced more than once, not repeating the same subquery over and over).",
+  "concepts": [
+    "CTE",
+    "WITH"
+  ],
+  "skills": [
+    "sql_intermediate"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['Mechanical Keyboard', '79.99'], ['Standing Mat', '45.00'], ['USB-C Hub', '34.50']]",
+      "label": "main check",
+      "ordered": false
+    }
+  ]
+}

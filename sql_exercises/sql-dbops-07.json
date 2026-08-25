@@ -1,0 +1,34 @@
+{
+  "module": "dbops",
+  "source": "sqlbolt",
+  "id": "sql-dbops-07",
+  "difficulty": 4,
+  "title": "FOREIGN KEY via ALTER TABLE",
+  "description": "A foreign key doesn't have to be declared at CREATE TABLE time either - ADD CONSTRAINT ... FOREIGN KEY works on an existing table, the same way ADD CONSTRAINT ... UNIQUE did earlier. First CREATE TABLE `wishlist` with columns `id` (SERIAL PRIMARY KEY), `customer_id` (INTEGER), and `product_id` (INTEGER); then, in a second statement, add a FOREIGN KEY constraint named `wishlist_customer_fk` on `wishlist.customer_id` referencing `customers (id)`.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: ADD CONSTRAINT, FOREIGN KEY",
+    "You need two separate statements, one after the other, separated by a semicolon: the CREATE TABLE first, then an ALTER TABLE wishlist ADD CONSTRAINT ... FOREIGN KEY (customer_id) REFERENCES customers (id).",
+    "For the second statement, give the constraint the exact name wishlist_customer_fk, and make it a FOREIGN KEY on wishlist.customer_id referencing customers (id)."
+  ],
+  "expected_behavior": "wishlist exists with the three columns, and customer_id is constrained to reference an existing customers.id.",
+  "solution": "CREATE TABLE wishlist (id SERIAL PRIMARY KEY, customer_id INTEGER, product_id INTEGER); ALTER TABLE wishlist ADD CONSTRAINT wishlist_customer_fk FOREIGN KEY (customer_id) REFERENCES customers (id);",
+  "explanation": "Splitting table creation from constraint creation is common in real migrations - it lets you build up a table's rules incrementally, and it's exactly how you'd add a relationship to a table that already has data you don't want to lose.",
+  "concepts": [
+    "CREATE TABLE",
+    "ALTER TABLE",
+    "ADD CONSTRAINT",
+    "FOREIGN KEY"
+  ],
+  "skills": [
+    "sql_db_operations"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "SELECT constraint_type FROM information_schema.table_constraints WHERE table_schema = 'fixtures' AND table_name = 'wishlist' AND constraint_name = 'wishlist_customer_fk'",
+      "expected": "[['FOREIGN KEY']]",
+      "label": "wishlist_customer_fk constraint exists"
+    }
+  ]
+}

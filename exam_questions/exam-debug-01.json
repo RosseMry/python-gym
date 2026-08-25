@@ -1,0 +1,12 @@
+{
+  "id": "exam-debug-01",
+  "kind": "debugging",
+  "category": "python_fundamentals",
+  "prompt": "def count_to(n):\n    total = []\n    for i in range(1, n):\n        total.append(i)\n    return total\n\nprint(count_to(5))\n\nThis was meant to print [1, 2, 3, 4, 5]. What does it ACTUALLY print, exactly, as written?",
+  "difficulty": 2,
+  "points": 1,
+  "code_snippet": "def count_to(n):\n    total = []\n    for i in range(1, n):\n        total.append(i)\n    return total\n\nprint(count_to(5))",
+  "expected_output": "[1, 2, 3, 4]",
+  "explanation": "range(1, n) stops BEFORE n, so range(1, 5) only produces 1, 2, 3, 4 - the fix is range(1, n + 1) to actually include n itself.",
+  "source": "adapted"
+}

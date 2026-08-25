@@ -1,0 +1,16 @@
+{
+  "id": "sql-note-triggers",
+  "module": "triggers",
+  "title": "Triggers: Running Code Automatically on Writes",
+  "display_order": 12,
+  "what_is_it": "A trigger runs a special trigger function automatically whenever a table is written to (BEFORE or AFTER INSERT/UPDATE/DELETE), without the application ever calling it directly. A trigger function RETURNS TRIGGER (not a normal type) and, inside a BEFORE trigger, can inspect the row being written via NEW and stop the write entirely with RAISE EXCEPTION.",
+  "why_it_matters": "Some rules need to be enforced no matter WHERE the write comes from - a hand-run migration script, a buggy application, a different service years from now - and a trigger, living in the database itself, is the one place that guarantee actually holds. This is exactly the kind of rule application code can't be trusted to remember every time.",
+  "syntax": "CREATE FUNCTION trigger_function_name() RETURNS TRIGGER AS $$\nBEGIN\n    IF NEW.column < 0 THEN\n        RAISE EXCEPTION 'reason for rejecting this write';\n    END IF;\n    RETURN NEW;\nEND;\n$$ LANGUAGE plpgsql;\n\nCREATE TRIGGER trigger_name\n    BEFORE UPDATE ON table_name\n    FOR EACH ROW\n    EXECUTE FUNCTION trigger_function_name();",
+  "example": "CREATE FUNCTION reject_negative_price() RETURNS TRIGGER AS $$\nBEGIN\n    IF NEW.price < 0 THEN\n        RAISE EXCEPTION 'price cannot be negative';\n    END IF;\n    RETURN NEW;\nEND;\n$$ LANGUAGE plpgsql;\n\nCREATE TRIGGER trg_reject_negative_price\n    BEFORE UPDATE ON products\n    FOR EACH ROW\n    EXECUTE FUNCTION reject_negative_price();\n\nUPDATE products SET price = -5 WHERE name = 'Fountain Pen';",
+  "output": "ERROR: price cannot be negative\nCONTEXT: PL/pgSQL function reject_negative_price() line 3 at RAISE\n(the UPDATE never took effect)",
+  "common_mistakes": "Forgetting RETURN NEW; at the end of a BEFORE trigger function that doesn't reject the row - without it, the write silently fails to apply at all, even for perfectly valid data, because the trigger function returned nothing for Postgres to actually write. Also mixing up BEFORE and AFTER: BEFORE can inspect/reject the write before it happens, AFTER runs once the write has already taken effect (useful for logging, not for rejecting).",
+  "mini_exercise": "Why does the trigger function need to RETURN NEW at the end, even in the case where it doesn't raise an exception?",
+  "postgres_note": "A trigger function is a normal PL/pgSQL function except its return type must be TRIGGER and it's never called directly by name - only Postgres invokes it, automatically, when the trigger's condition (BEFORE/AFTER, INSERT/UPDATE/DELETE) fires.",
+  "source": "freecodecamp",
+  "related_exercise_ids": ["sql-triggers-01", "sql-triggers-02"]
+}

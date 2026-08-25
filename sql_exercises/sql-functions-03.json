@@ -1,0 +1,31 @@
+{
+  "module": "functions",
+  "source": "sqlbolt",
+  "id": "sql-functions-03",
+  "difficulty": 2,
+  "title": "DROP FUNCTION",
+  "description": "DROP FUNCTION removes a function definition - Postgres needs the parameter types too, since two functions can share a name if their parameter types differ. The fixtures already include a function `full_name(first_name TEXT, last_name TEXT)` - drop it.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: DROP FUNCTION",
+    "DROP FUNCTION <name>(<param_type>, <param_type>) - unlike DROP TABLE or DROP VIEW, you have to repeat the parameter types so Postgres knows exactly which overload you mean.",
+    "Use DROP FUNCTION followed by full_name and the exact parameter types (TEXT, TEXT) in parentheses."
+  ],
+  "expected_behavior": "full_name(TEXT, TEXT) no longer exists as a function.",
+  "solution": "DROP FUNCTION full_name(TEXT, TEXT);",
+  "explanation": "Postgres allows function overloading (the same name with different parameter types counts as different functions), which is exactly why DROP FUNCTION needs the full signature, not just the name.",
+  "concepts": [
+    "DROP FUNCTION"
+  ],
+  "skills": [
+    "sql_functions"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "SELECT COUNT(*) FROM pg_proc WHERE proname = 'full_name' AND pronamespace = 'fixtures'::regnamespace",
+      "expected": "[['0']]",
+      "label": "full_name function is gone"
+    }
+  ]
+}

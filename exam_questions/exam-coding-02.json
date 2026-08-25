@@ -1,0 +1,17 @@
+{
+  "id": "exam-coding-02",
+  "kind": "coding",
+  "category": "strings",
+  "prompt": "Write a function is_palindrome(s) that returns True if s reads the same forward and backward once you ignore case and any non-alphanumeric characters (spaces, punctuation), and False otherwise. For example, is_palindrome('A man, a plan, a canal: Panama') should return True.",
+  "difficulty": 2,
+  "points": 2,
+  "starter_code": "def is_palindrome(s):\n    pass\n",
+  "solution": "def is_palindrome(s):\n    cleaned = [c.lower() for c in s if c.isalnum()]\n    return cleaned == cleaned[::-1]\n",
+  "explanation": "Filtering to only alphanumeric characters (str.isalnum()) and lowercasing first reduces the problem to a plain reversed-sequence comparison - cleaned[::-1] reverses the list, and == checks it matches the original.",
+  "hidden_tests": [
+    {"call": "is_palindrome('A man, a plan, a canal: Panama')", "expected": "True"},
+    {"call": "is_palindrome('race a car')", "expected": "False"},
+    {"call": "is_palindrome('')", "expected": "True"}
+  ],
+  "source": "adapted"
+}

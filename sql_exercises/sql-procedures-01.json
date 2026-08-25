@@ -1,0 +1,38 @@
+{
+  "module": "procedures",
+  "source": "sqlbolt",
+  "id": "sql-procedures-01",
+  "difficulty": 4,
+  "title": "CREATE PROCEDURE and CALL",
+  "description": "A PROCEDURE is like a FUNCTION but it's meant to perform actions (INSERT/UPDATE/DELETE) rather than compute and return a value - you invoke it with CALL instead of using it inside a SELECT. Create a procedure `give_department_raise(dept_id INTEGER, amount NUMERIC)` that adds `amount` to the salary of every employee in department `dept_id`. Then CALL it to give department 1 (Engineering) a $500 raise.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: CREATE PROCEDURE, CALL",
+    "CREATE PROCEDURE <name>(<params>) LANGUAGE plpgsql AS $$ BEGIN <body>; END; $$ - no RETURNS clause at all, since a procedure doesn't hand back a value the way a function does.",
+    "The body is a single UPDATE employees SET salary = salary + amount WHERE department_id = dept_id; then, as a separate statement, CALL give_department_raise(1, 500)."
+  ],
+  "expected_behavior": "Every Engineering (department 1) employee's salary increases by exactly 500; every other department is untouched.",
+  "solution": "CREATE PROCEDURE give_department_raise(dept_id INTEGER, amount NUMERIC) LANGUAGE plpgsql AS $$ BEGIN UPDATE employees SET salary = salary + amount WHERE department_id = dept_id; END; $$; CALL give_department_raise(1, 500);",
+  "explanation": "The FUNCTION vs PROCEDURE split exists because a function is meant to be usable inside a query expression (SELECT my_func(...)) - a procedure isn't, since its whole point is to run statements that change data, which CALL reflects by being its own top-level statement rather than something you SELECT.",
+  "concepts": [
+    "CREATE PROCEDURE",
+    "CALL",
+    "PL/pgSQL"
+  ],
+  "skills": [
+    "sql_procedures"
+  ],
+  "postgres_note": "PROCEDURE support (and CALL) was added in Postgres 11 - before that, everything (side effects included) had to be written as a FUNCTION.",
+  "hidden_tests": [
+    {
+      "check_query": "SELECT first_name, salary FROM employees WHERE department_id = 1 ORDER BY id",
+      "expected": "[['Ada', '10000.00'], ['Alan', '9300.00'], ['Grace', '9100.00']]",
+      "label": "Engineering salaries got the raise"
+    },
+    {
+      "check_query": "SELECT first_name, salary FROM employees WHERE department_id = 2 ORDER BY id",
+      "expected": "[['Margaret', '7200.00'], ['Katherine', '6100.00']]",
+      "label": "Sales salaries are untouched"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "module": "foundations",
+  "source": "sqlbolt",
+  "id": "sql-foundations-04",
+  "difficulty": 1,
+  "title": "Sort results with ORDER BY",
+  "description": "Write a query that returns every product's `name` and `price`, sorted from most to least expensive.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: ORDER BY",
+    "ORDER BY column sorts the result set - add DESC after the column to sort from highest to lowest instead of the default ascending order.",
+    "Select name and price from products, then ORDER BY price DESC."
+  ],
+  "expected_behavior": "Returns name and price for every product, most expensive first.",
+  "solution": "SELECT name, price FROM products ORDER BY price DESC;",
+  "explanation": "ORDER BY runs after the rows and columns are chosen - DESC (descending) reverses the default ascending sort, and ties (equal prices) keep whatever order the database happens to produce unless a second sort column is added.",
+  "concepts": [
+    "ORDER BY"
+  ],
+  "skills": [
+    "sql_basics"
+  ],
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['Mechanical Keyboard', '79.99'], ['Standing Mat', '45.00'], ['USB-C Hub', '34.50'], ['Desk Lamp', '27.75'], ['Wireless Mouse', '19.99'], ['Fountain Pen', '15.00'], ['Water Bottle', '12.90'], ['Notebook A5', '4.25']]",
+      "label": "main check",
+      "ordered": true
+    }
+  ]
+}

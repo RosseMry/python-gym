@@ -61,15 +61,21 @@ resources/           Supporting material exercises can reference by path
 
 ## Setup
 
-Requires [uv](https://docs.astral.sh/uv/) and Node.js 18+.
+Requires [uv](https://docs.astral.sh/uv/), Node.js 18+, and Docker (for
+the SQL track's grading database — see below).
 
 ```bash
 # Backend
 cd backend
 uv sync
-uv run python scripts/seed.py     # loads all 43 exercises into SQLite
-uv run pytest                      # 61 tests should pass
-uv run flake8 app scripts tests    # style check (project convention)
+uv run python scripts/seed.py           # Python exercises (exercises/*.json)
+uv run python scripts/seed_notes.py     # Python learning notes (notes/*.json)
+uv run python scripts/seed_functions.py # Function reference (function_references/*.json)
+uv run python scripts/seed_sql.py       # SQL exercises (sql_exercises/*.json)
+uv run python scripts/seed_sql_notes.py # SQL learning notes (sql_notes/*.json)
+uv run python scripts/seed_exam.py      # Exam question bank (exam_questions/*.json)
+uv run pytest                            # full backend test suite should pass
+uv run flake8 app scripts tests          # style check (project convention)
 uv run uvicorn app.main:app --reload --port 8000
 
 # Frontend (separate terminal)
@@ -78,9 +84,46 @@ npm install
 npm run dev                        # http://localhost:5173
 ```
 
+Re-running any `seed_*.py` script is always safe — each one upserts by
+id, so you can re-seed after editing content without wiping progress
+data. If the SQLite database ever gets into a weird state during
+development, delete `backend/python_gym.db` and re-run every
+`seed_*.py` script above from scratch.
+
 Open **http://localhost:5173**. The Vite dev server proxies `/api/*`
 to the backend on port 8000 (see `vite.config.ts`), so no CORS setup
 is needed beyond what's already in `app/main.py`.
+
+### SQL grading database (Sprint 4)
+
+SQL exercises are graded by running the student's real SQL against a
+disposable, local PostgreSQL 16 instance — never a shared/production
+database (see the docstring in
+`app/services/sql_execution_service.py`). Every submission runs inside
+one transaction that's always rolled back, so the fixture data below
+never needs re-seeding between individual student submissions — only
+when the fixtures themselves change.
+
+```bash
+# One-time: start the throwaway Postgres container (skip if it already exists)
+docker run --name python-gym-sql \
+  -e POSTGRES_PASSWORD=pythongym \
+  -e POSTGRES_DB=python_gym_sql \
+  -p 55432:5432 \
+  -d postgres:16-alpine
+
+# Every time you start work (or after editing resources/sql/fixtures.sql):
+docker start python-gym-sql   # if it's stopped
+cd backend
+uv run python scripts/provision_sql_fixtures.py   # (re)loads resources/sql/fixtures.sql
+uv run python scripts/seed_sql.py
+uv run python scripts/seed_sql_notes.py
+```
+
+`SQL_DATABASE_URL` (default
+`postgresql://postgres:pythongym@127.0.0.1:55432/python_gym_sql`) is
+overridable via env var if you're pointing at a different local
+instance.
 
 ## What's in Sprint 2
 

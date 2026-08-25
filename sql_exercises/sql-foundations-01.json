@@ -1,0 +1,32 @@
+{
+  "module": "foundations",
+  "source": "sqlbolt",
+  "id": "sql-foundations-01",
+  "difficulty": 1,
+  "title": "SELECT specific columns",
+  "description": "Write a query that returns the `first_name` and `last_name` of every row in the `customers` table.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: SELECT",
+    "SELECT column1, column2 FROM table lists exactly the columns you want, in the order you name them - unlike SELECT *, which returns every column.",
+    "Select first_name and last_name from customers - no WHERE or ORDER BY needed for this one."
+  ],
+  "expected_behavior": "Returns first_name and last_name for every customer, in table order.",
+  "solution": "SELECT first_name, last_name FROM customers;",
+  "explanation": "SELECT is the clause that names which columns come back - listing exactly the ones you want is more explicit (and usually faster) than SELECT * when you only need a few.",
+  "concepts": [
+    "SELECT",
+    "FROM"
+  ],
+  "skills": [
+    "sql_basics"
+  ],
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['Ana', 'Silva'], ['Bo', 'Chen'], ['Cid', 'Rocha'], ['Dara', 'Ola'], ['Eero', 'Salo'], ['Fatima', 'Haidari'], ['Gustav', 'Berg'], ['Hana', 'Kobayashi'], ['Ivo', 'Novak'], ['Julia', 'Kowalski']]",
+      "label": "main check",
+      "ordered": false
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "sql-note-indexes",
+  "module": "indexes",
+  "title": "Indexes: Speeding Up Lookups",
+  "display_order": 9,
+  "what_is_it": "An index is an extra, separately-stored structure that lets Postgres find matching rows without scanning the entire table - CREATE INDEX builds one on a column, CREATE UNIQUE INDEX also enforces no duplicates (the same mechanism a UNIQUE constraint uses internally), and DROP INDEX removes one.",
+  "why_it_matters": "Without an index, a WHERE or JOIN condition on a column forces Postgres to check every single row (a sequential scan) - fine for a handful of rows, painfully slow once a table has millions. An index turns that into a near-instant lookup, at the cost of some extra disk space and slightly slower writes to that column.",
+  "syntax": "CREATE INDEX idx_orders_customer_id ON orders (customer_id);\nCREATE UNIQUE INDEX idx_products_name_unique ON products (name);\nDROP INDEX idx_orders_customer_id;",
+  "example": "CREATE INDEX idx_orders_customer_id ON orders (customer_id);",
+  "output": "CREATE INDEX\n(no rows returned - queries filtering on orders.customer_id can now use this index instead of scanning every row)",
+  "common_mistakes": "Adding an index to every column 'just in case' - each index costs real disk space and slows down every INSERT/UPDATE/DELETE on that table, so indexes are worth adding for columns you actually filter, join, or sort on frequently, not reflexively everywhere. Also assuming DROP INDEX is risky - it never touches any data, only the lookup structure.",
+  "mini_exercise": "Why does adding a UNIQUE constraint to a column (like earlier with products.name) automatically create an index for it too?",
+  "postgres_note": "Postgres's default index type is B-tree, which handles equality and range comparisons (=, <, >, BETWEEN) well - other types (GIN for full-text search and arrays, GiST for geometric data) exist for specialized use cases.",
+  "source": "freecodecamp",
+  "related_exercise_ids": ["sql-indexes-01", "sql-indexes-02", "sql-indexes-03"]
+}

@@ -1,0 +1,28 @@
+{
+  "module": "relational",
+  "source": "sqlbolt",
+  "id": "sql-relational-04",
+  "difficulty": 2,
+  "title": "UNIQUE constraints",
+  "description": "`customers.email` has a UNIQUE constraint, so the database itself refuses to store two customers with the same email - even if you never checked for a duplicate yourself. Write an INSERT into `customers` that reuses an email already in the table (for example `ana.silva@example.com`) and watch Postgres reject it.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: UNIQUE constraint",
+    "A UNIQUE constraint is a rule the table enforces on every write, not something your query has to check for itself - if you INSERT a row whose email column already exists elsewhere in the table, Postgres raises an error and nothing is written.",
+    "Write a normal INSERT INTO customers with values for every NOT NULL column, but set email to a value you already know is taken."
+  ],
+  "expected_behavior": "The INSERT is rejected with a unique-constraint violation - the exercise passes when your query correctly fails.",
+  "solution": "INSERT INTO customers (first_name, last_name, email, city, country, signup_date) VALUES ('Test', 'User', 'ana.silva@example.com', 'Lisbon', 'Portugal', '2024-01-01');",
+  "explanation": "UNIQUE constraints are checked on every INSERT and UPDATE, independent of any application code - it's the database guaranteeing the rule instead of trusting every caller to remember it.",
+  "concepts": ["UNIQUE", "INSERT", "constraints"],
+  "skills": ["sql_basics"],
+  "postgres_note": "The error Postgres raises is a UniqueViolation naming the constraint (e.g. customers_email_key) - that name comes from the constraint you declared when the table was created.",
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "",
+      "expect_error": true,
+      "label": "insert is rejected"
+    }
+  ]
+}

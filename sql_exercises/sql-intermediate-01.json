@@ -1,0 +1,33 @@
+{
+  "module": "intermediate",
+  "source": "sqlbolt",
+  "id": "sql-intermediate-01",
+  "difficulty": 3,
+  "title": "Subqueries in WHERE",
+  "description": "A subquery is a complete SELECT nested inside another query - here, inside a WHERE clause, to filter using a value you don't already know. Write a query that returns the `name` and `price` of every product priced above the average price of all products.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: subquery",
+    "You need the average price before you can compare anything to it - (SELECT AVG(price) FROM products) is a complete query on its own, and SQL lets you drop it right inside another query's WHERE clause in place of a literal number.",
+    "SELECT name, price FROM products WHERE price > (a subquery computing AVG(price) FROM products)."
+  ],
+  "expected_behavior": "Returns name and price for products whose price exceeds the average price across all products.",
+  "solution": "SELECT name, price FROM products WHERE price > (SELECT AVG(price) FROM products);",
+  "explanation": "A subquery in WHERE runs first, produces a single value, and the outer query then compares each row against it - the database handles the ordering, you just nest the query where the value belongs.",
+  "concepts": [
+    "subquery",
+    "AVG"
+  ],
+  "skills": [
+    "sql_intermediate"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['Mechanical Keyboard', '79.99'], ['Standing Mat', '45.00'], ['USB-C Hub', '34.50']]",
+      "label": "main check",
+      "ordered": false
+    }
+  ]
+}

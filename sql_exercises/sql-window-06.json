@@ -1,0 +1,34 @@
+{
+  "module": "window",
+  "source": "sqlbolt",
+  "id": "sql-window-06",
+  "difficulty": 4,
+  "title": "LEAD",
+  "description": "LEAD(column) OVER (...) is LAG's mirror image - it reaches FORWARD to a following row instead of back. Write a query that returns each order's `customer_id`, `order_date`, and that SAME customer's NEXT order_date (NULL if it's their most recent order), using LEAD.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: LEAD, window function",
+    "Same PARTITION BY customer_id ORDER BY order_date setup as LAG - the only difference is which direction you look. LEAD(order_date) OVER (...) reads the NEXT row's order_date instead of the previous one.",
+    "Select customer_id, order_date, and a LEAD(order_date) window function partitioned by customer_id and ordered by order_date, from orders."
+  ],
+  "expected_behavior": "Returns customer_id, order_date, and next_order_date (NULL for each customer's most recent order, chronologically).",
+  "solution": "SELECT customer_id, order_date, LEAD(order_date) OVER (PARTITION BY customer_id ORDER BY order_date) AS next_order_date FROM orders;",
+  "explanation": "LAG and LEAD together let you compute row-to-row differences (like \"days since the last order\") entirely in SQL, without pulling the data out and comparing rows in application code.",
+  "concepts": [
+    "LEAD",
+    "PARTITION BY",
+    "window function"
+  ],
+  "skills": [
+    "sql_window_functions"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['1', '2023-09-01', '2023-09-10'], ['1', '2023-09-10', ''], ['2', '2023-09-03', '2023-09-22'], ['2', '2023-09-22', ''], ['3', '2023-09-12', ''], ['4', '2023-09-15', ''], ['5', '2023-09-18', ''], ['6', '2023-09-20', ''], ['7', '2023-09-25', ''], ['8', '2023-09-27', '']]",
+      "label": "main check",
+      "ordered": false
+    }
+  ]
+}

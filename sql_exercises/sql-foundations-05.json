@@ -1,0 +1,32 @@
+{
+  "module": "foundations",
+  "source": "sqlbolt",
+  "id": "sql-foundations-05",
+  "difficulty": 2,
+  "title": "Limit the number of rows",
+  "description": "Write a query that returns the `name` and `price` of the 3 most expensive products.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: LIMIT",
+    "LIMIT n caps the result set at n rows, applied after ORDER BY has already sorted them - the first n rows of the sorted result are what LIMIT keeps.",
+    "Sort products by price descending, then add LIMIT 3."
+  ],
+  "expected_behavior": "Returns the 3 highest-priced products, most expensive first.",
+  "solution": "SELECT name, price FROM products ORDER BY price DESC LIMIT 3;",
+  "explanation": "LIMIT is evaluated after ORDER BY - reversing that order in your head (limiting first, then imagining a sort) would give the wrong 3 rows whenever the table isn't already sorted.",
+  "concepts": [
+    "LIMIT",
+    "ORDER BY"
+  ],
+  "skills": [
+    "sql_basics"
+  ],
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['Mechanical Keyboard', '79.99'], ['Standing Mat', '45.00'], ['USB-C Hub', '34.50']]",
+      "label": "main check",
+      "ordered": true
+    }
+  ]
+}

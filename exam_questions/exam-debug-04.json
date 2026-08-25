@@ -1,0 +1,12 @@
+{
+  "id": "exam-debug-04",
+  "kind": "debugging",
+  "category": "python_fundamentals",
+  "prompt": "def describe_score(score):\n    return 'Score: ' + score\n\ndescribe_score(5)\n\nThis raises an exception instead of returning a string. What is the exact error message (just the message text after the exception type, e.g. \"TypeError: ...\")?",
+  "difficulty": 2,
+  "points": 1,
+  "code_snippet": "def describe_score(score):\n    return 'Score: ' + score\n\ndescribe_score(5)",
+  "expected_output": "TypeError: can only concatenate str (not \"int\") to str",
+  "explanation": "+ between a str and an int isn't defined in Python - you can't concatenate a string with a number directly, you have to convert first: 'Score: ' + str(score), or use an f-string, f'Score: {score}'.",
+  "source": "adapted"
+}

@@ -1,0 +1,30 @@
+{
+  "module": "foundations",
+  "source": "sqlbolt",
+  "id": "sql-foundations-11",
+  "difficulty": 2,
+  "title": "Add a new row with INSERT",
+  "description": "Write a statement that inserts a new department named `'Legal'` into the `departments` table.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: INSERT INTO ... VALUES",
+    "INSERT INTO table (columns) VALUES (values) adds one new row - id is a SERIAL column here, so it fills itself in automatically if you don't specify it.",
+    "Name just the name column in your INSERT (skip id entirely) and give it the single value 'Legal'."
+  ],
+  "expected_behavior": "Adds a new 'Legal' department.",
+  "solution": "INSERT INTO departments (name) VALUES ('Legal');",
+  "explanation": "Naming the column list explicitly (INSERT INTO departments (name) ...) means the statement doesn't depend on knowing every column's position - the SERIAL id column is left out entirely and Postgres assigns it.",
+  "concepts": [
+    "INSERT"
+  ],
+  "skills": [
+    "sql_basics"
+  ],
+  "hidden_tests": [
+    {
+      "check_query": "SELECT name FROM departments WHERE name = 'Legal'",
+      "expected": "[['Legal']]",
+      "label": "main check"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "module": "joins",
+  "source": "sqlbolt",
+  "id": "sql-joins-04",
+  "difficulty": 3,
+  "title": "FULL OUTER JOIN",
+  "description": "A FULL OUTER JOIN keeps every row from BOTH tables, matched where possible and padded with NULLs on whichever side has no match. Write a query that returns every department's `name` alongside every employee's `first_name`, joined on department - so a department with no employees AND an employee with no department both still appear.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: FULL OUTER JOIN",
+    "FULL OUTER JOIN is a LEFT JOIN and a RIGHT JOIN at once: a department with no employees gets a NULL employee name, and an employee with no department gets a NULL department name - neither side ever gets silently dropped.",
+    "Select departments.name and employees.first_name, using departments FULL OUTER JOIN employees ON departments.id = employees.department_id."
+  ],
+  "expected_behavior": "Returns every matched pair, plus a NULL-employee row for any empty department and a NULL-department row for any employee with no department.",
+  "solution": "SELECT departments.name, employees.first_name FROM departments FULL OUTER JOIN employees ON departments.id = employees.department_id;",
+  "explanation": "FULL OUTER JOIN is the least common of the four, but it's exactly what you reach for when you need to see BOTH sides' orphans in one result - unmatched departments and unmatched employees together.",
+  "concepts": [
+    "FULL OUTER JOIN"
+  ],
+  "skills": [
+    "sql_joins"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "",
+      "expected": "[['', 'Hedy'], ['Engineering', 'Ada'], ['Engineering', 'Alan'], ['Engineering', 'Grace'], ['Facilities', ''], ['Marketing', ''], ['Sales', 'Katherine'], ['Sales', 'Margaret'], ['Support', 'Barbara'], ['Support', 'Radia']]",
+      "label": "main check",
+      "ordered": false
+    }
+  ]
+}

@@ -163,3 +163,140 @@ export const CONTENT_SOURCES = {
 } as const;
 
 export type ContentSource = keyof typeof CONTENT_SOURCES;
+
+// ---------------------------------------------------------------------
+// Sprint 4: SQL
+// ---------------------------------------------------------------------
+
+export const SQL_MODULES: { id: string; label: string }[] = [
+  { id: "foundations", label: "Foundations" },
+  { id: "relational", label: "Relational Concepts" },
+  { id: "joins", label: "JOINs" },
+  { id: "intermediate", label: "Intermediate SQL" },
+  { id: "window", label: "Window Functions" },
+  { id: "dbops", label: "Database Operations" },
+  { id: "views", label: "Views" },
+  { id: "transactions", label: "Transactions" },
+  { id: "indexes", label: "Indexes" },
+  { id: "functions", label: "Functions" },
+  { id: "procedures", label: "Procedures" },
+  { id: "triggers", label: "Triggers" },
+];
+
+export interface SqlExerciseSummary {
+  id: string;
+  module: string;
+  difficulty: number;
+  title: string;
+  source: string;
+}
+
+export interface SqlExerciseDetail {
+  id: string;
+  module: string;
+  difficulty: number;
+  title: string;
+  title_fr: string | null;
+  description: string;
+  description_fr: string | null;
+  starter_query: string;
+  expected_behavior: string;
+  concepts: string[];
+  skills: string[];
+  source: string;
+  postgres_note: string | null;
+  prerequisites: string[];
+}
+
+export interface SqlHintResponse {
+  hint: string;
+  hint_fr: string | null;
+}
+
+export interface SqlSolutionResponse {
+  solution: string;
+  explanation: string;
+}
+
+export interface SqlSubmissionResult {
+  status: "passed" | "failed" | "error";
+  passed: boolean;
+  tests_total: number;
+  tests_passed: number;
+  tests: TestOutcome[];
+  result_columns: string[];
+  result_rows: string[][];
+  error: string | null;
+  execution_time: number;
+}
+
+export interface SqlLearningNoteSummary {
+  id: string;
+  module: string;
+  title: string;
+  title_fr: string | null;
+}
+
+export interface SqlLearningNoteDetail {
+  id: string;
+  module: string;
+  title: string;
+  title_fr: string | null;
+  what_is_it: string;
+  what_is_it_fr: string | null;
+  why_it_matters: string;
+  why_it_matters_fr: string | null;
+  syntax: string;
+  syntax_fr: string | null;
+  example: string;
+  output: string;
+  common_mistakes: string;
+  common_mistakes_fr: string | null;
+  postgres_note: string | null;
+  mini_exercise: string;
+  mini_exercise_fr: string | null;
+  source: string;
+  related_exercise_ids: string[];
+}
+
+// ---------------------------------------------------------------------
+// Sprint 4: Timed Exam
+// ---------------------------------------------------------------------
+
+export interface ExamQuestionForStudent {
+  id: string;
+  kind: "mcq" | "output_prediction" | "debugging" | "coding";
+  category: string;
+  prompt: string;
+  points: number;
+  code_snippet: string | null;
+  starter_code: string | null;
+  choices: string[] | null;
+}
+
+export interface ExamSessionResponse {
+  session_id: string;
+  started_at: string;
+  duration_seconds: number;
+  deadline_at: string;
+  status: string;
+  questions: ExamQuestionForStudent[];
+}
+
+export interface ExamAnswerResult {
+  question_id: string;
+  correct: boolean;
+  points_earned: number;
+  points_possible: number;
+}
+
+export interface ExamResult {
+  session_id: string;
+  status: string;
+  score: number;
+  max_score: number;
+  questions_total: number;
+  questions_correct: number;
+  time_used_seconds: number;
+  answers: ExamAnswerResult[];
+}

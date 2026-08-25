@@ -1,0 +1,12 @@
+{
+  "id": "exam-debug-05",
+  "kind": "debugging",
+  "category": "python_fundamentals",
+  "prompt": "def total_length(items):\n    total = 0\n    for i in range(len(items) + 1):\n        total += len(items[i])\n    return total\n\ntotal_length(['a', 'bb', 'ccc'])\n\nThis raises an exception instead of returning 6. What is the exact error message (just the message text after the exception type, e.g. \"IndexError: ...\")?",
+  "difficulty": 2,
+  "points": 1,
+  "code_snippet": "def total_length(items):\n    total = 0\n    for i in range(len(items) + 1):\n        total += len(items[i])\n    return total\n\ntotal_length(['a', 'bb', 'ccc'])",
+  "expected_output": "IndexError: list index out of range",
+  "explanation": "range(len(items) + 1) goes one step too far - for a 3-item list, it produces indices 0, 1, 2, 3, and index 3 doesn't exist. The fix is range(len(items)), or better, just iterate the items directly: for item in items.",
+  "source": "adapted"
+}

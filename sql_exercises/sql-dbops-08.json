@@ -1,0 +1,33 @@
+{
+  "module": "dbops",
+  "source": "sqlbolt",
+  "id": "sql-dbops-08",
+  "difficulty": 2,
+  "title": "DEFAULT values",
+  "description": "ALTER TABLE ... ALTER COLUMN ... SET DEFAULT gives a column a fallback value used whenever a future INSERT doesn't specify one - it doesn't touch rows that already exist. Set the DEFAULT for `customers.country` to `'Unknown'`.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: SET DEFAULT",
+    "The pattern mirrors SET NOT NULL from an earlier exercise: ALTER TABLE <table> ALTER COLUMN <column> SET DEFAULT <value> - the value needs quotes here since country is a text column.",
+    "Target the customers table's country column, and set its default to the text 'Unknown' (with quotes, since it's a text column)."
+  ],
+  "expected_behavior": "Future INSERTs into customers that omit country get 'Unknown' automatically; existing rows are unaffected.",
+  "solution": "ALTER TABLE customers ALTER COLUMN country SET DEFAULT 'Unknown';",
+  "explanation": "A DEFAULT only fires at INSERT time for a row that leaves the column out entirely - it's not the same as a CHECK constraint or a NOT NULL rule, and it does nothing at all to rows already in the table.",
+  "concepts": [
+    "ALTER TABLE",
+    "ALTER COLUMN",
+    "DEFAULT"
+  ],
+  "skills": [
+    "sql_db_operations"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "SELECT column_default FROM information_schema.columns WHERE table_schema = 'fixtures' AND table_name = 'customers' AND column_name = 'country'",
+      "expected": "[[\"'Unknown'::text\"]]",
+      "label": "country column has the new default"
+    }
+  ]
+}

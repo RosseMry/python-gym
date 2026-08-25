@@ -1,0 +1,33 @@
+{
+  "module": "dbops",
+  "source": "sqlbolt",
+  "id": "sql-dbops-04",
+  "difficulty": 3,
+  "title": "UNIQUE constraint (ALTER TABLE)",
+  "description": "You can add a constraint to a table that already exists with ALTER TABLE ... ADD CONSTRAINT, not just when you first create it. Add a UNIQUE constraint named `products_name_unique` on the `products.name` column.",
+  "starter_query": "-- your query here\n",
+  "hints": [
+    "💡 SQL concept to consider: ADD CONSTRAINT, UNIQUE",
+    "ADD CONSTRAINT <constraint_name> UNIQUE (<column>) is the general pattern - the constraint needs its own name so Postgres has something to report if a future INSERT ever violates it.",
+    "Target the products table, give the constraint the exact name products_name_unique, and make it UNIQUE on the name column."
+  ],
+  "expected_behavior": "products.name can no longer contain duplicate values - a future INSERT reusing an existing name would be rejected.",
+  "solution": "ALTER TABLE products ADD CONSTRAINT products_name_unique UNIQUE (name);",
+  "explanation": "Constraints don't have to be decided up front at CREATE TABLE time - real schemas evolve, and ALTER TABLE ADD CONSTRAINT is how you tighten the rules on a table that's already live.",
+  "concepts": [
+    "ALTER TABLE",
+    "ADD CONSTRAINT",
+    "UNIQUE"
+  ],
+  "skills": [
+    "sql_db_operations"
+  ],
+  "postgres_note": null,
+  "hidden_tests": [
+    {
+      "check_query": "SELECT constraint_type FROM information_schema.table_constraints WHERE table_schema = 'fixtures' AND table_name = 'products' AND constraint_name = 'products_name_unique'",
+      "expected": "[['UNIQUE']]",
+      "label": "products_name_unique constraint exists"
+    }
+  ]
+}

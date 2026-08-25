@@ -1,0 +1,17 @@
+{
+  "id": "exam-mcq-03",
+  "kind": "mcq",
+  "category": "python_fundamentals",
+  "prompt": "What is the main practical difference between a Python list and a Python tuple?",
+  "difficulty": 1,
+  "points": 1,
+  "choices": [
+    "Lists can only hold numbers; tuples can hold any type",
+    "Tuples are mutable and lists are immutable",
+    "Lists are mutable (can be changed after creation); tuples are immutable",
+    "There is no real difference - they're interchangeable"
+  ],
+  "correct_choice": 2,
+  "explanation": "A list's contents can be changed in place (append, remove, item assignment); a tuple's cannot - once created, a tuple's elements never change (though a mutable object stored INSIDE a tuple, like a list, can still be mutated).",
+  "source": "adapted"
+}

@@ -1,0 +1,16 @@
+{
+  "id": "sql-note-views",
+  "module": "views",
+  "title": "Views: Saving a Query Under a Name",
+  "display_order": 7,
+  "what_is_it": "A VIEW saves a SELECT query under a name so you can query it later like a table - CREATE VIEW defines one, CREATE OR REPLACE VIEW redefines it in place, and DROP VIEW removes it. Critically, a view is NOT a copy of the data: it re-runs its saved query every time you select from it, so it always reflects the CURRENT state of the underlying tables.",
+  "why_it_matters": "Views are a readability and reuse tool - if several queries all need 'products priced above X' or 'departments with their headcount,' defining that once as a view means every caller gets the same, always-current logic instead of copy-pasting (and potentially drifting) the same SELECT everywhere.",
+  "syntax": "CREATE VIEW view_name AS\n    SELECT ... FROM ... WHERE ...;\n\nCREATE OR REPLACE VIEW view_name AS\n    SELECT ...;  -- redefines it in place\n\nDROP VIEW view_name;",
+  "example": "CREATE VIEW pricey_products AS\n    SELECT name, price FROM products WHERE price > 30;\n\nSELECT * FROM pricey_products;",
+  "output": "     name       | price\n-----------------+-------\n Mechanical Keyboard | 79.99\n Standing Mat        | 45.00\n USB-C Hub           | 34.50",
+  "common_mistakes": "Expecting a view to be faster than just running its underlying query directly - it isn't, since a plain view has no storage of its own and re-executes the SELECT every time (that's what a MATERIALIZED VIEW is for, which does cache results). Also forgetting that DROP VIEW never touches the real table's data - it only removes the saved query.",
+  "mini_exercise": "If products.price changes after you create a view over it, does querying that view again show the OLD price or the NEW one? Why?",
+  "postgres_note": "Postgres also supports MATERIALIZED VIEW, which DOES store a snapshot of the result and must be explicitly refreshed (REFRESH MATERIALIZED VIEW) to pick up new data - useful for expensive queries you're willing to serve slightly stale.",
+  "source": "freecodecamp",
+  "related_exercise_ids": ["sql-views-01", "sql-views-02", "sql-views-03"]
+}
